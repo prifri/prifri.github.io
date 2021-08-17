@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Geekdocs</title>
-    <link>https://prifri.github.io/</link>
-    <description>Recent content on Geekdocs</description>
+    <title>Test_dir on Geekdocs</title>
+    <link>https://prifri.github.io/test_dir/</link>
+    <description>Recent content in Test_dir on Geekdocs</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Tue, 17 Aug 2021 21:26:26 +0900</lastBuildDate>
     
-	<atom:link href="https://prifri.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://prifri.github.io/test_dir/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
