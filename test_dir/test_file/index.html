@@ -25,7 +25,7 @@ hugo -t hugo-geekdoc
 
 
 
-    <title>Test_file | ABC가나다1234</title>
+    <title>Test_file | Geekdocs</title>
 
     <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 
@@ -81,8 +81,8 @@ hugo -t hugo-geekdoc
         
         <a class="gdoc-header__link" href="https://prifri.github.io/">
             <span class="gdoc-brand flex align-center">
-                <img class="gdoc-brand__img" src="/logo.png" alt="">
-                <span class="gdoc-brand__title">ABC가나다1234</span>
+                <img class="gdoc-brand__img" src="/brand.svg" alt="">
+                <span class="gdoc-brand__title">Geekdocs</span>
             </span>
         </a>
         <div class="gdoc-menu-header">
@@ -112,6 +112,14 @@ hugo -t hugo-geekdoc
             <aside class="gdoc-nav">
                 <nav>
     
+    <div class="gdoc-search">
+        <svg class="icon gdoc_search"><use xlink:href="#gdoc_search"></use></svg>
+        <input type="text" id="gdoc-search-input" class="gdoc-search__input" placeholder="Search..."
+            aria-label="Search" maxlength="64" />
+        <div class="gdoc-search__spinner spinner hidden"></div>
+        <ul id="gdoc-search-results" class="gdoc-search__list"></ul>
+    </div>
+
 
 
     <section class="gdoc-nav--main">
@@ -119,12 +127,67 @@ hugo -t hugo-geekdoc
         
             
 
+    
 
+    <ul class="gdoc-nav__list">
+        
+            
+            
 
+            
+            
+            
+            
+            
+            
 
-<ul class="gdoc-nav__list">
+            <li>
+            
+            
+                <span class="flex">Test_dir</span>
+            
+            
 
-</ul>
+            
+                
+    
+
+    <ul class="gdoc-nav__list">
+        
+            
+            
+
+            
+            
+            
+            
+            
+            
+
+            <li>
+            
+            
+                <span class="flex">
+                    <a href="/test_dir/test_file/" class="gdoc-nav__entry is-active">
+                        Test_file
+                    </a>
+                </span>
+            
+            
+
+            
+            </li>
+            
+            
+        
+    </ul>
+
+            
+            </li>
+            
+            
+        
+    </ul>
 
 
 
@@ -154,9 +217,40 @@ hugo -t hugo-geekdoc
 
 
 <div class="gdoc-page__header flex flex-wrap
-     justify-end 
+     justify-between 
      hidden-mobile 
-     hidden " itemprop="breadcrumb">
+    " itemprop="breadcrumb">
+    
+    <div>
+        <svg class="icon gdoc_path hidden-mobile"><use xlink:href="#gdoc_path"></use></svg>
+        <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+            
+            
+            
+            
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Geekdocs</span></a><meta itemprop='position' content='1' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/test_dir/' href='/test_dir/'><span itemprop='name'>Test_dir</span></a><meta itemprop='position' content='2' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Test_file</span><meta itemprop='position' content='3' /></li>
+    
+
+    
+
+    
+
+        </ol>
+    </div>
     
     
 </div>
@@ -220,10 +314,6 @@ curl -L <a href="https://github.com/thegeeklab/hugo-geekdoc/releases/latest/down
                 <svg class="icon gdoc_heart"><use xlink:href="#gdoc_heart"></use></svg>
             </span>
             
-            <span class="gdoc-footer__item gdoc-footer__item--row">
-                <a href="/" class="gdoc-footer__link">Legal Notice</a>
-            </span>
-            
             
         </div>
         
@@ -241,6 +331,12 @@ curl -L <a href="https://github.com/thegeeklab/hugo-geekdoc/releases/latest/down
     </div>
 
     
+
+
+
+
+<script defer src="/js/en.search.min.906335212566964634d06021fd5908e3f8c6d591eb6677d9248c42cfc57bc6a2.js"></script>
+
 
 
 <script defer src="/js/clipboard-27784b7376.min.js"></script>
