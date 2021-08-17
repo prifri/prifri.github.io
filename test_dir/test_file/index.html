@@ -10,7 +10,18 @@
 
 
 
-    <meta name="description" content="Geekdocs">
+    <meta name="description" content="환경 https://ialy1595.github.io/post/blog-construct-1/ https://gohugo.io/getting-started/quick-start/
+sudo apt-get install hugo
+테마 https://themes.gohugo.io/themes/hugo-geekdoc/ https://geekdocs.de/usage/getting-started/
+hugo new site prifri_site cd prifri_site
+mkdir -p themes/hugo-geekdoc/ curl -L https://github.com/thegeeklab/hugo-geekdoc/releases/latest/download/hugo-geekdoc.tar.gz | tar -xz -C themes/hugo-geekdoc/ &ndash;strip-components=1
+config.toml 수정
+git repository 를 2개 추가해야된다. site 전체와 public만 있는것 두개로 나눠서 해야함..
+git init &hellip;
+그리고 public의 repository는 무조건 ${NAME}.github.io로 이름을 지어야되며, 무료사용자일 경우 무조건 public으로 써야된다.
+git submodule add https://github.com/prifri/prifri.github.io.git public
+hugo -t hugo-geekdoc
+참고 https://github.com/Integerous/Integerous.github.io">
 
 
 
@@ -156,7 +167,11 @@
             <li>
             
             
-                <span class="flex">Test_file</span>
+                <span class="flex">
+                    <a href="/test_dir/test_file/" class="gdoc-nav__entry is-active">
+                        Test_file
+                    </a>
+                </span>
             
             
 
@@ -243,7 +258,26 @@
 
     <article class="gdoc-markdown gdoc-markdown__align--left">
         <h1>Test_file</h1>
-        
+        <h1 id="환경">환경</h1>
+<p><a href="https://ialy1595.github.io/post/blog-construct-1/">https://ialy1595.github.io/post/blog-construct-1/</a>
+<a href="https://gohugo.io/getting-started/quick-start/">https://gohugo.io/getting-started/quick-start/</a></p>
+<p>sudo apt-get install hugo</p>
+<h1 id="테마">테마</h1>
+<p><a href="https://themes.gohugo.io/themes/hugo-geekdoc/">https://themes.gohugo.io/themes/hugo-geekdoc/</a>
+<a href="https://geekdocs.de/usage/getting-started/">https://geekdocs.de/usage/getting-started/</a></p>
+<p>hugo new site prifri_site
+cd prifri_site</p>
+<p>mkdir -p themes/hugo-geekdoc/
+curl -L <a href="https://github.com/thegeeklab/hugo-geekdoc/releases/latest/download/hugo-geekdoc.tar.gz">https://github.com/thegeeklab/hugo-geekdoc/releases/latest/download/hugo-geekdoc.tar.gz</a> | tar -xz -C themes/hugo-geekdoc/ &ndash;strip-components=1</p>
+<p>config.toml 수정</p>
+<p>git repository 를 2개 추가해야된다. site 전체와 public만 있는것 두개로 나눠서 해야함..</p>
+<p>git init &hellip;</p>
+<p>그리고 public의 repository는 무조건 ${NAME}.github.io로 이름을 지어야되며, 무료사용자일 경우 무조건 public으로 써야된다.</p>
+<p>git submodule add <a href="https://github.com/prifri/prifri.github.io.git">https://github.com/prifri/prifri.github.io.git</a> public</p>
+<p>hugo -t hugo-geekdoc</p>
+<p>참고
+<a href="https://github.com/Integerous/Integerous.github.io">https://github.com/Integerous/Integerous.github.io</a></p>
+
     </article>
 
                 

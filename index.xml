@@ -16,7 +16,18 @@
       <pubDate>Tue, 17 Aug 2021 21:26:26 +0900</pubDate>
       
       <guid>https://prifri.github.io/test_dir/test_file/</guid>
-      <description></description>
+      <description>환경 https://ialy1595.github.io/post/blog-construct-1/ https://gohugo.io/getting-started/quick-start/
+sudo apt-get install hugo
+테마 https://themes.gohugo.io/themes/hugo-geekdoc/ https://geekdocs.de/usage/getting-started/
+hugo new site prifri_site cd prifri_site
+mkdir -p themes/hugo-geekdoc/ curl -L https://github.com/thegeeklab/hugo-geekdoc/releases/latest/download/hugo-geekdoc.tar.gz | tar -xz -C themes/hugo-geekdoc/ &amp;ndash;strip-components=1
+config.toml 수정
+git repository 를 2개 추가해야된다. site 전체와 public만 있는것 두개로 나눠서 해야함..
+git init &amp;hellip;
+그리고 public의 repository는 무조건 ${NAME}.github.io로 이름을 지어야되며, 무료사용자일 경우 무조건 public으로 써야된다.
+git submodule add https://github.com/prifri/prifri.github.io.git public
+hugo -t hugo-geekdoc
+참고 https://github.com/Integerous/Integerous.github.io</description>
     </item>
     
   </channel>
