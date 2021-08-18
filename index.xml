@@ -11,23 +11,19 @@
     
     
     <item>
-      <title>Test_file</title>
-      <link>https://prifri.github.io/test_dir/test_file/</link>
+      <title>Hugo로 site 만들기</title>
+      <link>https://prifri.github.io/test_dir/Hugo%EB%A1%9C-site-%EB%A7%8C%EB%93%A4%EA%B8%B0/</link>
       <pubDate>Tue, 17 Aug 2021 21:26:26 +0900</pubDate>
       
-      <guid>https://prifri.github.io/test_dir/test_file/</guid>
-      <description>환경 https://ialy1595.github.io/post/blog-construct-1/ https://gohugo.io/getting-started/quick-start/
-sudo apt-get install hugo
-테마 https://themes.gohugo.io/themes/hugo-geekdoc/ https://geekdocs.de/usage/getting-started/
-hugo new site prifri_site cd prifri_site
-mkdir -p themes/hugo-geekdoc/ curl -L https://github.com/thegeeklab/hugo-geekdoc/releases/latest/download/hugo-geekdoc.tar.gz | tar -xz -C themes/hugo-geekdoc/ &amp;ndash;strip-components=1
-config.toml 수정
-git repository 를 2개 추가해야된다. site 전체와 public만 있는것 두개로 나눠서 해야함..
-git init &amp;hellip;
-그리고 public의 repository는 무조건 ${NAME}.github.io로 이름을 지어야되며, 무료사용자일 경우 무조건 public으로 써야된다.
-git submodule add https://github.com/prifri/prifri.github.io.git public
-hugo -t hugo-geekdoc
-참고 https://github.com/Integerous/Integerous.github.io</description>
+      <guid>https://prifri.github.io/test_dir/Hugo%EB%A1%9C-site-%EB%A7%8C%EB%93%A4%EA%B8%B0/</guid>
+      <description>Hugo 설치 [Hugo 에 대한 설명과 설치] (https://ialy1595.github.io/post/blog-construct-1/) [Hugo 공식 Quick Start] (https://gohugo.io/getting-started/quick-start/)
+ubuntu에서 환경을 시작하므로 apt로 hugo를 설치한다.
+sudo apt-get install hugo 사이트 site 이름은 prifri_site 라고 대충 정했을때
+다음과 같은 명령어로 site 환경을 초기화한다.
+hugo new site prifri_site cd prifri_site directiory가 생기고 해당 directory가 workspace 개념이된다.
+테마 다운로드 [Hugo Themes] (https://themes.gohugo.io/) [Geekdocs] (https://geekdocs.de/usage/getting-started/)
+geekdoc를 사용했다. darkmode가 바로 지원되는게 마음에 들어 그냥 이거썻다.
+code study용 블로그는 주로 doc계열을 많이 사용하는거 같으며 대표적으로 learn, books등이 존재하는거 같다.</description>
     </item>
     
   </channel>
