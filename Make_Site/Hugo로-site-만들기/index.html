@@ -2,7 +2,6 @@
 <html lang="en" class="color-toggle-hidden">
 
 <head>
-	<meta name="generator" content="Hugo 0.68.3" />
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light dark" />
@@ -11,11 +10,18 @@
 
 
 
-    <meta name="description" content="Test1234가나다라">
+    <meta name="description" content="Hugo 설치 [Hugo 에 대한 설명과 설치] (https://ialy1595.github.io/post/blog-construct-1/) [Hugo 공식 Quick Start] (https://gohugo.io/getting-started/quick-start/)
+ubuntu에서 환경을 시작하므로 apt로 hugo를 설치한다.
+sudo apt-get install hugo 사이트 site 이름은 prifri_site 라고 대충 정했을때
+다음과 같은 명령어로 site 환경을 초기화한다.
+hugo new site prifri_site cd prifri_site directiory가 생기고 해당 directory가 workspace 개념이된다.
+테마 다운로드 [Hugo Themes] (https://themes.gohugo.io/) [Geekdocs] (https://geekdocs.de/usage/getting-started/)
+geekdoc를 사용했다. darkmode가 바로 지원되는게 마음에 들어 그냥 이거썻다.
+code study용 블로그는 주로 doc계열을 많이 사용하는거 같으며 대표적으로 learn, books등이 존재하는거 같다.">
 
 
 
-    <title>Test1234가나다라</title>
+    <title>Hugo로 site 만들기 | Test1234가나다라</title>
 
     <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 
@@ -36,7 +42,6 @@
 <link rel="preload" href="/custom.css" as="style">
 <link rel="stylesheet" href="/custom.css" media="all">
 
-<link rel="alternate" type="application/rss+xml" href="https://prifri.github.io/index.xml" title="Test1234가나다라" />
 
 
 <!-- Made with Geekdoc theme https://github.com/thegeeklab/hugo-geekdoc -->
@@ -159,7 +164,7 @@
             
             
                 <span class="flex">
-                    <a href="/Make_Site/Hugo%EB%A1%9C-site-%EB%A7%8C%EB%93%A4%EA%B8%B0/" class="gdoc-nav__entry ">
+                    <a href="/Make_Site/Hugo%EB%A1%9C-site-%EB%A7%8C%EB%93%A4%EA%B8%B0/" class="gdoc-nav__entry is-active">
                         Hugo로 site 만들기
                     </a>
                 </span>
@@ -221,7 +226,23 @@
             
     
     
-        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Test1234가나다라</span><meta itemprop='position' content='1' /></li>
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='1' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/make_site/' href='/make_site/'><span itemprop='name'>Make_Site</span></a><meta itemprop='position' content='2' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Hugo로 site 만들기</span><meta itemprop='position' content='3' /></li>
+    
+
+    
+
     
 
         </ol>
@@ -230,9 +251,53 @@
     
 </div>
 
+
     <article class="gdoc-markdown gdoc-markdown__align--left">
-        <h1>Test1234가나다라</h1>
-        
+        <h1>Hugo로 site 만들기</h1>
+        <h1 id="hugo-설치">Hugo 설치</h1>
+<p>[Hugo 에 대한 설명과 설치] (<a href="https://ialy1595.github.io/post/blog-construct-1/">https://ialy1595.github.io/post/blog-construct-1/</a>)
+[Hugo 공식 Quick Start] (<a href="https://gohugo.io/getting-started/quick-start/">https://gohugo.io/getting-started/quick-start/</a>)</p>
+<p>ubuntu에서 환경을 시작하므로 apt로 hugo를 설치한다.</p>
+<div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">sudo apt-get install hugo
+</code></pre></div><h1 id="사이트">사이트</h1>
+<p>site 이름은 prifri_site 라고 대충 정했을때</p>
+<p>다음과 같은 명령어로 site 환경을 초기화한다.</p>
+<div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">hugo new site prifri_site
+<span class="nb">cd</span> prifri_site
+</code></pre></div><p>directiory가 생기고 해당 directory가 workspace 개념이된다.</p>
+<h1 id="테마-다운로드">테마 다운로드</h1>
+<p>[Hugo Themes] (<a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a>)
+[Geekdocs] (<a href="https://geekdocs.de/usage/getting-started/">https://geekdocs.de/usage/getting-started/</a>)</p>
+<p>geekdoc를 사용했다. darkmode가 바로 지원되는게 마음에 들어 그냥 이거썻다.</p>
+<p>code study용 블로그는 주로 doc계열을 많이 사용하는거 같으며 대표적으로 learn, books등이 존재하는거 같다.</p>
+<p>생성방법은 Geekdocs의 공식 started를 따른다.</p>
+<div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">mkdir -p themes/hugo-geekdoc/
+curl -L https://github.com/thegeeklab/hugo-geekdoc/releases/latest/download/hugo-geekdoc.tar.gz <span class="p">|</span> tar -xz -C themes/hugo-geekdoc/ --strip-components<span class="o">=</span><span class="m">1</span>
+
+</code></pre></div><p>config.toml을 공식 홈페이지에서 요구하는것처럼 똑같이 수정해준다.</p>
+<p>npm으로 뭘 이것저것도 잇는데 Geekdocs 테마의 original source를 build하는게 아니면 필요없다.</p>
+<h1 id="repository-관리-workspace-repository-연동">repository 관리. workspace repository 연동</h1>
+<p>repository 가 2개 필요하다. 한개는 site의 모든 source가 있을 workspace가 존재하는 repository와 build 결과물만이 존재해
+실제 site와 연동되는 repository가 필요하다.</p>
+<p>실제 site와 연동되는 repository는 git 계정이름을 사용해서 다음과 무조건 ${NAME}.github.io로 이름을 지어야되며, 무료사용자일 경우 무조건 public으로 써야된다.</p>
+<p>build 결과물 repository는 workspace repository의 submodule로 사용할 것다.</p>
+<p>아마 다른 directory에 관리하는 방법으로도 되긴 하겠지만 빌드 결과물이 생기는 public directory그 자체는 바로 git
+repository로 쓰는게 편한방법이라 다들 이렇게 그냥 쓰는거 같다.</p>
+<p>일단 github에서 workspace(hugo site 생성명령어로 만들어진 directory)용 repository와 build repository를 만든다.</p>
+<p>그리고 site directory를 workspace repository로 remote 시켜준다. prifri_site로 예로 들면 다음과 같다.</p>
+<div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">git init
+git remote add origin git@github.com:prifri/prifri_site.git
+</code></pre></div><p>https://github.. 은 현재 시점에서 이제 사용하지 않는다 auth token을 써야 되는데 매번 번거로우므로 github 계정에 ssh
+key를 등록시켜놓는 방법으로 사용한다.</p>
+<h1 id="repository-관리-build-repository-연동">repository 관리. build repository 연동</h1>
+<p>현재 빌드를 한번도 안했기 때문에 build에 대한 결과물이 없으므로 빌드를 한번 해준다.</p>
+<div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">hugo -t hugo-geekdoc
+</code></pre></div><p>그러면 public directory가 생기는데 이것을 이제 build repository와 연결을 해줘야된다.</p>
+<p>workspace repository source안에 build repository가 있는 개념이므로 submodule로 연동해준다.</p>
+<div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">git submodule add -b origin git@github.com:prifri/prifri.github.io public
+</code></pre></div><p>그후 workspace, build repository둘다 git add 후 push로 밀어보면 적당히 보이고 config.toml을 적당히 수정해서 적당히
+content 만들고 해보면된다.</p>
+
     </article>
 
                 
