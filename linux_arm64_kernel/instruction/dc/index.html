@@ -10,17 +10,18 @@
 
 
 
-    <meta name="description" content="ubuntu 환경을 기준으로 한다.
- 자신의 ssh key 생성. ssh-keygen 처음 물어보는게 key의 경로이자 name이 된다. 그냥 넘기면 기본 경로로 ~/.ssh/id_rsa, ~/.ssh/id_rsa.pub에 존재한다.
-~/.ssh/id_rsa : private key ~/.ssh/id_rsa.pub : public key
-public key를 github자신의 계정에 등록해줘야한다.
-cat ~/.ssh/id_rsa.pub 하면 쏼라쏼라 나올텐데 전부 copy해놓는다.
-자신의 github 에 ssh키 등록 github 계정에서 setting -&gt; SSH and GPG keys에 들어가서 New SSH key 눌러서 등록한다.
-clone 한 repository remote 경로 변경 일반적으로 그냥 copy해서 가져오면 remote경로가 https://&hellip; 로 시작한다.">
+    <meta name="description" content="data cache 의 invalidate / clean 관련 명령어
+ cache invalidate한다 라는 의미는? cache clean한다 라는 의미는? dirty bit가 set된 cache를 모두 메모리에 반영한다는것.
+dc ivac, Xt D-cache invalidate by address to Point of Coherency
+dc instruction option에 대한 설명   dc : Data Cache
+  IC : Instruction Cache
+  IS : Inner Shareable
+  ALL : all
+  U : Point of Unification">
 
 
 
-    <title>SSH Key Setup | Test1234가나다라</title>
+    <title>DC | Test1234가나다라</title>
 
     <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 
@@ -163,7 +164,7 @@ clone 한 repository remote 경로 변경 일반적으로 그냥 copy해서 가�
             
             
                 <span class="flex">
-                    <a href="/Git/SSH-Key-Setup/" class="gdoc-nav__entry is-active">
+                    <a href="/Git/SSH-Key-Setup/" class="gdoc-nav__entry ">
                         SSH Key Setup
                     </a>
                 </span>
@@ -217,7 +218,7 @@ clone 한 repository remote 경로 변경 일반적으로 그냥 copy해서 가�
             
             
                 <span class="flex">
-                    <a href="/linux_arm64_kernel/instruction/dc/" class="gdoc-nav__entry ">
+                    <a href="/linux_arm64_kernel/instruction/dc/" class="gdoc-nav__entry is-active">
                         DC
                     </a>
                 </span>
@@ -393,7 +394,7 @@ clone 한 repository remote 경로 변경 일반적으로 그냥 copy해서 가�
         
     
     
-        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='1' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/git/' href='/git/'><span itemprop='name'>Git</span></a><meta itemprop='position' content='2' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>SSH Key Setup</span><meta itemprop='position' content='3' /></li>
+        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='2' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/linux_arm64_kernel/' href='/linux_arm64_kernel/'><span itemprop='name'>Linux_arm64_kernel</span></a><meta itemprop='position' content='3' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>DC</span><meta itemprop='position' content='4' /></li>
     
 
     
@@ -408,28 +409,48 @@ clone 한 repository remote 경로 변경 일반적으로 그냥 copy해서 가�
 
 
     <article class="gdoc-markdown gdoc-markdown__align--left">
-        <h1>SSH Key Setup</h1>
-        <p>ubuntu 환경을 기준으로 한다.</p>
+        <h1>DC</h1>
+        <p>data cache 의 invalidate / clean 관련 명령어</p>
 <hr>
-<h1 id="자신의-ssh-key-생성">자신의 ssh key 생성.</h1>
-<div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">ssh-keygen
-</code></pre></div><p>처음 물어보는게 key의 경로이자 name이 된다. 그냥 넘기면 기본 경로로 ~/.ssh/id_rsa, ~/.ssh/id_rsa.pub에 존재한다.</p>
-<p>~/.ssh/id_rsa : private key
-~/.ssh/id_rsa.pub : public key</p>
-<p>public key를 github자신의 계정에 등록해줘야한다.</p>
-<div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">cat ~/.ssh/id_rsa.pub
-</code></pre></div><p>하면 쏼라쏼라 나올텐데 전부 copy해놓는다.</p>
-<h1 id="자신의-github-에-ssh키-등록">자신의 github 에 ssh키 등록</h1>
-<p>github 계정에서 setting -&gt; SSH and GPG keys에 들어가서 New SSH key 눌러서 등록한다.</p>
-<h1 id="clone-한-repository-remote-경로-변경">clone 한 repository remote 경로 변경</h1>
-<p>일반적으로 그냥 copy해서 가져오면 remote경로가 https://&hellip; 로 시작한다. 이러면 결국 웹 프로토콜로 통신을 하므로 이렇게
-해서는 안되고 scp로 접근하는것처럼 바꿔줘야한다.</p>
-<p>일단 다음의 명령어로 어디에 remote 되있는지 보고</p>
-<div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">git remote -v
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">git remote set-url origin git@github.com:prifri/prifri.github.io.git
-</code></pre></div><p>뭐 이런식으로 바꿔줘야한다.</p>
-<h1 id="다중-ssh-key-셋팅">다중 SSH key 셋팅.</h1>
-<p><a class="gdoc-markdown__link" href="http://taewan.kim/post/ssh_config/">사이트</a></p>
+<h1 id="cache-invalidate한다-라는-의미는">cache invalidate한다 라는 의미는?</h1>
+<h1 id="cache-clean한다-라는-의미는">cache clean한다 라는 의미는?</h1>
+<p>dirty bit가 set된 cache를 모두 메모리에 반영한다는것.</p>
+<h1 id="dc-ivac-xt">dc ivac, Xt</h1>
+<p>D-cache invalidate by address to Point of Coherency</p>
+<h1 id="dc-instruction-option에-대한-설명">dc instruction option에 대한 설명</h1>
+<ul>
+<li>
+<p>dc : Data Cache</p>
+</li>
+<li>
+<p>IC : Instruction Cache</p>
+</li>
+<li>
+<p>IS : Inner Shareable</p>
+</li>
+<li>
+<p>ALL : all</p>
+</li>
+<li>
+<p>U : Point of Unification</p>
+</li>
+<li>
+<p>VA : Address to Point of Coherency</p>
+</li>
+<li>
+<p>Z : zero</p>
+</li>
+<li>
+<p>SW : Set/Way</p>
+</li>
+<li>
+<p>I : invalidate</p>
+</li>
+<li>
+<p>C : Clean / Point Coherency</p>
+</li>
+</ul>
+<hr>
 
     </article>
 

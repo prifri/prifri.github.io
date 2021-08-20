@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux_arm64_kernel on Test1234가나다라</title>
+    <link>https://prifri.github.io/linux_arm64_kernel/</link>
+    <description>Recent content in Linux_arm64_kernel on Test1234가나다라</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 20 Aug 2021 18:05:58 +0900</lastBuildDate>
+    
+	<atom:link href="https://prifri.github.io/linux_arm64_kernel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ifb</title>
+      <link>https://prifri.github.io/linux_arm64_kernel/assembly/ifb/</link>
+      <pubDate>Fri, 20 Aug 2021 18:05:58 +0900</pubDate>
+      
+      <guid>https://prifri.github.io/linux_arm64_kernel/assembly/ifb/</guid>
+      <description>[ifb 참고] (https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/useful-assembler-directives-and-macros-for-the-gnu-assembler)
+ .macro	ldr_l, dst, sym, tmp= .ifb	\tmp adrp	\dst, \sym ldr	\dst, [\dst, :lo12:\sym] .else adrp	\tmp, \sym ldr	\dst, [\tmp, :lo12:\sym] .endif .endm .ifb = if blank라는 뜻
+ldr_l	x4, idmap_ptrs_per_pgd 이런 코드가 왔으면 위 macro에서 ifb 로 된 code가 만들어질것이다. </description>
+    </item>
+    
+    <item>
+      <title>DC</title>
+      <link>https://prifri.github.io/linux_arm64_kernel/instruction/dc/</link>
+      <pubDate>Fri, 20 Aug 2021 17:39:47 +0900</pubDate>
+      
+      <guid>https://prifri.github.io/linux_arm64_kernel/instruction/dc/</guid>
+      <description>data cache 의 invalidate / clean 관련 명령어
+ cache invalidate한다 라는 의미는? cache clean한다 라는 의미는? dirty bit가 set된 cache를 모두 메모리에 반영한다는것.
+dc ivac, Xt D-cache invalidate by address to Point of Coherency
+dc instruction option에 대한 설명   dc : Data Cache
+  IC : Instruction Cache
+  IS : Inner Shareable
+  ALL : all
+  U : Point of Unification</description>
+    </item>
+    
+    <item>
+      <title>DMB</title>
+      <link>https://prifri.github.io/linux_arm64_kernel/instruction/dmb/</link>
+      <pubDate>Fri, 20 Aug 2021 17:30:28 +0900</pubDate>
+      
+      <guid>https://prifri.github.io/linux_arm64_kernel/instruction/dmb/</guid>
+      <description>해당 instruction을 기준으로 명령의 순서를 변경하지 않는다.
+ dmb sy Ordered Accesses : Any - Any
+store / load가 전부 완료될때까지 기다리고 하겠다는뜻.
+ </description>
+    </item>
+    
+  </channel>
+</rss>
