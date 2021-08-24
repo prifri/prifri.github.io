@@ -3,17 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://prifri.github.io/linux_arm64_kernel/assembly/ifb/</loc>
-    <lastmod>2021-08-20T18:05:58+09:00</lastmod>
+    <loc>https://prifri.github.io/linux_arm64_kernel/arch/cache/</loc>
+    <lastmod>2021-08-24T17:48:25+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://prifri.github.io/linux_arm64_kernel/</loc>
-    <lastmod>2021-08-20T18:05:58+09:00</lastmod>
+    <lastmod>2021-08-24T17:48:25+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://prifri.github.io/</loc>
+    <lastmod>2021-08-24T17:48:25+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://prifri.github.io/linux_arm64_kernel/arch/TCR/</loc>
+    <lastmod>2021-08-24T16:56:42+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://prifri.github.io/linux_arm64_kernel/assembly/ifb/</loc>
     <lastmod>2021-08-20T18:05:58+09:00</lastmod>
   </url>
   

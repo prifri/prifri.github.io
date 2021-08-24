@@ -10,11 +10,16 @@
 
 
 
-    <meta name="description" content="Test1234가나다라">
+    <meta name="description" content="참고사이트 문c블로그 Cache-Coherent
+ WB(Write-Back)   Write
+ Cache에만 Write. cache가 가득 찻을때만 Memory에 Write    Read
+ Cache에서만 읽음     WT(Write-Through)   Write
+ Cache, Memory 둘다 Write    Read
+ Cache에서만 읽음     WA, RA(Write-Allocate, Read-Allocate) Write시 Cache에 해당 메모리가 없을때(Miss발생시) Cache에 해당 메모리의 데이터를 Cache에 할당하고 할당된 캐시에 데이터를 기록한다. Read또한 마찬가지로 read시 cache에 없으면 cache에 할당한다.">
 
 
 
-    <title>Git | Test1234가나다라</title>
+    <title>Cache | Test1234가나다라</title>
 
     <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 
@@ -35,7 +40,6 @@
 <link rel="preload" href="/custom.css" as="style">
 <link rel="stylesheet" href="/custom.css" media="all">
 
-<link rel="alternate" type="application/rss+xml" href="https://prifri.github.io/git/index.xml" title="Test1234가나다라" />
 
 
 <!-- Made with Geekdoc theme https://github.com/thegeeklab/hugo-geekdoc -->
@@ -212,7 +216,7 @@
             
             
                 <span class="flex">
-                    <a href="/linux_arm64_kernel/arch/cache/" class="gdoc-nav__entry ">
+                    <a href="/linux_arm64_kernel/arch/cache/" class="gdoc-nav__entry is-active">
                         Cache
                     </a>
                 </span>
@@ -430,7 +434,15 @@
         
     
     
-        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='1' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Git</span><meta itemprop='position' content='2' /></li>
+        
+        
+        
+        
+    
+    
+        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='2' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/linux_arm64_kernel/' href='/linux_arm64_kernel/'><span itemprop='name'>Linux_arm64_kernel</span></a><meta itemprop='position' content='3' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Cache</span><meta itemprop='position' content='4' /></li>
+    
+
     
 
     
@@ -441,9 +453,57 @@
     
 </div>
 
+
     <article class="gdoc-markdown gdoc-markdown__align--left">
-        <h1>Git</h1>
-        
+        <h1>Cache</h1>
+        <h1 id="참고사이트">참고사이트</h1>
+<p><a class="gdoc-markdown__link" href="http://jake.dothome.co.kr/cache4/">문c블로그 Cache-Coherent</a></p>
+<hr>
+<h1 id="wbwrite-back">WB(Write-Back)</h1>
+<ul>
+<li>
+<p>Write</p>
+<ul>
+<li>Cache에만 Write. cache가 가득 찻을때만 Memory에 Write</li>
+</ul>
+</li>
+<li>
+<p>Read</p>
+<ul>
+<li>Cache에서만 읽음</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="wtwrite-through">WT(Write-Through)</h1>
+<ul>
+<li>
+<p>Write</p>
+<ul>
+<li>Cache, Memory 둘다 Write</li>
+</ul>
+</li>
+<li>
+<p>Read</p>
+<ul>
+<li>Cache에서만 읽음</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="wa-rawrite-allocate-read-allocate">WA, RA(Write-Allocate, Read-Allocate)</h1>
+<p>Write시 Cache에 해당 메모리가 없을때(Miss발생시) Cache에 해당 메모리의 데이터를 Cache에 할당하고 할당된 캐시에 데이터를
+기록한다.
+Read또한 마찬가지로 read시 cache에 없으면 cache에 할당한다.</p>
+<p>꽤 많은 블로그에서 WA에대 잘못설명한다.
+Cache에 할당하지 않고 바로 Memory에 Write 하기때문에 WT랑 같이 사용하지 않는다는둥, 대부분의 시스템에서는 WT nWA를
+사용한다는둥..</p>
+<p>Linux만 놓고 봤을때도 WT의 default는 WA이다&hellip;ㅋㅋ linux말고 대부분이 WT nWA를 쓰나?</p>
+<h1 id="shareability">Shareability</h1>
+<p>아키텍처에서 공유라는것은 CPU를 기준으로 의미한다.</p>
+<p>Inner CPU : Linux로 동작하는 모든 시스템
+Outer CPU : Linux를 사용하지 않는 시스템(ex GPU)</p>
+
     </article>
 
                 

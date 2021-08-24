@@ -5,10 +5,36 @@
     <link>https://prifri.github.io/linux_arm64_kernel/</link>
     <description>Recent content in Linux_arm64_kernel on Test1234가나다라</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 20 Aug 2021 18:05:58 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 24 Aug 2021 17:48:25 +0900</lastBuildDate>
     
 	<atom:link href="https://prifri.github.io/linux_arm64_kernel/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cache</title>
+      <link>https://prifri.github.io/linux_arm64_kernel/arch/cache/</link>
+      <pubDate>Tue, 24 Aug 2021 17:48:25 +0900</pubDate>
+      
+      <guid>https://prifri.github.io/linux_arm64_kernel/arch/cache/</guid>
+      <description>참고사이트 문c블로그 Cache-Coherent
+ WB(Write-Back)   Write
+ Cache에만 Write. cache가 가득 찻을때만 Memory에 Write    Read
+ Cache에서만 읽음     WT(Write-Through)   Write
+ Cache, Memory 둘다 Write    Read
+ Cache에서만 읽음     WA, RA(Write-Allocate, Read-Allocate) Write시 Cache에 해당 메모리가 없을때(Miss발생시) Cache에 해당 메모리의 데이터를 Cache에 할당하고 할당된 캐시에 데이터를 기록한다. Read또한 마찬가지로 read시 cache에 없으면 cache에 할당한다.</description>
+    </item>
+    
+    <item>
+      <title>TCR</title>
+      <link>https://prifri.github.io/linux_arm64_kernel/arch/TCR/</link>
+      <pubDate>Tue, 24 Aug 2021 16:56:42 +0900</pubDate>
+      
+      <guid>https://prifri.github.io/linux_arm64_kernel/arch/TCR/</guid>
+      <description>TXSZ 가상주소를 계산할때 상위 주소의 0, 1의 개수를 미리 설정해놓는것이다. Kernel 공간 인경우 상위 비트가 1이 채워져있는 개념이므로 T1SZ을 사용하게 되고 user 공간 인경우 상위 비트가 0이 채워져있는 개념이므로 T0SZ을 사용하게 된다.
+ T0SZ User 공간의 가상주소에서 주소 하위에서부터 0이 채워지는 비트 개수
+ T0SZ = 16일때 0x0000_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD   T1SZ Kernel 공간의 가상주소에서 주소 상위에서부터 1이 채워지는 비트 개수
+ T1SZ = 16일때 0xFFFF_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD_ABCD   특성  TXSZ가 커짐에따라 해당 영역의 가상주소공간이 줄어듬을 알 수 있다.</description>
+    </item>
     
     <item>
       <title>Ifb</title>

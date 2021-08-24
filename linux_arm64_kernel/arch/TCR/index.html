@@ -10,11 +10,14 @@
 
 
 
-    <meta name="description" content="Test1234가나다라">
+    <meta name="description" content="TXSZ 가상주소를 계산할때 상위 주소의 0, 1의 개수를 미리 설정해놓는것이다. Kernel 공간 인경우 상위 비트가 1이 채워져있는 개념이므로 T1SZ을 사용하게 되고 user 공간 인경우 상위 비트가 0이 채워져있는 개념이므로 T0SZ을 사용하게 된다.
+ T0SZ User 공간의 가상주소에서 주소 하위에서부터 0이 채워지는 비트 개수
+ T0SZ = 16일때 0x0000_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD   T1SZ Kernel 공간의 가상주소에서 주소 상위에서부터 1이 채워지는 비트 개수
+ T1SZ = 16일때 0xFFFF_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD_ABCD   특성  TXSZ가 커짐에따라 해당 영역의 가상주소공간이 줄어듬을 알 수 있다.">
 
 
 
-    <title>Git | Test1234가나다라</title>
+    <title>TCR | Test1234가나다라</title>
 
     <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 
@@ -35,7 +38,6 @@
 <link rel="preload" href="/custom.css" as="style">
 <link rel="stylesheet" href="/custom.css" media="all">
 
-<link rel="alternate" type="application/rss+xml" href="https://prifri.github.io/git/index.xml" title="Test1234가나다라" />
 
 
 <!-- Made with Geekdoc theme https://github.com/thegeeklab/hugo-geekdoc -->
@@ -308,7 +310,7 @@
             
             
                 <span class="flex">
-                    <a href="/linux_arm64_kernel/arch/TCR/" class="gdoc-nav__entry ">
+                    <a href="/linux_arm64_kernel/arch/TCR/" class="gdoc-nav__entry is-active">
                         TCR
                     </a>
                 </span>
@@ -430,7 +432,15 @@
         
     
     
-        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='1' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Git</span><meta itemprop='position' content='2' /></li>
+        
+        
+        
+        
+    
+    
+        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='2' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/linux_arm64_kernel/' href='/linux_arm64_kernel/'><span itemprop='name'>Linux_arm64_kernel</span></a><meta itemprop='position' content='3' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>TCR</span><meta itemprop='position' content='4' /></li>
+    
+
     
 
     
@@ -441,9 +451,38 @@
     
 </div>
 
+
     <article class="gdoc-markdown gdoc-markdown__align--left">
-        <h1>Git</h1>
-        
+        <h1>TCR</h1>
+        <h1 id="txsz">TXSZ</h1>
+<p>가상주소를 계산할때 상위 주소의 0, 1의 개수를 미리 설정해놓는것이다.
+Kernel 공간 인경우 상위 비트가 1이 채워져있는 개념이므로 T1SZ을 사용하게 되고
+user 공간 인경우 상위 비트가 0이 채워져있는 개념이므로 T0SZ을 사용하게 된다.</p>
+<hr>
+<h2 id="t0sz">T0SZ</h2>
+<p>User 공간의 가상주소에서 주소 하위에서부터 0이 채워지는 비트 개수</p>
+<ul>
+<li>T0SZ = 16일때</li>
+<li>0x0000_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD</li>
+</ul>
+<hr>
+<h2 id="t1sz">T1SZ</h2>
+<p>Kernel 공간의 가상주소에서 주소 상위에서부터 1이 채워지는 비트 개수</p>
+<ul>
+<li>T1SZ = 16일때</li>
+<li>0xFFFF_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD_ABCD</li>
+</ul>
+<hr>
+<h2 id="특성">특성</h2>
+<ul>
+<li>TXSZ가 커짐에따라 해당 영역의 가상주소공간이 줄어듬을 알 수 있다.</li>
+<li>한번 정해지면 바귀지 않는다.</li>
+</ul>
+<hr>
+<p>TGX(Translation Granule 0, 1)</p>
+<p>Memory Mapping 단위를 Granule Size라고 하는데 user, kernel 각각의 memory mapping size에 대한 내용</p>
+<p>4KB, 16KB, 64KB설정이 가능한듯.</p>
+
     </article>
 
                 
