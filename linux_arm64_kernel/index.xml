@@ -5,23 +5,38 @@
     <link>https://prifri.github.io/linux_arm64_kernel/</link>
     <description>Recent content in Linux_arm64_kernel on Test1234가나다라</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 24 Aug 2021 17:48:25 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 25 Aug 2021 12:11:02 +0900</lastBuildDate>
     
 	<atom:link href="https://prifri.github.io/linux_arm64_kernel/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Device_memory</title>
+      <link>https://prifri.github.io/linux_arm64_kernel/memory/device_memory/</link>
+      <pubDate>Wed, 25 Aug 2021 12:11:02 +0900</pubDate>
+      
+      <guid>https://prifri.github.io/linux_arm64_kernel/memory/device_memory/</guid>
+      <description>Device Memory Normal Memory는 Cache를 사용할수있음. Device memory는 Buffer 개념임.
+ Gathering(G or nG) 모아서 처리해도 되는지 안되는지에 대한 여부. 일반적으로 모아서 처리해도되지만 예를들어 Counter의 경우 이런 처리를 하면 안된다.
+Reorder(R or nR) 순서를 지켜도 되는지 안되는지에 대한 여부.
+Early Write Acknowledgement(E or nE) Write Done이 안됬어도 미리 Ack를 보낼지 안보낼지에 대한것.
+메모리 Write는 Error가 안날 확률이 매우 높기떄문에 이렇게 처리한다는듯.
+ ARM에서 사용하는 Device Type Device-nGnRnE. Stronlgy Ordered Memory. 다 안쓴다느듯.</description>
+    </item>
+    
+    <item>
       <title>Cache</title>
-      <link>https://prifri.github.io/linux_arm64_kernel/arch/cache/</link>
+      <link>https://prifri.github.io/linux_arm64_kernel/memory/cache/</link>
       <pubDate>Tue, 24 Aug 2021 17:48:25 +0900</pubDate>
       
-      <guid>https://prifri.github.io/linux_arm64_kernel/arch/cache/</guid>
+      <guid>https://prifri.github.io/linux_arm64_kernel/memory/cache/</guid>
       <description>참고사이트 문c블로그 Cache-Coherent
- WB(Write-Back)   Write
- Cache에만 Write. cache가 가득 찻을때만 Memory에 Write    Read
- Cache에서만 읽음     WT(Write-Through)   Write
- Cache, Memory 둘다 Write    Read
- Cache에서만 읽음     WA, RA(Write-Allocate, Read-Allocate) Write시 Cache에 해당 메모리가 없을때(Miss발생시) Cache에 해당 메모리의 데이터를 Cache에 할당하고 할당된 캐시에 데이터를 기록한다. Read또한 마찬가지로 read시 cache에 없으면 cache에 할당한다.</description>
+ Cache Policies Cache Allocation Policies WA, RA(Write-Allocate, Read-Allocate)   Write시 Cache에 해당 메모리가 없을때(Miss발생시)
+ Cache에 해당 메모리의 데이터를 할당. 할당된 캐시에 데이터를 기록한다.    Write시 Cache에 해당 메모리가 존재할때
+ RAM에 접근하지않고 Cache에만 접근하고 끝날것이다.    cache data는 dirty, memory data는 old가 될것이다.
+Read또한 마찬가지로 read시 cache에 없으면 cache에 할당한다.
+꽤 많은 블로그에서 WA에대 잘못설명한다.
+Cache에 할당하지 않고 바로 Memory에 Write 하기때문에 WT랑 같이 사용하지 않는다는둥, 대부분의 시스템에서는 WT nWA를 사용한다는둥.</description>
     </item>
     
     <item>

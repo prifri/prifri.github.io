@@ -10,14 +10,16 @@
 
 
 
-    <meta name="description" content="TXSZ 가상주소를 계산할때 상위 주소의 0, 1의 개수를 미리 설정해놓는것이다. Kernel 공간 인경우 상위 비트가 1이 채워져있는 개념이므로 T1SZ을 사용하게 되고 user 공간 인경우 상위 비트가 0이 채워져있는 개념이므로 T0SZ을 사용하게 된다.
- T0SZ User 공간의 가상주소에서 주소 하위에서부터 0이 채워지는 비트 개수
- T0SZ = 16일때 0x0000_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD   T1SZ Kernel 공간의 가상주소에서 주소 상위에서부터 1이 채워지는 비트 개수
- T1SZ = 16일때 0xFFFF_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD_ABCD   특성  TXSZ가 커짐에따라 해당 영역의 가상주소공간이 줄어듬을 알 수 있다.">
+    <meta name="description" content="Device Memory Normal Memory는 Cache를 사용할수있음. Device memory는 Buffer 개념임.
+ Gathering(G or nG) 모아서 처리해도 되는지 안되는지에 대한 여부. 일반적으로 모아서 처리해도되지만 예를들어 Counter의 경우 이런 처리를 하면 안된다.
+Reorder(R or nR) 순서를 지켜도 되는지 안되는지에 대한 여부.
+Early Write Acknowledgement(E or nE) Write Done이 안됬어도 미리 Ack를 보낼지 안보낼지에 대한것.
+메모리 Write는 Error가 안날 확률이 매우 높기떄문에 이렇게 처리한다는듯.
+ ARM에서 사용하는 Device Type Device-nGnRnE. Stronlgy Ordered Memory. 다 안쓴다느듯.">
 
 
 
-    <title>TCR | Test1234가나다라</title>
+    <title>Device_memory | Test1234가나다라</title>
 
     <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 
@@ -262,7 +264,7 @@
             
             
                 <span class="flex">
-                    <a href="/linux_arm64_kernel/memory/device_memory/" class="gdoc-nav__entry ">
+                    <a href="/linux_arm64_kernel/memory/device_memory/" class="gdoc-nav__entry is-active">
                         Device_memory
                     </a>
                 </span>
@@ -334,7 +336,7 @@
             
             
                 <span class="flex">
-                    <a href="/linux_arm64_kernel/arch/TCR/" class="gdoc-nav__entry is-active">
+                    <a href="/linux_arm64_kernel/arch/TCR/" class="gdoc-nav__entry ">
                         TCR
                     </a>
                 </span>
@@ -462,7 +464,7 @@
         
     
     
-        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='2' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/linux_arm64_kernel/' href='/linux_arm64_kernel/'><span itemprop='name'>Linux_arm64_kernel</span></a><meta itemprop='position' content='3' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>TCR</span><meta itemprop='position' content='4' /></li>
+        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='2' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/linux_arm64_kernel/' href='/linux_arm64_kernel/'><span itemprop='name'>Linux_arm64_kernel</span></a><meta itemprop='position' content='3' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Device_memory</span><meta itemprop='position' content='4' /></li>
     
 
     
@@ -477,35 +479,26 @@
 
 
     <article class="gdoc-markdown gdoc-markdown__align--left">
-        <h1>TCR</h1>
-        <h1 id="txsz">TXSZ</h1>
-<p>가상주소를 계산할때 상위 주소의 0, 1의 개수를 미리 설정해놓는것이다.
-Kernel 공간 인경우 상위 비트가 1이 채워져있는 개념이므로 T1SZ을 사용하게 되고
-user 공간 인경우 상위 비트가 0이 채워져있는 개념이므로 T0SZ을 사용하게 된다.</p>
+        <h1>Device_memory</h1>
+        <h1 id="device-memory">Device Memory</h1>
+<p>Normal Memory는 Cache를 사용할수있음.
+Device memory는 Buffer 개념임.</p>
 <hr>
-<h2 id="t0sz">T0SZ</h2>
-<p>User 공간의 가상주소에서 주소 하위에서부터 0이 채워지는 비트 개수</p>
-<ul>
-<li>T0SZ = 16일때</li>
-<li>0x0000_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD</li>
-</ul>
+<h2 id="gatheringg-or-ng">Gathering(G or nG)</h2>
+<p>모아서 처리해도 되는지 안되는지에 대한 여부. 일반적으로 모아서 처리해도되지만 예를들어 Counter의 경우 이런 처리를 하면 안된다.</p>
+<h2 id="reorderr-or-nr">Reorder(R or nR)</h2>
+<p>순서를 지켜도 되는지 안되는지에 대한 여부.</p>
+<h2 id="early-write-acknowledgemente-or-ne">Early Write Acknowledgement(E or nE)</h2>
+<p>Write Done이 안됬어도 미리 Ack를 보낼지 안보낼지에 대한것.</p>
+<p>메모리 Write는 Error가 안날 확률이 매우 높기떄문에 이렇게 처리한다는듯.</p>
 <hr>
-<h2 id="t1sz">T1SZ</h2>
-<p>Kernel 공간의 가상주소에서 주소 상위에서부터 1이 채워지는 비트 개수</p>
-<ul>
-<li>T1SZ = 16일때</li>
-<li>0xFFFF_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD_ABCD</li>
-</ul>
-<hr>
-<h2 id="특성">특성</h2>
-<ul>
-<li>TXSZ가 커짐에따라 해당 영역의 가상주소공간이 줄어듬을 알 수 있다.</li>
-<li>한번 정해지면 바귀지 않는다.</li>
-</ul>
-<hr>
-<p>TGX(Translation Granule 0, 1)</p>
-<p>Memory Mapping 단위를 Granule Size라고 하는데 user, kernel 각각의 memory mapping size에 대한 내용</p>
-<p>4KB, 16KB, 64KB설정이 가능한듯.</p>
+<h1 id="arm에서-사용하는-device-type">ARM에서 사용하는 Device Type</h1>
+<h2 id="device-ngnrne">Device-nGnRnE.</h2>
+<p>Stronlgy Ordered Memory. 다 안쓴다느듯.</p>
+<h2 id="device-ngnre">Device-nGnRE</h2>
+<p>Early Ack만 쓰겠다는뜻.</p>
+<h2 id="device-gre">Device-GRE</h2>
+<p>모든 버퍼를 쓰겠다는뜻.</p>
 
     </article>
 
