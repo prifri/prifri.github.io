@@ -10,11 +10,13 @@
 
 
 
-    <meta name="description" content="Test1234가나다라">
+    <meta name="description" content="ISB(Instruction Synchronization Barrier) 파이프라인을 비워줌(15~20 cycle)
+DMB(Data Memory Barrier) load, store의 순서를 유지해줌 &#43; 모든 CPU에서 해당 값의 일관성을 유지 시켜줌.
+DSB(Data Synchronization Barrier) Memory에 관련된 동기화">
 
 
 
-    <title>Make_Site | Test1234가나다라</title>
+    <title>Barrier | Test1234가나다라</title>
 
     <link rel="icon" href="/favicon/favicon-32x32.png" type="image/x-icon">
 
@@ -35,7 +37,6 @@
 <link rel="preload" href="/custom.css" as="style">
 <link rel="stylesheet" href="/custom.css" media="all">
 
-<link rel="alternate" type="application/rss+xml" href="https://prifri.github.io/make_site/index.xml" title="Test1234가나다라" />
 
 
 <!-- Made with Geekdoc theme https://github.com/thegeeklab/hugo-geekdoc -->
@@ -212,7 +213,7 @@
             
             
                 <span class="flex">
-                    <a href="/linux_arm64_kernel/memory/barrier/" class="gdoc-nav__entry ">
+                    <a href="/linux_arm64_kernel/memory/barrier/" class="gdoc-nav__entry is-active">
                         Barrier
                     </a>
                 </span>
@@ -478,7 +479,15 @@
         
     
     
-        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='1' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Make_Site</span><meta itemprop='position' content='2' /></li>
+        
+        
+        
+        
+    
+    
+        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/' href='/'><span itemprop='name'>Test1234가나다라</span></a><meta itemprop='position' content='2' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/linux_arm64_kernel/' href='/linux_arm64_kernel/'><span itemprop='name'>Linux_arm64_kernel</span></a><meta itemprop='position' content='3' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Barrier</span><meta itemprop='position' content='4' /></li>
+    
+
     
 
     
@@ -489,9 +498,16 @@
     
 </div>
 
+
     <article class="gdoc-markdown gdoc-markdown__align--left">
-        <h1>Make_Site</h1>
-        
+        <h1>Barrier</h1>
+        <h1 id="isbinstruction-synchronization-barrier">ISB(Instruction Synchronization Barrier)</h1>
+<p>파이프라인을 비워줌(15~20 cycle)</p>
+<h1 id="dmbdata-memory-barrier">DMB(Data Memory Barrier)</h1>
+<p>load, store의 순서를 유지해줌 + 모든 CPU에서 해당 값의 일관성을 유지 시켜줌.</p>
+<h1 id="dsbdata-synchronization-barrier">DSB(Data Synchronization Barrier)</h1>
+<p>Memory에 관련된 동기화</p>
+
     </article>
 
                 

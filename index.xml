@@ -5,10 +5,21 @@
     <link>https://prifri.github.io/</link>
     <description>Recent content on Test1234가나다라</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 25 Aug 2021 12:11:02 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 26 Aug 2021 11:03:29 +0900</lastBuildDate>
     
 	<atom:link href="https://prifri.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Barrier</title>
+      <link>https://prifri.github.io/linux_arm64_kernel/memory/barrier/</link>
+      <pubDate>Thu, 26 Aug 2021 11:03:29 +0900</pubDate>
+      
+      <guid>https://prifri.github.io/linux_arm64_kernel/memory/barrier/</guid>
+      <description>ISB(Instruction Synchronization Barrier) 파이프라인을 비워줌(15~20 cycle)
+DMB(Data Memory Barrier) load, store의 순서를 유지해줌 + 모든 CPU에서 해당 값의 일관성을 유지 시켜줌.
+DSB(Data Synchronization Barrier) Memory에 관련된 동기화</description>
+    </item>
     
     <item>
       <title>Device_memory</title>
