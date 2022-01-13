@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Test1234가나다라</title>
+    <title>TestTitle</title>
     <link>https://prifri.github.io/</link>
-    <description>Recent content on Test1234가나다라</description>
+    <description>Recent content on TestTitle</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 26 Aug 2021 11:03:29 +0900</lastBuildDate>
     
@@ -122,7 +122,7 @@ clone 한 repository remote 경로 변경 일반적으로 그냥 copy해서 가�
       <pubDate>Tue, 17 Aug 2021 21:26:26 +0900</pubDate>
       
       <guid>https://prifri.github.io/Make_Site/Hugo%EB%A1%9C-site-%EB%A7%8C%EB%93%A4%EA%B8%B0/</guid>
-      <description>Site BootUp  Hugo 설치 사이트 테마 다운로드 repository 관리. workspace repository 연동 repository 관리. build repository 연동   Comment 생성 구글, Naver 검색에 사이트 노출 시키기  sitemap 생성 robot.txt 생성 google 검색에 사이트 노출 시키기  sitemap 인식이 안될경우 (사이트맵을 읽을 수 없음)   naver 검색에 사이트 노출 시키기  site 체크     md 좀더 편하게 작성하기.  stackedit     ubuntu 환경을 기준으로 한다.</description>
+      <description>Site BootUp  Hugo 설치 사이트 테마 다운로드 repository 관리. workspace repository 연동 repository 관리. build repository 연동   Comment 생성 구글, Naver 검색에 사이트 노출 시키기  sitemap 생성 robot.txt 생성 google 검색에 사이트 노출 시키기  sitemap 인식이 안될경우 (사이트맵을 읽을 수 없음)   naver 검색에 사이트 노출 시키기  site 체크     md 좀더 편하게 작성하기.  stackedit   layouts   ubuntu 환경을 기준으로 한다.</description>
     </item>
     
   </channel>

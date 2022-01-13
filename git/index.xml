@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Git on Test1234가나다라</title>
+    <title>Git on TestTitle</title>
     <link>https://prifri.github.io/git/</link>
-    <description>Recent content in Git on Test1234가나다라</description>
+    <description>Recent content in Git on TestTitle</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Wed, 18 Aug 2021 18:01:57 +0900</lastBuildDate>
     
