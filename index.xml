@@ -129,5 +129,14 @@ ubuntu에서 환경을 시작하므로 apt로 hugo를 설치한다.
 sudo apt-get install hugo 사이트 site 이름은 prifri_site 라고 대충 정했을때</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://prifri.github.io/google87c8a1501b6bd128/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://prifri.github.io/google87c8a1501b6bd128/</guid>
+      <description>google-site-verification: google87c8a1501b6bd128.</description>
+    </item>
+    
   </channel>
 </rss>
