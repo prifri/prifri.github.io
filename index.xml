@@ -122,7 +122,18 @@ clone 한 repository remote 경로 변경 일반적으로 그냥 copy해서 가�
       <pubDate>Tue, 17 Aug 2021 21:26:26 +0900</pubDate>
       
       <guid>https://prifri.github.io/Make_Site/Hugo%EB%A1%9C-site-%EB%A7%8C%EB%93%A4%EA%B8%B0/</guid>
-      <description>Site BootUp  Hugo 설치 사이트 테마 다운로드 repository 관리. workspace repository 연동 repository 관리. build repository 연동   Comment 생성 구글, Naver 검색에 사이트 노출 시키기  sitemap 생성 robot.txt 생성 google 검색에 사이트 노출 시키기  sitemap 인식이 안될경우 (사이트맵을 읽을 수 없음)   naver 검색에 사이트 노출 시키기  site 체크     md 좀더 편하게 작성하기.  stackedit     ubuntu 환경을 기준으로 한다.</description>
+      <description>ubuntu 환경을 기준으로 한다.
+  Site BootUp
+ Hugo 설치
+  Hugo 에 대한 설명과 설치
+Hugo 공식 Quick Start
+ubuntu에서 환경을 시작하므로 apt로 hugo를 설치한다.
+sudo apt-get install hugo   사이트
+  site 이름은 prifri_site 라고 대충 정했을때
+다음과 같은 명령어로 site 환경을 초기화한다.
+hugo new site prifri_site cd prifri_site directiory가 생기고 해당 directory가 workspace 개념이된다.
+  테마 다운로드
+  Hugo Themes</description>
     </item>
     
   </channel>
