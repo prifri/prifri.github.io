@@ -68,7 +68,7 @@ Cache에 할당하지 않고 바로 Memory에 Write 하기때문에 WT랑 같이
       <pubDate>Fri, 20 Aug 2021 18:05:58 +0900</pubDate>
       
       <guid>https://prifri.github.io/linux_arm64_kernel/assembly/ifb/</guid>
-      <description>[ifb 참고] (https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/useful-assembler-directives-and-macros-for-the-gnu-assembler)
+      <description>ifb 참고
  .macro	ldr_l, dst, sym, tmp= .ifb	\tmp adrp	\dst, \sym ldr	\dst, [\dst, :lo12:\sym] .else adrp	\tmp, \sym ldr	\dst, [\tmp, :lo12:\sym] .endif .endm .ifb = if blank라는 뜻
 ldr_l	x4, idmap_ptrs_per_pgd 이런 코드가 왔으면 위 macro에서 ifb 로 된 code가 만들어질것이다. </description>
     </item>

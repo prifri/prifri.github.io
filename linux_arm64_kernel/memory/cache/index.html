@@ -578,9 +578,9 @@ Write시 Miss가 났을때 Cache에 할당할거면 WA, 아니면 nWA다.</p>
 Outer CPU : Linux를 사용하지 않는 시스템(ex GPU)</p>
 <hr>
 <h1 id="cache-type">Cache Type</h1>
-<p>[참고사이트] (<a href="https://aidanbae.github.io/code/devops/computer/cpucache/">https://aidanbae.github.io/code/devops/computer/cpucache/</a>)</p>
+<p><a class="gdoc-markdown__link" href="https://aidanbae.github.io/code/devops/computer/cpucache/">참고사이트</a></p>
 <h2 id="direct-mapped-cache">Direct-mapped cache</h2>
-<p>[참고사이트] (<a href="https://talkingaboutme.tistory.com/entry/Study-Memory-Hierarchy-2-Direct-Mapped-Cache">https://talkingaboutme.tistory.com/entry/Study-Memory-Hierarchy-2-Direct-Mapped-Cache</a>)</p>
+<p><a class="gdoc-markdown__link" href="https://talkingaboutme.tistory.com/entry/Study-Memory-Hierarchy-2-Direct-Mapped-Cache">참고사이트</a></p>
 <p>cache구조를 설명할때 그냥 이렇게 동작한다라고 알려주는게 바로 이 방식.
 tag, index를 모두 사용하여 특정 cache address가 여러개의 dram address를 커버하게 되는 구조이다.</p>
 <h2 id="fully-associative-cache">Fully associative cache</h2>
@@ -608,7 +608,7 @@ data 전체 크기가 아니라 오로직 Line크기만을 다 합친것을 의�
 <h2 id="stbstore-buffer--write-buffer">St.B(Store buffer) / Write buffer</h2>
 <p>cpu -&gt; store buffer -&gt; cache -&gt; wirte buffer -&gt; memory</p>
 <h2 id="axiadvanced-extensible-interface">AXI(Advanced eXtensible Interface)</h2>
-<p>[참고사이트] (<a href="https://m.blog.naver.com/esoclab/20174360379">https://m.blog.naver.com/esoclab/20174360379</a>)</p>
+<p><a class="gdoc-markdown__link" href="https://m.blog.naver.com/esoclab/20174360379">참고사이트</a></p>
 <p>cache -&gt; dram 의 사이에서 사용하고 있는 있는 bus.</p>
 <p>AXI를 설명할때 AHB와 비교를 많이하는데, AXI는 채널이라는게 도입됬다고 한다.</p>
 <p>기존 버스라는 개념은 예를들어 A(저속 디바이스), B(고속 디바이스)요청이 있을때</p>
@@ -648,7 +648,7 @@ cpu D &lt;-&gt; st.b &lt;-&gt; L1 cache &lt;-&gt; | U |</p>
 <p>가상주소를 물리주소로 변환하는 속도를 높이기 위해 사용하는 캐시.</p>
 <hr>
 <h1 id="cache-maintance">Cache maintance</h1>
-<p>[참고사이트] (<a href="https://ko.wikipedia.org/wiki/%EC%BA%90%EC%8B%9C_%EC%9D%BC%EA%B4%80%EC%84%B1">https://ko.wikipedia.org/wiki/%EC%BA%90%EC%8B%9C_%EC%9D%BC%EA%B4%80%EC%84%B1</a>)</p>
+<p><a class="gdoc-markdown__link" href="https://ko.wikipedia.org/wiki/%EC%BA%90%EC%8B%9C_%EC%9D%BC%EA%B4%80%EC%84%B1">참고사이트</a></p>
 <p>CPU간 Cache 일관성을 지켜야하는데, 이 지키는 범위를 정해논게  PoC, PoU라고한다.</p>
 <p>CPU간 각자의 cache가 변했다는걸 확인하는게 스누핑 이라는 구조고, (MOESI라는 프로토콜을 쓴다는듯)</p>
 <p>이걸 통해서 CPU간의 일관성을 확인한다고한다.</p>
@@ -670,6 +670,13 @@ PoC를 수행할 Last Cache에 대한 Level을 의미한다.</p>
 <h3 id="louislevel-of-unification-inner-shareable">LoUIS(Level of Unification, Inner Shareable)</h3>
 <p>공유 자원에 대한것에 대해서의 Last Cache에 대한 Level을 의미한다. SMP 에서만 존재한다.
 단일 Process는 LOUU, SMP는 LoUISf라고만 일단 이해하고 넘어가야겠다.</p>
+<script src="https://utteranc.es/client.js"
+        repo="prifri/prifri_site_comments"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
 
     </article>
 
