@@ -540,8 +540,8 @@
 <hr>
 <h1 id="site-bootup">Site BootUp</h1>
 <h2 id="hugo-설치">Hugo 설치</h2>
-<p>[Hugo 에 대한 설명과 설치] (<a href="https://ialy1595.github.io/post/blog-construct-1/">https://ialy1595.github.io/post/blog-construct-1/</a>)</p>
-<p>[Hugo 공식 Quick Start] (<a href="https://gohugo.io/getting-started/quick-start/">https://gohugo.io/getting-started/quick-start/</a>)</p>
+<p><a class="gdoc-markdown__link" href="https://ialy1595.github.io/post/blog-construct-1/">Hugo 에 대한 설명과 설치</a></p>
+<p><a class="gdoc-markdown__link" href="https://gohugo.io/getting-started/quick-start/">Hugo 공식 Quick Start</a></p>
 <p>ubuntu에서 환경을 시작하므로 apt로 hugo를 설치한다.</p>
 <div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">sudo apt-get install hugo
 </code></pre></div><h2 id="사이트">사이트</h2>
@@ -551,8 +551,8 @@
 <span class="nb">cd</span> prifri_site
 </code></pre></div><p>directiory가 생기고 해당 directory가 workspace 개념이된다.</p>
 <h2 id="테마-다운로드">테마 다운로드</h2>
-<p>[Hugo Themes] (<a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a>)</p>
-<p>[Geekdocs] (<a href="https://geekdocs.de/usage/getting-started/">https://geekdocs.de/usage/getting-started/</a>)</p>
+<p><a class="gdoc-markdown__link" href="https://themes.gohugo.io/">Hugo Themes</a></p>
+<p><a class="gdoc-markdown__link" href="https://geekdocs.de/usage/getting-started/">Geekdocs</a></p>
 <p>geekdoc를 사용했다. darkmode가 바로 지원되는게 마음에 들어 그냥 이거썻다.</p>
 <p>code study용 블로그는 주로 doc계열을 많이 사용하는거 같으며 대표적으로 learn, books등이 존재하는거 같다.</p>
 <p>생성방법은 Geekdocs의 공식 started를 따른다.</p>
@@ -587,7 +587,7 @@ key를 등록시켜놓는 방법으로 사용한다.</p>
 content 만들고 해보면된다.</p>
 <h1 id="comment-생성">Comment 생성</h1>
 <p>utteranaces를 사용했다.</p>
-<p>[참고사이트] (<a href="https://ansohxxn.github.io/blog/utterances/">https://ansohxxn.github.io/blog/utterances/</a>)</p>
+<p><a class="gdoc-markdown__link" href="https://ansohxxn.github.io/blog/utterances/">참고사이트</a></p>
 <p>script 복사를 하는곳은 지금 사용하고있는 Geekdocs 기준으로</p>
 <div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell">layouts/partials/page-footer.html 
 </code></pre></div><p>의 밑에 넣었더니 main page에서도 나오더라. 아마 모든 page의 아래에 대한 html인가 보다.</p>
@@ -595,7 +595,7 @@ content 만들고 해보면된다.</p>
 <h1 id="구글-naver--검색에-사이트-노출-시키기">구글, Naver  검색에 사이트 노출 시키기</h1>
 <h2 id="sitemap-생성">sitemap 생성</h2>
 <p>자동생성이 기본이지만 config.toml에서 sitmap 파라미터란것도 존재하는듯 싶다.
-[참고사이트] (<a href="https://theissaclee.com/ko/post/robotstxtsitemaphugo/">https://theissaclee.com/ko/post/robotstxtsitemaphugo/</a>)</p>
+<a class="gdoc-markdown__link" href="https://theissaclee.com/ko/post/robotstxtsitemaphugo/">참고사이트</a></p>
 <div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell"><span class="c1"># sitemap 생성</span>
 <span class="o">[</span>sitemap<span class="o">]</span>
   <span class="nv">changefreq</span> <span class="o">=</span> <span class="s2">&#34;monthly&#34;</span>
@@ -603,26 +603,26 @@ content 만들고 해보면된다.</p>
   <span class="nv">priority</span> <span class="o">=</span> 0.5
 </code></pre></div><h2 id="robottxt-생성">robot.txt 생성</h2>
 <p>config.toml에 roboot.txt 자동생성 기능을 추가한다. [markup] 이나 [param]같은 것 아래에서 하면 안된다.</p>
-<p>[참고사이트] (<a href="https://theissaclee.com/ko/post/robotstxtsitemaphugo/">https://theissaclee.com/ko/post/robotstxtsitemaphugo/</a>)</p>
+<p><a class="gdoc-markdown__link" href="https://theissaclee.com/ko/post/robotstxtsitemaphugo/">참고사이트</a></p>
 <div class="highlight"><pre class="chroma"><code class="language-Shell" data-lang="Shell"><span class="c1"># robots.txt</span>
 <span class="nv">enableRobotsTXT</span> <span class="o">=</span> <span class="nb">true</span>
 </code></pre></div><h2 id="google-검색에-사이트-노출-시키기">google 검색에 사이트 노출 시키기</h2>
-<p>[참고사이트] (<a href="https://hoontaeklee.github.io/en/posts/20200112_%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EB%85%B8%EC%B6%9C/">https://hoontaeklee.github.io/en/posts/20200112_%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EB%85%B8%EC%B6%9C/</a>)
+<p><a class="gdoc-markdown__link" href="https://hoontaeklee.github.io/en/posts/20200112_%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EB%85%B8%EC%B6%9C/">참고사이트</a>
 public 에 넣고 push후 좀 기다리고나서 인증요청하면된다.</p>
 <h3 id="sitemap-인식이-안될경우-사이트맵을-읽을-수-없음">sitemap 인식이 안될경우 (사이트맵을 읽을 수 없음)</h3>
 <p>시간이 지나면 된다고 하는 경우가 있다. 나도 안되서 그냥 적당히 하다가 포기했다.
-[참고사이트] (<a href="https://julynine2.tistory.com/entry/Google-Search-Console-Sitemap-couldnt-fetch">https://julynine2.tistory.com/entry/Google-Search-Console-Sitemap-couldnt-fetch</a>)</p>
+<a class="gdoc-markdown__link" href="https://julynine2.tistory.com/entry/Google-Search-Console-Sitemap-couldnt-fetch">참고사이트</a></p>
 <h2 id="naver-검색에-사이트-노출-시키기">naver 검색에 사이트 노출 시키기</h2>
-<p>네이버 웹마스터가 [네이버 서치어드바이저] (<a href="https://searchadvisor.naver.com/">https://searchadvisor.naver.com/</a>)로 변경된듯 싶다.</p>
+<p>네이버 웹마스터가 <a class="gdoc-markdown__link" href="https://searchadvisor.naver.com/">네이버 서치어드바이저</a>로 변경된듯 싶다.</p>
 <p>google에 등록했을때랑 똑같이 html 파일을 받아서 public에 넣어놓는다.</p>
 <p>robots.txt 설정도 공홈에서 제공해주는 웹마스터 가이드를 보면 자세히 나와있다.</p>
 <p>그리고 google에서 인증할때와 마찬가지로 naver에서도 html을 가져와야된다.</p>
 <h3 id="site-체크">site 체크</h3>
-<p>[site check] (<a href="https://searchadvisor.naver.com/tools/sitecheck">https://searchadvisor.naver.com/tools/sitecheck</a>)에 들어가서 확인해본다.</p>
+<p><a class="gdoc-markdown__link" href="https://searchadvisor.naver.com/tools/sitecheck">site check</a>에 들어가서 확인해본다.</p>
 <h1 id="md-좀더-편하게-작성하기">md 좀더 편하게 작성하기.</h1>
 <h2 id="stackedit">stackedit</h2>
-<p>[참고사이트] (<a href="https://danggai.github.io/github.io/StackEdit%EC%97%90%EC%84%9C-Github.io%EB%A1%9C-%ED%8E%B8%ED%95%98%EA%B2%8C-%EB%B8%94%EB%A1%9C%EA%B9%85%ED%95%98%EA%B8%B0!/">https://danggai.github.io/github.io/StackEdit%EC%97%90%EC%84%9C-Github.io%EB%A1%9C-%ED%8E%B8%ED%95%98%EA%B2%8C-%EB%B8%94%EB%A1%9C%EA%B9%85%ED%95%98%EA%B8%B0!/</a>)
-[stackedit] (<a href="https://stackedit.io/app#">https://stackedit.io/app#</a>)</p>
+<p><a class="gdoc-markdown__link" href="https://danggai.github.io/github.io/StackEdit%EC%97%90%EC%84%9C-Github.io%EB%A1%9C-%ED%8E%B8%ED%95%98%EA%B2%8C-%EB%B8%94%EB%A1%9C%EA%B9%85%ED%95%98%EA%B8%B0!/">참고사이트</a>
+<a class="gdoc-markdown__link" href="https://stackedit.io/app#">stackedit</a></p>
 
     </article>
 
