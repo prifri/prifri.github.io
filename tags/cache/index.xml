@@ -1,0 +1,247 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Goldydocs – cache</title>
+    <link>/tags/cache/</link>
+    <description>Recent content in cache on Goldydocs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 24 Aug 2021 17:48:25 +0900</lastBuildDate>
+    
+	  <atom:link href="/tags/cache/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Cache</title>
+      <link>/docs/linux-arm64-kernel/assembly/memory/cache/</link>
+      <pubDate>Tue, 24 Aug 2021 17:48:25 +0900</pubDate>
+      
+      <guid>/docs/linux-arm64-kernel/assembly/memory/cache/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;Cache 개요&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h1 id=&#34;cache-policies&#34;&gt;Cache Policies&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;http://jake.dothome.co.kr/cache4/&#34;&gt;문c블로그 Cache-Coherent&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;cache-allocation-policies&#34;&gt;Cache Allocation Policies&lt;/h2&gt;
+&lt;h3 id=&#34;wa-rawrite-allocate-read-allocate&#34;&gt;WA, RA(Write-Allocate, Read-Allocate)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Write시 Cache에 해당 메모리가 없을때(Miss발생시)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Cache에 해당 메모리의 데이터를 할당.&lt;/li&gt;
+&lt;li&gt;할당된 캐시에 데이터를 기록한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Write시 Cache에 해당 메모리가 존재할때&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;RAM에 접근하지않고 Cache에만 접근하고 끝날것이다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;cache data는 dirty, memory data는 old가 될것이다.&lt;/p&gt;
+&lt;p&gt;Read또한 마찬가지로 read시 cache에 없으면 cache에 할당한다.&lt;/p&gt;
+&lt;p&gt;꽤 많은 블로그에서 WA에대 잘못설명한다.&lt;/p&gt;
+&lt;p&gt;Cache에 할당하지 않고 바로 Memory에 Write 하기때문에 WT랑 같이 사용하지 않는다는둥, 대부분의 시스템에서는 WT nWA를 사용한다는둥..&lt;/p&gt;
+&lt;p&gt;WA는 DRAM의 Data를 old로 만들고 cache write(dirty)를 하는거다.. miss일때 최초 한번만 DRAM에 접근한다는 얘기다.&lt;/p&gt;
+&lt;p&gt;Linux만 놓고 봤을때도 WT의 default는 WA이다&amp;hellip;ㅋㅋ linux말고 대부분이 WT nWA를 쓰나?&lt;/p&gt;
+&lt;h2 id=&#34;cache-write-pollicies&#34;&gt;Cache Write Pollicies&lt;/h2&gt;
+&lt;h3 id=&#34;wbwrite-back&#34;&gt;WB(Write-Back)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Write&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cache에만 Write. cache가 가득 찻을때만 Memory에 Write&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Read&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cache에서만 읽음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;wtwrite-through&#34;&gt;WT(Write-Through)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Write&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cache, Memory 둘다 Write&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Read&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cache에서만 읽음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cache-allocation--write-pollicies&#34;&gt;Cache Allocation + Write Pollicies&lt;/h2&gt;
+&lt;p&gt;Cache Allocation Policies는 Cache Write시 Miss가 됬을때 Cache Allocate를 할건지에 대한 정책이고&lt;/p&gt;
+&lt;p&gt;Cache Write Policies는 Write DRAM에도 Write를 하는 정책이다.(Read는 무조건 miss면 DRAM에서 가져오는거니 모든 정책에서 같다)&lt;/p&gt;
+&lt;p&gt;즉 둘을 나눠서만 생각하면 된다.&lt;/p&gt;
+&lt;p&gt;Write시 DRAM에도 쓰고 싶으면 WT, Cache만 읽을거면 WB
+Write시 Miss가 났을때 Cache에 할당할거면 WA, 아니면 nWA다.&lt;/p&gt;
+&lt;h2 id=&#34;armv8에서의-cache-policies&#34;&gt;ARMv8에서의 Cache Policies&lt;/h2&gt;
+&lt;p&gt;Normal Memory에서는 WTWA만을 사용하는데, TTB관련은 WBWA를 쓰는것처럼 보인다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;shareability&#34;&gt;Shareability&lt;/h2&gt;
+&lt;p&gt;아키텍처에서 공유라는것은 CPU를 기준으로 의미한다.&lt;/p&gt;
+&lt;p&gt;Inner CPU : Linux로 동작하는 모든 시스템
+Outer CPU : Linux를 사용하지 않는 시스템(ex GPU)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;cache-type&#34;&gt;Cache Type&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://aidanbae.github.io/code/devops/computer/cpucache/&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;direct-mapped-cache&#34;&gt;Direct-mapped cache&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://talkingaboutme.tistory.com/entry/Study-Memory-Hierarchy-2-Direct-Mapped-Cache&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;cache구조를 설명할때 그냥 이렇게 동작한다라고 알려주는게 바로 이 방식.
+tag, index를 모두 사용하여 특정 cache address가 여러개의 dram address를 커버하게 되는 구조이다.&lt;/p&gt;
+&lt;h2 id=&#34;fully-associative-cache&#34;&gt;Fully associative cache&lt;/h2&gt;
+&lt;p&gt;그냥 아무데나 넣고, 찾을때는 전부 검색해서 찾는 방식.&lt;/p&gt;
+&lt;h2 id=&#34;n-way-set-associative-cache&#34;&gt;N-way-set-associative cache&lt;/h2&gt;
+&lt;p&gt;Block화 하고 그것을 index화 하는 방식으로 fully와 direct방식을 혼합한 거라고 한다.&lt;/p&gt;
+&lt;h2 id=&#34;armv8에서-의-cache-type&#34;&gt;ARMv8에서 의 Cache Type.&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ARM Ref.11.1.1 Set associative caches and ways 참고&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cortex에 따라 달라지는거 같은데 L1 Data cache은 4way, L1 Instruction cache는 2 Way,&lt;/p&gt;
+&lt;p&gt;L2는 16way, L3은 더 많은 way등을 가질수있다고 한다.&lt;/p&gt;
+&lt;p&gt;또한 MMU TLBs의 경우를 제외하곤 Way를 늘리는것에 대해 추천하지 않는다고 한다.&lt;/p&gt;
+&lt;p&gt;MMU TLBs와 같이 매우 작은 cache에 대해서는 Way를 늘리는게 도움이 된다고 하며, 8방향이 minimum이라고 하며,
+L2 같이 큰 cache에서만 유용하다는듯 싶다&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;cache-terminology&#34;&gt;Cache terminology&lt;/h1&gt;
+&lt;h2 id=&#34;way&#34;&gt;Way&lt;/h2&gt;
+&lt;p&gt;Cache Type을 set-associative로 사용할때 나오는 용어로, 몇개의 line을 1개의 block. 즉 way로 썻냐는것이다.&lt;/p&gt;
+&lt;p&gt;1 way면 direct mapped와 같은거나 다름없고, way가 총 line수와 같으면 fully와 똑같다.&lt;/p&gt;
+&lt;h2 id=&#34;cache의-용량&#34;&gt;Cache의 용량&lt;/h2&gt;
+&lt;p&gt;Cache의 용량을 말할때는 Line의 크기만을 두고 말한다.&lt;/p&gt;
+&lt;p&gt;Cache data는 크게 Line, tag로 이루어져있는데 흔히 4k cache등을 말할때는 저 cache data의 구조에서 Line + tag등의
+data 전체 크기가 아니라 오로직 Line크기만을 다 합친것을 의미한다.&lt;/p&gt;
+&lt;h2 id=&#34;stbstore-buffer--write-buffer&#34;&gt;St.B(Store buffer) / Write buffer&lt;/h2&gt;
+&lt;p&gt;cpu -&amp;gt; store buffer -&amp;gt; cache -&amp;gt; wirte buffer -&amp;gt; memory&lt;/p&gt;
+&lt;h2 id=&#34;axiadvanced-extensible-interface&#34;&gt;AXI(Advanced eXtensible Interface)&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://m.blog.naver.com/esoclab/20174360379&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;cache -&amp;gt; dram 의 사이에서 사용하고 있는 있는 bus.&lt;/p&gt;
+&lt;p&gt;AXI를 설명할때 AHB와 비교를 많이하는데, AXI는 채널이라는게 도입됬다고 한다.&lt;/p&gt;
+&lt;p&gt;기존 버스라는 개념은 예를들어 A(저속 디바이스), B(고속 디바이스)요청이 있을때&lt;/p&gt;
+&lt;p&gt;A주소 전송 -&amp;gt; Adata 받음(B는 기다려야함)&lt;/p&gt;
+&lt;p&gt;을 기다려야 됬는데 채널이라는 개념이 도압되면서&lt;/p&gt;
+&lt;p&gt;1채널에 A주소 전송, 2채널에 B주소 전송이 가능해 진다는것 같다.&lt;/p&gt;
+&lt;p&gt;또한 버스트 전송이 기본개념이라 버스트 전송을 전제로 동작한다고 한다.&lt;/p&gt;
+&lt;p&gt;data 전송 단위는 bit이며 8, 16, 32, 64 &amp;hellip; 1024 bit등을 지원하는거 같다.&lt;/p&gt;
+&lt;h2 id=&#34;scusoope-control-unit&#34;&gt;SCU(Soope control unit)&lt;/h2&gt;
+&lt;p&gt;어떤 CPU에서 해당 CPU의 L1 Cache miss data를 L2에 요청했을때 해당 data가 다른 CPU cache에 해당 값이 존재하는지, 존재한다면 해당값을 전송하는 역할을 한다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;cache-전송-예제&#34;&gt;Cache 전송 예제&lt;/h1&gt;
+&lt;h2 id=&#34;cache-data-1-byte-read-시&#34;&gt;Cache Data 1 byte read 시&lt;/h2&gt;
+&lt;p&gt;다음의 전제를 가진다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;cache line 크기 : 16bit 크기의 cache line&lt;/li&gt;
+&lt;li&gt;AXI 전송단위 : 8bit&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;cache line의 최소크기인 16bit인데 1byte만을 가져올순없다. 그래서 cache line의 최소크기인 16bit로 읽는다.
+이때 AXI 전송단위가 8bit이므로 2번을 읽어야되는데, AXI구조상 start address와 length를 주면 해당 값만큼 읽어오는 개념인가보다.
+그래서 그렇게 한번의 주소+크기 요청으로 데이터를 가져온다.&lt;/p&gt;
+&lt;h2 id=&#34;cpu---메모리의-데이터-전송-단위&#34;&gt;cpu &amp;lt;-&amp;gt; 메모리의 데이터 전송 단위&lt;/h2&gt;
+&lt;p&gt;cpu -&amp;gt; (가상메모리 cache) -&amp;gt; mmu -&amp;gt; (물리메모리 cache) -&amp;gt; memory&lt;/p&gt;
+&lt;p&gt;cpu &amp;lt;-&amp;gt; cache : 1byte or 4byte&lt;/p&gt;
+&lt;p&gt;cache &amp;lt;-&amp;gt; cache : cache line단위&lt;/p&gt;
+&lt;p&gt;cache memory &amp;lt;-&amp;gt; DRAM : AXI bus 단위&lt;/p&gt;
+&lt;h2 id=&#34;큰그림&#34;&gt;큰그림&lt;/h2&gt;
+&lt;p&gt;cpu A &amp;lt;-&amp;gt; st.b &amp;lt;-&amp;gt; L1 cache &amp;lt;-&amp;gt; |   |
+cpu B &amp;lt;-&amp;gt; st.b &amp;lt;-&amp;gt; L1 cache &amp;lt;-&amp;gt; | S |
+cpu C &amp;lt;-&amp;gt; st.b &amp;lt;-&amp;gt; L1 cache &amp;lt;-&amp;gt; | C | &amp;lt;-&amp;gt; L2 cache &amp;lt;-&amp;gt; Memory
+cpu D &amp;lt;-&amp;gt; st.b &amp;lt;-&amp;gt; L1 cache &amp;lt;-&amp;gt; | U |&lt;/p&gt;
+&lt;h2 id=&#34;heading&#34;&gt;&amp;hellip;&lt;/h2&gt;
+&lt;h1 id=&#34;instruction-cache&#34;&gt;Instruction cache.&lt;/h1&gt;
+&lt;p&gt;Instruction cache는 dirty bit가 존재하지 않는다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;tlbtranslation-lookaside-buffer&#34;&gt;TLB(Translation Lookaside Buffer)&lt;/h1&gt;
+&lt;p&gt;가상주소를 물리주소로 변환하는 속도를 높이기 위해 사용하는 캐시.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;cache-maintance&#34;&gt;Cache maintance&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://ko.wikipedia.org/wiki/%EC%BA%90%EC%8B%9C_%EC%9D%BC%EA%B4%80%EC%84%B1&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CPU간 Cache 일관성을 지켜야하는데, 이 지키는 범위를 정해논게  PoC, PoU라고한다.&lt;/p&gt;
+&lt;p&gt;CPU간 각자의 cache가 변했다는걸 확인하는게 스누핑 이라는 구조고, (MOESI라는 프로토콜을 쓴다는듯)&lt;/p&gt;
+&lt;p&gt;이걸 통해서 CPU간의 일관성을 확인한다고한다.&lt;/p&gt;
+&lt;h2 id=&#34;snooping&#34;&gt;Snooping&lt;/h2&gt;
+&lt;p&gt;주소 버스를 항상 감시하여 캐시 상의 메모리에 대한 접근이 있는지를 감소하는 구조.&lt;/p&gt;
+&lt;p&gt;다른 캐시에서 쓰기가 발생하면 캐시 컨트롤러에 의해서 자신의 캐시 위에 있는 복사본을 무효화시킨다.&lt;/p&gt;
+&lt;h2 id=&#34;pocpoint-of-coherency&#34;&gt;Poc(Point of Coherency)&lt;/h2&gt;
+&lt;p&gt;DMA, DSP등의 외부 Device와 Coherency를 맞추기 위한 개념으로 DRAM까지 Coherency를 맞추는다는것.&lt;/p&gt;
+&lt;h2 id=&#34;poupoint-of-unification&#34;&gt;PoU(Point of Unification)&lt;/h2&gt;
+&lt;p&gt;캐시 일관성을 Data Cache뿐만 아니라 Instruction Cache까지 지킨다는 것.(+Translation Table Walk)&lt;/p&gt;
+&lt;h2 id=&#34;armv8에서의-poc-pou&#34;&gt;ARMv8에서의 Poc, PoU&lt;/h2&gt;
+&lt;p&gt;linux에서는 미리 정해진 PoC, PoU에 따라 Cache Clean을 하는 명령어가 정해져있다.&lt;/p&gt;
+&lt;p&gt;Instruct Cache같은경우엔 PoU 밖에 존재하지 않는데, Data Cache는 빈번하게 바뀔 여지가 있지만 Instruct Cache를 교체하는 경우가 빈번하지 않고 교체하게 되면 결국 Data Cache까지 바뀌게 되는 개념이므로 PoU만 존재하는것처럼 보인다.&lt;/p&gt;
+&lt;h3 id=&#34;loclevel-of-coherence&#34;&gt;LoC(Level of Coherence)&lt;/h3&gt;
+&lt;p&gt;PoC, PoU가 추상적인 개념이라면, 실제 Arch에 명령어를 날려야할때 몇번 Level까지 수행인지를 정해야된다.
+PoC를 수행할 Last Cache에 대한 Level을 의미한다.&lt;/p&gt;
+&lt;h3 id=&#34;louulevel-of-unification-uniprocessor&#34;&gt;LoUU(Level of Unification, Uniprocessor)&lt;/h3&gt;
+&lt;p&gt;단일 Process에서 PoU를 수행할 Last Cache에 대한 Level을 의미한다.&lt;/p&gt;
+&lt;h3 id=&#34;louislevel-of-unification-inner-shareable&#34;&gt;LoUIS(Level of Unification, Inner Shareable)&lt;/h3&gt;
+&lt;p&gt;공유 자원에 대한것에 대해서의 Last Cache에 대한 Level을 의미한다. SMP 에서만 존재한다.
+단일 Process는 LOUU, SMP는 LoUISf라고만 일단 이해하고 넘어가야겠다.&lt;/p&gt;
+
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;data cache 의 invalidate / clean 관련 명령어&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h1 id=&#34;cache-invalidate한다-라는-의미는&#34;&gt;cache invalidate한다 라는 의미는?&lt;/h1&gt;
+&lt;h1 id=&#34;cache-clean한다-라는-의미는&#34;&gt;cache clean한다 라는 의미는?&lt;/h1&gt;
+&lt;p&gt;dirty bit가 set된 cache를 모두 메모리에 반영한다는것.&lt;/p&gt;
+&lt;h1 id=&#34;dc-ivac-xt&#34;&gt;dc ivac, Xt&lt;/h1&gt;
+&lt;p&gt;D-cache invalidate by address to Point of Coherency&lt;/p&gt;
+&lt;h1 id=&#34;dc-instruction-option에-대한-설명&#34;&gt;dc instruction option에 대한 설명&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;dc : Data Cache&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IC : Instruction Cache&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IS : Inner Shareable&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ALL : all&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;U : Point of Unification&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;VA : Address to Point of Coherency&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Z : zero&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SW : Set/Way&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I : invalidate&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C : Clean / Point Coherency&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

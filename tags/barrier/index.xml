@@ -1,0 +1,40 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Goldydocs – barrier</title>
+    <link>/tags/barrier/</link>
+    <description>Recent content in barrier on Goldydocs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 26 Aug 2021 11:03:29 +0900</lastBuildDate>
+    
+	  <atom:link href="/tags/barrier/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Barrier</title>
+      <link>/docs/linux-arm64-kernel/assembly/memory/barrier/</link>
+      <pubDate>Thu, 26 Aug 2021 11:03:29 +0900</pubDate>
+      
+      <guid>/docs/linux-arm64-kernel/assembly/memory/barrier/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;isbinstruction-synchronization-barrier&#34;&gt;ISB(Instruction Synchronization Barrier)&lt;/h1&gt;
+&lt;p&gt;파이프라인을 비워줌(15~20 cycle)&lt;/p&gt;
+&lt;h1 id=&#34;dmbdata-memory-barrier&#34;&gt;DMB(Data Memory Barrier)&lt;/h1&gt;
+&lt;p&gt;Ordered Accesses : Any - Any
+load, store의 순서를 유지해줌 + 모든 CPU에서 해당 값의 일관성을 유지 시켜줌.&lt;/p&gt;
+&lt;h2 id=&#34;dmb-sy&#34;&gt;dmb sy&lt;/h2&gt;
+&lt;h1 id=&#34;dsbdata-synchronization-barrier&#34;&gt;DSB(Data Synchronization Barrier)&lt;/h1&gt;
+&lt;p&gt;Memory에 관련된 동기화
+해당 instruction을 기준으로 명령의 순서를 변경하지 않는다.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

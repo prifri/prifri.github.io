@@ -14,324 +14,249 @@
     
     
     <item>
-      <title>Docs: Bed and Chair Metrics</title>
-      <link>/docs/tasks/beds/</link>
-      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      <title>Docs: Docsy Theme로 변경</title>
+      <link>/docs/make-site/docsy-theme%EB%A1%9C-%EB%B3%80%EA%B2%BD/</link>
+      <pubDate>Fri, 14 Jan 2022 12:46:18 +0900</pubDate>
       
-      <guid>/docs/tasks/beds/</guid>
+      <guid>/docs/make-site/docsy-theme%EB%A1%9C-%EB%B3%80%EA%B2%BD/</guid>
       <description>
         
         
         
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;This is a placeholder page. Replace it with your own content.&lt;/p&gt;
+&lt;p&gt;search 기능을 추가하다가 잘안되고 themes를 docsy로 변경하였다.&lt;/p&gt;
 
 &lt;/div&gt;
 
-&lt;p&gt;Text can be &lt;strong&gt;bold&lt;/strong&gt;, &lt;em&gt;italic&lt;/em&gt;, or &lt;del&gt;strikethrough&lt;/del&gt;. &lt;a href=&#34;https://gohugo.io&#34;&gt;Links&lt;/a&gt; should be blue with no underlines (unless hovered over).&lt;/p&gt;
-&lt;p&gt;There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p&gt;
-&lt;p&gt;90&amp;rsquo;s four loko seitan photo booth gochujang freegan tumeric listicle fam ugh humblebrag. Bespoke leggings gastropub, biodiesel brunch pug fashion axe meh swag art party neutra deep v chia. Enamel pin fanny pack knausgaard tofu, artisan cronut hammock meditation occupy master cleanse chartreuse lumbersexual. Kombucha kogi viral truffaut synth distillery single-origin coffee ugh slow-carb marfa selfies. Pitchfork schlitz semiotics fanny pack, ugh artisan vegan vaporware hexagon. Polaroid fixie post-ironic venmo wolf ramps &lt;strong&gt;kale chips&lt;/strong&gt;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;There should be no margin above this first sentence.&lt;/p&gt;
-&lt;p&gt;Blockquotes should be a lighter gray with a border along the left side in the secondary color.&lt;/p&gt;
-&lt;p&gt;There should be no margin below this final sentence.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;first-header-2&#34;&gt;First Header 2&lt;/h2&gt;
-&lt;p&gt;This is a normal paragraph following a header. Knausgaard kale chips snackwave microdosing cronut copper mug swag synth bitters letterpress glossier &lt;strong&gt;craft beer&lt;/strong&gt;. Mumblecore bushwick authentic gochujang vegan chambray meditation jean shorts irony. Viral farm-to-table kale chips, pork belly palo santo distillery activated charcoal aesthetic jianbing air plant woke lomo VHS organic. Tattooed locavore succulents heirloom, small batch sriracha echo park DIY af. Shaman you probably haven&amp;rsquo;t heard of them copper mug, crucifix green juice vape &lt;em&gt;single-origin coffee&lt;/em&gt; brunch actually. Mustache etsy vexillologist raclette authentic fam. Tousled beard humblebrag asymmetrical. I love turkey, I love my job, I love my friends, I love Chardonnay!&lt;/p&gt;
-&lt;p&gt;Deae legum paulatimque terra, non vos mutata tacet: dic. Vocant docuique me plumas fila quin afuerunt copia haec o neque.&lt;/p&gt;
-&lt;p&gt;On big screens, paragraphs and headings should not take up the full container width, but we want tables, code blocks and similar to take the full width.&lt;/p&gt;
-&lt;p&gt;Scenester tumeric pickled, authentic crucifix post-ironic fam freegan VHS pork belly 8-bit yuccie PBR&amp;amp;B. &lt;strong&gt;I love this life we live in&lt;/strong&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;second-header-2&#34;&gt;Second Header 2&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;header-3&#34;&gt;Header 3&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;This is a code block following a header.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Next level leggings before they sold out, PBR&amp;amp;B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.&lt;/p&gt;
-&lt;h4 id=&#34;header-4&#34;&gt;Header 4&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
-&lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
-&lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&#34;header-5&#34;&gt;Header 5&lt;/h5&gt;
-&lt;ol&gt;
-&lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
-&lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
-&lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h6 id=&#34;header-6&#34;&gt;Header 6&lt;/h6&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;What&lt;/th&gt;
-&lt;th&gt;Follows&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;A table&lt;/td&gt;
-&lt;td&gt;A header&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;A table&lt;/td&gt;
-&lt;td&gt;A header&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;A table&lt;/td&gt;
-&lt;td&gt;A header&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;hr&gt;
-&lt;p&gt;There&amp;rsquo;s a horizontal rule above and below this.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;Here is an unordered list:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Liverpool F.C.&lt;/li&gt;
-&lt;li&gt;Chelsea F.C.&lt;/li&gt;
-&lt;li&gt;Manchester United F.C.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And an ordered list:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Michael Brecker&lt;/li&gt;
-&lt;li&gt;Seamus Blake&lt;/li&gt;
-&lt;li&gt;Branford Marsalis&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;And an unordered task list:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Create a Hugo theme&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Add task lists to it&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Take a vacation&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And a &amp;ldquo;mixed&amp;rdquo; task list:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Pack bags&lt;/li&gt;
-&lt;li&gt;?&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Travel!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And a nested list:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Jackson 5
-&lt;ul&gt;
-&lt;li&gt;Michael&lt;/li&gt;
-&lt;li&gt;Tito&lt;/li&gt;
-&lt;li&gt;Jackie&lt;/li&gt;
-&lt;li&gt;Marlon&lt;/li&gt;
-&lt;li&gt;Jermaine&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;TMNT
-&lt;ul&gt;
-&lt;li&gt;Leonardo&lt;/li&gt;
-&lt;li&gt;Michelangelo&lt;/li&gt;
-&lt;li&gt;Donatello&lt;/li&gt;
-&lt;li&gt;Raphael&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Definition lists can be used with Markdown syntax. Definition headers are bold.&lt;/p&gt;
-&lt;dl&gt;
-&lt;dt&gt;Name&lt;/dt&gt;
-&lt;dd&gt;Godzilla&lt;/dd&gt;
-&lt;dt&gt;Born&lt;/dt&gt;
-&lt;dd&gt;1952&lt;/dd&gt;
-&lt;dt&gt;Birthplace&lt;/dt&gt;
-&lt;dd&gt;Japan&lt;/dd&gt;
-&lt;dt&gt;Color&lt;/dt&gt;
-&lt;dd&gt;Green&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;hr&gt;
-&lt;p&gt;Tables should have bold headings and alternating shaded rows.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Artist&lt;/th&gt;
-&lt;th&gt;Album&lt;/th&gt;
-&lt;th&gt;Year&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Michael Jackson&lt;/td&gt;
-&lt;td&gt;Thriller&lt;/td&gt;
-&lt;td&gt;1982&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Prince&lt;/td&gt;
-&lt;td&gt;Purple Rain&lt;/td&gt;
-&lt;td&gt;1984&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Beastie Boys&lt;/td&gt;
-&lt;td&gt;License to Ill&lt;/td&gt;
-&lt;td&gt;1986&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;If a table is too wide, it should scroll horizontally.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Artist&lt;/th&gt;
-&lt;th&gt;Album&lt;/th&gt;
-&lt;th&gt;Year&lt;/th&gt;
-&lt;th&gt;Label&lt;/th&gt;
-&lt;th&gt;Awards&lt;/th&gt;
-&lt;th&gt;Songs&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Michael Jackson&lt;/td&gt;
-&lt;td&gt;Thriller&lt;/td&gt;
-&lt;td&gt;1982&lt;/td&gt;
-&lt;td&gt;Epic Records&lt;/td&gt;
-&lt;td&gt;Grammy Award for Album of the Year, American Music Award for Favorite Pop/Rock Album, American Music Award for Favorite Soul/R&amp;amp;B Album, Brit Award for Best Selling Album, Grammy Award for Best Engineered Album, Non-Classical&lt;/td&gt;
-&lt;td&gt;Wanna Be Startin&amp;rsquo; Somethin&amp;rsquo;, Baby Be Mine, The Girl Is Mine, Thriller, Beat It, Billie Jean, Human Nature, P.Y.T. (Pretty Young Thing), The Lady in My Life&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Prince&lt;/td&gt;
-&lt;td&gt;Purple Rain&lt;/td&gt;
-&lt;td&gt;1984&lt;/td&gt;
-&lt;td&gt;Warner Brothers Records&lt;/td&gt;
-&lt;td&gt;Grammy Award for Best Score Soundtrack for Visual Media, American Music Award for Favorite Pop/Rock Album, American Music Award for Favorite Soul/R&amp;amp;B Album, Brit Award for Best Soundtrack/Cast Recording, Grammy Award for Best Rock Performance by a Duo or Group with Vocal&lt;/td&gt;
-&lt;td&gt;Let&amp;rsquo;s Go Crazy, Take Me With U, The Beautiful Ones, Computer Blue, Darling Nikki, When Doves Cry, I Would Die 4 U, Baby I&amp;rsquo;m a Star, Purple Rain&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Beastie Boys&lt;/td&gt;
-&lt;td&gt;License to Ill&lt;/td&gt;
-&lt;td&gt;1986&lt;/td&gt;
-&lt;td&gt;Mercury Records&lt;/td&gt;
-&lt;td&gt;noawardsbutthistablecelliswide&lt;/td&gt;
-&lt;td&gt;Rhymin &amp;amp; Stealin, The New Style, She&amp;rsquo;s Crafty, Posse in Effect, Slow Ride, Girls, (You Gotta) Fight for Your Right, No Sleep Till Brooklyn, Paul Revere, Hold It Now, Hit It, Brass Monkey, Slow and Low, Time to Get Ill&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;hr&gt;
-&lt;p&gt;Code snippets like &lt;code&gt;var foo = &amp;quot;bar&amp;quot;;&lt;/code&gt; can be shown inline.&lt;/p&gt;
-&lt;p&gt;Also, &lt;code&gt;this should vertically align&lt;/code&gt; &lt;del&gt;&lt;code&gt;with this&lt;/code&gt;&lt;/del&gt; &lt;del&gt;and this&lt;/del&gt;.&lt;/p&gt;
-&lt;p&gt;Code can also be shown in a block element.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;foo := &amp;quot;bar&amp;quot;;
-bar := &amp;quot;foo&amp;quot;;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Code can also use syntax highlighting.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;input&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;`var foo = &amp;#34;bar&amp;#34;;`&lt;/span&gt;
+&lt;h1 id=&#34;docsy-설치&#34;&gt;docsy 설치&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.docsy.dev/docs/getting-started/&#34;&gt;docsy Getting started&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;hugo는 ubuntu가 18version 이상이라면 extended로 설치됬을것이다.
+example site로 clone하여 사용하는걸 추천하니 그렇게 한다.
+remote를 바꾸기 전까지만 따라 한다.&lt;/p&gt;
+&lt;h2 id=&#34;branch-backup&#34;&gt;branch backup&lt;/h2&gt;
+&lt;p&gt;docsy origin git에서 update를 계속 받아야 될것이므로 현재 master에 대한 backup brach를 만들어준다.
+remote도 origin복사본을 만들어놓고, push 한다&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git checkout -b docsy_origin
+git remote add docsy https://github.com/google/docsy-example.git
+git push origin docsy_origin
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;이제 origin remote를 원래 remote로 변경한다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git remote set-url origin git@github.com:prifri/prifri_site.git
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;git-덮어쓰기&#34;&gt;git 덮어쓰기&lt;/h2&gt;
+&lt;p&gt;현재 master git과 origin과는 완전히 다른 내용일것이다. 강제로 update 시킨다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git checkout master
+git push --force origin master 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;나는 시행착오좀 겪느라 branch가 원격 저장소에 좀 생겼었는데 master, backup bracnh만 남기고 정리하고 master를 default로 한다.&lt;/p&gt;
+&lt;h2 id=&#34;public을-submodule로-추가&#34;&gt;public을 submodule로 추가&lt;/h2&gt;
+&lt;p&gt;geedoc에서 했던 대로 추가한다. docsy example의 .gitignore에 public이 있으므로 이를 지우고 submodule을 추가하면된다.&lt;/p&gt;
+&lt;h1 id=&#34;docsy-build&#34;&gt;docsy build&lt;/h1&gt;
+&lt;p&gt;hugo server -D 로 테스트를 한번 해보고 잘되면 hugo -t docsy로 build를 하고 push를 해본다.&lt;/p&gt;
+&lt;h2 id=&#34;ss-error-처리&#34;&gt;ss error 처리&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;import fs from &#39;fs-extra&#39;
+       ^^
 
-  &lt;span style=&#34;color:#000&#34;&gt;lexer&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;lexers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Get&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;javascript&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;iterator&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;lexer&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Tokenise&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;input&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;style&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;styles&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Get&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;github&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;formatter&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;html&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;New&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;html&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;WithLineNumbers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;())&lt;/span&gt;
+SyntaxError: Unexpected identifier
+    at Module._compile (internal/modules/cjs/loader.js:723:23)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+Total in 2031 ms
+Error: Error building site: POSTCSS: failed to transform &amp;quot;scss/main.css&amp;quot; (text/css): /home/unit_dev64/kkr/docsy-example/node_modules/postcss-cli/index.js:3
+import fs from &#39;fs-extra&#39;
+       ^^
 
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;buff&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;bytes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Buffer&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;formatter&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Format&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;buff&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;iterator&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
+SyntaxError: Unexpected identifier
+    at Module._compile (internal/modules/cjs/loader.js:723:23)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;nodejs version이 낮아서 그런거 같다. &lt;a href=&#34;https://github.com/google/docsy/issues/265&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;nodejs version을 확인해본다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ node -v
+v10.19.0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;대충 검색해보니 v12도 있는거 같아서 v12로 다시 깔아서 해봤다.&lt;a href=&#34;https://stackoverflow.com/questions/60679889/update-node-to-v12-on-ubuntu&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;다시 build 했더니 잘된다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ hugo -t docsy
 
-  &lt;span style=&#34;color:#000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;buff&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;())&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Inline code inside table cells should still be distinguishable.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Language&lt;/th&gt;
-&lt;th&gt;Code&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Javascript&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;var foo = &amp;quot;bar&amp;quot;;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Ruby&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;foo = &amp;quot;bar&amp;quot;{&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;hr&gt;
-&lt;p&gt;Small images should be shown at their actual size.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg/240px-Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Large images should always scale down and fit in the content container.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg/1024px-Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;The photo above of the Spruce Picea abies shoot with foliage buds: Bjørn Erik Pedersen, CC-BY-SA.&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&#34;components&#34;&gt;Components&lt;/h2&gt;
-&lt;h3 id=&#34;alerts&#34;&gt;Alerts&lt;/h3&gt;
-&lt;p&gt;
+                   | EN | FA | NO  
+-------------------+----+----+-----
+  Pages            | 76 | 28 | 95  
+  Paginator pages  |  0 |  0 |  0  
+  Non-page files   |  3 |  3 |  1  
+  Static files     | 43 | 43 | 43  
+  Processed images |  7 |  7 |  2  
+  Aliases          |  4 |  2 |  0  
+  Sitemaps         |  2 |  1 |  1  
+  Cleaned          |  0 |  0 |  0  
 
-&lt;div class=&#34;alert alert-primary&#34; role=&#34;alert&#34;&gt;
-
-
-    This is an alert.
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;alert alert-primary&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
-
-    This is an alert with a title.
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;alert alert-primary&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
-
-    This is an alert with a title and &lt;strong&gt;Markdown&lt;/strong&gt;.
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;alert alert-success&#34; role=&#34;alert&#34;&gt;
-
-
-    This is a successful alert.
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
-
-
-    This is a warning.
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Warning&lt;/h4&gt;
-
-    This is a warning with a title.
-
-&lt;/div&gt;
-&lt;/p&gt;
-&lt;h2 id=&#34;another-heading&#34;&gt;Another Heading&lt;/h2&gt;
-&lt;p&gt;Add some sections here to see how the ToC looks like. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.&lt;/p&gt;
-&lt;h3 id=&#34;this-document&#34;&gt;This Document&lt;/h3&gt;
-&lt;p&gt;Inguina genus: Anaphen post: lingua violente voce suae meus aetate diversi. Orbis unam nec flammaeque status deam Silenum erat et a ferrea. Excitus rigidum ait: vestro et Herculis convicia: nitidae deseruit coniuge Proteaque adiciam &lt;em&gt;eripitur&lt;/em&gt;? Sitim noceat signa &lt;em&gt;probat quidem&lt;/em&gt;. Sua longis &lt;em&gt;fugatis&lt;/em&gt; quidem genae.&lt;/p&gt;
-&lt;h3 id=&#34;pixel-count&#34;&gt;Pixel Count&lt;/h3&gt;
-&lt;p&gt;Tilde photo booth wayfarers cliche lomo intelligentsia man braid kombucha vaporware farm-to-table mixtape portland. PBR&amp;amp;B pickled cornhole ugh try-hard ethical subway tile. Fixie paleo intelligentsia pabst. Ennui waistcoat vinyl gochujang. Poutine salvia authentic affogato, chambray lumbersexual shabby chic.&lt;/p&gt;
-&lt;h3 id=&#34;contact-info&#34;&gt;Contact Info&lt;/h3&gt;
-&lt;p&gt;Plaid hell of cred microdosing, succulents tilde pour-over. Offal shabby chic 3 wolf moon blue bottle raw denim normcore poutine pork belly.&lt;/p&gt;
-&lt;h3 id=&#34;external-links&#34;&gt;External Links&lt;/h3&gt;
-&lt;p&gt;Stumptown PBR&amp;amp;B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;This is the final element on the page and there should be no margin below this.
+Total in 2477 ms
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;기존-작업했던것을-옮긴다&#34;&gt;기존 작업했던것을 옮긴다&lt;/h1&gt;
+&lt;p&gt;content 작업들
+google, naver 검색등록 작업들&lt;/p&gt;
+&lt;h2 id=&#34;comment&#34;&gt;comment&lt;/h2&gt;
+&lt;p&gt;blog와 doc의 sigle.html을 layouts에 복사해온다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mkdir -p layouts/blog
+mkdir -p layouts/docs
+cp thems/docsy/layouts/blog/single.html layouts/blog/
+cp thems/docsy/layouts/docs/single.html layouts/docs/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;그리고 end앞에 script를 복사해넣는다&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{{ define &amp;quot;main&amp;quot; }}
+{{ .Render &amp;quot;content&amp;quot; }}
+&amp;lt;script src=&amp;quot;https://utteranc.es/client.js&amp;quot;
+        repo=&amp;quot;prifri/prifri_site_comments&amp;quot;
+        issue-term=&amp;quot;pathname&amp;quot;
+        theme=&amp;quot;github-light&amp;quot;
+        crossorigin=&amp;quot;anonymous&amp;quot;
+        async&amp;gt;
+&amp;lt;/script&amp;gt;
+{{ end }}
 &lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
     
     <item>
+      <title>Docs: Hugo로 site 만들기</title>
+      <link>/docs/make-site/hugo%EB%A1%9C-site-%EB%A7%8C%EB%93%A4%EA%B8%B0/</link>
+      <pubDate>Tue, 17 Aug 2021 21:26:26 +0900</pubDate>
+      
+      <guid>/docs/make-site/hugo%EB%A1%9C-site-%EB%A7%8C%EB%93%A4%EA%B8%B0/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;ubuntu 환경을 기준으로 한다. Theme를 geekdoc으로 만들었었던 내용에 대한정리이다.
+geekdoc를 사용하면 댓글을 만들면 main page를 포함해서 댓글이 생기고,
+검색기능도 추가를 해도 잘 동작이 안되서 현재 docsy로 갈아 탓다.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h1 id=&#34;site-bootup&#34;&gt;Site BootUp&lt;/h1&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;hugo-설치&#34;&gt;Hugo 설치&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://ialy1595.github.io/post/blog-construct-1/&#34;&gt;Hugo 에 대한 설명과 설치&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://gohugo.io/getting-started/quick-start/&#34;&gt;Hugo 공식 Quick Start&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ubuntu에서 환경을 시작하므로 apt로 hugo를 설치한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;sudo apt-get install hugo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;사이트&#34;&gt;사이트&lt;/h2&gt;
+&lt;p&gt;site 이름은 prifri_site 라고 대충 정했을때&lt;/p&gt;
+&lt;p&gt;다음과 같은 명령어로 site 환경을 초기화한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;hugo new site prifri_site
+&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; prifri_site
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;directiory가 생기고 해당 directory가 workspace 개념이된다.&lt;/p&gt;
+&lt;h2 id=&#34;테마-다운로드&#34;&gt;테마 다운로드&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://themes.gohugo.io/&#34;&gt;Hugo Themes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://geekdocs.de/usage/getting-started/&#34;&gt;Geekdocs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;geekdoc를 사용했다. darkmode가 바로 지원되는게 마음에 들어 그냥 이거썻다.&lt;/p&gt;
+&lt;p&gt;code study용 블로그는 주로 doc계열을 많이 사용하는거 같으며 대표적으로 learn, books등이 존재하는거 같다.&lt;/p&gt;
+&lt;p&gt;생성방법은 Geekdocs의 공식 started를 따른다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;mkdir -p themes/hugo-geekdoc/
+curl -L https://github.com/thegeeklab/hugo-geekdoc/releases/latest/download/hugo-geekdoc.tar.gz &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; tar -xz -C themes/hugo-geekdoc/ --strip-components&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;config.toml을 공식 홈페이지에서 요구하는것처럼 똑같이 수정해준다.&lt;/p&gt;
+
+
+&lt;div class=&#34;alert alert-primary&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+
+    npm으로 뭘 이것저것도 잇는데 Geekdocs 테마의 original source를 build하는게 아니면 필요없다.
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;repository-관리-workspace-repository-연동&#34;&gt;repository 관리. workspace repository 연동&lt;/h2&gt;
+&lt;p&gt;repository 가 2개 필요하다. 한개는 site의 모든 source가 있을 workspace가 존재하는 repository와 build 결과물만이 존재해
+실제 site와 연동되는 repository가 필요하다.&lt;/p&gt;
+&lt;p&gt;실제 site와 연동되는 repository는 git 계정이름을 사용해서 다음과 무조건 ${NAME}.github.io로 이름을 지어야되며, 무료사용자일 경우 무조건 public으로 써야된다.&lt;/p&gt;
+&lt;p&gt;build 결과물 repository는 workspace repository의 submodule로 사용할 것다.&lt;/p&gt;
+&lt;p&gt;아마 다른 directory에 관리하는 방법으로도 되긴 하겠지만 빌드 결과물이 생기는 public directory그 자체는 바로 git
+repository로 쓰는게 편한방법이라 다들 이렇게 그냥 쓰는거 같다.&lt;/p&gt;
+&lt;p&gt;일단 github에서 workspace(hugo site 생성명령어로 만들어진 directory)용 repository와 build repository를 만든다.&lt;/p&gt;
+&lt;p&gt;그리고 site directory를 workspace repository로 remote 시켜준다. prifri_site로 예로 들면 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;git init
+git remote add origin git@github.com:prifri/prifri_site.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;https://github.. 은 현재 시점에서 이제 사용하지 않는다 auth token을 써야 되는데 매번 번거로우므로 github 계정에 ssh
+key를 등록시켜놓는 방법으로 사용한다.&lt;/p&gt;
+&lt;h2 id=&#34;repository-관리-build-repository-연동&#34;&gt;repository 관리. build repository 연동&lt;/h2&gt;
+&lt;p&gt;현재 빌드를 한번도 안했기 때문에 build에 대한 결과물이 없으므로 빌드를 한번 해준다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;hugo -t hugo-geekdoc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;그러면 public directory가 생기는데 이것을 이제 build repository와 연결을 해줘야된다.&lt;/p&gt;
+&lt;p&gt;workspace repository source안에 build repository가 있는 개념이므로 submodule로 연동해준다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;git submodule add -b origin git@github.com:prifri/prifri.github.io public
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;그후 workspace, build repository둘다 git add 후 push로 밀어보면 적당히 보이고 config.toml을 적당히 수정해서 적당히
+content 만들고 해보면된다.&lt;/p&gt;
+&lt;h1 id=&#34;comment-생성&#34;&gt;Comment 생성&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;utteranaces를 사용했다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://ansohxxn.github.io/blog/utterances/&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;script 복사를 하는곳은 지금 사용하고있는 Geekdocs 기준으로&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;layouts/partials/page-footer.html 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;의 밑에 넣었더니 main page에서도 나오더라. 아마 모든 page의 아래에 대한 html인가 보다.&lt;/p&gt;
+&lt;p&gt;repository는 무조건 public으로 해야된다. private로 하면 동작안한다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;구글-naver--검색에-사이트-노출-시키기&#34;&gt;구글, Naver  검색에 사이트 노출 시키기&lt;/h1&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;sitemap-생성&#34;&gt;sitemap 생성&lt;/h2&gt;
+&lt;p&gt;자동생성이 기본이지만 config.toml에서 sitmap 파라미터란것도 존재하는듯 싶다.
+&lt;a href=&#34;https://theissaclee.com/ko/post/robotstxtsitemaphugo/&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# sitemap 생성&lt;/span&gt;
+&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;sitemap&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+  &lt;span style=&#34;color:#000&#34;&gt;changefreq&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;monthly&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#000&#34;&gt;filename&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sitemap.xml&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#000&#34;&gt;priority&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; 0.5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;robottxt-생성&#34;&gt;robot.txt 생성&lt;/h2&gt;
+&lt;p&gt;config.toml에 roboot.txt 자동생성 기능을 추가한다. [markup] 이나 [param]같은 것 아래에서 하면 안된다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://theissaclee.com/ko/post/robotstxtsitemaphugo/&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# robots.txt&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;enableRobotsTXT&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;google-검색에-사이트-노출-시키기&#34;&gt;google 검색에 사이트 노출 시키기&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://hoontaeklee.github.io/en/posts/20200112_%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EB%85%B8%EC%B6%9C/&#34;&gt;참고사이트&lt;/a&gt;
+public 에 넣고 push후 좀 기다리고나서 인증요청하면된다.&lt;/p&gt;
+&lt;h3 id=&#34;sitemap-인식이-안될경우-사이트맵을-읽을-수-없음&#34;&gt;sitemap 인식이 안될경우 (사이트맵을 읽을 수 없음)&lt;/h3&gt;
+&lt;p&gt;시간이 지나면 된다고 하는 경우가 있다. 나도 안되서 그냥 적당히 하다가 포기했다.
+&lt;a href=&#34;https://julynine2.tistory.com/entry/Google-Search-Console-Sitemap-couldnt-fetch&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;naver-검색에-사이트-노출-시키기&#34;&gt;naver 검색에 사이트 노출 시키기&lt;/h2&gt;
+&lt;p&gt;네이버 웹마스터가 &lt;a href=&#34;https://searchadvisor.naver.com/&#34;&gt;네이버 서치어드바이저&lt;/a&gt;로 변경된듯 싶다.&lt;/p&gt;
+&lt;p&gt;google에 등록했을때랑 똑같이 html 파일을 받아서 public에 넣어놓는다.&lt;/p&gt;
+&lt;p&gt;robots.txt 설정도 공홈에서 제공해주는 웹마스터 가이드를 보면 자세히 나와있다.&lt;/p&gt;
+&lt;p&gt;그리고 google에서 인증할때와 마찬가지로 naver에서도 html을 가져와야된다.&lt;/p&gt;
+&lt;h3 id=&#34;site-체크&#34;&gt;site 체크&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://searchadvisor.naver.com/tools/sitecheck&#34;&gt;site check&lt;/a&gt;에 들어가서 확인해본다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;검색기능추가&#34;&gt;검색기능추가&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;a href=&#34;https://findstar.pe.kr/2021/07/10/fuse-search-on-hugo/&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;submodule로 themes에 fuse.js를 추가한다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;md-좀더-편하게-작성하기&#34;&gt;md 좀더 편하게 작성하기.&lt;/h1&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;stackedit&#34;&gt;stackedit&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://danggai.github.io/github.io/StackEdit%EC%97%90%EC%84%9C-Github.io%EB%A1%9C-%ED%8E%B8%ED%95%98%EA%B2%8C-%EB%B8%94%EB%A1%9C%EA%B9%85%ED%95%98%EA%B8%B0!/&#34;&gt;참고사이트&lt;/a&gt;
+&lt;a href=&#34;https://stackedit.io/app#&#34;&gt;stackedit&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;layouts&#34;&gt;layouts&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;themes dir에 가보면 layouts이 존재한다. 최초의 root에서 해당 layouts이 존재하면 그걸 쓰고 아니면 themes를 사용한다.
+themes 의 layouts을 직접 수정을 왠간하면 안하는게 나중에 update등을 할때 좋을것이므로 만약 layouts을 수정할 일이 있다면 root에 복사해서 쓰는게 좋다고한다.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Configuring Ponycopters</title>
-      <link>/docs/tasks/ponycopters/configuring-ponycopters/</link>
+      <link>/docs/example/ponycopters/configuring-ponycopters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/docs/tasks/ponycopters/configuring-ponycopters/</guid>
+      <guid>/docs/example/ponycopters/configuring-ponycopters/</guid>
       <description>
         
         
@@ -641,10 +566,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Launching Ponycopters</title>
-      <link>/docs/tasks/ponycopters/launching-ponycopters/</link>
+      <link>/docs/example/ponycopters/launching-ponycopters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/docs/tasks/ponycopters/launching-ponycopters/</guid>
+      <guid>/docs/example/ponycopters/launching-ponycopters/</guid>
       <description>
         
         
@@ -1266,324 +1191,11 @@ bar := &amp;quot;foo&amp;quot;;
     </item>
     
     <item>
-      <title>Docs: Porridge Assessment</title>
-      <link>/docs/tasks/porridge/</link>
-      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/tasks/porridge/</guid>
-      <description>
-        
-        
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;This is a placeholder page. Replace it with your own content.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;Text can be &lt;strong&gt;bold&lt;/strong&gt;, &lt;em&gt;italic&lt;/em&gt;, or &lt;del&gt;strikethrough&lt;/del&gt;. &lt;a href=&#34;https://gohugo.io&#34;&gt;Links&lt;/a&gt; should be blue with no underlines (unless hovered over).&lt;/p&gt;
-&lt;p&gt;There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p&gt;
-&lt;p&gt;90&amp;rsquo;s four loko seitan photo booth gochujang freegan tumeric listicle fam ugh humblebrag. Bespoke leggings gastropub, biodiesel brunch pug fashion axe meh swag art party neutra deep v chia. Enamel pin fanny pack knausgaard tofu, artisan cronut hammock meditation occupy master cleanse chartreuse lumbersexual. Kombucha kogi viral truffaut synth distillery single-origin coffee ugh slow-carb marfa selfies. Pitchfork schlitz semiotics fanny pack, ugh artisan vegan vaporware hexagon. Polaroid fixie post-ironic venmo wolf ramps &lt;strong&gt;kale chips&lt;/strong&gt;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;There should be no margin above this first sentence.&lt;/p&gt;
-&lt;p&gt;Blockquotes should be a lighter gray with a border along the left side in the secondary color.&lt;/p&gt;
-&lt;p&gt;There should be no margin below this final sentence.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;first-header-2&#34;&gt;First Header 2&lt;/h2&gt;
-&lt;p&gt;This is a normal paragraph following a header. Knausgaard kale chips snackwave microdosing cronut copper mug swag synth bitters letterpress glossier &lt;strong&gt;craft beer&lt;/strong&gt;. Mumblecore bushwick authentic gochujang vegan chambray meditation jean shorts irony. Viral farm-to-table kale chips, pork belly palo santo distillery activated charcoal aesthetic jianbing air plant woke lomo VHS organic. Tattooed locavore succulents heirloom, small batch sriracha echo park DIY af. Shaman you probably haven&amp;rsquo;t heard of them copper mug, crucifix green juice vape &lt;em&gt;single-origin coffee&lt;/em&gt; brunch actually. Mustache etsy vexillologist raclette authentic fam. Tousled beard humblebrag asymmetrical. I love turkey, I love my job, I love my friends, I love Chardonnay!&lt;/p&gt;
-&lt;p&gt;Deae legum paulatimque terra, non vos mutata tacet: dic. Vocant docuique me plumas fila quin afuerunt copia haec o neque.&lt;/p&gt;
-&lt;p&gt;On big screens, paragraphs and headings should not take up the full container width, but we want tables, code blocks and similar to take the full width.&lt;/p&gt;
-&lt;p&gt;Scenester tumeric pickled, authentic crucifix post-ironic fam freegan VHS pork belly 8-bit yuccie PBR&amp;amp;B. &lt;strong&gt;I love this life we live in&lt;/strong&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;second-header-2&#34;&gt;Second Header 2&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;header-3&#34;&gt;Header 3&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;This is a code block following a header.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Next level leggings before they sold out, PBR&amp;amp;B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.&lt;/p&gt;
-&lt;h4 id=&#34;header-4&#34;&gt;Header 4&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
-&lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
-&lt;li&gt;This is an unordered list following a header.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&#34;header-5&#34;&gt;Header 5&lt;/h5&gt;
-&lt;ol&gt;
-&lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
-&lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
-&lt;li&gt;This is an ordered list following a header.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h6 id=&#34;header-6&#34;&gt;Header 6&lt;/h6&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;What&lt;/th&gt;
-&lt;th&gt;Follows&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;A table&lt;/td&gt;
-&lt;td&gt;A header&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;A table&lt;/td&gt;
-&lt;td&gt;A header&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;A table&lt;/td&gt;
-&lt;td&gt;A header&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;hr&gt;
-&lt;p&gt;There&amp;rsquo;s a horizontal rule above and below this.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;Here is an unordered list:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Liverpool F.C.&lt;/li&gt;
-&lt;li&gt;Chelsea F.C.&lt;/li&gt;
-&lt;li&gt;Manchester United F.C.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And an ordered list:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Michael Brecker&lt;/li&gt;
-&lt;li&gt;Seamus Blake&lt;/li&gt;
-&lt;li&gt;Branford Marsalis&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;And an unordered task list:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Create a Hugo theme&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Add task lists to it&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Take a vacation&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And a &amp;ldquo;mixed&amp;rdquo; task list:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Pack bags&lt;/li&gt;
-&lt;li&gt;?&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Travel!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And a nested list:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Jackson 5
-&lt;ul&gt;
-&lt;li&gt;Michael&lt;/li&gt;
-&lt;li&gt;Tito&lt;/li&gt;
-&lt;li&gt;Jackie&lt;/li&gt;
-&lt;li&gt;Marlon&lt;/li&gt;
-&lt;li&gt;Jermaine&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;TMNT
-&lt;ul&gt;
-&lt;li&gt;Leonardo&lt;/li&gt;
-&lt;li&gt;Michelangelo&lt;/li&gt;
-&lt;li&gt;Donatello&lt;/li&gt;
-&lt;li&gt;Raphael&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Definition lists can be used with Markdown syntax. Definition headers are bold.&lt;/p&gt;
-&lt;dl&gt;
-&lt;dt&gt;Name&lt;/dt&gt;
-&lt;dd&gt;Godzilla&lt;/dd&gt;
-&lt;dt&gt;Born&lt;/dt&gt;
-&lt;dd&gt;1952&lt;/dd&gt;
-&lt;dt&gt;Birthplace&lt;/dt&gt;
-&lt;dd&gt;Japan&lt;/dd&gt;
-&lt;dt&gt;Color&lt;/dt&gt;
-&lt;dd&gt;Green&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;hr&gt;
-&lt;p&gt;Tables should have bold headings and alternating shaded rows.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Artist&lt;/th&gt;
-&lt;th&gt;Album&lt;/th&gt;
-&lt;th&gt;Year&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Michael Jackson&lt;/td&gt;
-&lt;td&gt;Thriller&lt;/td&gt;
-&lt;td&gt;1982&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Prince&lt;/td&gt;
-&lt;td&gt;Purple Rain&lt;/td&gt;
-&lt;td&gt;1984&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Beastie Boys&lt;/td&gt;
-&lt;td&gt;License to Ill&lt;/td&gt;
-&lt;td&gt;1986&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;If a table is too wide, it should scroll horizontally.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Artist&lt;/th&gt;
-&lt;th&gt;Album&lt;/th&gt;
-&lt;th&gt;Year&lt;/th&gt;
-&lt;th&gt;Label&lt;/th&gt;
-&lt;th&gt;Awards&lt;/th&gt;
-&lt;th&gt;Songs&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Michael Jackson&lt;/td&gt;
-&lt;td&gt;Thriller&lt;/td&gt;
-&lt;td&gt;1982&lt;/td&gt;
-&lt;td&gt;Epic Records&lt;/td&gt;
-&lt;td&gt;Grammy Award for Album of the Year, American Music Award for Favorite Pop/Rock Album, American Music Award for Favorite Soul/R&amp;amp;B Album, Brit Award for Best Selling Album, Grammy Award for Best Engineered Album, Non-Classical&lt;/td&gt;
-&lt;td&gt;Wanna Be Startin&amp;rsquo; Somethin&amp;rsquo;, Baby Be Mine, The Girl Is Mine, Thriller, Beat It, Billie Jean, Human Nature, P.Y.T. (Pretty Young Thing), The Lady in My Life&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Prince&lt;/td&gt;
-&lt;td&gt;Purple Rain&lt;/td&gt;
-&lt;td&gt;1984&lt;/td&gt;
-&lt;td&gt;Warner Brothers Records&lt;/td&gt;
-&lt;td&gt;Grammy Award for Best Score Soundtrack for Visual Media, American Music Award for Favorite Pop/Rock Album, American Music Award for Favorite Soul/R&amp;amp;B Album, Brit Award for Best Soundtrack/Cast Recording, Grammy Award for Best Rock Performance by a Duo or Group with Vocal&lt;/td&gt;
-&lt;td&gt;Let&amp;rsquo;s Go Crazy, Take Me With U, The Beautiful Ones, Computer Blue, Darling Nikki, When Doves Cry, I Would Die 4 U, Baby I&amp;rsquo;m a Star, Purple Rain&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Beastie Boys&lt;/td&gt;
-&lt;td&gt;License to Ill&lt;/td&gt;
-&lt;td&gt;1986&lt;/td&gt;
-&lt;td&gt;Mercury Records&lt;/td&gt;
-&lt;td&gt;noawardsbutthistablecelliswide&lt;/td&gt;
-&lt;td&gt;Rhymin &amp;amp; Stealin, The New Style, She&amp;rsquo;s Crafty, Posse in Effect, Slow Ride, Girls, (You Gotta) Fight for Your Right, No Sleep Till Brooklyn, Paul Revere, Hold It Now, Hit It, Brass Monkey, Slow and Low, Time to Get Ill&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;hr&gt;
-&lt;p&gt;Code snippets like &lt;code&gt;var foo = &amp;quot;bar&amp;quot;;&lt;/code&gt; can be shown inline.&lt;/p&gt;
-&lt;p&gt;Also, &lt;code&gt;this should vertically align&lt;/code&gt; &lt;del&gt;&lt;code&gt;with this&lt;/code&gt;&lt;/del&gt; &lt;del&gt;and this&lt;/del&gt;.&lt;/p&gt;
-&lt;p&gt;Code can also be shown in a block element.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;foo := &amp;quot;bar&amp;quot;;
-bar := &amp;quot;foo&amp;quot;;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Code can also use syntax highlighting.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;input&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;`var foo = &amp;#34;bar&amp;#34;;`&lt;/span&gt;
-
-  &lt;span style=&#34;color:#000&#34;&gt;lexer&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;lexers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Get&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;javascript&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;iterator&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;lexer&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Tokenise&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;input&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;style&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;styles&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Get&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;github&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;formatter&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;html&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;New&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;html&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;WithLineNumbers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;())&lt;/span&gt;
-
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;buff&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;bytes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Buffer&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;formatter&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Format&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;buff&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;iterator&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
-
-  &lt;span style=&#34;color:#000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;buff&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;())&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Inline code inside table cells should still be distinguishable.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Language&lt;/th&gt;
-&lt;th&gt;Code&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Javascript&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;var foo = &amp;quot;bar&amp;quot;;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Ruby&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;foo = &amp;quot;bar&amp;quot;{&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;hr&gt;
-&lt;p&gt;Small images should be shown at their actual size.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg/240px-Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Large images should always scale down and fit in the content container.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg/1024px-Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;The photo above of the Spruce Picea abies shoot with foliage buds: Bjørn Erik Pedersen, CC-BY-SA.&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&#34;components&#34;&gt;Components&lt;/h2&gt;
-&lt;h3 id=&#34;alerts&#34;&gt;Alerts&lt;/h3&gt;
-&lt;p&gt;
-
-&lt;div class=&#34;alert alert-primary&#34; role=&#34;alert&#34;&gt;
-
-
-    This is an alert.
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;alert alert-primary&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
-
-    This is an alert with a title.
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;alert alert-primary&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
-
-    This is an alert with a title and &lt;strong&gt;Markdown&lt;/strong&gt;.
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;alert alert-success&#34; role=&#34;alert&#34;&gt;
-
-
-    This is a successful alert.
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
-
-
-    This is a warning.
-
-&lt;/div&gt;
-
-
-
-&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Warning&lt;/h4&gt;
-
-    This is a warning with a title.
-
-&lt;/div&gt;
-&lt;/p&gt;
-&lt;h2 id=&#34;another-heading&#34;&gt;Another Heading&lt;/h2&gt;
-&lt;p&gt;Add some sections here to see how the ToC looks like. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.&lt;/p&gt;
-&lt;h3 id=&#34;this-document&#34;&gt;This Document&lt;/h3&gt;
-&lt;p&gt;Inguina genus: Anaphen post: lingua violente voce suae meus aetate diversi. Orbis unam nec flammaeque status deam Silenum erat et a ferrea. Excitus rigidum ait: vestro et Herculis convicia: nitidae deseruit coniuge Proteaque adiciam &lt;em&gt;eripitur&lt;/em&gt;? Sitim noceat signa &lt;em&gt;probat quidem&lt;/em&gt;. Sua longis &lt;em&gt;fugatis&lt;/em&gt; quidem genae.&lt;/p&gt;
-&lt;h3 id=&#34;pixel-count&#34;&gt;Pixel Count&lt;/h3&gt;
-&lt;p&gt;Tilde photo booth wayfarers cliche lomo intelligentsia man braid kombucha vaporware farm-to-table mixtape portland. PBR&amp;amp;B pickled cornhole ugh try-hard ethical subway tile. Fixie paleo intelligentsia pabst. Ennui waistcoat vinyl gochujang. Poutine salvia authentic affogato, chambray lumbersexual shabby chic.&lt;/p&gt;
-&lt;h3 id=&#34;contact-info&#34;&gt;Contact Info&lt;/h3&gt;
-&lt;p&gt;Plaid hell of cred microdosing, succulents tilde pour-over. Offal shabby chic 3 wolf moon blue bottle raw denim normcore poutine pork belly.&lt;/p&gt;
-&lt;h3 id=&#34;external-links&#34;&gt;External Links&lt;/h3&gt;
-&lt;p&gt;Stumptown PBR&amp;amp;B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;This is the final element on the page and there should be no margin below this.
-&lt;/code&gt;&lt;/pre&gt;
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: Another Task</title>
-      <link>/docs/tasks/task/</link>
+      <link>/docs/example/task/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/docs/tasks/task/</guid>
+      <guid>/docs/example/task/</guid>
       <description>
         
         
@@ -2205,6 +1817,318 @@ bar := &amp;quot;foo&amp;quot;;
     </item>
     
     <item>
+      <title>Docs: ifb</title>
+      <link>/docs/linux-arm64-kernel/assembly/syntax/ifb/</link>
+      <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/linux-arm64-kernel/assembly/syntax/ifb/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;a href=&#34;https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/useful-assembler-directives-and-macros-for-the-gnu-assembler&#34;&gt;ifb 참고&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code class=&#34;language-assembly&#34; data-lang=&#34;assembly&#34;&gt;	.macro	ldr_l, dst, sym, tmp=
+	.ifb	\tmp
+	adrp	\dst, \sym
+	ldr	\dst, [\dst, :lo12:\sym]
+	.else
+	adrp	\tmp, \sym
+	ldr	\dst, [\tmp, :lo12:\sym]
+	.endif
+	.endm
+
+	ldr_l	x4, idmap_ptrs_per_pgd
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;이런-코드가-왔으면-위-macro에서-ifb-로-된-code가-만들어질것이다&#34;&gt;이런 코드가 왔으면 위 macro에서 ifb 로 된 code가 만들어질것이다.&lt;/h2&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Barrier</title>
+      <link>/docs/linux-arm64-kernel/assembly/memory/barrier/</link>
+      <pubDate>Thu, 26 Aug 2021 11:03:29 +0900</pubDate>
+      
+      <guid>/docs/linux-arm64-kernel/assembly/memory/barrier/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;isbinstruction-synchronization-barrier&#34;&gt;ISB(Instruction Synchronization Barrier)&lt;/h1&gt;
+&lt;p&gt;파이프라인을 비워줌(15~20 cycle)&lt;/p&gt;
+&lt;h1 id=&#34;dmbdata-memory-barrier&#34;&gt;DMB(Data Memory Barrier)&lt;/h1&gt;
+&lt;p&gt;Ordered Accesses : Any - Any
+load, store의 순서를 유지해줌 + 모든 CPU에서 해당 값의 일관성을 유지 시켜줌.&lt;/p&gt;
+&lt;h2 id=&#34;dmb-sy&#34;&gt;dmb sy&lt;/h2&gt;
+&lt;h1 id=&#34;dsbdata-synchronization-barrier&#34;&gt;DSB(Data Synchronization Barrier)&lt;/h1&gt;
+&lt;p&gt;Memory에 관련된 동기화
+해당 instruction을 기준으로 명령의 순서를 변경하지 않는다.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Cache</title>
+      <link>/docs/linux-arm64-kernel/assembly/memory/cache/</link>
+      <pubDate>Tue, 24 Aug 2021 17:48:25 +0900</pubDate>
+      
+      <guid>/docs/linux-arm64-kernel/assembly/memory/cache/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;Cache 개요&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h1 id=&#34;cache-policies&#34;&gt;Cache Policies&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;http://jake.dothome.co.kr/cache4/&#34;&gt;문c블로그 Cache-Coherent&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;cache-allocation-policies&#34;&gt;Cache Allocation Policies&lt;/h2&gt;
+&lt;h3 id=&#34;wa-rawrite-allocate-read-allocate&#34;&gt;WA, RA(Write-Allocate, Read-Allocate)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Write시 Cache에 해당 메모리가 없을때(Miss발생시)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Cache에 해당 메모리의 데이터를 할당.&lt;/li&gt;
+&lt;li&gt;할당된 캐시에 데이터를 기록한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Write시 Cache에 해당 메모리가 존재할때&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;RAM에 접근하지않고 Cache에만 접근하고 끝날것이다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;cache data는 dirty, memory data는 old가 될것이다.&lt;/p&gt;
+&lt;p&gt;Read또한 마찬가지로 read시 cache에 없으면 cache에 할당한다.&lt;/p&gt;
+&lt;p&gt;꽤 많은 블로그에서 WA에대 잘못설명한다.&lt;/p&gt;
+&lt;p&gt;Cache에 할당하지 않고 바로 Memory에 Write 하기때문에 WT랑 같이 사용하지 않는다는둥, 대부분의 시스템에서는 WT nWA를 사용한다는둥..&lt;/p&gt;
+&lt;p&gt;WA는 DRAM의 Data를 old로 만들고 cache write(dirty)를 하는거다.. miss일때 최초 한번만 DRAM에 접근한다는 얘기다.&lt;/p&gt;
+&lt;p&gt;Linux만 놓고 봤을때도 WT의 default는 WA이다&amp;hellip;ㅋㅋ linux말고 대부분이 WT nWA를 쓰나?&lt;/p&gt;
+&lt;h2 id=&#34;cache-write-pollicies&#34;&gt;Cache Write Pollicies&lt;/h2&gt;
+&lt;h3 id=&#34;wbwrite-back&#34;&gt;WB(Write-Back)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Write&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cache에만 Write. cache가 가득 찻을때만 Memory에 Write&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Read&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cache에서만 읽음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;wtwrite-through&#34;&gt;WT(Write-Through)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Write&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cache, Memory 둘다 Write&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Read&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cache에서만 읽음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cache-allocation--write-pollicies&#34;&gt;Cache Allocation + Write Pollicies&lt;/h2&gt;
+&lt;p&gt;Cache Allocation Policies는 Cache Write시 Miss가 됬을때 Cache Allocate를 할건지에 대한 정책이고&lt;/p&gt;
+&lt;p&gt;Cache Write Policies는 Write DRAM에도 Write를 하는 정책이다.(Read는 무조건 miss면 DRAM에서 가져오는거니 모든 정책에서 같다)&lt;/p&gt;
+&lt;p&gt;즉 둘을 나눠서만 생각하면 된다.&lt;/p&gt;
+&lt;p&gt;Write시 DRAM에도 쓰고 싶으면 WT, Cache만 읽을거면 WB
+Write시 Miss가 났을때 Cache에 할당할거면 WA, 아니면 nWA다.&lt;/p&gt;
+&lt;h2 id=&#34;armv8에서의-cache-policies&#34;&gt;ARMv8에서의 Cache Policies&lt;/h2&gt;
+&lt;p&gt;Normal Memory에서는 WTWA만을 사용하는데, TTB관련은 WBWA를 쓰는것처럼 보인다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;shareability&#34;&gt;Shareability&lt;/h2&gt;
+&lt;p&gt;아키텍처에서 공유라는것은 CPU를 기준으로 의미한다.&lt;/p&gt;
+&lt;p&gt;Inner CPU : Linux로 동작하는 모든 시스템
+Outer CPU : Linux를 사용하지 않는 시스템(ex GPU)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;cache-type&#34;&gt;Cache Type&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://aidanbae.github.io/code/devops/computer/cpucache/&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;direct-mapped-cache&#34;&gt;Direct-mapped cache&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://talkingaboutme.tistory.com/entry/Study-Memory-Hierarchy-2-Direct-Mapped-Cache&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;cache구조를 설명할때 그냥 이렇게 동작한다라고 알려주는게 바로 이 방식.
+tag, index를 모두 사용하여 특정 cache address가 여러개의 dram address를 커버하게 되는 구조이다.&lt;/p&gt;
+&lt;h2 id=&#34;fully-associative-cache&#34;&gt;Fully associative cache&lt;/h2&gt;
+&lt;p&gt;그냥 아무데나 넣고, 찾을때는 전부 검색해서 찾는 방식.&lt;/p&gt;
+&lt;h2 id=&#34;n-way-set-associative-cache&#34;&gt;N-way-set-associative cache&lt;/h2&gt;
+&lt;p&gt;Block화 하고 그것을 index화 하는 방식으로 fully와 direct방식을 혼합한 거라고 한다.&lt;/p&gt;
+&lt;h2 id=&#34;armv8에서-의-cache-type&#34;&gt;ARMv8에서 의 Cache Type.&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ARM Ref.11.1.1 Set associative caches and ways 참고&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cortex에 따라 달라지는거 같은데 L1 Data cache은 4way, L1 Instruction cache는 2 Way,&lt;/p&gt;
+&lt;p&gt;L2는 16way, L3은 더 많은 way등을 가질수있다고 한다.&lt;/p&gt;
+&lt;p&gt;또한 MMU TLBs의 경우를 제외하곤 Way를 늘리는것에 대해 추천하지 않는다고 한다.&lt;/p&gt;
+&lt;p&gt;MMU TLBs와 같이 매우 작은 cache에 대해서는 Way를 늘리는게 도움이 된다고 하며, 8방향이 minimum이라고 하며,
+L2 같이 큰 cache에서만 유용하다는듯 싶다&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;cache-terminology&#34;&gt;Cache terminology&lt;/h1&gt;
+&lt;h2 id=&#34;way&#34;&gt;Way&lt;/h2&gt;
+&lt;p&gt;Cache Type을 set-associative로 사용할때 나오는 용어로, 몇개의 line을 1개의 block. 즉 way로 썻냐는것이다.&lt;/p&gt;
+&lt;p&gt;1 way면 direct mapped와 같은거나 다름없고, way가 총 line수와 같으면 fully와 똑같다.&lt;/p&gt;
+&lt;h2 id=&#34;cache의-용량&#34;&gt;Cache의 용량&lt;/h2&gt;
+&lt;p&gt;Cache의 용량을 말할때는 Line의 크기만을 두고 말한다.&lt;/p&gt;
+&lt;p&gt;Cache data는 크게 Line, tag로 이루어져있는데 흔히 4k cache등을 말할때는 저 cache data의 구조에서 Line + tag등의
+data 전체 크기가 아니라 오로직 Line크기만을 다 합친것을 의미한다.&lt;/p&gt;
+&lt;h2 id=&#34;stbstore-buffer--write-buffer&#34;&gt;St.B(Store buffer) / Write buffer&lt;/h2&gt;
+&lt;p&gt;cpu -&amp;gt; store buffer -&amp;gt; cache -&amp;gt; wirte buffer -&amp;gt; memory&lt;/p&gt;
+&lt;h2 id=&#34;axiadvanced-extensible-interface&#34;&gt;AXI(Advanced eXtensible Interface)&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://m.blog.naver.com/esoclab/20174360379&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;cache -&amp;gt; dram 의 사이에서 사용하고 있는 있는 bus.&lt;/p&gt;
+&lt;p&gt;AXI를 설명할때 AHB와 비교를 많이하는데, AXI는 채널이라는게 도입됬다고 한다.&lt;/p&gt;
+&lt;p&gt;기존 버스라는 개념은 예를들어 A(저속 디바이스), B(고속 디바이스)요청이 있을때&lt;/p&gt;
+&lt;p&gt;A주소 전송 -&amp;gt; Adata 받음(B는 기다려야함)&lt;/p&gt;
+&lt;p&gt;을 기다려야 됬는데 채널이라는 개념이 도압되면서&lt;/p&gt;
+&lt;p&gt;1채널에 A주소 전송, 2채널에 B주소 전송이 가능해 진다는것 같다.&lt;/p&gt;
+&lt;p&gt;또한 버스트 전송이 기본개념이라 버스트 전송을 전제로 동작한다고 한다.&lt;/p&gt;
+&lt;p&gt;data 전송 단위는 bit이며 8, 16, 32, 64 &amp;hellip; 1024 bit등을 지원하는거 같다.&lt;/p&gt;
+&lt;h2 id=&#34;scusoope-control-unit&#34;&gt;SCU(Soope control unit)&lt;/h2&gt;
+&lt;p&gt;어떤 CPU에서 해당 CPU의 L1 Cache miss data를 L2에 요청했을때 해당 data가 다른 CPU cache에 해당 값이 존재하는지, 존재한다면 해당값을 전송하는 역할을 한다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;cache-전송-예제&#34;&gt;Cache 전송 예제&lt;/h1&gt;
+&lt;h2 id=&#34;cache-data-1-byte-read-시&#34;&gt;Cache Data 1 byte read 시&lt;/h2&gt;
+&lt;p&gt;다음의 전제를 가진다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;cache line 크기 : 16bit 크기의 cache line&lt;/li&gt;
+&lt;li&gt;AXI 전송단위 : 8bit&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;cache line의 최소크기인 16bit인데 1byte만을 가져올순없다. 그래서 cache line의 최소크기인 16bit로 읽는다.
+이때 AXI 전송단위가 8bit이므로 2번을 읽어야되는데, AXI구조상 start address와 length를 주면 해당 값만큼 읽어오는 개념인가보다.
+그래서 그렇게 한번의 주소+크기 요청으로 데이터를 가져온다.&lt;/p&gt;
+&lt;h2 id=&#34;cpu---메모리의-데이터-전송-단위&#34;&gt;cpu &amp;lt;-&amp;gt; 메모리의 데이터 전송 단위&lt;/h2&gt;
+&lt;p&gt;cpu -&amp;gt; (가상메모리 cache) -&amp;gt; mmu -&amp;gt; (물리메모리 cache) -&amp;gt; memory&lt;/p&gt;
+&lt;p&gt;cpu &amp;lt;-&amp;gt; cache : 1byte or 4byte&lt;/p&gt;
+&lt;p&gt;cache &amp;lt;-&amp;gt; cache : cache line단위&lt;/p&gt;
+&lt;p&gt;cache memory &amp;lt;-&amp;gt; DRAM : AXI bus 단위&lt;/p&gt;
+&lt;h2 id=&#34;큰그림&#34;&gt;큰그림&lt;/h2&gt;
+&lt;p&gt;cpu A &amp;lt;-&amp;gt; st.b &amp;lt;-&amp;gt; L1 cache &amp;lt;-&amp;gt; |   |
+cpu B &amp;lt;-&amp;gt; st.b &amp;lt;-&amp;gt; L1 cache &amp;lt;-&amp;gt; | S |
+cpu C &amp;lt;-&amp;gt; st.b &amp;lt;-&amp;gt; L1 cache &amp;lt;-&amp;gt; | C | &amp;lt;-&amp;gt; L2 cache &amp;lt;-&amp;gt; Memory
+cpu D &amp;lt;-&amp;gt; st.b &amp;lt;-&amp;gt; L1 cache &amp;lt;-&amp;gt; | U |&lt;/p&gt;
+&lt;h2 id=&#34;heading&#34;&gt;&amp;hellip;&lt;/h2&gt;
+&lt;h1 id=&#34;instruction-cache&#34;&gt;Instruction cache.&lt;/h1&gt;
+&lt;p&gt;Instruction cache는 dirty bit가 존재하지 않는다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;tlbtranslation-lookaside-buffer&#34;&gt;TLB(Translation Lookaside Buffer)&lt;/h1&gt;
+&lt;p&gt;가상주소를 물리주소로 변환하는 속도를 높이기 위해 사용하는 캐시.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;cache-maintance&#34;&gt;Cache maintance&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://ko.wikipedia.org/wiki/%EC%BA%90%EC%8B%9C_%EC%9D%BC%EA%B4%80%EC%84%B1&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CPU간 Cache 일관성을 지켜야하는데, 이 지키는 범위를 정해논게  PoC, PoU라고한다.&lt;/p&gt;
+&lt;p&gt;CPU간 각자의 cache가 변했다는걸 확인하는게 스누핑 이라는 구조고, (MOESI라는 프로토콜을 쓴다는듯)&lt;/p&gt;
+&lt;p&gt;이걸 통해서 CPU간의 일관성을 확인한다고한다.&lt;/p&gt;
+&lt;h2 id=&#34;snooping&#34;&gt;Snooping&lt;/h2&gt;
+&lt;p&gt;주소 버스를 항상 감시하여 캐시 상의 메모리에 대한 접근이 있는지를 감소하는 구조.&lt;/p&gt;
+&lt;p&gt;다른 캐시에서 쓰기가 발생하면 캐시 컨트롤러에 의해서 자신의 캐시 위에 있는 복사본을 무효화시킨다.&lt;/p&gt;
+&lt;h2 id=&#34;pocpoint-of-coherency&#34;&gt;Poc(Point of Coherency)&lt;/h2&gt;
+&lt;p&gt;DMA, DSP등의 외부 Device와 Coherency를 맞추기 위한 개념으로 DRAM까지 Coherency를 맞추는다는것.&lt;/p&gt;
+&lt;h2 id=&#34;poupoint-of-unification&#34;&gt;PoU(Point of Unification)&lt;/h2&gt;
+&lt;p&gt;캐시 일관성을 Data Cache뿐만 아니라 Instruction Cache까지 지킨다는 것.(+Translation Table Walk)&lt;/p&gt;
+&lt;h2 id=&#34;armv8에서의-poc-pou&#34;&gt;ARMv8에서의 Poc, PoU&lt;/h2&gt;
+&lt;p&gt;linux에서는 미리 정해진 PoC, PoU에 따라 Cache Clean을 하는 명령어가 정해져있다.&lt;/p&gt;
+&lt;p&gt;Instruct Cache같은경우엔 PoU 밖에 존재하지 않는데, Data Cache는 빈번하게 바뀔 여지가 있지만 Instruct Cache를 교체하는 경우가 빈번하지 않고 교체하게 되면 결국 Data Cache까지 바뀌게 되는 개념이므로 PoU만 존재하는것처럼 보인다.&lt;/p&gt;
+&lt;h3 id=&#34;loclevel-of-coherence&#34;&gt;LoC(Level of Coherence)&lt;/h3&gt;
+&lt;p&gt;PoC, PoU가 추상적인 개념이라면, 실제 Arch에 명령어를 날려야할때 몇번 Level까지 수행인지를 정해야된다.
+PoC를 수행할 Last Cache에 대한 Level을 의미한다.&lt;/p&gt;
+&lt;h3 id=&#34;louulevel-of-unification-uniprocessor&#34;&gt;LoUU(Level of Unification, Uniprocessor)&lt;/h3&gt;
+&lt;p&gt;단일 Process에서 PoU를 수행할 Last Cache에 대한 Level을 의미한다.&lt;/p&gt;
+&lt;h3 id=&#34;louislevel-of-unification-inner-shareable&#34;&gt;LoUIS(Level of Unification, Inner Shareable)&lt;/h3&gt;
+&lt;p&gt;공유 자원에 대한것에 대해서의 Last Cache에 대한 Level을 의미한다. SMP 에서만 존재한다.
+단일 Process는 LOUU, SMP는 LoUISf라고만 일단 이해하고 넘어가야겠다.&lt;/p&gt;
+
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;data cache 의 invalidate / clean 관련 명령어&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h1 id=&#34;cache-invalidate한다-라는-의미는&#34;&gt;cache invalidate한다 라는 의미는?&lt;/h1&gt;
+&lt;h1 id=&#34;cache-clean한다-라는-의미는&#34;&gt;cache clean한다 라는 의미는?&lt;/h1&gt;
+&lt;p&gt;dirty bit가 set된 cache를 모두 메모리에 반영한다는것.&lt;/p&gt;
+&lt;h1 id=&#34;dc-ivac-xt&#34;&gt;dc ivac, Xt&lt;/h1&gt;
+&lt;p&gt;D-cache invalidate by address to Point of Coherency&lt;/p&gt;
+&lt;h1 id=&#34;dc-instruction-option에-대한-설명&#34;&gt;dc instruction option에 대한 설명&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;dc : Data Cache&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IC : Instruction Cache&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IS : Inner Shareable&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ALL : all&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;U : Point of Unification&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;VA : Address to Point of Coherency&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Z : zero&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SW : Set/Way&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I : invalidate&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C : Clean / Point Coherency&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: SSH Key Setup</title>
+      <link>/docs/git/ssh-key-setup/</link>
+      <pubDate>Wed, 18 Aug 2021 18:01:57 +0900</pubDate>
+      
+      <guid>/docs/git/ssh-key-setup/</guid>
+      <description>
+        
+        
+        &lt;p&gt;ubuntu 환경을 기준으로 한다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;자신의-ssh-key-생성&#34;&gt;자신의 ssh key 생성.&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;ssh-keygen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;처음 물어보는게 key의 경로이자 name이 된다. 그냥 넘기면 기본 경로로 ~/.ssh/id_rsa, ~/.ssh/id_rsa.pub에 존재한다.&lt;/p&gt;
+&lt;p&gt;~/.ssh/id_rsa : private key
+~/.ssh/id_rsa.pub : public key&lt;/p&gt;
+&lt;p&gt;public key를 github자신의 계정에 등록해줘야한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;cat ~/.ssh/id_rsa.pub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;하면 쏼라쏼라 나올텐데 전부 copy해놓는다.&lt;/p&gt;
+&lt;h1 id=&#34;자신의-github-에-ssh키-등록&#34;&gt;자신의 github 에 ssh키 등록&lt;/h1&gt;
+&lt;p&gt;github 계정에서 setting -&amp;gt; SSH and GPG keys에 들어가서 New SSH key 눌러서 등록한다.&lt;/p&gt;
+&lt;h1 id=&#34;clone-한-repository-remote-경로-변경&#34;&gt;clone 한 repository remote 경로 변경&lt;/h1&gt;
+&lt;p&gt;일반적으로 그냥 copy해서 가져오면 remote경로가 https://&amp;hellip; 로 시작한다. 이러면 결국 웹 프로토콜로 통신을 하므로 이렇게
+해서는 안되고 scp로 접근하는것처럼 바꿔줘야한다.&lt;/p&gt;
+&lt;p&gt;일단 다음의 명령어로 어디에 remote 되있는지 보고&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;git remote -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Shell&#34; data-lang=&#34;Shell&#34;&gt;git remote set-url origin git@github.com:prifri/prifri.github.io.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;뭐 이런식으로 바꿔줘야한다.&lt;/p&gt;
+&lt;h1 id=&#34;다중-ssh-key-셋팅&#34;&gt;다중 SSH key 셋팅.&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;http://taewan.kim/post/ssh_config/&#34;&gt;사이트&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Example Page</title>
       <link>/docs/getting-started/example-page/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
@@ -2816,6 +2740,38 @@ bar := &amp;quot;foo&amp;quot;;
 &lt;/div&gt;
 &lt;/p&gt;
 &lt;h2 id=&#34;another-heading&#34;&gt;Another Heading&lt;/h2&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Device memory</title>
+      <link>/docs/linux-arm64-kernel/assembly/memory/device-memory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/linux-arm64-kernel/assembly/memory/device-memory/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;device-memory&#34;&gt;Device Memory&lt;/h1&gt;
+&lt;p&gt;Normal Memory는 Cache를 사용할수있음.
+Device memory는 Buffer 개념임.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;gatheringg-or-ng&#34;&gt;Gathering(G or nG)&lt;/h2&gt;
+&lt;p&gt;모아서 처리해도 되는지 안되는지에 대한 여부. 일반적으로 모아서 처리해도되지만 예를들어 Counter의 경우 이런 처리를 하면 안된다.&lt;/p&gt;
+&lt;h2 id=&#34;reorderr-or-nr&#34;&gt;Reorder(R or nR)&lt;/h2&gt;
+&lt;p&gt;순서를 지켜도 되는지 안되는지에 대한 여부.&lt;/p&gt;
+&lt;h2 id=&#34;early-write-acknowledgemente-or-ne&#34;&gt;Early Write Acknowledgement(E or nE)&lt;/h2&gt;
+&lt;p&gt;Write Done이 안됬어도 미리 Ack를 보낼지 안보낼지에 대한것.&lt;/p&gt;
+&lt;p&gt;메모리 Write는 Error가 안날 확률이 매우 높기떄문에 이렇게 처리한다는듯.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;arm에서-사용하는-device-type&#34;&gt;ARM에서 사용하는 Device Type&lt;/h1&gt;
+&lt;h2 id=&#34;device-ngnrne&#34;&gt;Device-nGnRnE.&lt;/h2&gt;
+&lt;p&gt;Stronlgy Ordered Memory. 다 안쓴다느듯.&lt;/p&gt;
+&lt;h2 id=&#34;device-ngnre&#34;&gt;Device-nGnRE&lt;/h2&gt;
+&lt;p&gt;Early Ack만 쓰겠다는뜻.&lt;/p&gt;
+&lt;h2 id=&#34;device-gre&#34;&gt;Device-GRE&lt;/h2&gt;
+&lt;p&gt;모든 버퍼를 쓰겠다는뜻.&lt;/p&gt;
 
       </description>
     </item>

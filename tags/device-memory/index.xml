@@ -1,0 +1,49 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Goldydocs – device memory</title>
+    <link>/tags/device-memory/</link>
+    <description>Recent content in device memory on Goldydocs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/tags/device-memory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Device memory</title>
+      <link>/docs/linux-arm64-kernel/assembly/memory/device-memory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/linux-arm64-kernel/assembly/memory/device-memory/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;device-memory&#34;&gt;Device Memory&lt;/h1&gt;
+&lt;p&gt;Normal Memory는 Cache를 사용할수있음.
+Device memory는 Buffer 개념임.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;gatheringg-or-ng&#34;&gt;Gathering(G or nG)&lt;/h2&gt;
+&lt;p&gt;모아서 처리해도 되는지 안되는지에 대한 여부. 일반적으로 모아서 처리해도되지만 예를들어 Counter의 경우 이런 처리를 하면 안된다.&lt;/p&gt;
+&lt;h2 id=&#34;reorderr-or-nr&#34;&gt;Reorder(R or nR)&lt;/h2&gt;
+&lt;p&gt;순서를 지켜도 되는지 안되는지에 대한 여부.&lt;/p&gt;
+&lt;h2 id=&#34;early-write-acknowledgemente-or-ne&#34;&gt;Early Write Acknowledgement(E or nE)&lt;/h2&gt;
+&lt;p&gt;Write Done이 안됬어도 미리 Ack를 보낼지 안보낼지에 대한것.&lt;/p&gt;
+&lt;p&gt;메모리 Write는 Error가 안날 확률이 매우 높기떄문에 이렇게 처리한다는듯.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;arm에서-사용하는-device-type&#34;&gt;ARM에서 사용하는 Device Type&lt;/h1&gt;
+&lt;h2 id=&#34;device-ngnrne&#34;&gt;Device-nGnRnE.&lt;/h2&gt;
+&lt;p&gt;Stronlgy Ordered Memory. 다 안쓴다느듯.&lt;/p&gt;
+&lt;h2 id=&#34;device-ngnre&#34;&gt;Device-nGnRE&lt;/h2&gt;
+&lt;p&gt;Early Ack만 쓰겠다는뜻.&lt;/p&gt;
+&lt;h2 id=&#34;device-gre&#34;&gt;Device-GRE&lt;/h2&gt;
+&lt;p&gt;모든 버퍼를 쓰겠다는뜻.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

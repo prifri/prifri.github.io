@@ -1,0 +1,127 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Goldydocs – docsy</title>
+    <link>/tags/docsy/</link>
+    <description>Recent content in docsy on Goldydocs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 14 Jan 2022 12:46:18 +0900</lastBuildDate>
+    
+	  <atom:link href="/tags/docsy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Docsy Theme로 변경</title>
+      <link>/docs/make-site/docsy-theme%EB%A1%9C-%EB%B3%80%EA%B2%BD/</link>
+      <pubDate>Fri, 14 Jan 2022 12:46:18 +0900</pubDate>
+      
+      <guid>/docs/make-site/docsy-theme%EB%A1%9C-%EB%B3%80%EA%B2%BD/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;search 기능을 추가하다가 잘안되고 themes를 docsy로 변경하였다.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h1 id=&#34;docsy-설치&#34;&gt;docsy 설치&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.docsy.dev/docs/getting-started/&#34;&gt;docsy Getting started&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;hugo는 ubuntu가 18version 이상이라면 extended로 설치됬을것이다.
+example site로 clone하여 사용하는걸 추천하니 그렇게 한다.
+remote를 바꾸기 전까지만 따라 한다.&lt;/p&gt;
+&lt;h2 id=&#34;branch-backup&#34;&gt;branch backup&lt;/h2&gt;
+&lt;p&gt;docsy origin git에서 update를 계속 받아야 될것이므로 현재 master에 대한 backup brach를 만들어준다.
+remote도 origin복사본을 만들어놓고, push 한다&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git checkout -b docsy_origin
+git remote add docsy https://github.com/google/docsy-example.git
+git push origin docsy_origin
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;이제 origin remote를 원래 remote로 변경한다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git remote set-url origin git@github.com:prifri/prifri_site.git
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;git-덮어쓰기&#34;&gt;git 덮어쓰기&lt;/h2&gt;
+&lt;p&gt;현재 master git과 origin과는 완전히 다른 내용일것이다. 강제로 update 시킨다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git checkout master
+git push --force origin master 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;나는 시행착오좀 겪느라 branch가 원격 저장소에 좀 생겼었는데 master, backup bracnh만 남기고 정리하고 master를 default로 한다.&lt;/p&gt;
+&lt;h2 id=&#34;public을-submodule로-추가&#34;&gt;public을 submodule로 추가&lt;/h2&gt;
+&lt;p&gt;geedoc에서 했던 대로 추가한다. docsy example의 .gitignore에 public이 있으므로 이를 지우고 submodule을 추가하면된다.&lt;/p&gt;
+&lt;h1 id=&#34;docsy-build&#34;&gt;docsy build&lt;/h1&gt;
+&lt;p&gt;hugo server -D 로 테스트를 한번 해보고 잘되면 hugo -t docsy로 build를 하고 push를 해본다.&lt;/p&gt;
+&lt;h2 id=&#34;ss-error-처리&#34;&gt;ss error 처리&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;import fs from &#39;fs-extra&#39;
+       ^^
+
+SyntaxError: Unexpected identifier
+    at Module._compile (internal/modules/cjs/loader.js:723:23)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+Total in 2031 ms
+Error: Error building site: POSTCSS: failed to transform &amp;quot;scss/main.css&amp;quot; (text/css): /home/unit_dev64/kkr/docsy-example/node_modules/postcss-cli/index.js:3
+import fs from &#39;fs-extra&#39;
+       ^^
+
+SyntaxError: Unexpected identifier
+    at Module._compile (internal/modules/cjs/loader.js:723:23)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;nodejs version이 낮아서 그런거 같다. &lt;a href=&#34;https://github.com/google/docsy/issues/265&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;nodejs version을 확인해본다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ node -v
+v10.19.0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;대충 검색해보니 v12도 있는거 같아서 v12로 다시 깔아서 해봤다.&lt;a href=&#34;https://stackoverflow.com/questions/60679889/update-node-to-v12-on-ubuntu&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;다시 build 했더니 잘된다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ hugo -t docsy
+
+                   | EN | FA | NO  
+-------------------+----+----+-----
+  Pages            | 76 | 28 | 95  
+  Paginator pages  |  0 |  0 |  0  
+  Non-page files   |  3 |  3 |  1  
+  Static files     | 43 | 43 | 43  
+  Processed images |  7 |  7 |  2  
+  Aliases          |  4 |  2 |  0  
+  Sitemaps         |  2 |  1 |  1  
+  Cleaned          |  0 |  0 |  0  
+
+Total in 2477 ms
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;기존-작업했던것을-옮긴다&#34;&gt;기존 작업했던것을 옮긴다&lt;/h1&gt;
+&lt;p&gt;content 작업들
+google, naver 검색등록 작업들&lt;/p&gt;
+&lt;h2 id=&#34;comment&#34;&gt;comment&lt;/h2&gt;
+&lt;p&gt;blog와 doc의 sigle.html을 layouts에 복사해온다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mkdir -p layouts/blog
+mkdir -p layouts/docs
+cp thems/docsy/layouts/blog/single.html layouts/blog/
+cp thems/docsy/layouts/docs/single.html layouts/docs/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;그리고 end앞에 script를 복사해넣는다&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{{ define &amp;quot;main&amp;quot; }}
+{{ .Render &amp;quot;content&amp;quot; }}
+&amp;lt;script src=&amp;quot;https://utteranc.es/client.js&amp;quot;
+        repo=&amp;quot;prifri/prifri_site_comments&amp;quot;
+        issue-term=&amp;quot;pathname&amp;quot;
+        theme=&amp;quot;github-light&amp;quot;
+        crossorigin=&amp;quot;anonymous&amp;quot;
+        async&amp;gt;
+&amp;lt;/script&amp;gt;
+{{ end }}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

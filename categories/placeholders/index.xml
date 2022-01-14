@@ -4,6 +4,7 @@
     <link>/categories/placeholders/</link>
     <description>Recent content in Placeholders on Goldydocs</description>
     <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
     
 	  <atom:link href="/categories/placeholders/index.xml" rel="self" type="application/rss+xml" />
     
@@ -47,6 +48,35 @@
 &lt;p&gt;Is there any initial setup users need to do after installation to try your project?&lt;/p&gt;
 &lt;h2 id=&#34;try-it-out&#34;&gt;Try it out!&lt;/h2&gt;
 &lt;p&gt;Can your users test their installation, for example by running a command or deploying a Hello World example?&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: example</title>
+      <link>/docs/example/</link>
+      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/example/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;copy해서 새로운 page를 만들때 쓰기 위한 page&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Think about your project’s features and use cases. Use these to choose your core tasks. Each granular use case (enable x, configure y) should have a corresponding tasks page or tasks page section. Users should be able to quickly refer to your core tasks when they need to find out how to do one specific thing, rather than having to look for the instructions in a bigger tutorial or example. Think of your tasks pages as a cookbook with different procedures your users can combine to create something more substantial.&lt;/p&gt;
+&lt;p&gt;You can give each task a page, or you can group related tasks together in a page, such as tasks related to a particular feature. As well as grouping related tasks in single pages, you can also group task pages in nested folders with an index page as an overview, as seen in this example site. Or if you have a small docset like the &lt;a href=&#34;https://docsy.dev/docs/&#34;&gt;Docsy User Guide&lt;/a&gt; with no Tutorials or Concepts pages, consider adding your feature-specific pages at the top level of your docs rather than in a Tasks section.&lt;/p&gt;
+&lt;p&gt;Each task should give the user&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The prerequisites for this task, if any (this can be specified at the top of a multi-task page if they&amp;rsquo;re the same for all the page&amp;rsquo;s tasks. &amp;ldquo;All these tasks assume that you understand&amp;hellip;.and that you have already&amp;hellip;.&amp;quot;).&lt;/li&gt;
+&lt;li&gt;What this task accomplishes.&lt;/li&gt;
+&lt;li&gt;Instructions for the task. If it involves editing a file, running a command, or writing code, provide code-formatted example snippets to show the user what to do! If there are multiple steps, provide them as a numbered list.&lt;/li&gt;
+&lt;li&gt;If appropriate, links to related concept, tutorial, or example pages.&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>
