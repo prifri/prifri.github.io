@@ -180,7 +180,7 @@ if (!doNotTrack) {
     
     
 	
-<li>1.1: <a href="#pg-78425163d548e6aea6d633039c85b0be">Barrier</a></li>
+<li>1.1: <a href="#pg-424ed19d8068348c8dac0ead06de8e53">TCR</a></li>
 
 
     
@@ -188,7 +188,7 @@ if (!doNotTrack) {
     
     
 	
-<li>1.2: <a href="#pg-af1254e5694bf2c4fad7279b1abbf750">Cache</a></li>
+<li>1.2: <a href="#pg-78425163d548e6aea6d633039c85b0be">Barrier</a></li>
 
 
     
@@ -196,7 +196,15 @@ if (!doNotTrack) {
     
     
 	
-<li>1.3: <a href="#pg-e3da72b6e3a0be2aa93bb22e78616823">macro</a></li>
+<li>1.3: <a href="#pg-af1254e5694bf2c4fad7279b1abbf750">Cache</a></li>
+
+
+    
+  
+    
+    
+	
+<li>1.4: <a href="#pg-e3da72b6e3a0be2aa93bb22e78616823">macro</a></li>
 
 
     
@@ -211,7 +219,7 @@ if (!doNotTrack) {
     
     
 	
-<li>1.3.1: <a href="#pg-9b3ebad3aa83ae83872e3dcbd2de8116">ifb</a></li>
+<li>1.4.1: <a href="#pg-9b3ebad3aa83ae83872e3dcbd2de8116">ifb</a></li>
 
 
     
@@ -223,7 +231,7 @@ if (!doNotTrack) {
     
     
 	
-<li>1.4: <a href="#pg-93ca5875c81d6faf8c005cd487b83681">Device memory</a></li>
+<li>1.5: <a href="#pg-93ca5875c81d6faf8c005cd487b83681">Device memory</a></li>
 
 
     
@@ -297,7 +305,52 @@ if (!doNotTrack) {
 
 <div class="td-content" style="">
     
-	<h1 id="pg-78425163d548e6aea6d633039c85b0be">1.1 - Barrier</h1>
+	<h1 id="pg-424ed19d8068348c8dac0ead06de8e53">1.1 - TCR</h1>
+    <div class="lead">TCR register에 대한 정리.</div>
+	<h1 id="txsz">TXSZ</h1>
+<p>가상주소를 계산할때 상위 주소의 0, 1의 개수를 미리 설정해놓는것이다.
+Kernel 공간 인경우 상위 비트가 1이 채워져있는 개념이므로 T1SZ을 사용하게 되고
+user 공간 인경우 상위 비트가 0이 채워져있는 개념이므로 T0SZ을 사용하게 된다.</p>
+<hr>
+<h2 id="t0sz">T0SZ</h2>
+<p>User 공간의 가상주소에서 주소 하위에서부터 0이 채워지는 비트 개수</p>
+<ul>
+<li>T0SZ = 16일때</li>
+<li>0x0000_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD</li>
+</ul>
+<hr>
+<h2 id="t1sz">T1SZ</h2>
+<p>Kernel 공간의 가상주소에서 주소 상위에서부터 1이 채워지는 비트 개수</p>
+<ul>
+<li>T1SZ = 16일때</li>
+<li>0xFFFF_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD_ABCD</li>
+</ul>
+<hr>
+<h2 id="특성">특성</h2>
+<ul>
+<li>TXSZ가 커짐에따라 해당 영역의 가상주소공간이 줄어듬을 알 수 있다.</li>
+<li>한번 정해지면 바귀지 않는다.</li>
+</ul>
+<hr>
+<p>TGX(Translation Granule 0, 1)</p>
+<p>Memory Mapping 단위를 Granule Size라고 하는데 user, kernel 각각의 memory mapping size에 대한 내용</p>
+<p>4KB, 16KB, 64KB설정이 가능한듯.</p>
+
+</div>
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-78425163d548e6aea6d633039c85b0be">1.2 - Barrier</h1>
     <div class="lead">barrier 명령에 대한 정리</div>
 	<h1 id="isbinstruction-synchronization-barrier">ISB(Instruction Synchronization Barrier)</h1>
 <p>파이프라인을 비워줌(15~20 cycle)</p>
@@ -323,7 +376,7 @@ load, store의 순서를 유지해줌 + 모든 CPU에서 해당 값의 일관성
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-af1254e5694bf2c4fad7279b1abbf750">1.2 - Cache</h1>
+	<h1 id="pg-af1254e5694bf2c4fad7279b1abbf750">1.3 - Cache</h1>
     <div class="lead">cache 명령에 대한 정리</div>
 	
 
@@ -556,7 +609,7 @@ PoC를 수행할 Last Cache에 대한 Level을 의미한다.</p>
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-e3da72b6e3a0be2aa93bb22e78616823">1.3 - macro</h1>
+	<h1 id="pg-e3da72b6e3a0be2aa93bb22e78616823">1.4 - macro</h1>
     <div class="lead">macro 에 대한 정리</div>
 	
 
@@ -588,7 +641,7 @@ PoC를 수행할 Last Cache에 대한 Level을 의미한다.</p>
 
 <div class="td-content" style="">
     
-	<h1 id="pg-9b3ebad3aa83ae83872e3dcbd2de8116">1.3.1 - ifb</h1>
+	<h1 id="pg-9b3ebad3aa83ae83872e3dcbd2de8116">1.4.1 - ifb</h1>
     <div class="lead">.ifb = if blank라는 뜻.</div>
 	<p><a href="https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/useful-assembler-directives-and-macros-for-the-gnu-assembler">ifb 참고</a></p>
 <hr>
@@ -623,7 +676,7 @@ PoC를 수행할 Last Cache에 대한 Level을 의미한다.</p>
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-93ca5875c81d6faf8c005cd487b83681">1.4 - Device memory</h1>
+	<h1 id="pg-93ca5875c81d6faf8c005cd487b83681">1.5 - Device memory</h1>
     <div class="lead">arm에서의 device memory에 대한 정리</div>
 	<h1 id="device-memory">Device Memory</h1>
 <p>Normal Memory는 Cache를 사용할수있음.

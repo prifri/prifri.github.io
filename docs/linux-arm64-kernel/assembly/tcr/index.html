@@ -4,8 +4,6 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.68.3" />
-<link rel="alternate" type="text/html" href="/blog/releases/_print/">
-<link rel="alternate" type="application/rss&#43;xml" href="/blog/releases/index.xml">
 <meta name="robots" content="index, follow">
 
 
@@ -20,17 +18,29 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>New Releases | Goldydocs</title>
-<meta name="description" content="">
-<meta property="og:title" content="New Releases" />
-<meta property="og:description" content="A Docsy example site" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/blog/releases/" />
-<meta property="og:site_name" content="Goldydocs" />
-<meta itemprop="name" content="New Releases">
-<meta itemprop="description" content="A Docsy example site"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="New Releases"/>
-<meta name="twitter:description" content="A Docsy example site"/>
+<title>TCR | Goldydocs</title>
+<meta name="description" content="TCR register에 대한 정리.
+">
+<meta property="og:title" content="TCR" />
+<meta property="og:description" content="TCR register에 대한 정리.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/docs/linux-arm64-kernel/assembly/tcr/" />
+<meta property="article:published_time" content="2022-01-14T16:56:42+09:00" />
+<meta property="article:modified_time" content="2022-01-14T16:47:16+09:00" /><meta property="og:site_name" content="Goldydocs" />
+<meta itemprop="name" content="TCR">
+<meta itemprop="description" content="TCR register에 대한 정리.
+">
+<meta itemprop="datePublished" content="2022-01-14T16:56:42&#43;09:00" />
+<meta itemprop="dateModified" content="2022-01-14T16:47:16&#43;09:00" />
+<meta itemprop="wordCount" content="96">
+
+
+
+<meta itemprop="keywords" content="tcr," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TCR"/>
+<meta name="twitter:description" content="TCR register에 대한 정리.
+"/>
 
 
 
@@ -55,7 +65,7 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
   </head>
-  <body class="td-section td-blog">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -87,7 +97,7 @@ if (!doNotTrack) {
 				
 				
 				
-				<a class="nav-link" href="/docs/" ><span>Documentation</span></a>
+				<a class="nav-link active" href="/docs/" ><span class="active">Documentation</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -99,7 +109,7 @@ if (!doNotTrack) {
 				
 				
 				
-				<a class="nav-link active" href="/blog/" ><span class="active">Blog</span></a>
+				<a class="nav-link" href="/blog/" ><span>Blog</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -137,25 +147,92 @@ if (!doNotTrack) {
   </form>
   <nav class="collapse td-sidebar-nav" id="td-section-nav">
     <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-blog-li">
-  <a href="/blog/" title="Docsy Blog" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-blog"><span class="">Blog</span></a>
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docs-li">
+  <a href="/docs/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Documentation</span></a>
   <ul class="ul-1">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-blognews-li">
-  <a href="/blog/news/" title="News About Docsy" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-blognews"><span class="">News</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsoverview-li">
+  <a href="/docs/overview/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsoverview"><span class="">Overview</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsgetting-started-li">
+  <a href="/docs/getting-started/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsgetting-started"><span class="">Getting Started</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20181006easy-documentation-with-docsy-li">
-  <a href="/blog/2018/10/06/easy-documentation-with-docsy/" title="Easy documentation with Docsy" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20181006easy-documentation-with-docsy"><span class="">Announcing Docsy</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20181006the-second-blog-post-li">
-  <a href="/blog/2018/10/06/the-second-blog-post/" title="The second blog post" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20181006the-second-blog-post"><span class="">Second blog post</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsgetting-startedexample-page-li">
+  <a href="/docs/getting-started/example-page/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsgetting-startedexample-page"><span class="">Example Page</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-blogreleases-li">
-  <a href="/blog/releases/" title="New Releases" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id="m-blogreleases"><span class="td-sidebar-nav-active-item">Releases</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsexamples-li">
+  <a href="/docs/examples/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsexamples"><span class="">Examples</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconcepts-li">
+  <a href="/docs/concepts/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsconcepts"><span class="">Concepts</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docslinux-arm64-kernel-li">
+  <a href="/docs/linux-arm64-kernel/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docslinux-arm64-kernel"><span class="">Linux ARM64 kernel</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20180104another-great-release-li">
-  <a href="/blog/2018/01/04/another-great-release/" title="Another Great Release" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20180104another-great-release"><span class="">Release New Features</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docslinux-arm64-kernelassembly-li">
+  <a href="/docs/linux-arm64-kernel/assembly/" title="assembly" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docslinux-arm64-kernelassembly"><span class="">arm64 assembly</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelassemblytcr-li">
+  <a href="/docs/linux-arm64-kernel/assembly/tcr/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelassemblytcr"><span class="td-sidebar-nav-active-item">TCR</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelassemblymemorybarrier-li">
+  <a href="/docs/linux-arm64-kernel/assembly/memory/barrier/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelassemblymemorybarrier"><span class="">Barrier</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelassemblymemorycache-li">
+  <a href="/docs/linux-arm64-kernel/assembly/memory/cache/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelassemblymemorycache"><span class="">Cache</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docslinux-arm64-kernelassemblysyntax-li">
+  <a href="/docs/linux-arm64-kernel/assembly/syntax/" title="macro" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docslinux-arm64-kernelassemblysyntax"><span class="">arm64 macro</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelassemblysyntaxifb-li">
+  <a href="/docs/linux-arm64-kernel/assembly/syntax/ifb/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelassemblysyntaxifb"><span class="">ifb</span></a>
 </li>
   </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelassemblymemorydevice-memory-li">
+  <a href="/docs/linux-arm64-kernel/assembly/memory/device-memory/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelassemblymemorydevice-memory"><span class="">Device memory</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsmake-site-li">
+  <a href="/docs/make-site/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsmake-site"><span class="">Make Site</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsmake-sitedocsy-themeeba19c-ebb380eab2bd-li">
+  <a href="/docs/make-site/docsy-theme%EB%A1%9C-%EB%B3%80%EA%B2%BD/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsmake-sitedocsy-themeeba19c-ebb380eab2bd"><span class="">Docsy Theme로 변경</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsmake-sitehugoeba19c-site-eba78ceb93a4eab8b0-li">
+  <a href="/docs/make-site/hugo%EB%A1%9C-site-%EB%A7%8C%EB%93%A4%EA%B8%B0/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsmake-sitehugoeba19c-site-eba78ceb93a4eab8b0"><span class="">Hugo로 site 만들기</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsexample-li">
+  <a href="/docs/example/" title="example" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsexample"><span class="">exampe</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsexampletask-li">
+  <a href="/docs/example/task/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsexampletask"><span class="">Another Task</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsexampleponycopters-li">
+  <a href="/docs/example/ponycopters/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsexampleponycopters"><span class="">Working with Ponycopters</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsexampleponycoptersconfiguring-ponycopters-li">
+  <a href="/docs/example/ponycopters/configuring-ponycopters/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsexampleponycoptersconfiguring-ponycopters"><span class="">Configuring Ponycopters</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsexampleponycopterslaunching-ponycopters-li">
+  <a href="/docs/example/ponycopters/launching-ponycopters/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsexampleponycopterslaunching-ponycopters"><span class="">Launching Ponycopters</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docstutorials-li">
+  <a href="/docs/tutorials/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docstutorials"><span class="">Tutorials</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstutorialsmulti-bear-li">
+  <a href="/docs/tutorials/multi-bear/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstutorialsmulti-bear"><span class="">Multi-Bear Domicile Setup</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstutorialstutorial2-li">
+  <a href="/docs/tutorials/tutorial2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstutorialstutorial2"><span class="">Another Tutorial</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsreference-li">
+  <a href="/docs/reference/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsreference"><span class="">Reference</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceparameter-reference-li">
+  <a href="/docs/reference/parameter-reference/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsreferenceparameter-reference"><span class="">Parameter Reference</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docscontribution-guidelines-li">
+  <a href="/docs/contribution-guidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docscontribution-guidelines"><span class="">Contribution Guidelines</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsgitssh-key-setup-li">
+  <a href="/docs/git/ssh-key-setup/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsgitssh-key-setup"><span class="">SSH Key Setup</span></a>
 </li>
   </ul>
 </li>
@@ -167,12 +244,12 @@ if (!doNotTrack) {
           <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
             
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href="https://github.com/google/docsy-example/tree/master/content/ko/blog/releases/_index.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> [i18n] post_view_this</a>
-  <a href="https://github.com/google/docsy-example/edit/master/content/ko/blog/releases/_index.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> 페이지 편집</a>
-  <a href="https://github.com/google/docsy-example/new/master/content/ko/blog/releases/_index.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> 하부 페이지 생성</a>
-  <a href="https://github.com/google/docsy-example/issues/new?title=New%20Releases" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fab fa-github fa-fw"></i> 문서에 이슈 생성</a>
+<a href="https://github.com/google/docsy-example/tree/master/content/ko/docs/Linux%20ARM64%20kernel/assembly/TCR.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> [i18n] post_view_this</a>
+  <a href="https://github.com/google/docsy-example/edit/master/content/ko/docs/Linux%20ARM64%20kernel/assembly/TCR.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> 페이지 편집</a>
+  <a href="https://github.com/google/docsy-example/new/master/content/ko/docs/Linux%20ARM64%20kernel/assembly/TCR.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> 하부 페이지 생성</a>
+  <a href="https://github.com/google/docsy-example/issues/new?title=TCR" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fab fa-github fa-fw"></i> 문서에 이슈 생성</a>
   <a href="https://github.com/google/docsy/issues/new" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> 프로젝트에 이슈 생성</a>
-  <a id="print" href="/blog/releases/_print/"><i class="fa fa-print fa-fw"></i> 전체 섹션 프린트</a>
+  <a id="print" href="/docs/linux-arm64-kernel/assembly/_print/"><i class="fa fa-print fa-fw"></i> 전체 섹션 프린트</a>
 
 </div>
 
@@ -260,66 +337,169 @@ if (!doNotTrack) {
 	
 
           </aside>
-          <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
-            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="/blog/releases/index.xml" target="_blank">
-              RSS <i class="fa fa-rss ml-2 "></i>
-            </a>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
             
+  
 
-
-
-
-<div class="row">
-	<div class="col-12">
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/">Documentation</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/docs/linux-arm64-kernel/">Linux ARM64 kernel</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/docs/linux-arm64-kernel/assembly/">arm64 assembly</a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="/docs/linux-arm64-kernel/assembly/tcr/">TCR</a>
+  </li>
+  </ol>
+</nav>
+            
+<div class="td-content">
+	<h1>TCR</h1>
+	<div class="lead">TCR register에 대한 정리.</div>
+	<header class="article-meta">
+		
+		
 			
-			<h2>Posts in 2018</h2>
-			<ul class="list-unstyled mt-4">
 				
-				<li class="media mb-4">
-					<div class="media-body">
-						<h5 class="mt-0 mb-1"><a href="/blog/2018/01/04/another-great-release/">Release New Features</a></h5>
-						<p class="mb-2 mb-md-3"><small class="text-muted">Thursday, January 04, 2018 in Releases</small></p>
-						<header class="article-meta">
-							
-							
-								
-									
 
 
-								
-									
+<div class="taxonomy taxonomy-terms-article taxo-tags">
+  <h5 class="taxonomy-title">Tags:</h5>
+  <ul class="taxonomy-terms">
+    
+      <li><a class="taxonomy-term" href="/tags/tcr/" data-taxonomy-term="tcr"><span class="taxonomy-label">tcr</span></a></li>
+    
+  </ul>
+</div>
 
-
-								
-							
-							
-						</header>
-						
-
-
-
-
-
-						<p class="pt-0 mt-0">Text can be bold, italic, or strikethrough. Links should be blue with no underlines (unless hovered over).
-There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs. …</p>
-						<p class="pt-0"><a href="/blog/2018/01/04/another-great-release/" aria-label="더 읽기 - Release New Features">더 읽기</a></p>
-					</div>
-				</li>
+			
 				
-			</ul>
-			
-		
-	</div>
-</div>
-<div class="row pl-2 pt-2">
-	<div class="col">
-		
-			
 
 
-		
-	</div>
+<div class="taxonomy taxonomy-terms-article taxo-categories">
+  <h5 class="taxonomy-title">Categories:</h5>
+  <ul class="taxonomy-terms">
+    
+      <li><a class="taxonomy-term" href="/categories/assembly/" data-taxonomy-term="assembly"><span class="taxonomy-label">assembly</span></a></li>
+    
+  </ul>
 </div>
+
+			
+		
+		
+	</header>    
+	<h1 id="txsz">TXSZ</h1>
+<p>가상주소를 계산할때 상위 주소의 0, 1의 개수를 미리 설정해놓는것이다.
+Kernel 공간 인경우 상위 비트가 1이 채워져있는 개념이므로 T1SZ을 사용하게 되고
+user 공간 인경우 상위 비트가 0이 채워져있는 개념이므로 T0SZ을 사용하게 된다.</p>
+<hr>
+<h2 id="t0sz">T0SZ</h2>
+<p>User 공간의 가상주소에서 주소 하위에서부터 0이 채워지는 비트 개수</p>
+<ul>
+<li>T0SZ = 16일때</li>
+<li>0x0000_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD</li>
+</ul>
+<hr>
+<h2 id="t1sz">T1SZ</h2>
+<p>Kernel 공간의 가상주소에서 주소 상위에서부터 1이 채워지는 비트 개수</p>
+<ul>
+<li>T1SZ = 16일때</li>
+<li>0xFFFF_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD_ABCD</li>
+</ul>
+<hr>
+<h2 id="특성">특성</h2>
+<ul>
+<li>TXSZ가 커짐에따라 해당 영역의 가상주소공간이 줄어듬을 알 수 있다.</li>
+<li>한번 정해지면 바귀지 않는다.</li>
+</ul>
+<hr>
+<p>TGX(Translation Granule 0, 1)</p>
+<p>Memory Mapping 단위를 Granule Size라고 하는데 user, kernel 각각의 memory mapping size에 대한 내용</p>
+<p>4KB, 16KB, 64KB설정이 가능한듯.</p>
+
+	
+		<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof ga !== 'function') return;
+    const args = {
+      command: 'send',
+      hitType: 'event',
+      category: 'Helpful',
+      action: 'click',
+      label: window.location.pathname,
+      value: value
+    };
+    ga(args.command, args.hitType, args.category, args.action, args.label, args.value);
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(1);
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+
+		<br />
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">
+  최종 수정 January 14, 2022: <a href="https://github.com/google/docsy-example/commit/1c3af42987f693d95910a312208a1755adee7763">rebuilding site 2022. 01. 14. (금) 16:47:16 KST (1c3af42)</a>
+</div>
+
+</div>
+
+<script src="https://utteranc.es/client.js"
+        repo="prifri/prifri_site_comments"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
 
           </main>
         </div>

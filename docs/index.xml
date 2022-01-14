@@ -1817,6 +1817,47 @@ bar := &amp;quot;foo&amp;quot;;
     </item>
     
     <item>
+      <title>Docs: TCR</title>
+      <link>/docs/linux-arm64-kernel/assembly/tcr/</link>
+      <pubDate>Fri, 14 Jan 2022 16:56:42 +0900</pubDate>
+      
+      <guid>/docs/linux-arm64-kernel/assembly/tcr/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;txsz&#34;&gt;TXSZ&lt;/h1&gt;
+&lt;p&gt;가상주소를 계산할때 상위 주소의 0, 1의 개수를 미리 설정해놓는것이다.
+Kernel 공간 인경우 상위 비트가 1이 채워져있는 개념이므로 T1SZ을 사용하게 되고
+user 공간 인경우 상위 비트가 0이 채워져있는 개념이므로 T0SZ을 사용하게 된다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;t0sz&#34;&gt;T0SZ&lt;/h2&gt;
+&lt;p&gt;User 공간의 가상주소에서 주소 하위에서부터 0이 채워지는 비트 개수&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;T0SZ = 16일때&lt;/li&gt;
+&lt;li&gt;0x0000_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;t1sz&#34;&gt;T1SZ&lt;/h2&gt;
+&lt;p&gt;Kernel 공간의 가상주소에서 주소 상위에서부터 1이 채워지는 비트 개수&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;T1SZ = 16일때&lt;/li&gt;
+&lt;li&gt;0xFFFF_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD_ABCD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;특성&#34;&gt;특성&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;TXSZ가 커짐에따라 해당 영역의 가상주소공간이 줄어듬을 알 수 있다.&lt;/li&gt;
+&lt;li&gt;한번 정해지면 바귀지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;TGX(Translation Granule 0, 1)&lt;/p&gt;
+&lt;p&gt;Memory Mapping 단위를 Granule Size라고 하는데 user, kernel 각각의 memory mapping size에 대한 내용&lt;/p&gt;
+&lt;p&gt;4KB, 16KB, 64KB설정이 가능한듯.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: ifb</title>
       <link>/docs/linux-arm64-kernel/assembly/syntax/ifb/</link>
       <pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate>
