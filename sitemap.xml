@@ -68,6 +68,11 @@
   </url>
   
   <url>
+    <loc>/docs/linux-arm64-kernel/source-studty/</loc>
+    <lastmod>2022-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/docs/example/</loc>
     <lastmod>2022-01-14T16:47:16+09:00</lastmod>
   </url>
@@ -153,6 +158,16 @@
   </url>
   
   <url>
+    <loc>/categories/c/</loc>
+    <lastmod>2022-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/code-review/</loc>
+    <lastmod>2022-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/ifb/</loc>
     <lastmod>2022-01-14T16:47:16+09:00</lastmod>
   </url>
@@ -160,6 +175,26 @@
   <url>
     <loc>/docs/linux-arm64-kernel/assembly/syntax/ifb/</loc>
     <lastmod>2022-01-14T16:47:16+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/linux-arm64-kernel/</loc>
+    <lastmod>2022-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/linux-arm64-kernel/source-studty/per-cpu/pcpu_embed_first_chunk/</loc>
+    <lastmod>2022-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/per-cpu/</loc>
+    <lastmod>2022-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/linux-arm64-kernel/source-studty/per-cpu/</loc>
+    <lastmod>2022-01-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>

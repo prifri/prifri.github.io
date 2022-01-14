@@ -267,7 +267,7 @@ if (!doNotTrack) {
     
     
 	
-<li>5.1: <a href="#pg-e1ea2e90214eaa5fa250eb800b927037">assembly</a></li>
+<li>5.1: <a href="#pg-7d980a78f253ca4874dd76ecf4c650d1">source study</a></li>
 
 
     
@@ -282,31 +282,7 @@ if (!doNotTrack) {
     
     
 	
-<li>5.1.1: <a href="#pg-424ed19d8068348c8dac0ead06de8e53">TCR</a></li>
-
-
-    
-  
-    
-    
-	
-<li>5.1.2: <a href="#pg-78425163d548e6aea6d633039c85b0be">Barrier</a></li>
-
-
-    
-  
-    
-    
-	
-<li>5.1.3: <a href="#pg-af1254e5694bf2c4fad7279b1abbf750">Cache</a></li>
-
-
-    
-  
-    
-    
-	
-<li>5.1.4: <a href="#pg-e3da72b6e3a0be2aa93bb22e78616823">macro</a></li>
+<li>5.1.1: <a href="#pg-add538d6bd1e80e427b73e5db9ebf583">per cpu</a></li>
 
 
     
@@ -321,7 +297,77 @@ if (!doNotTrack) {
     
     
 	
-<li>5.1.4.1: <a href="#pg-9b3ebad3aa83ae83872e3dcbd2de8116">ifb</a></li>
+<li>5.1.1.1: <a href="#pg-446cceac8e66b778a42559f0b753668f">pcpu_embed_first_chunk</a></li>
+
+
+    
+  
+
+    </ul>
+    
+  
+
+    </ul>
+    
+  
+    
+    
+	
+<li>5.2: <a href="#pg-e1ea2e90214eaa5fa250eb800b927037">assembly</a></li>
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+<li>5.2.1: <a href="#pg-424ed19d8068348c8dac0ead06de8e53">TCR</a></li>
+
+
+    
+  
+    
+    
+	
+<li>5.2.2: <a href="#pg-78425163d548e6aea6d633039c85b0be">Barrier</a></li>
+
+
+    
+  
+    
+    
+	
+<li>5.2.3: <a href="#pg-af1254e5694bf2c4fad7279b1abbf750">Cache</a></li>
+
+
+    
+  
+    
+    
+	
+<li>5.2.4: <a href="#pg-e3da72b6e3a0be2aa93bb22e78616823">macro</a></li>
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+<li>5.2.4.1: <a href="#pg-9b3ebad3aa83ae83872e3dcbd2de8116">ifb</a></li>
 
 
     
@@ -333,7 +379,7 @@ if (!doNotTrack) {
     
     
 	
-<li>5.1.5: <a href="#pg-93ca5875c81d6faf8c005cd487b83681">Device memory</a></li>
+<li>5.2.5: <a href="#pg-93ca5875c81d6faf8c005cd487b83681">Device memory</a></li>
 
 
     
@@ -1106,7 +1152,222 @@ bar := &quot;foo&quot;;
 
 <div class="td-content" style="">
     
-	<h1 id="pg-e1ea2e90214eaa5fa250eb800b927037">5.1 - assembly</h1>
+	<h1 id="pg-7d980a78f253ca4874dd76ecf4c650d1">5.1 - source study</h1>
+    <div class="lead">source 분석관련 내용정리</div>
+	
+
+<div class="pageinfo pageinfo-primary">
+<p>:)</p>
+
+</div>
+
+
+</div>
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+<div class="td-content" style="">
+    
+	<h1 id="pg-add538d6bd1e80e427b73e5db9ebf583">5.1.1 - per cpu</h1>
+    <div class="lead">setup_per_cpu_areas</div>
+	
+
+<div class="pageinfo pageinfo-primary">
+<p>setup_per_cpu_areas</p>
+
+</div>
+
+
+</div>
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+<div class="td-content" style="">
+    
+	<h1 id="pg-446cceac8e66b778a42559f0b753668f">5.1.1.1 - pcpu_embed_first_chunk</h1>
+    <div class="lead">pcpu_embed_first_chunk</div>
+	<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">__init</span> <span style="color:#000">pcpu_embed_first_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">size_t</span> <span style="color:#000">reserved_size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size_t</span> <span style="color:#000">dyn_size</span><span style="color:#000;font-weight:bold">,</span>
+				  <span style="color:#000">size_t</span> <span style="color:#000">atom_size</span><span style="color:#000;font-weight:bold">,</span>
+				  <span style="color:#000">pcpu_fc_cpu_distance_fn_t</span> <span style="color:#000">cpu_distance_fn</span><span style="color:#000;font-weight:bold">,</span>
+				  <span style="color:#000">pcpu_fc_alloc_fn_t</span> <span style="color:#000">alloc_fn</span><span style="color:#000;font-weight:bold">,</span>
+				  <span style="color:#000">pcpu_fc_free_fn_t</span> <span style="color:#000">free_fn</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">base</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">ULONG_MAX</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">**</span><span style="color:#000">areas</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">NULL</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_alloc_info</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ai</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">size_t</span> <span style="color:#000">size_sum</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">areas_size</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">max_distance</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">group</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">i</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">highest_group</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rc</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+
+<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic"> * IAMROOT, 2022.01.08: 
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_alloc_info 구조체를 할당해온다.
+</span><span style="color:#8f5902;font-style:italic"> * - setup_per_cpu_areas 에서 불러진 경우
+</span><span style="color:#8f5902;font-style:italic"> *   @reserved_size PERCPU_MODULE_RESERVE. 8k
+</span><span style="color:#8f5902;font-style:italic"> *   @dyn_size PERCPU_DYNAMIC_RESERVE 28k
+</span><span style="color:#8f5902;font-style:italic"> *   @atom_size PAGE_SIZE
+</span><span style="color:#8f5902;font-style:italic"> *   @cpu_distance_fn pcpu_cpu_distance,
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+	<span style="color:#000">ai</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_build_alloc_info</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">reserved_size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">dyn_size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">atom_size</span><span style="color:#000;font-weight:bold">,</span>
+				   <span style="color:#000">cpu_distance_fn</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">IS_ERR</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ai</span><span style="color:#000;font-weight:bold">))</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">PTR_ERR</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ai</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">size_sum</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">static_size</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">reserved_size</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">dyn_size</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">areas_size</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">PFN_ALIGN</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_groups</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#204a87;font-weight:bold">sizeof</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000;font-weight:bold">));</span>
+
+	<span style="color:#000">areas</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">memblock_alloc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">areas_size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">SMP_CACHE_BYTES</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">areas</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">rc</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#000">ENOMEM</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">out_free</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>@size_sun  unit size를 구함
+@areas_size group배열에 필요한 사이즈를 구함
+@areas memblock에서 group 배열을 할당해왔음.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/* allocate, copy and determine base address &amp; max_distance */</span>
+	<span style="color:#000">highest_group</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">group</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">group</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_groups</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">group</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_group_info</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">gi</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">groups</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">group</span><span style="color:#000;font-weight:bold">];</span>
+		<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">cpu</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">NR_CPUS</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">;</span>
+
+		<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">gi</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_units</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">cpu</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">NR_CPUS</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#000">cpu</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">gi</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">cpu_map</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">i</span><span style="color:#000;font-weight:bold">];</span>
+		<span style="color:#000">BUG_ON</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cpu</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">NR_CPUS</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>pcpu_build_alloc_info 에서 초기화됬던 pcpu_group_info를 가져오고 거기서 첫번째 cpu_map을 찾아온다. 순서대로 넣었으니 기본적으로 0번일것이다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">		<span style="color:#8f5902;font-style:italic">/* allocate space for the whole group */</span>
+		<span style="color:#000">ptr</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">alloc_fn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cpu</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gi</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_units</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">unit_size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">atom_size</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">rc</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#000">ENOMEM</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">out_free_areas</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>@ptr group에서 사용할 unit memory block. 총 unit 크기여야하니 unit개수 * unit_size가 될것이다. 또한 해당 node에서 구해와야되서 cpu를 인자로 넣는것이 보인다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">		<span style="color:#8f5902;font-style:italic">/* kmemleak tracks the percpu allocations separately */</span>
+		<span style="color:#000">kmemleak_free</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000">areas</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">group</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">;</span>
+</code></pre></div><p>아까 할당해놨던 areas의 member에 넣는게 보인다.
+areas[group 번호] -&gt; unit 으로 연결된다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">		<span style="color:#000">base</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">min</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">base</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">ptr</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">areas</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">highest_group</span><span style="color:#000;font-weight:bold">])</span>
+			<span style="color:#000">highest_group</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">group</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>제일 낮은 주소와 제일 높은 주소를 가진 group번호를 저장해놓는다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">max_distance</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">areas</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">highest_group</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">base</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">max_distance</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">unit_size</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">groups</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">highest_group</span><span style="color:#000;font-weight:bold">].</span><span style="color:#000">nr_units</span><span style="color:#000;font-weight:bold">;</span>
+</code></pre></div><p>가장 높은 주소를 가진 group의 unit 시작주소 + 가장 높은주소의 group의 unit 크기를 더햇다.
+즉 가장 아래의 unit의 시작 ~ 가장 높은 unit의 마지막 주소가 max_distacne가 된다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/* warn if maximum distance is further than 75% of vmalloc space */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">max_distance</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">VMALLOC_TOTAL</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#0000cf;font-weight:bold">3</span> <span style="color:#ce5c00;font-weight:bold">/</span> <span style="color:#0000cf;font-weight:bold">4</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">pr_warn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;max_distance=0x%lx too large for vmalloc space 0x%lx</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span>
+				<span style="color:#000">max_distance</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">VMALLOC_TOTAL</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#8f5902;font-style:italic">#ifdef CONFIG_NEED_PER_CPU_PAGE_FIRST_CHUNK
+</span><span style="color:#8f5902;font-style:italic"></span>		<span style="color:#8f5902;font-style:italic">/* and fail if we have fallback */</span>
+		<span style="color:#000">rc</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#000">EINVAL</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">out_free_areas</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#8f5902;font-style:italic">#endif
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000;font-weight:bold">}</span>
+
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * Copy data and free unused parts.  This should happen after all
+</span><span style="color:#8f5902;font-style:italic">	 * allocations are complete; otherwise, we may end up with
+</span><span style="color:#8f5902;font-style:italic">	 * overlapping groups.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">group</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">group</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_groups</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">group</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_group_info</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">gi</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">groups</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">group</span><span style="color:#000;font-weight:bold">];</span>
+		<span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ptr</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">areas</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">group</span><span style="color:#000;font-weight:bold">];</span>
+
+		<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">gi</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_units</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ptr</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">unit_size</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">gi</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">cpu_map</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">i</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">NR_CPUS</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#8f5902;font-style:italic">/* unused unit, free whole */</span>
+				<span style="color:#000">free_fn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">unit_size</span><span style="color:#000;font-weight:bold">);</span>
+				<span style="color:#204a87;font-weight:bold">continue</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000;font-weight:bold">}</span>
+			<span style="color:#8f5902;font-style:italic">/* copy and return the unused part */</span>
+			<span style="color:#000">memcpy</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">__per_cpu_load</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">static_size</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">free_fn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ptr</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">size_sum</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">unit_size</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">size_sum</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>이 전에서 사용하지 않은 unit은 NR_CPUS로 했었다. 해당 unit의 memory는 free를 한다. 그리고 원본 percpu 에서 static_size를 복사해오고, unit size를 넘는 부분은 free해버린다.(이전에 alloc크기가 컷다면 unit size이상 한번에 할당했었을 것이다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/* base address is now known, determine group base offsets */</span>
+	<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">group</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">group</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_groups</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">group</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">groups</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">group</span><span style="color:#000;font-weight:bold">].</span><span style="color:#000">base_offset</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">areas</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">group</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">base</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>제일 아래있는 base 주소에서 현재 group unit 시작 주소의 offset을 구한다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">pr_info</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Embedded %zu pages/cpu s%zu r%zu d%zu u%zu</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span>
+		<span style="color:#000">PFN_DOWN</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">size_sum</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">static_size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">reserved_size</span><span style="color:#000;font-weight:bold">,</span>
+		<span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">dyn_size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">unit_size</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">pcpu_setup_first_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ai</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">base</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">out_free</span><span style="color:#000;font-weight:bold">;</span>
+
+<span style="color:#f57900">out_free_areas</span><span style="color:#000;font-weight:bold">:</span>
+	<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">group</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">group</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_groups</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">group</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">areas</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">group</span><span style="color:#000;font-weight:bold">])</span>
+			<span style="color:#000">free_fn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">areas</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">group</span><span style="color:#000;font-weight:bold">],</span>
+				<span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">groups</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">group</span><span style="color:#000;font-weight:bold">].</span><span style="color:#000">nr_units</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">ai</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">unit_size</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#f57900">out_free</span><span style="color:#000;font-weight:bold">:</span>
+	<span style="color:#000">pcpu_free_alloc_info</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ai</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">areas</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">memblock_free_early</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">__pa</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">areas</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">areas_size</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">rc</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#8f5902;font-style:italic">#endif </span><span style="color:#8f5902;font-style:italic">/* BUILD_EMBED_FIRST_CHUNK */</span><span style="color:#8f5902;font-style:italic">
+</span></code></pre></div><p>pcpu_setup_first_chunk 전까지 unit memory를 초기화하고, 사용하지 않은 영역을 전부 free했다.</p>
+
+</div>
+
+
+
+    
+	
+  
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-e1ea2e90214eaa5fa250eb800b927037">5.2 - assembly</h1>
     <div class="lead">arm64 assembly에 대한 정리 내용.</div>
 	
 
@@ -1138,7 +1399,7 @@ bar := &quot;foo&quot;;
 
 <div class="td-content" style="">
     
-	<h1 id="pg-424ed19d8068348c8dac0ead06de8e53">5.1.1 - TCR</h1>
+	<h1 id="pg-424ed19d8068348c8dac0ead06de8e53">5.2.1 - TCR</h1>
     <div class="lead">TCR register에 대한 정리.</div>
 	<h1 id="txsz">TXSZ</h1>
 <p>가상주소를 계산할때 상위 주소의 0, 1의 개수를 미리 설정해놓는것이다.
@@ -1183,7 +1444,7 @@ user 공간 인경우 상위 비트가 0이 채워져있는 개념이므로 T0SZ
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-78425163d548e6aea6d633039c85b0be">5.1.2 - Barrier</h1>
+	<h1 id="pg-78425163d548e6aea6d633039c85b0be">5.2.2 - Barrier</h1>
     <div class="lead">barrier 명령에 대한 정리</div>
 	<h1 id="isbinstruction-synchronization-barrier">ISB(Instruction Synchronization Barrier)</h1>
 <p>파이프라인을 비워줌(15~20 cycle)</p>
@@ -1209,7 +1470,7 @@ load, store의 순서를 유지해줌 + 모든 CPU에서 해당 값의 일관성
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-af1254e5694bf2c4fad7279b1abbf750">5.1.3 - Cache</h1>
+	<h1 id="pg-af1254e5694bf2c4fad7279b1abbf750">5.2.3 - Cache</h1>
     <div class="lead">cache 명령에 대한 정리</div>
 	
 
@@ -1442,7 +1703,7 @@ PoC를 수행할 Last Cache에 대한 Level을 의미한다.</p>
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-e3da72b6e3a0be2aa93bb22e78616823">5.1.4 - macro</h1>
+	<h1 id="pg-e3da72b6e3a0be2aa93bb22e78616823">5.2.4 - macro</h1>
     <div class="lead">macro 에 대한 정리</div>
 	
 
@@ -1474,7 +1735,7 @@ PoC를 수행할 Last Cache에 대한 Level을 의미한다.</p>
 
 <div class="td-content" style="">
     
-	<h1 id="pg-9b3ebad3aa83ae83872e3dcbd2de8116">5.1.4.1 - ifb</h1>
+	<h1 id="pg-9b3ebad3aa83ae83872e3dcbd2de8116">5.2.4.1 - ifb</h1>
     <div class="lead">.ifb = if blank라는 뜻.</div>
 	<p><a href="https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/useful-assembler-directives-and-macros-for-the-gnu-assembler">ifb 참고</a></p>
 <hr>
@@ -1509,7 +1770,7 @@ PoC를 수행할 Last Cache에 대한 Level을 의미한다.</p>
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-93ca5875c81d6faf8c005cd487b83681">5.1.5 - Device memory</h1>
+	<h1 id="pg-93ca5875c81d6faf8c005cd487b83681">5.2.5 - Device memory</h1>
     <div class="lead">arm에서의 device memory에 대한 정리</div>
 	<h1 id="device-memory">Device Memory</h1>
 <p>Normal Memory는 Cache를 사용할수있음.
