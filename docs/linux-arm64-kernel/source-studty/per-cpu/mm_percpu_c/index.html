@@ -4,9 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.68.3" />
-<link rel="canonical" type="text/html" href="/docs/linux-arm64-kernel/">
-<link rel="alternate" type="application/rss&#43;xml" href="/docs/linux-arm64-kernel/index.xml">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -20,20 +18,28 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Linux ARM64 kernel | Goldydocs</title>
-<meta name="description" content="iamroot 18차 Linux ARM64 kernel을 예습한 내용들에 대한 정리.
+<title>mm_percpu_c | Goldydocs</title>
+<meta name="description" content="mm/percpu.c
 ">
-<meta property="og:title" content="Linux ARM64 kernel" />
-<meta property="og:description" content="iamroot 18차 Linux ARM64 kernel을 예습한 내용들에 대한 정리.
+<meta property="og:title" content="mm_percpu_c" />
+<meta property="og:description" content="mm/percpu.c
 " />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/docs/linux-arm64-kernel/" />
-<meta property="og:updated_time" content="2022-01-14T00:00:00+00:00" /><meta property="og:site_name" content="Goldydocs" />
-<meta itemprop="name" content="Linux ARM64 kernel">
-<meta itemprop="description" content="iamroot 18차 Linux ARM64 kernel을 예습한 내용들에 대한 정리.
-"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Linux ARM64 kernel"/>
-<meta name="twitter:description" content="iamroot 18차 Linux ARM64 kernel을 예습한 내용들에 대한 정리.
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/docs/linux-arm64-kernel/source-studty/per-cpu/mm_percpu_c/" />
+<meta property="article:published_time" content="2022-01-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-14T00:00:00+00:00" /><meta property="og:site_name" content="Goldydocs" />
+<meta itemprop="name" content="mm_percpu_c">
+<meta itemprop="description" content="mm/percpu.c
+">
+<meta itemprop="datePublished" content="2022-01-14T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-01-14T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2012">
+
+
+
+<meta itemprop="keywords" content="per cpu,source study," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="mm_percpu_c"/>
+<meta name="twitter:description" content="mm/percpu.c
 "/>
 
 
@@ -59,7 +65,7 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -130,628 +136,293 @@ if (!doNotTrack) {
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
-          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <input type="search" class="form-control td-search-input" placeholder="&#xf002; 사이트에서 검색…" aria-label="사이트에서 검색…" autocomplete="off">
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docs-li">
+  <a href="/docs/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Documentation</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsoverview-li">
+  <a href="/docs/overview/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsoverview"><span class="">Overview</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsgetting-started-li">
+  <a href="/docs/getting-started/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsgetting-started"><span class="">Getting Started</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsgetting-startedexample-page-li">
+  <a href="/docs/getting-started/example-page/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsgetting-startedexample-page"><span class="">Example Page</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsexamples-li">
+  <a href="/docs/examples/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsexamples"><span class="">Examples</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconcepts-li">
+  <a href="/docs/concepts/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsconcepts"><span class="">Concepts</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docslinux-arm64-kernel-li">
+  <a href="/docs/linux-arm64-kernel/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docslinux-arm64-kernel"><span class="">Linux ARM64 kernel</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docslinux-arm64-kernelsource-studty-li">
+  <a href="/docs/linux-arm64-kernel/source-studty/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docslinux-arm64-kernelsource-studty"><span class="">source study</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docslinux-arm64-kernelsource-studtyper-cpu-li">
+  <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docslinux-arm64-kernelsource-studtyper-cpu"><span class="">per cpu</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelsource-studtyper-cpuscan_hint-li">
+  <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/scan_hint/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelsource-studtyper-cpuscan_hint"><span class="">scan_hint</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelsource-studtyper-cpumm_percpu_c-li">
+  <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/mm_percpu_c/" title="mm_percpu_c" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelsource-studtyper-cpumm_percpu_c"><span class="td-sidebar-nav-active-item">mm/percpu.c</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docslinux-arm64-kernelassembly-li">
+  <a href="/docs/linux-arm64-kernel/assembly/" title="assembly" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docslinux-arm64-kernelassembly"><span class="">arm64 assembly</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelassemblytcr-li">
+  <a href="/docs/linux-arm64-kernel/assembly/tcr/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelassemblytcr"><span class="">TCR</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelassemblymemorybarrier-li">
+  <a href="/docs/linux-arm64-kernel/assembly/memory/barrier/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelassemblymemorybarrier"><span class="">Barrier</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelassemblymemorycache-li">
+  <a href="/docs/linux-arm64-kernel/assembly/memory/cache/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelassemblymemorycache"><span class="">Cache</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docslinux-arm64-kernelassemblysyntax-li">
+  <a href="/docs/linux-arm64-kernel/assembly/syntax/" title="macro" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docslinux-arm64-kernelassemblysyntax"><span class="">arm64 macro</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelassemblysyntaxifb-li">
+  <a href="/docs/linux-arm64-kernel/assembly/syntax/ifb/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelassemblysyntaxifb"><span class="">ifb</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelassemblymemorydevice-memory-li">
+  <a href="/docs/linux-arm64-kernel/assembly/memory/device-memory/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelassemblymemorydevice-memory"><span class="">Device memory</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsmake-site-li">
+  <a href="/docs/make-site/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsmake-site"><span class="">Make Site</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsmake-sitedocsy-themeeba19c-ebb380eab2bd-li">
+  <a href="/docs/make-site/docsy-theme%EB%A1%9C-%EB%B3%80%EA%B2%BD/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsmake-sitedocsy-themeeba19c-ebb380eab2bd"><span class="">Docsy Theme로 변경</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsmake-sitehugoeba19c-site-eba78ceb93a4eab8b0-li">
+  <a href="/docs/make-site/hugo%EB%A1%9C-site-%EB%A7%8C%EB%93%A4%EA%B8%B0/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsmake-sitehugoeba19c-site-eba78ceb93a4eab8b0"><span class="">Hugo로 site 만들기</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsexample-li">
+  <a href="/docs/example/" title="example" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsexample"><span class="">exampe</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsexampletask-li">
+  <a href="/docs/example/task/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsexampletask"><span class="">Another Task</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsexampleponycopters-li">
+  <a href="/docs/example/ponycopters/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsexampleponycopters"><span class="">Working with Ponycopters</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsexampleponycoptersconfiguring-ponycopters-li">
+  <a href="/docs/example/ponycopters/configuring-ponycopters/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsexampleponycoptersconfiguring-ponycopters"><span class="">Configuring Ponycopters</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsexampleponycopterslaunching-ponycopters-li">
+  <a href="/docs/example/ponycopters/launching-ponycopters/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsexampleponycopterslaunching-ponycopters"><span class="">Launching Ponycopters</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docstutorials-li">
+  <a href="/docs/tutorials/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docstutorials"><span class="">Tutorials</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstutorialsmulti-bear-li">
+  <a href="/docs/tutorials/multi-bear/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstutorialsmulti-bear"><span class="">Multi-Bear Domicile Setup</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstutorialstutorial2-li">
+  <a href="/docs/tutorials/tutorial2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docstutorialstutorial2"><span class="">Another Tutorial</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsreference-li">
+  <a href="/docs/reference/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsreference"><span class="">Reference</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceparameter-reference-li">
+  <a href="/docs/reference/parameter-reference/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsreferenceparameter-reference"><span class="">Parameter Reference</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docscontribution-guidelines-li">
+  <a href="/docs/contribution-guidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docscontribution-guidelines"><span class="">Contribution Guidelines</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsgitssh-key-setup-li">
+  <a href="/docs/git/ssh-key-setup/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsgitssh-key-setup"><span class="">SSH Key Setup</span></a>
+</li>
+  </ul>
+</li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/google/docsy-example/tree/master/content/ko/docs/Linux%20ARM64%20kernel/source%20studty/per%20cpu/mm_percpu_c.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> [i18n] post_view_this</a>
+  <a href="https://github.com/google/docsy-example/edit/master/content/ko/docs/Linux%20ARM64%20kernel/source%20studty/per%20cpu/mm_percpu_c.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> 페이지 편집</a>
+  <a href="https://github.com/google/docsy-example/new/master/content/ko/docs/Linux%20ARM64%20kernel/source%20studty/per%20cpu/mm_percpu_c.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> 하부 페이지 생성</a>
+  <a href="https://github.com/google/docsy-example/issues/new?title=mm_percpu_c" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fab fa-github fa-fw"></i> 문서에 이슈 생성</a>
+  <a href="https://github.com/google/docsy/issues/new" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> 프로젝트에 이슈 생성</a>
+  <a id="print" href="/docs/linux-arm64-kernel/source-studty/per-cpu/_print/"><i class="fa fa-print fa-fw"></i> 전체 섹션 프린트</a>
+
+</div>
+
             
 
 
 
 
+            
+
+	
+		
+			
+		
+		
+
+
+
+  
+  
+    <div class="taxonomy taxonomy-terms-cloud taxo-tags">
+      
+        <h5 class="taxonomy-title">Tag Cloud</h5>
+      
+      <ul class="taxonomy-terms">
+        
+          <li><a class="taxonomy-term" href="/tags/barrier/" data-taxonomy-term="barrier"><span class="taxonomy-label">barrier</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/cache/" data-taxonomy-term="cache"><span class="taxonomy-label">cache</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/device-memory/" data-taxonomy-term="device-memory"><span class="taxonomy-label">device memory</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span><span class="taxonomy-count">4</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/docsy/" data-taxonomy-term="docsy"><span class="taxonomy-label">docsy</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/geekdocs/" data-taxonomy-term="geekdocs"><span class="taxonomy-label">geekdocs</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/hugo/" data-taxonomy-term="hugo"><span class="taxonomy-label">hugo</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/ifb/" data-taxonomy-term="ifb"><span class="taxonomy-label">ifb</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/per-cpu/" data-taxonomy-term="per-cpu"><span class="taxonomy-label">per cpu</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/source-study/" data-taxonomy-term="source-study"><span class="taxonomy-label">source study</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/tcr/" data-taxonomy-term="tcr"><span class="taxonomy-label">tcr</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/test/" data-taxonomy-term="test"><span class="taxonomy-label">test</span><span class="taxonomy-count">4</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/utteranc/" data-taxonomy-term="utteranc"><span class="taxonomy-label">utteranc</span><span class="taxonomy-count">1</span></a></li>
+        
+      </ul>
+    </div>
+  
+
+	
+		
+			
+		
+		
+
+
+
+  
+  
+    <div class="taxonomy taxonomy-terms-cloud taxo-categories">
+      
+        <h5 class="taxonomy-title">Categories</h5>
+      
+      <ul class="taxonomy-terms">
+        
+          <li><a class="taxonomy-term" href="/categories/assembly/" data-taxonomy-term="assembly"><span class="taxonomy-label">assembly</span><span class="taxonomy-count">4</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/categories/assembly-syntax/" data-taxonomy-term="assembly-syntax"><span class="taxonomy-label">assembly syntax</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/categories/c/" data-taxonomy-term="c"><span class="taxonomy-label">c</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/categories/examples/" data-taxonomy-term="examples"><span class="taxonomy-label">Examples</span><span class="taxonomy-count">4</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/categories/html/" data-taxonomy-term="html"><span class="taxonomy-label">html</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/categories/linux-arm64-kernel/" data-taxonomy-term="linux-arm64-kernel"><span class="taxonomy-label">linux arm64 kernel</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/categories/placeholders/" data-taxonomy-term="placeholders"><span class="taxonomy-label">Placeholders</span><span class="taxonomy-count">3</span></a></li>
+        
+      </ul>
+    </div>
+  
+
+	
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/">Documentation</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/docs/linux-arm64-kernel/">Linux ARM64 kernel</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/docs/linux-arm64-kernel/source-studty/">source study</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/">per cpu</a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/mm_percpu_c/">mm/percpu.c</a>
+  </li>
+  </ol>
+</nav>
+            
 <div class="td-content">
-<div class="pageinfo pageinfo-primary d-print-none">
-<p>
-이 섹션의 다중 페이지 출력 화면임.
-<a href="#" onclick="print();return false;">여기를 클릭하여 프린트</a>.
-</p><p>
-<a href="/docs/linux-arm64-kernel/">이 페이지의 일반 화면으로 돌아가기</a>.
-</p>
+	<h1>mm_percpu_c</h1>
+	<div class="lead">mm/percpu.c</div>
+	<header class="article-meta">
+		
+		
+			
+				
+
+
+<div class="taxonomy taxonomy-terms-article taxo-tags">
+  <h5 class="taxonomy-title">Tags:</h5>
+  <ul class="taxonomy-terms">
+    
+      <li><a class="taxonomy-term" href="/tags/per-cpu/" data-taxonomy-term="per-cpu"><span class="taxonomy-label">per cpu</span></a></li>
+    
+      <li><a class="taxonomy-term" href="/tags/source-study/" data-taxonomy-term="source-study"><span class="taxonomy-label">source study</span></a></li>
+    
+  </ul>
 </div>
 
+			
+				
 
 
-<h1 class="title">Linux ARM64 kernel</h1>
-<div class="lead">iamroot 18차 Linux ARM64 kernel을 예습한 내용들에 대한 정리.</div>
-
-
-
-
-    <ul>
+<div class="taxonomy taxonomy-terms-article taxo-categories">
+  <h5 class="taxonomy-title">Categories:</h5>
+  <ul class="taxonomy-terms">
     
-  
-  
-  
-  
-
-  
+      <li><a class="taxonomy-term" href="/categories/c/" data-taxonomy-term="c"><span class="taxonomy-label">c</span></a></li>
     
+      <li><a class="taxonomy-term" href="/categories/linux-arm64-kernel/" data-taxonomy-term="linux-arm64-kernel"><span class="taxonomy-label">linux arm64 kernel</span></a></li>
     
-	
-<li>1: <a href="#pg-7d980a78f253ca4874dd76ecf4c650d1">source study</a></li>
-
-
-    
-    <ul>
-        
-  
-  
-  
-  
-
-  
-    
-    
-	
-<li>1.1: <a href="#pg-add538d6bd1e80e427b73e5db9ebf583">per cpu</a></li>
-
-
-    
-    <ul>
-        
-  
-  
-  
-  
-
-  
-    
-    
-	
-<li>1.1.1: <a href="#pg-ea349711d868e9d1493dd1bcf661a200">scan_hint</a></li>
-
-
-    
-  
-    
-    
-	
-<li>1.1.2: <a href="#pg-4e18266c986768ca76a8ded008df6603">mm_percpu_c</a></li>
-
-
-    
-  
-
-    </ul>
-    
-  
-
-    </ul>
-    
-  
-    
-    
-	
-<li>2: <a href="#pg-e1ea2e90214eaa5fa250eb800b927037">assembly</a></li>
-
-
-    
-    <ul>
-        
-  
-  
-  
-  
-
-  
-    
-    
-	
-<li>2.1: <a href="#pg-424ed19d8068348c8dac0ead06de8e53">TCR</a></li>
-
-
-    
-  
-    
-    
-	
-<li>2.2: <a href="#pg-78425163d548e6aea6d633039c85b0be">Barrier</a></li>
-
-
-    
-  
-    
-    
-	
-<li>2.3: <a href="#pg-af1254e5694bf2c4fad7279b1abbf750">Cache</a></li>
-
-
-    
-  
-    
-    
-	
-<li>2.4: <a href="#pg-e3da72b6e3a0be2aa93bb22e78616823">macro</a></li>
-
-
-    
-    <ul>
-        
-  
-  
-  
-  
-
-  
-    
-    
-	
-<li>2.4.1: <a href="#pg-9b3ebad3aa83ae83872e3dcbd2de8116">ifb</a></li>
-
-
-    
-  
-
-    </ul>
-    
-  
-    
-    
-	
-<li>2.5: <a href="#pg-93ca5875c81d6faf8c005cd487b83681">Device memory</a></li>
-
-
-    
-  
-
-    </ul>
-    
-  
-
-    </ul>
-
-
-<div class="content">
-      
-
-<div class="pageinfo pageinfo-primary">
-<p><a href="https://github.com/iamroot18/5.10">iamroot18 github</a>
-5.10이지만 kernel version은 5.15다.</p>
-
+  </ul>
 </div>
 
-<p>현재까진 study 복습이나 추가 내용은 github에 바로 올리고 있으므로 딱히 여기에 재정리할 필요성까진 느끼지 못해서 예습 내용만을 정리한다.</p>
-
-</div>
-</div>
-
-
-  
-  
-  
-  
-
-  
-  
-
-  
-    
-    
-	
-    
-
-<div class="td-content" style="page-break-before: always">
-    
-	<h1 id="pg-7d980a78f253ca4874dd76ecf4c650d1">1 - source study</h1>
-    <div class="lead">source 분석관련 내용정리</div>
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>:)</p>
-
-</div>
-
-
-</div>
-
-
-
-    
-      
-  
-  
-  
-  
-
-  
-  
-
-  
-    
-    
-	
-    
-
-<div class="td-content" style="">
-    
-	<h1 id="pg-add538d6bd1e80e427b73e5db9ebf583">1.1 - per cpu</h1>
-    <div class="lead">setup_per_cpu_areas</div>
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>setup_per_cpu_areas</p>
-
-</div>
-
-
-</div>
-
-
-
-    
-      
-  
-  
-  
-  
-
-  
-  
-
-  
-    
-    
-	
-    
-
-<div class="td-content" style="">
-    
-	<h1 id="pg-ea349711d868e9d1493dd1bcf661a200">1.1.1 - scan_hint</h1>
-    <div class="lead">scan_hint</div>
-	<h1 id="introudce">Introudce</h1>
-<p><a href="https://lwn.net/Articles/780936/">introudce percpu block scan_hint</a></p>
-<p>Hi everyone,</p>
-<p>It was reported a while [1] that an increase in allocation alignment requirement [2] caused the percpu memory allocator to do significantly more work.</p>
-<p>After spending quite a bit of time diving into it, it seems the crux was the following:</p>
-<ol>
-<li>chunk management by free_bytes caused allocations to scan over chunks that could not fit due to fragmentation.</li>
-<li>per block fragmentation required scanning from an early first_free bit causing allocations to repeat work.</li>
-</ol>
-<p>This series introduces a scan_hint for pcpu_block_md and merges the paths used to manage the hints. The scan_hint represents the largest known free area prior to the contig_hint.
-There are some caveats to this. First, it may not necessarily be the largest area as we do partial updates based on freeing of regions and failed scanning in pcpu_alloc_area().
-Second, if contig_hint == scan_hint, then scan_hint_start &gt; contig_hint_start is possible. This is necessary for scan_hint discovery when refreshing the hint of a block.</p>
-<p>A necessary change is to enforce a block to be the size of a page. This let&rsquo;s the management of nr_empty_pop_pages to be done by breaking and making full contig_hints in the hint update paths. Prior, this was done by piggy backing off of refreshing the chunk contig_hint as it performed a full scan and counting empty full pages.</p>
-<p>The following are the results found using the workload provided in [3].</p>
-<pre><code>    branch        | time
-   ------------------------
-    5.0-rc7       | 69s
-    [2] reverted  | 44s
-    scan_hint     | 39s
-</code></pre>
-<p>The times above represent the approximate average across multiple runs.
-I tested based on a basic 1M 16-byte allocation pattern with no alignment requirement and times did not differ between 5.0-rc7 and scan_hint.</p>
-<p>[1] <a href="https://lore.kernel.org/netdev/CANn89iKb_vW+LA-91RV=zuAqbNycPFUYW54w_S=KZ3HdcWPw6Q@mail.gmail.com/">https://lore.kernel.org/netdev/CANn89iKb_vW+LA-91RV=zuAqbNycPFUYW54w_S=KZ3HdcWPw6Q@mail.gmail.com/</a>
-[2] <a href="https://lore.kernel.org/netdev/20181116154329.247947-1-edumazet@google.com/">https://lore.kernel.org/netdev/20181116154329.247947-1-edumazet@google.com/</a>
-[3] <a href="https://lore.kernel.org/netdev/vbfzhrj9smb.fsf@mellanox.com/">https://lore.kernel.org/netdev/vbfzhrj9smb.fsf@mellanox.com/</a></p>
-<p>This patchset contains the following 12 patches:
-0001-percpu-update-free-path-with-correct-new-free-region.patch
-0002-percpu-do-not-search-past-bitmap-when-allocating-an-.patch
-0003-percpu-introduce-helper-to-determine-if-two-regions-.patch
-0004-percpu-manage-chunks-based-on-contig_bits-instead-of.patch
-0005-percpu-relegate-chunks-unusable-when-failing-small-a.patch
-0006-percpu-set-PCPU_BITMAP_BLOCK_SIZE-to-PAGE_SIZE.patch
-0007-percpu-add-block-level-scan_hint.patch
-0008-percpu-remember-largest-area-skipped-during-allocati.patch
-0009-percpu-use-block-scan_hint-to-only-scan-forward.patch
-0010-percpu-make-pcpu_block_md-generic.patch
-0011-percpu-convert-chunk-hints-to-be-based-on-pcpu_block.patch
-0012-percpu-use-chunk-scan_hint-to-skip-some-scanning.patch</p>
-<p>0001 fixes an issue where the chunk contig_hint was being updated improperly with the new region&rsquo;s starting offset and possibly differing contig_hint.
-0002 fixes possibly scanning pass the end of the bitmap.
-0003 introduces a helper to do region overlap comparison.
-0004 switches to chunk management by contig_hint rather than free_bytes.
-0005 moves chunks that fail to allocate to the empty block list to prevent excess scanning with of chunks with small contig_hints and poor alignment.
-0006 introduces the constraint PCPU_BITMAP_BLOCK_SIZE == PAGE_SIZE and modifies nr_empty_pop_pages management to be a part of the hint updates.
-0007-0009 introduces percpu block scan_hint. 0010 makes pcpu_block_md generic so chunk hints can be managed as a pcpu_block_md responsible for more bits. 0011-0012 add chunk scan_hints.</p>
-<p>This patchset is on top of percpu#master a3b22b9f11d9.</p>
-<p>diffstats below:</p>
-<p>Dennis Zhou (12):
-percpu: update free path with correct new free region.
-percpu: do not search past bitmap when allocating an area.
-percpu: introduce helper to determine if two regions overlap.
-percpu: manage chunks based on contig_bits instead of free_bytes.
-percpu: relegate chunks unusable when failing small allocations.
-percpu: set PCPU_BITMAP_BLOCK_SIZE to PAGE_SIZE.
-percpu: add block level scan_hint.
-percpu: remember largest area skipped during allocation.
-percpu: use block scan_hint to only scan forward.
-percpu: make pcpu_block_md generic.
-percpu: convert chunk hints to be based on pcpu_block_md.
-percpu: use chunk scan_hint to skip some scanning.</p>
-<hr>
-<h1 id="soruce">soruce</h1>
-<p>scan_hint를 사용하는 함수를 전부 들여다본다.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * pcpu_next_hint - determine which hint to use
-</span><span style="color:#8f5902;font-style:italic"> * @block: block of interest
-</span><span style="color:#8f5902;font-style:italic"> * @alloc_bits: size of allocation
-</span><span style="color:#8f5902;font-style:italic"> *
-</span><span style="color:#8f5902;font-style:italic"> * This determines if we should scan based on the scan_hint or first_free.
-</span><span style="color:#8f5902;font-style:italic"> * In general, we want to scan from first_free to fulfill allocations by
-</span><span style="color:#8f5902;font-style:italic"> * first fit.  However, if we know a scan_hint at position scan_hint_start
-</span><span style="color:#8f5902;font-style:italic"> * cannot fulfill an allocation, we can begin scanning from there knowing
-</span><span style="color:#8f5902;font-style:italic"> * the contig_hint will be our fallback.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">pcpu_next_hint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_block_md</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">block</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">)</span>
-<span style="color:#000;font-weight:bold">{</span>
-	<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic">	 * The three conditions below determine if we can skip past the
-</span><span style="color:#8f5902;font-style:italic">	 * scan_hint.  First, does the scan hint exist.  Second, is the
-</span><span style="color:#8f5902;font-style:italic">	 * contig_hint after the scan_hint (possibly not true iff
-</span><span style="color:#8f5902;font-style:italic">	 * contig_hint == scan_hint).  Third, is the allocation request
-</span><span style="color:#8f5902;font-style:italic">	 * larger than the scan_hint.
-</span><span style="color:#8f5902;font-style:italic">	 */</span>
-	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
-	    <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
-	    <span style="color:#000">alloc_bits</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span><span style="color:#000;font-weight:bold">)</span>
-		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span><span style="color:#000;font-weight:bold">;</span>
-
-	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">first_free</span><span style="color:#000;font-weight:bold">;</span>
-<span style="color:#000;font-weight:bold">}</span>
-
-</code></pre></div><p><a href="https://jhnyang.tistory.com/284">first fit이란</a></p>
-<p>scan_hint를 기준으로 scan할지, first_free기준으로 scan할지 선택한다. 일반적으로 first_free를 first fit으로 할당을 수행한다. 하지만 scan_hint에서 못하면 conting_hint에서 한다(??)</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * pcpu_update_empty_pages - update empty page counters
-</span><span style="color:#8f5902;font-style:italic"> * @chunk: chunk of interest
-</span><span style="color:#8f5902;font-style:italic"> * @nr: nr of empty pages
-</span><span style="color:#8f5902;font-style:italic"> *
-</span><span style="color:#8f5902;font-style:italic"> * This is used to keep track of the empty pages now based on the premise
-</span><span style="color:#8f5902;font-style:italic"> * a md_block covers a page.  The hint update functions recognize if a block
-</span><span style="color:#8f5902;font-style:italic"> * is made full or broken to calculate deltas for keeping track of free pages.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">inline</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_update_empty_pages</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">nr</span><span style="color:#000;font-weight:bold">)</span>
-<span style="color:#000;font-weight:bold">{</span>
-	<span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_empty_pop_pages</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#000">nr</span><span style="color:#000;font-weight:bold">;</span>
-	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#000">pcpu_reserved_chunk</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">isolated</span><span style="color:#000;font-weight:bold">)</span>
-		<span style="color:#000">pcpu_nr_empty_pop_pages</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#000">nr</span><span style="color:#000;font-weight:bold">;</span>
-<span style="color:#000;font-weight:bold">}</span>
-
-<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * pcpu_region_overlap - determines if two regions overlap
-</span><span style="color:#8f5902;font-style:italic"> * @a: start of first region, inclusive
-</span><span style="color:#8f5902;font-style:italic"> * @b: end of first region, exclusive
-</span><span style="color:#8f5902;font-style:italic"> * @x: start of second region, inclusive
-</span><span style="color:#8f5902;font-style:italic"> * @y: end of second region, exclusive
-</span><span style="color:#8f5902;font-style:italic"> *
-</span><span style="color:#8f5902;font-style:italic"> * This is used to determine if the hint region [a, b) overlaps with the
-</span><span style="color:#8f5902;font-style:italic"> * allocated region [x, y).
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * IAMROOT, 2022.01.15:
-</span><span style="color:#8f5902;font-style:italic"> * - (a, b) 와 (x, y)가 겹치는지 확인한다.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">inline</span> <span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">pcpu_region_overlap</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">a</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">b</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">x</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">y</span><span style="color:#000;font-weight:bold">)</span>
-<span style="color:#000;font-weight:bold">{</span>
-	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">a</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">y</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">x</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">b</span><span style="color:#000;font-weight:bold">);</span>
-<span style="color:#000;font-weight:bold">}</span>
-
-<span style="color:#8f5902;font-style:italic">/**
-</span><span style="color:#8f5902;font-style:italic"> * pcpu_block_update - updates a block given a free area
-</span><span style="color:#8f5902;font-style:italic"> * @block: block of interest
-</span><span style="color:#8f5902;font-style:italic"> * @start: start offset in block
-</span><span style="color:#8f5902;font-style:italic"> * @end: end offset in block
-</span><span style="color:#8f5902;font-style:italic"> *
-</span><span style="color:#8f5902;font-style:italic"> * Updates a block given a known free area.  The region [start, end) is
-</span><span style="color:#8f5902;font-style:italic"> * expected to be the entirety of the free area within a block.  Chooses
-</span><span style="color:#8f5902;font-style:italic"> * the best starting offset if the contig hints are equal.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_block_update</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_block_md</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">block</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">)</span>
-<span style="color:#000;font-weight:bold">{</span>
-<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * IAMROOT, 2022.01.15:
-</span><span style="color:#8f5902;font-style:italic"> * - start ~ end전까지 0인 bit가 되며, contig는 즉 연속적인 free size를 의미한다.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">contig</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">;</span>
-
-	<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">first_free</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">min</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">first_free</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">);</span>
-<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * IAMROOT, 2022.01.15:
-</span><span style="color:#8f5902;font-style:italic"> * - start가 0이면 처음부터 free임으로 left_free가 contig가 된다.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>
-		<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">left_free</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">contig</span><span style="color:#000;font-weight:bold">;</span>
-<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * IAMROOT, 2022.01.15:
-</span><span style="color:#8f5902;font-style:italic"> * - 마지막까지 contig면 right부터 contig이므로 right_free를 갱신한다.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_bits</span><span style="color:#000;font-weight:bold">)</span>
-		<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">right_free</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">contig</span><span style="color:#000;font-weight:bold">;</span>
-
-<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * IAMROOT, 2022.01.15:
-</span><span style="color:#8f5902;font-style:italic"> * - size가 큰것이 우선순위가 높다.
-</span><span style="color:#8f5902;font-style:italic"> * - 아에 0번째에 위치하거나 우측에 위치하는게 우선순위가 높다.
-</span><span style="color:#8f5902;font-style:italic"> * - contig가 기존 config_hint보다 클경우
-</span><span style="color:#8f5902;font-style:italic"> *   scan_hint &lt;- contig_hint &lt;- contig 로 밀어내기를 한다. 예외상황일 경우엔
-</span><span style="color:#8f5902;font-style:italic"> *   scan_hint를 초기화 시켜버린다.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">contig</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-		<span style="color:#8f5902;font-style:italic">/* promote the old contig_hint to be the new scan_hint */</span>
-		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-				<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span> <span style="color:#ce5c00;font-weight:bold">=</span>
-					<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span><span style="color:#000;font-weight:bold">;</span>
-				<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span><span style="color:#000;font-weight:bold">;</span>
-			<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-				<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic">				 * The old contig_hint == scan_hint.  But, the
-</span><span style="color:#8f5902;font-style:italic">				 * new contig is larger so hold the invariant
-</span><span style="color:#8f5902;font-style:italic">				 * scan_hint_start &lt; contig_hint_start.
-</span><span style="color:#8f5902;font-style:italic">				 */</span>
-				<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
-			<span style="color:#000;font-weight:bold">}</span>
-		<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">{</span>
-			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000;font-weight:bold">}</span>
-		<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">contig</span><span style="color:#000;font-weight:bold">;</span>
-<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * IAMROOT, 2022.01.15:
-</span><span style="color:#8f5902;font-style:italic"> * - size가 동일한 경우, 위치가 아에 처음이거나 기존 contig_hint_start보다
-</span><span style="color:#8f5902;font-style:italic"> *   우측에 있으면 contig_hint_start를 start로 갱신한다.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-	<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">contig</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-
-		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
-		    <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">||</span>
-		     <span style="color:#000">__ffs</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">start</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">__ffs</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span><span style="color:#000;font-weight:bold">)))</span> <span style="color:#000;font-weight:bold">{</span>
-			<span style="color:#8f5902;font-style:italic">/* start has a better alignment so use it */</span>
-			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">;</span>
-			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
-			    <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span><span style="color:#000;font-weight:bold">)</span>
-				<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span> <span style="color:#ce5c00;font-weight:bold">||</span>
-			   <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-			<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic">			 * Knowing contig == contig_hint, update the scan_hint
-</span><span style="color:#8f5902;font-style:italic">			 * if it is farther than or larger than the current
-</span><span style="color:#8f5902;font-style:italic">			 * scan_hint.
-</span><span style="color:#8f5902;font-style:italic">			 */</span>
-			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">;</span>
-			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">contig</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000;font-weight:bold">}</span>
-<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * IAMROOT, 2022.01.15:
-</span><span style="color:#8f5902;font-style:italic"> * - contig_hint보다 현재 contig가 작은 경우.
-</span><span style="color:#8f5902;font-style:italic"> *   scan_hint와 비교하여 더 유리한경우 scan_hint를 contig로 대체한다.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-	<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">{</span>
-		<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic">		 * The region is smaller than the contig_hint.  So only update
-</span><span style="color:#8f5902;font-style:italic">		 * the scan_hint if it is larger than or equal and farther than
-</span><span style="color:#8f5902;font-style:italic">		 * the current scan_hint.
-</span><span style="color:#8f5902;font-style:italic">		 */</span>
-		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">((</span><span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
-		     <span style="color:#000;font-weight:bold">(</span><span style="color:#000">contig</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">||</span>
-		      <span style="color:#000;font-weight:bold">(</span><span style="color:#000">contig</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
-		       <span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span><span style="color:#000;font-weight:bold">))))</span> <span style="color:#000;font-weight:bold">{</span>
-			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">;</span>
-			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">contig</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000;font-weight:bold">}</span>
-	<span style="color:#000;font-weight:bold">}</span>
-<span style="color:#000;font-weight:bold">}</span>
-
-</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
-</span><span style="color:#8f5902;font-style:italic"> * pcpu_chunk_refresh_hint - updates metadata about a chunk
-</span><span style="color:#8f5902;font-style:italic"> * @chunk: chunk of interest
-</span><span style="color:#8f5902;font-style:italic"> * @full_scan: if we should scan from the beginning
-</span><span style="color:#8f5902;font-style:italic"> *
-</span><span style="color:#8f5902;font-style:italic"> * Iterates over the metadata blocks to find the largest contig area.
-</span><span style="color:#8f5902;font-style:italic"> * A full scan can be avoided on the allocation path as this is triggered
-</span><span style="color:#8f5902;font-style:italic"> * if we broke the contig_hint.  In doing so, the scan_hint will be before
-</span><span style="color:#8f5902;font-style:italic"> * the contig_hint or after if the scan_hint == contig_hint.  This cannot
-</span><span style="color:#8f5902;font-style:italic"> * be prevented on freeing as we want to find the largest area possibly
-</span><span style="color:#8f5902;font-style:italic"> * spanning blocks.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_chunk_refresh_hint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">full_scan</span><span style="color:#000;font-weight:bold">)</span>
-<span style="color:#000;font-weight:bold">{</span>
-	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_block_md</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk_md</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">chunk_md</span><span style="color:#000;font-weight:bold">;</span>
-	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">;</span>
-
-	<span style="color:#8f5902;font-style:italic">/* promote scan_hint to contig_hint */</span>
-	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">full_scan</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-		<span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint_start</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
-	<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">{</span>
-		<span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">first_free</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
-	<span style="color:#000;font-weight:bold">}</span>
-
-	<span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
-	<span style="color:#000">pcpu_for_each_md_free_region</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">)</span>
-		<span style="color:#000">pcpu_block_update</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk_md</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">);</span>
-<span style="color:#000;font-weight:bold">}</span>
-
-</code></pre></div><p>metadata block위에서 iteration하여 가장 큰 contig 영역을 찾는다.
-full_scan 이란게 마치 contig까지 새로 찾는것으로 보이며, full_scan이 아니면 scan_hint를 초기화시킨다.
-bitt_off는 free라고 알고있는 지점의 마지막이다.
-full_scan이 아니면서 scan_hint가 있는 경우 : bit_off는 scan_hint 다음부터. contig_hint를 scan_hint로 update하고 scan_hint는 초기화.
-그 나머지의 경우(full_scan이거나 scan_hint가 없는경우) : bit_off 는 무조건 first_free부터, contig_hint는 초기화</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic"> * Metadata free area iterators.  These perform aggregation of free areas
-</span><span style="color:#8f5902;font-style:italic"> * based on the metadata blocks and return the offset @bit_off and size in
-</span><span style="color:#8f5902;font-style:italic"> * bits of the free area @bits.  pcpu_for_each_fit_region only returns when
-</span><span style="color:#8f5902;font-style:italic"> * a fit is found for the allocation request.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-<span style="color:#8f5902;font-style:italic">#define pcpu_for_each_md_free_region(chunk, bit_off, bits)		\
-</span><span style="color:#8f5902;font-style:italic">	for (pcpu_next_md_free_region((chunk), &amp;(bit_off), &amp;(bits));	\
-</span><span style="color:#8f5902;font-style:italic">	     (bit_off) &lt; pcpu_chunk_map_bits((chunk));			\
-</span><span style="color:#8f5902;font-style:italic">	     (bit_off) += (bits) + 1,					\
-</span><span style="color:#8f5902;font-style:italic">	     pcpu_next_md_free_region((chunk), &amp;(bit_off), &amp;(bits)))
-</span><span style="color:#8f5902;font-style:italic"></span>
-</code></pre></div><p>(번역)메타데이터 사용 가능 영역 반복자. 이 명령은 메타데이터 블록을 기반으로 사용 가능한 영역을 집계하고 오프셋 @bit_off 및 사용 가능한 영역 @bit의 비트 단위로 크기를 반환합니다. pcpu_for_etach_fit_region은 할당 요청에 대한 적합치가 발견된 경우에만 반환합니다.
-pcpu_next_md_free_region을통해서 free의 start 지점(bitt_off)과 size(bits)가 한덩이씩 튀어나온다.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
-</span><span style="color:#8f5902;font-style:italic"> * pcpu_next_md_free_region - finds the next hint free area
-</span><span style="color:#8f5902;font-style:italic"> * @chunk: chunk of interest
-</span><span style="color:#8f5902;font-style:italic"> * @bit_off: chunk offset
-</span><span style="color:#8f5902;font-style:italic"> * @bits: size of free area
-</span><span style="color:#8f5902;font-style:italic"> *
-</span><span style="color:#8f5902;font-style:italic"> * Helper function for pcpu_for_each_md_free_region.  It checks
-</span><span style="color:#8f5902;font-style:italic"> * block-&gt;contig_hint and performs aggregation across blocks to find the
-</span><span style="color:#8f5902;font-style:italic"> * next hint.  It modifies bit_off and bits in-place to be consumed in the
-</span><span style="color:#8f5902;font-style:italic"> * loop.
-</span><span style="color:#8f5902;font-style:italic"> */</span>
-<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_next_md_free_region</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span>
-				     <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bits</span><span style="color:#000;font-weight:bold">)</span>
-<span style="color:#000;font-weight:bold">{</span>
-	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_off_to_block_index</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">);</span>
-	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">block_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_off_to_block_off</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">);</span>
-	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_block_md</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">block</span><span style="color:#000;font-weight:bold">;</span>
-
-	<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
-	<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">block</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">md_blocks</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">i</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">pcpu_chunk_nr_blocks</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">);</span>
-	     <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">i</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-		<span style="color:#8f5902;font-style:italic">/* handles contig area across blocks */</span>
-		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bits</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-			<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">left_free</span><span style="color:#000;font-weight:bold">;</span>
-			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">left_free</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">)</span>
-				<span style="color:#204a87;font-weight:bold">continue</span><span style="color:#000;font-weight:bold">;</span>
-			<span style="color:#204a87;font-weight:bold">return</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000;font-weight:bold">}</span>
-
-		<span style="color:#8f5902;font-style:italic">/*
-</span><span style="color:#8f5902;font-style:italic">		 * This checks three things.  First is there a contig_hint to
-</span><span style="color:#8f5902;font-style:italic">		 * check.  Second, have we checked this hint before by
-</span><span style="color:#8f5902;font-style:italic">		 * comparing the block_off.  Third, is this the same as the
-</span><span style="color:#8f5902;font-style:italic">		 * right contig hint.  In the last case, it spills over into
-</span><span style="color:#8f5902;font-style:italic">		 * the next block and should be handled by the contig area
-</span><span style="color:#8f5902;font-style:italic">		 * across blocks code.
-</span><span style="color:#8f5902;font-style:italic">		 */</span>
-		<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span> <span style="color:#ce5c00;font-weight:bold">&gt;=</span> <span style="color:#000">block_off</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
-		    <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-			<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_block_off_to_off</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">i</span><span style="color:#000;font-weight:bold">,</span>
-					<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span><span style="color:#000;font-weight:bold">);</span>
-			<span style="color:#204a87;font-weight:bold">return</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#000;font-weight:bold">}</span>
-		<span style="color:#8f5902;font-style:italic">/* reset to satisfy the second predicate above */</span>
-		<span style="color:#000">block_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
-
-		<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">right_free</span><span style="color:#000;font-weight:bold">;</span>
-		<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">right_free</span><span style="color:#000;font-weight:bold">;</span>
-	<span style="color:#000;font-weight:bold">}</span>
-<span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><p>bit_off부터 시작해 탐색을 수행한다.
-contig_hint가 존재하고, contig_hint가 오른쪽에 있으며, contig의 end주소가 PCPU_BITMAP_BLOCK_BITS넘지 않으면(이걸 왜하는진 모르겠다.) contig로 return 쳐버린다. 만약 end주소가 PCU_BITMAP_BLOCK_BITS를 넘으면 다음 block까지 contig가 연결되있다는것이고 이건 right_free가 존재할것이므로 아래 right_free처리에 맡긴다는 개념으로 넘어가는것이다.
-for문의 마지막 right를 기준으로 offset을 구한다. 그리고 다음 iter에서 그전에 right가 존재하면 left를 붙이고, 만약 전부 비어있다면 (block-&gt;left_free == PCPU_BITMAP_BLOCK_BITS) 다음 block까지 계속 left를 바라본다.</p>
-
-</div>
-
-
-
-    
-	
-  
-    
-    
-	
-    
-
-<div class="td-content" style="page-break-before: always">
-    
-	<h1 id="pg-4e18266c986768ca76a8ded008df6603">1.1.2 - mm_percpu_c</h1>
-    <div class="lead">mm/percpu.c</div>
+			
+		
+		
+	</header>    
 	<h1 id="pcpu_embed_first_chunk">pcpu_embed_first_chunk</h1>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">__init</span> <span style="color:#000">pcpu_embed_first_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">size_t</span> <span style="color:#000">reserved_size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size_t</span> <span style="color:#000">dyn_size</span><span style="color:#000;font-weight:bold">,</span>
 				  <span style="color:#000">size_t</span> <span style="color:#000">atom_size</span><span style="color:#000;font-weight:bold">,</span>
@@ -1191,466 +862,80 @@ slot 번호란것은 결국 size에 따라 관리할 목록 개념이다.</p>
 
 </code></pre></div><p>chunk metadata를 update한다. scan_hint의 쓰임새가 보인다.</p>
 
+	
+		<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof ga !== 'function') return;
+    const args = {
+      command: 'send',
+      hitType: 'event',
+      category: 'Helpful',
+      action: 'click',
+      label: window.location.pathname,
+      value: value
+    };
+    ga(args.command, args.hitType, args.category, args.action, args.label, args.value);
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(1);
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+
+		<br />
+	
+	
+	
 </div>
 
-
-
-    
-	
-  
-
-    
-	
-  
-
-    
-	
-  
-    
-    
-	
-    
-
-<div class="td-content" style="page-break-before: always">
-    
-	<h1 id="pg-e1ea2e90214eaa5fa250eb800b927037">2 - assembly</h1>
-    <div class="lead">arm64 assembly에 대한 정리 내용.</div>
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>linux arm64 kernel을 공부하면서 봤었던 arm64 assembly에 대해서 정리한다.</p>
-
-</div>
-
-
-</div>
-
-
-
-    
-      
-  
-  
-  
-  
-
-  
-  
-
-  
-    
-    
-	
-    
-
-<div class="td-content" style="">
-    
-	<h1 id="pg-424ed19d8068348c8dac0ead06de8e53">2.1 - TCR</h1>
-    <div class="lead">TCR register에 대한 정리.</div>
-	<h1 id="txsz">TXSZ</h1>
-<p>가상주소를 계산할때 상위 주소의 0, 1의 개수를 미리 설정해놓는것이다.
-Kernel 공간 인경우 상위 비트가 1이 채워져있는 개념이므로 T1SZ을 사용하게 되고
-user 공간 인경우 상위 비트가 0이 채워져있는 개념이므로 T0SZ을 사용하게 된다.</p>
-<hr>
-<h2 id="t0sz">T0SZ</h2>
-<p>User 공간의 가상주소에서 주소 하위에서부터 0이 채워지는 비트 개수</p>
-<ul>
-<li>T0SZ = 16일때</li>
-<li>0x0000_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD</li>
-</ul>
-<hr>
-<h2 id="t1sz">T1SZ</h2>
-<p>Kernel 공간의 가상주소에서 주소 상위에서부터 1이 채워지는 비트 개수</p>
-<ul>
-<li>T1SZ = 16일때</li>
-<li>0xFFFF_ABCD_ABCD_ABCD__ABCD_ABCD_ABCD_ABCD</li>
-</ul>
-<hr>
-<h2 id="특성">특성</h2>
-<ul>
-<li>TXSZ가 커짐에따라 해당 영역의 가상주소공간이 줄어듬을 알 수 있다.</li>
-<li>한번 정해지면 바귀지 않는다.</li>
-</ul>
-<hr>
-<p>TGX(Translation Granule 0, 1)</p>
-<p>Memory Mapping 단위를 Granule Size라고 하는데 user, kernel 각각의 memory mapping size에 대한 내용</p>
-<p>4KB, 16KB, 64KB설정이 가능한듯.</p>
-
-</div>
-
-
-
-    
-	
-  
-    
-    
-	
-    
-
-<div class="td-content" style="page-break-before: always">
-    
-	<h1 id="pg-78425163d548e6aea6d633039c85b0be">2.2 - Barrier</h1>
-    <div class="lead">barrier 명령에 대한 정리</div>
-	<h1 id="isbinstruction-synchronization-barrier">ISB(Instruction Synchronization Barrier)</h1>
-<p>파이프라인을 비워줌(15~20 cycle)</p>
-<h1 id="dmbdata-memory-barrier">DMB(Data Memory Barrier)</h1>
-<p>Ordered Accesses : Any - Any
-load, store의 순서를 유지해줌 + 모든 CPU에서 해당 값의 일관성을 유지 시켜줌.</p>
-<h2 id="dmb-sy">dmb sy</h2>
-<h1 id="dsbdata-synchronization-barrier">DSB(Data Synchronization Barrier)</h1>
-<p>Memory에 관련된 동기화
-해당 instruction을 기준으로 명령의 순서를 변경하지 않는다.</p>
-
-</div>
-
-
-
-    
-	
-  
-    
-    
-	
-    
-
-<div class="td-content" style="page-break-before: always">
-    
-	<h1 id="pg-af1254e5694bf2c4fad7279b1abbf750">2.3 - Cache</h1>
-    <div class="lead">cache 명령에 대한 정리</div>
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>Cache 개요</p>
-
-</div>
-
-<h1 id="cache-policies">Cache Policies</h1>
-<p><a href="http://jake.dothome.co.kr/cache4/">문c블로그 Cache-Coherent</a></p>
-<h2 id="cache-allocation-policies">Cache Allocation Policies</h2>
-<h3 id="wa-rawrite-allocate-read-allocate">WA, RA(Write-Allocate, Read-Allocate)</h3>
-<ul>
-<li>
-<p>Write시 Cache에 해당 메모리가 없을때(Miss발생시)</p>
-<ol>
-<li>Cache에 해당 메모리의 데이터를 할당.</li>
-<li>할당된 캐시에 데이터를 기록한다.</li>
-</ol>
-</li>
-<li>
-<p>Write시 Cache에 해당 메모리가 존재할때</p>
-<ol>
-<li>RAM에 접근하지않고 Cache에만 접근하고 끝날것이다.</li>
-</ol>
-</li>
-</ul>
-<p>cache data는 dirty, memory data는 old가 될것이다.</p>
-<p>Read또한 마찬가지로 read시 cache에 없으면 cache에 할당한다.</p>
-<p>꽤 많은 블로그에서 WA에대 잘못설명한다.</p>
-<p>Cache에 할당하지 않고 바로 Memory에 Write 하기때문에 WT랑 같이 사용하지 않는다는둥, 대부분의 시스템에서는 WT nWA를 사용한다는둥..</p>
-<p>WA는 DRAM의 Data를 old로 만들고 cache write(dirty)를 하는거다.. miss일때 최초 한번만 DRAM에 접근한다는 얘기다.</p>
-<p>Linux만 놓고 봤을때도 WT의 default는 WA이다&hellip;ㅋㅋ linux말고 대부분이 WT nWA를 쓰나?</p>
-<h2 id="cache-write-pollicies">Cache Write Pollicies</h2>
-<h3 id="wbwrite-back">WB(Write-Back)</h3>
-<ul>
-<li>
-<p>Write</p>
-<ul>
-<li>Cache에만 Write. cache가 가득 찻을때만 Memory에 Write</li>
-</ul>
-</li>
-<li>
-<p>Read</p>
-<ul>
-<li>Cache에서만 읽음</li>
-</ul>
-</li>
-</ul>
-<h3 id="wtwrite-through">WT(Write-Through)</h3>
-<ul>
-<li>
-<p>Write</p>
-<ul>
-<li>Cache, Memory 둘다 Write</li>
-</ul>
-</li>
-<li>
-<p>Read</p>
-<ul>
-<li>Cache에서만 읽음</li>
-</ul>
-</li>
-</ul>
-<h2 id="cache-allocation--write-pollicies">Cache Allocation + Write Pollicies</h2>
-<p>Cache Allocation Policies는 Cache Write시 Miss가 됬을때 Cache Allocate를 할건지에 대한 정책이고</p>
-<p>Cache Write Policies는 Write DRAM에도 Write를 하는 정책이다.(Read는 무조건 miss면 DRAM에서 가져오는거니 모든 정책에서 같다)</p>
-<p>즉 둘을 나눠서만 생각하면 된다.</p>
-<p>Write시 DRAM에도 쓰고 싶으면 WT, Cache만 읽을거면 WB
-Write시 Miss가 났을때 Cache에 할당할거면 WA, 아니면 nWA다.</p>
-<h2 id="armv8에서의-cache-policies">ARMv8에서의 Cache Policies</h2>
-<p>Normal Memory에서는 WTWA만을 사용하는데, TTB관련은 WBWA를 쓰는것처럼 보인다.</p>
-<hr>
-<h2 id="shareability">Shareability</h2>
-<p>아키텍처에서 공유라는것은 CPU를 기준으로 의미한다.</p>
-<p>Inner CPU : Linux로 동작하는 모든 시스템
-Outer CPU : Linux를 사용하지 않는 시스템(ex GPU)</p>
-<hr>
-<h1 id="cache-type">Cache Type</h1>
-<p><a href="https://aidanbae.github.io/code/devops/computer/cpucache/">참고사이트</a></p>
-<h2 id="direct-mapped-cache">Direct-mapped cache</h2>
-<p><a href="https://talkingaboutme.tistory.com/entry/Study-Memory-Hierarchy-2-Direct-Mapped-Cache">참고사이트</a></p>
-<p>cache구조를 설명할때 그냥 이렇게 동작한다라고 알려주는게 바로 이 방식.
-tag, index를 모두 사용하여 특정 cache address가 여러개의 dram address를 커버하게 되는 구조이다.</p>
-<h2 id="fully-associative-cache">Fully associative cache</h2>
-<p>그냥 아무데나 넣고, 찾을때는 전부 검색해서 찾는 방식.</p>
-<h2 id="n-way-set-associative-cache">N-way-set-associative cache</h2>
-<p>Block화 하고 그것을 index화 하는 방식으로 fully와 direct방식을 혼합한 거라고 한다.</p>
-<h2 id="armv8에서-의-cache-type">ARMv8에서 의 Cache Type.</h2>
-<ul>
-<li>ARM Ref.11.1.1 Set associative caches and ways 참고</li>
-</ul>
-<p>Cortex에 따라 달라지는거 같은데 L1 Data cache은 4way, L1 Instruction cache는 2 Way,</p>
-<p>L2는 16way, L3은 더 많은 way등을 가질수있다고 한다.</p>
-<p>또한 MMU TLBs의 경우를 제외하곤 Way를 늘리는것에 대해 추천하지 않는다고 한다.</p>
-<p>MMU TLBs와 같이 매우 작은 cache에 대해서는 Way를 늘리는게 도움이 된다고 하며, 8방향이 minimum이라고 하며,
-L2 같이 큰 cache에서만 유용하다는듯 싶다</p>
-<hr>
-<h1 id="cache-terminology">Cache terminology</h1>
-<h2 id="way">Way</h2>
-<p>Cache Type을 set-associative로 사용할때 나오는 용어로, 몇개의 line을 1개의 block. 즉 way로 썻냐는것이다.</p>
-<p>1 way면 direct mapped와 같은거나 다름없고, way가 총 line수와 같으면 fully와 똑같다.</p>
-<h2 id="cache의-용량">Cache의 용량</h2>
-<p>Cache의 용량을 말할때는 Line의 크기만을 두고 말한다.</p>
-<p>Cache data는 크게 Line, tag로 이루어져있는데 흔히 4k cache등을 말할때는 저 cache data의 구조에서 Line + tag등의
-data 전체 크기가 아니라 오로직 Line크기만을 다 합친것을 의미한다.</p>
-<h2 id="stbstore-buffer--write-buffer">St.B(Store buffer) / Write buffer</h2>
-<p>cpu -&gt; store buffer -&gt; cache -&gt; wirte buffer -&gt; memory</p>
-<h2 id="axiadvanced-extensible-interface">AXI(Advanced eXtensible Interface)</h2>
-<p><a href="https://m.blog.naver.com/esoclab/20174360379">참고사이트</a></p>
-<p>cache -&gt; dram 의 사이에서 사용하고 있는 있는 bus.</p>
-<p>AXI를 설명할때 AHB와 비교를 많이하는데, AXI는 채널이라는게 도입됬다고 한다.</p>
-<p>기존 버스라는 개념은 예를들어 A(저속 디바이스), B(고속 디바이스)요청이 있을때</p>
-<p>A주소 전송 -&gt; Adata 받음(B는 기다려야함)</p>
-<p>을 기다려야 됬는데 채널이라는 개념이 도압되면서</p>
-<p>1채널에 A주소 전송, 2채널에 B주소 전송이 가능해 진다는것 같다.</p>
-<p>또한 버스트 전송이 기본개념이라 버스트 전송을 전제로 동작한다고 한다.</p>
-<p>data 전송 단위는 bit이며 8, 16, 32, 64 &hellip; 1024 bit등을 지원하는거 같다.</p>
-<h2 id="scusoope-control-unit">SCU(Soope control unit)</h2>
-<p>어떤 CPU에서 해당 CPU의 L1 Cache miss data를 L2에 요청했을때 해당 data가 다른 CPU cache에 해당 값이 존재하는지, 존재한다면 해당값을 전송하는 역할을 한다.</p>
-<hr>
-<h1 id="cache-전송-예제">Cache 전송 예제</h1>
-<h2 id="cache-data-1-byte-read-시">Cache Data 1 byte read 시</h2>
-<p>다음의 전제를 가진다.</p>
-<ol>
-<li>cache line 크기 : 16bit 크기의 cache line</li>
-<li>AXI 전송단위 : 8bit</li>
-</ol>
-<p>cache line의 최소크기인 16bit인데 1byte만을 가져올순없다. 그래서 cache line의 최소크기인 16bit로 읽는다.
-이때 AXI 전송단위가 8bit이므로 2번을 읽어야되는데, AXI구조상 start address와 length를 주면 해당 값만큼 읽어오는 개념인가보다.
-그래서 그렇게 한번의 주소+크기 요청으로 데이터를 가져온다.</p>
-<h2 id="cpu---메모리의-데이터-전송-단위">cpu &lt;-&gt; 메모리의 데이터 전송 단위</h2>
-<p>cpu -&gt; (가상메모리 cache) -&gt; mmu -&gt; (물리메모리 cache) -&gt; memory</p>
-<p>cpu &lt;-&gt; cache : 1byte or 4byte</p>
-<p>cache &lt;-&gt; cache : cache line단위</p>
-<p>cache memory &lt;-&gt; DRAM : AXI bus 단위</p>
-<h2 id="큰그림">큰그림</h2>
-<p>cpu A &lt;-&gt; st.b &lt;-&gt; L1 cache &lt;-&gt; |   |
-cpu B &lt;-&gt; st.b &lt;-&gt; L1 cache &lt;-&gt; | S |
-cpu C &lt;-&gt; st.b &lt;-&gt; L1 cache &lt;-&gt; | C | &lt;-&gt; L2 cache &lt;-&gt; Memory
-cpu D &lt;-&gt; st.b &lt;-&gt; L1 cache &lt;-&gt; | U |</p>
-<h2 id="heading">&hellip;</h2>
-<h1 id="instruction-cache">Instruction cache.</h1>
-<p>Instruction cache는 dirty bit가 존재하지 않는다.</p>
-<hr>
-<h1 id="tlbtranslation-lookaside-buffer">TLB(Translation Lookaside Buffer)</h1>
-<p>가상주소를 물리주소로 변환하는 속도를 높이기 위해 사용하는 캐시.</p>
-<hr>
-<h1 id="cache-maintance">Cache maintance</h1>
-<p><a href="https://ko.wikipedia.org/wiki/%EC%BA%90%EC%8B%9C_%EC%9D%BC%EA%B4%80%EC%84%B1">참고사이트</a></p>
-<p>CPU간 Cache 일관성을 지켜야하는데, 이 지키는 범위를 정해논게  PoC, PoU라고한다.</p>
-<p>CPU간 각자의 cache가 변했다는걸 확인하는게 스누핑 이라는 구조고, (MOESI라는 프로토콜을 쓴다는듯)</p>
-<p>이걸 통해서 CPU간의 일관성을 확인한다고한다.</p>
-<h2 id="snooping">Snooping</h2>
-<p>주소 버스를 항상 감시하여 캐시 상의 메모리에 대한 접근이 있는지를 감소하는 구조.</p>
-<p>다른 캐시에서 쓰기가 발생하면 캐시 컨트롤러에 의해서 자신의 캐시 위에 있는 복사본을 무효화시킨다.</p>
-<h2 id="pocpoint-of-coherency">Poc(Point of Coherency)</h2>
-<p>DMA, DSP등의 외부 Device와 Coherency를 맞추기 위한 개념으로 DRAM까지 Coherency를 맞추는다는것.</p>
-<h2 id="poupoint-of-unification">PoU(Point of Unification)</h2>
-<p>캐시 일관성을 Data Cache뿐만 아니라 Instruction Cache까지 지킨다는 것.(+Translation Table Walk)</p>
-<h2 id="armv8에서의-poc-pou">ARMv8에서의 Poc, PoU</h2>
-<p>linux에서는 미리 정해진 PoC, PoU에 따라 Cache Clean을 하는 명령어가 정해져있다.</p>
-<p>Instruct Cache같은경우엔 PoU 밖에 존재하지 않는데, Data Cache는 빈번하게 바뀔 여지가 있지만 Instruct Cache를 교체하는 경우가 빈번하지 않고 교체하게 되면 결국 Data Cache까지 바뀌게 되는 개념이므로 PoU만 존재하는것처럼 보인다.</p>
-<h3 id="loclevel-of-coherence">LoC(Level of Coherence)</h3>
-<p>PoC, PoU가 추상적인 개념이라면, 실제 Arch에 명령어를 날려야할때 몇번 Level까지 수행인지를 정해야된다.
-PoC를 수행할 Last Cache에 대한 Level을 의미한다.</p>
-<h3 id="louulevel-of-unification-uniprocessor">LoUU(Level of Unification, Uniprocessor)</h3>
-<p>단일 Process에서 PoU를 수행할 Last Cache에 대한 Level을 의미한다.</p>
-<h3 id="louislevel-of-unification-inner-shareable">LoUIS(Level of Unification, Inner Shareable)</h3>
-<p>공유 자원에 대한것에 대해서의 Last Cache에 대한 Level을 의미한다. SMP 에서만 존재한다.
-단일 Process는 LOUU, SMP는 LoUISf라고만 일단 이해하고 넘어가야겠다.</p>
-
-
-<div class="pageinfo pageinfo-primary">
-<p>data cache 의 invalidate / clean 관련 명령어</p>
-
-</div>
-
-<h1 id="cache-invalidate한다-라는-의미는">cache invalidate한다 라는 의미는?</h1>
-<h1 id="cache-clean한다-라는-의미는">cache clean한다 라는 의미는?</h1>
-<p>dirty bit가 set된 cache를 모두 메모리에 반영한다는것.</p>
-<h1 id="dc-ivac-xt">dc ivac, Xt</h1>
-<p>D-cache invalidate by address to Point of Coherency</p>
-<h1 id="dc-instruction-option에-대한-설명">dc instruction option에 대한 설명</h1>
-<ul>
-<li>
-<p>dc : Data Cache</p>
-</li>
-<li>
-<p>IC : Instruction Cache</p>
-</li>
-<li>
-<p>IS : Inner Shareable</p>
-</li>
-<li>
-<p>ALL : all</p>
-</li>
-<li>
-<p>U : Point of Unification</p>
-</li>
-<li>
-<p>VA : Address to Point of Coherency</p>
-</li>
-<li>
-<p>Z : zero</p>
-</li>
-<li>
-<p>SW : Set/Way</p>
-</li>
-<li>
-<p>I : invalidate</p>
-</li>
-<li>
-<p>C : Clean / Point Coherency</p>
-</li>
-</ul>
-<hr>
-
-</div>
-
-
-
-    
-	
-  
-    
-    
-	
-    
-
-<div class="td-content" style="page-break-before: always">
-    
-	<h1 id="pg-e3da72b6e3a0be2aa93bb22e78616823">2.4 - macro</h1>
-    <div class="lead">macro 에 대한 정리</div>
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>macro</p>
-
-</div>
-
-
-</div>
-
-
-
-    
-      
-  
-  
-  
-  
-
-  
-  
-
-  
-    
-    
-	
-    
-
-<div class="td-content" style="">
-    
-	<h1 id="pg-9b3ebad3aa83ae83872e3dcbd2de8116">2.4.1 - ifb</h1>
-    <div class="lead">.ifb = if blank라는 뜻.</div>
-	<p><a href="https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/useful-assembler-directives-and-macros-for-the-gnu-assembler">ifb 참고</a></p>
-<hr>
-<pre><code class="language-assembly" data-lang="assembly">	.macro	ldr_l, dst, sym, tmp=
-	.ifb	\tmp
-	adrp	\dst, \sym
-	ldr	\dst, [\dst, :lo12:\sym]
-	.else
-	adrp	\tmp, \sym
-	ldr	\dst, [\tmp, :lo12:\sym]
-	.endif
-	.endm
-
-	ldr_l	x4, idmap_ptrs_per_pgd
-</code></pre><h2 id="이런-코드가-왔으면-위-macro에서-ifb-로-된-code가-만들어질것이다">이런 코드가 왔으면 위 macro에서 ifb 로 된 code가 만들어질것이다.</h2>
-
-</div>
-
-
-
-    
-	
-  
-
-    
-	
-  
-    
-    
-	
-    
-
-<div class="td-content" style="page-break-before: always">
-    
-	<h1 id="pg-93ca5875c81d6faf8c005cd487b83681">2.5 - Device memory</h1>
-    <div class="lead">arm에서의 device memory에 대한 정리</div>
-	<h1 id="device-memory">Device Memory</h1>
-<p>Normal Memory는 Cache를 사용할수있음.
-Device memory는 Buffer 개념임.</p>
-<hr>
-<h2 id="gatheringg-or-ng">Gathering(G or nG)</h2>
-<p>모아서 처리해도 되는지 안되는지에 대한 여부. 일반적으로 모아서 처리해도되지만 예를들어 Counter의 경우 이런 처리를 하면 안된다.</p>
-<h2 id="reorderr-or-nr">Reorder(R or nR)</h2>
-<p>순서를 지켜도 되는지 안되는지에 대한 여부.</p>
-<h2 id="early-write-acknowledgemente-or-ne">Early Write Acknowledgement(E or nE)</h2>
-<p>Write Done이 안됬어도 미리 Ack를 보낼지 안보낼지에 대한것.</p>
-<p>메모리 Write는 Error가 안날 확률이 매우 높기떄문에 이렇게 처리한다는듯.</p>
-<hr>
-<h1 id="arm에서-사용하는-device-type">ARM에서 사용하는 Device Type</h1>
-<h2 id="device-ngnrne">Device-nGnRnE.</h2>
-<p>Stronlgy Ordered Memory. 다 안쓴다느듯.</p>
-<h2 id="device-ngnre">Device-nGnRE</h2>
-<p>Early Ack만 쓰겠다는뜻.</p>
-<h2 id="device-gre">Device-GRE</h2>
-<p>모든 버퍼를 쓰겠다는뜻.</p>
-
-</div>
-
-
-
-    
-	
-  
-
-    
-	
-  
-
-
+<script src="https://utteranc.es/client.js"
+        repo="prifri/prifri_site_comments"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
 
           </main>
         </div>

@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Goldydocs – per cpu</title>
-    <link>/docs/linux-arm64-kernel/source-studty/per-cpu/</link>
-    <description>Recent content in per cpu on Goldydocs</description>
+    <title>Goldydocs – source study</title>
+    <link>/tags/source-study/</link>
+    <description>Recent content in source study on Goldydocs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 14 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Jan 2022 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="/docs/linux-arm64-kernel/source-studty/per-cpu/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="/tags/source-study/index.xml" rel="self" type="application/rss+xml" />
     
     
       

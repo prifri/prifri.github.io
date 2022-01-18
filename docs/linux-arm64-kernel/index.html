@@ -21,19 +21,19 @@
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
 <title>Linux ARM64 kernel | Goldydocs</title>
-<meta name="description" content="Linux ARM64 kernel을 Study한 내용들에 대한 정리.
+<meta name="description" content="iamroot 18차 Linux ARM64 kernel을 예습한 내용들에 대한 정리.
 ">
 <meta property="og:title" content="Linux ARM64 kernel" />
-<meta property="og:description" content="Linux ARM64 kernel을 Study한 내용들에 대한 정리.
+<meta property="og:description" content="iamroot 18차 Linux ARM64 kernel을 예습한 내용들에 대한 정리.
 " />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/docs/linux-arm64-kernel/" />
 <meta property="og:updated_time" content="2022-01-14T00:00:00+00:00" /><meta property="og:site_name" content="Goldydocs" />
 <meta itemprop="name" content="Linux ARM64 kernel">
-<meta itemprop="description" content="Linux ARM64 kernel을 Study한 내용들에 대한 정리.
+<meta itemprop="description" content="iamroot 18차 Linux ARM64 kernel을 예습한 내용들에 대한 정리.
 "><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux ARM64 kernel"/>
-<meta name="twitter:description" content="Linux ARM64 kernel을 Study한 내용들에 대한 정리.
+<meta name="twitter:description" content="iamroot 18차 Linux ARM64 kernel을 예습한 내용들에 대한 정리.
 "/>
 
 
@@ -166,8 +166,10 @@ if (!doNotTrack) {
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docslinux-arm64-kernelsource-studtyper-cpu-li">
   <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docslinux-arm64-kernelsource-studtyper-cpu"><span class="">per cpu</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelsource-studtyper-cpupcpu_embed_first_chunk-li">
-  <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/pcpu_embed_first_chunk/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelsource-studtyper-cpupcpu_embed_first_chunk"><span class="">pcpu_embed_first_chunk</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelsource-studtyper-cpuscan_hint-li">
+  <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/scan_hint/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelsource-studtyper-cpuscan_hint"><span class="">scan_hint</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelsource-studtyper-cpumm_percpu_c-li">
+  <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/mm_percpu_c/" title="mm_percpu_c" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelsource-studtyper-cpumm_percpu_c"><span class="">mm/percpu.c</span></a>
 </li>
   </ul>
 </li>
@@ -286,8 +288,6 @@ if (!doNotTrack) {
         
           <li><a class="taxonomy-term" href="/tags/cache/" data-taxonomy-term="cache"><span class="taxonomy-label">cache</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/code-review/" data-taxonomy-term="code-review"><span class="taxonomy-label">code review</span><span class="taxonomy-count">1</span></a></li>
-        
           <li><a class="taxonomy-term" href="/tags/device-memory/" data-taxonomy-term="device-memory"><span class="taxonomy-label">device memory</span><span class="taxonomy-count">1</span></a></li>
         
           <li><a class="taxonomy-term" href="/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span><span class="taxonomy-count">4</span></a></li>
@@ -300,9 +300,11 @@ if (!doNotTrack) {
         
           <li><a class="taxonomy-term" href="/tags/ifb/" data-taxonomy-term="ifb"><span class="taxonomy-label">ifb</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/per-cpu/" data-taxonomy-term="per-cpu"><span class="taxonomy-label">per cpu</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="/tags/per-cpu/" data-taxonomy-term="per-cpu"><span class="taxonomy-label">per cpu</span><span class="taxonomy-count">2</span></a></li>
         
           <li><a class="taxonomy-term" href="/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/source-study/" data-taxonomy-term="source-study"><span class="taxonomy-label">source study</span><span class="taxonomy-count">2</span></a></li>
         
           <li><a class="taxonomy-term" href="/tags/tcr/" data-taxonomy-term="tcr"><span class="taxonomy-label">tcr</span><span class="taxonomy-count">1</span></a></li>
         
@@ -334,13 +336,13 @@ if (!doNotTrack) {
         
           <li><a class="taxonomy-term" href="/categories/assembly-syntax/" data-taxonomy-term="assembly-syntax"><span class="taxonomy-label">assembly syntax</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/categories/c/" data-taxonomy-term="c"><span class="taxonomy-label">c</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="/categories/c/" data-taxonomy-term="c"><span class="taxonomy-label">c</span><span class="taxonomy-count">2</span></a></li>
         
           <li><a class="taxonomy-term" href="/categories/examples/" data-taxonomy-term="examples"><span class="taxonomy-label">Examples</span><span class="taxonomy-count">4</span></a></li>
         
           <li><a class="taxonomy-term" href="/categories/html/" data-taxonomy-term="html"><span class="taxonomy-label">html</span><span class="taxonomy-count">2</span></a></li>
         
-          <li><a class="taxonomy-term" href="/categories/linux-arm64-kernel/" data-taxonomy-term="linux-arm64-kernel"><span class="taxonomy-label">linux arm64 kernel</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="/categories/linux-arm64-kernel/" data-taxonomy-term="linux-arm64-kernel"><span class="taxonomy-label">linux arm64 kernel</span><span class="taxonomy-count">2</span></a></li>
         
           <li><a class="taxonomy-term" href="/categories/placeholders/" data-taxonomy-term="placeholders"><span class="taxonomy-label">Placeholders</span><span class="taxonomy-count">3</span></a></li>
         
@@ -368,7 +370,7 @@ if (!doNotTrack) {
             
 <div class="td-content">
 	<h1>Linux ARM64 kernel</h1>
-  <div class="lead">Linux ARM64 kernel을 Study한 내용들에 대한 정리.</div>
+  <div class="lead">iamroot 18차 Linux ARM64 kernel을 예습한 내용들에 대한 정리.</div>
 	<header class="article-meta">
 		
 		
@@ -387,10 +389,12 @@ if (!doNotTrack) {
 	
 
 <div class="pageinfo pageinfo-primary">
-<p>:)</p>
+<p><a href="https://github.com/iamroot18/5.10">iamroot18 github</a>
+5.10이지만 kernel version은 5.15다.</p>
 
 </div>
 
+<p>현재까진 study 복습이나 추가 내용은 github에 바로 올리고 있으므로 딱히 여기에 재정리할 필요성까진 느끼지 못해서 예습 내용만을 정리한다.</p>
 
         <div class="section-index">
     

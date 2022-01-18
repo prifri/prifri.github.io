@@ -52,7 +52,7 @@ git push --force origin master
 &lt;p&gt;geedoc에서 했던 대로 추가한다. docsy example의 .gitignore에 public이 있으므로 이를 지우고 submodule을 추가하면된다.&lt;/p&gt;
 &lt;h1 id=&#34;docsy-build&#34;&gt;docsy build&lt;/h1&gt;
 &lt;p&gt;hugo server -D 로 테스트를 한번 해보고 잘되면 hugo -t docsy로 build를 하고 push를 해본다.&lt;/p&gt;
-&lt;h2 id=&#34;ss-error-처리&#34;&gt;ss error 처리&lt;/h2&gt;
+&lt;h2 id=&#34;error1&#34;&gt;error1&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;import fs from &#39;fs-extra&#39;
        ^^
 
@@ -84,7 +84,16 @@ SyntaxError: Unexpected identifier
 &lt;pre&gt;&lt;code&gt;$ node -v
 v10.19.0
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;대충 검색해보니 v12도 있는거 같아서 v12로 다시 깔아서 해봤다.&lt;a href=&#34;https://stackoverflow.com/questions/60679889/update-node-to-v12-on-ubuntu&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;다시 build 했더니 잘된다.&lt;/p&gt;
+&lt;h2 id=&#34;error2&#34;&gt;error2&lt;/h2&gt;
+&lt;p&gt;다음과 같은 error가 발생한다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Error: Error building site: POSTCSS: failed to transform &amp;quot;scss/main.css&amp;quot; (text/css): resource &amp;quot;scss/scss/main.scss_4853eb546e7a6c0898ed71feae7357c0&amp;quot; not found in file cache
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/google/docsy/issues/235&#34;&gt;참고사이트&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;이것저것 설치한다&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo npm install -g postcss-cli
+sudo npm install autoprefixer
+sudo npm audit fix
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;다시 build 했더니 잘된다.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ hugo -t docsy
 
                    | EN | FA | NO  

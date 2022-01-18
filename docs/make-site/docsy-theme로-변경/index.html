@@ -33,7 +33,7 @@
 ">
 <meta itemprop="datePublished" content="2022-01-14T12:46:18&#43;09:00" />
 <meta itemprop="dateModified" content="2022-01-14T12:46:18&#43;09:00" />
-<meta itemprop="wordCount" content="376">
+<meta itemprop="wordCount" content="412">
 
 
 
@@ -172,8 +172,10 @@ if (!doNotTrack) {
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docslinux-arm64-kernelsource-studtyper-cpu-li">
   <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docslinux-arm64-kernelsource-studtyper-cpu"><span class="">per cpu</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelsource-studtyper-cpupcpu_embed_first_chunk-li">
-  <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/pcpu_embed_first_chunk/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelsource-studtyper-cpupcpu_embed_first_chunk"><span class="">pcpu_embed_first_chunk</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelsource-studtyper-cpuscan_hint-li">
+  <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/scan_hint/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelsource-studtyper-cpuscan_hint"><span class="">scan_hint</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docslinux-arm64-kernelsource-studtyper-cpumm_percpu_c-li">
+  <a href="/docs/linux-arm64-kernel/source-studty/per-cpu/mm_percpu_c/" title="mm_percpu_c" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docslinux-arm64-kernelsource-studtyper-cpumm_percpu_c"><span class="">mm/percpu.c</span></a>
 </li>
   </ul>
 </li>
@@ -276,7 +278,8 @@ if (!doNotTrack) {
   </ul>
 
   <ul>
-    <li><a href="#ss-error-처리">ss error 처리</a></li>
+    <li><a href="#error1">error1</a></li>
+    <li><a href="#error2">error2</a></li>
   </ul>
 
   <ul>
@@ -308,8 +311,6 @@ if (!doNotTrack) {
         
           <li><a class="taxonomy-term" href="/tags/cache/" data-taxonomy-term="cache"><span class="taxonomy-label">cache</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/code-review/" data-taxonomy-term="code-review"><span class="taxonomy-label">code review</span><span class="taxonomy-count">1</span></a></li>
-        
           <li><a class="taxonomy-term" href="/tags/device-memory/" data-taxonomy-term="device-memory"><span class="taxonomy-label">device memory</span><span class="taxonomy-count">1</span></a></li>
         
           <li><a class="taxonomy-term" href="/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span><span class="taxonomy-count">4</span></a></li>
@@ -322,9 +323,11 @@ if (!doNotTrack) {
         
           <li><a class="taxonomy-term" href="/tags/ifb/" data-taxonomy-term="ifb"><span class="taxonomy-label">ifb</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/per-cpu/" data-taxonomy-term="per-cpu"><span class="taxonomy-label">per cpu</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="/tags/per-cpu/" data-taxonomy-term="per-cpu"><span class="taxonomy-label">per cpu</span><span class="taxonomy-count">2</span></a></li>
         
           <li><a class="taxonomy-term" href="/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/source-study/" data-taxonomy-term="source-study"><span class="taxonomy-label">source study</span><span class="taxonomy-count">2</span></a></li>
         
           <li><a class="taxonomy-term" href="/tags/tcr/" data-taxonomy-term="tcr"><span class="taxonomy-label">tcr</span><span class="taxonomy-count">1</span></a></li>
         
@@ -356,13 +359,13 @@ if (!doNotTrack) {
         
           <li><a class="taxonomy-term" href="/categories/assembly-syntax/" data-taxonomy-term="assembly-syntax"><span class="taxonomy-label">assembly syntax</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/categories/c/" data-taxonomy-term="c"><span class="taxonomy-label">c</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="/categories/c/" data-taxonomy-term="c"><span class="taxonomy-label">c</span><span class="taxonomy-count">2</span></a></li>
         
           <li><a class="taxonomy-term" href="/categories/examples/" data-taxonomy-term="examples"><span class="taxonomy-label">Examples</span><span class="taxonomy-count">4</span></a></li>
         
           <li><a class="taxonomy-term" href="/categories/html/" data-taxonomy-term="html"><span class="taxonomy-label">html</span><span class="taxonomy-count">2</span></a></li>
         
-          <li><a class="taxonomy-term" href="/categories/linux-arm64-kernel/" data-taxonomy-term="linux-arm64-kernel"><span class="taxonomy-label">linux arm64 kernel</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="/categories/linux-arm64-kernel/" data-taxonomy-term="linux-arm64-kernel"><span class="taxonomy-label">linux arm64 kernel</span><span class="taxonomy-count">2</span></a></li>
         
           <li><a class="taxonomy-term" href="/categories/placeholders/" data-taxonomy-term="placeholders"><span class="taxonomy-label">Placeholders</span><span class="taxonomy-count">3</span></a></li>
         
@@ -456,7 +459,7 @@ git push --force origin master
 <p>geedoc에서 했던 대로 추가한다. docsy example의 .gitignore에 public이 있으므로 이를 지우고 submodule을 추가하면된다.</p>
 <h1 id="docsy-build">docsy build</h1>
 <p>hugo server -D 로 테스트를 한번 해보고 잘되면 hugo -t docsy로 build를 하고 push를 해본다.</p>
-<h2 id="ss-error-처리">ss error 처리</h2>
+<h2 id="error1">error1</h2>
 <pre><code>import fs from 'fs-extra'
        ^^
 
@@ -488,7 +491,16 @@ SyntaxError: Unexpected identifier
 <pre><code>$ node -v
 v10.19.0
 </code></pre><p>대충 검색해보니 v12도 있는거 같아서 v12로 다시 깔아서 해봤다.<a href="https://stackoverflow.com/questions/60679889/update-node-to-v12-on-ubuntu">참고사이트</a></p>
-<p>다시 build 했더니 잘된다.</p>
+<h2 id="error2">error2</h2>
+<p>다음과 같은 error가 발생한다.</p>
+<pre><code>Error: Error building site: POSTCSS: failed to transform &quot;scss/main.css&quot; (text/css): resource &quot;scss/scss/main.scss_4853eb546e7a6c0898ed71feae7357c0&quot; not found in file cache
+
+</code></pre><p><a href="https://github.com/google/docsy/issues/235">참고사이트</a></p>
+<p>이것저것 설치한다</p>
+<pre><code>sudo npm install -g postcss-cli
+sudo npm install autoprefixer
+sudo npm audit fix
+</code></pre><p>다시 build 했더니 잘된다.</p>
 <pre><code>$ hugo -t docsy
 
                    | EN | FA | NO  
