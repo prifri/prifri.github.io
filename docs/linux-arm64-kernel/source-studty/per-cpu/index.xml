@@ -1193,6 +1193,7 @@ reseved가 아니거나 reseved chunk가 없으면 if문을 안타고 다음으�
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;기타 error 처리랑 마무리.&lt;/p&gt;
 &lt;p&gt;for_each_possible_cpu 동작이 어떻게 되는지 모르겠다.&lt;/p&gt;
+&lt;p&gt;pcpu_schedule_balance_work 가 수행되면 결국 pcpu_balance_workfn 가 한번 수행되는거 같다.&lt;/p&gt;
 
       </description>
     </item>
