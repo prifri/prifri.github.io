@@ -27,13 +27,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/linux-arm64-kernel/source-studty/per-cpu/mm_percpu_c/" />
 <meta property="article:published_time" content="2022-01-18T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-01-18T19:33:37+09:00" /><meta property="og:site_name" content="Goldydocs" />
+<meta property="article:modified_time" content="2022-01-18T19:35:33+09:00" /><meta property="og:site_name" content="Goldydocs" />
 <meta itemprop="name" content="mm_percpu_c">
 <meta itemprop="description" content="mm/percpu.c
 ">
 <meta itemprop="datePublished" content="2022-01-18T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2022-01-18T19:33:37&#43;09:00" />
-<meta itemprop="wordCount" content="2012">
+<meta itemprop="dateModified" content="2022-01-18T19:35:33&#43;09:00" />
+<meta itemprop="wordCount" content="5824">
 
 
 
@@ -283,6 +283,13 @@ if (!doNotTrack) {
     <li><a href="#pcpu_reintegrate_chunk">pcpu_reintegrate_chunk</a></li>
     <li><a href="#pcpu_block_update_scan">pcpu_block_update_scan</a></li>
     <li><a href="#pcpu_chunk_refresh_hint">pcpu_chunk_refresh_hint</a></li>
+    <li><a href="#pcpu_block_update_hint_free">pcpu_block_update_hint_free</a></li>
+    <li><a href="#pcpu_is_populated">pcpu_is_populated</a></li>
+    <li><a href="#pcpu_find_block_fit">pcpu_find_block_fit</a></li>
+    <li><a href="#pcpu_find_zero_area">pcpu_find_zero_area</a></li>
+    <li><a href="#pcpu_alloc_area">pcpu_alloc_area</a></li>
+    <li><a href="#pcpu_free_area">pcpu_free_area</a></li>
+    <li><a href="#pcpu_alloc">pcpu_alloc</a></li>
   </ul>
 </nav></div>
 
@@ -841,7 +848,15 @@ slot 번호란것은 결국 size에 따라 관리할 목록 개념이다.</p>
 
 	<span style="color:#000">pcpu_block_update</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">block</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">s_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">e_off</span><span style="color:#000;font-weight:bold">);</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><p>bit_off 부터 bits size만큼 free가 됬으니 해당 block의 metadata를 udpate하라는 것이다. find_last_bit를 통해서 set bit를 찾아서 해당 bit로 start bit를 고쳐서 쓴다.</p>
+</code></pre></div><ul>
+<li>
+<p>최종 할당 지점을 찾는 작업은 먼저 pcpu_find_block_fit()을 통해 할당을 보관할 수 있는 블록을 찾은 다음 pcpu_alloc_area()를 통해 검색이 사용됩니다. 할당에 특정 정렬이 필요한 경우 할당 경로 또는 여유 경로에서 볼 수 없는 구멍을 실수로 만들 수 있습니다.</p>
+</li>
+<li>
+<p>이 경우 주어진 자유 영역 홀을 사용하고 scan_hint를 변경할 수 있으므로 블록을 업데이트합니다. 정렬에서 자유 비트를 놓치지 않으려면 뒤로 스캔해야 합니다.</p>
+</li>
+</ul>
+<p>bit_off 부터 bits size만큼 free가 됬으니 해당 block의 metadata를 udpate하라는 것이다. find_last_bit를 통해서 set bit를 찾아서 해당 bit로 start bit를 고쳐서 쓴다.</p>
 <h2 id="pcpu_chunk_refresh_hint">pcpu_chunk_refresh_hint</h2>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
 </span><span style="color:#8f5902;font-style:italic"> * pcpu_chunk_refresh_hint - updates metadata about a chunk
@@ -877,6 +892,730 @@ slot 번호란것은 결국 size에 따라 관리할 목록 개념이다.</p>
 <span style="color:#000;font-weight:bold">}</span>
 
 </code></pre></div><p>chunk metadata를 update한다. scan_hint의 쓰임새가 보인다.</p>
+<h2 id="pcpu_block_update_hint_free">pcpu_block_update_hint_free</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_block_update_hint_free - updates the block hints on the free path
+</span><span style="color:#8f5902;font-style:italic"> * @chunk: chunk of interest
+</span><span style="color:#8f5902;font-style:italic"> * @bit_off: chunk offset
+</span><span style="color:#8f5902;font-style:italic"> * @bits: size of request
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * Updates metadata for the allocation path.  This avoids a blind block
+</span><span style="color:#8f5902;font-style:italic"> * refresh by making use of the block contig hints.  If this fails, it scans
+</span><span style="color:#8f5902;font-style:italic"> * forward and backward to determine the extent of the free area.  This is
+</span><span style="color:#8f5902;font-style:italic"> * capped at the boundary of blocks.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * A chunk update is triggered if a page becomes free, a block becomes free,
+</span><span style="color:#8f5902;font-style:italic"> * or the free spans across blocks.  This tradeoff is to minimize iterating
+</span><span style="color:#8f5902;font-style:italic"> * over the block metadata to update chunk_md-&gt;contig_hint.
+</span><span style="color:#8f5902;font-style:italic"> * chunk_md-&gt;contig_hint may be off by up to a page, but it will never be more
+</span><span style="color:#8f5902;font-style:italic"> * than the available space.  If the contig hint is contained in one block, it
+</span><span style="color:#8f5902;font-style:italic"> * will be accurate.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_block_update_hint_free</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span>
+					<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">nr_empty_pages</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_block_md</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s_block</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">e_block</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">block</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">s_index</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">e_index</span><span style="color:#000;font-weight:bold">;</span>	<span style="color:#8f5902;font-style:italic">/* block indexes of the freed allocation */</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">s_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">e_off</span><span style="color:#000;font-weight:bold">;</span>	<span style="color:#8f5902;font-style:italic">/* block offsets of the freed allocation */</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">;</span>		<span style="color:#8f5902;font-style:italic">/* start and end of the whole free area */</span>
+
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * Calculate per block offsets.
+</span><span style="color:#8f5902;font-style:italic">	 * The calculation uses an inclusive range, but the resulting offsets
+</span><span style="color:#8f5902;font-style:italic">	 * are [start, end).  e_index always points to the last block in the
+</span><span style="color:#8f5902;font-style:italic">	 * range.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#000">s_index</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_off_to_block_index</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">e_index</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_off_to_block_index</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">s_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_off_to_block_off</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">e_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_off_to_block_off</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">s_block</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">md_blocks</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">s_index</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">e_block</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">md_blocks</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">e_index</span><span style="color:#000;font-weight:bold">;</span>
+</code></pre></div><ul>
+<li>
+<p>할당 경로에 대한 메타데이터를 업데이트합니다. 이렇게 하면 블라인드 블록을 피할 수 있습니다.<br>
+블록 콘티그 힌트를 사용하여 새로 고칩니다. 이 작업이 실패하면 앞뒤로 스캔하여 사용 가능한 영역의 범위를 확인합니다. 이것은 블록의 경계에서 제한된다.</p>
+</li>
+<li>
+<p>페이지가 사용 가능해지거나 블록이 사용 가능해지거나 블록 간에 사용 가능한 범위가 확장되면 청크 업데이트가 트리거됩니다. 이 절충은 block 메타데이터에 대한 반복을 최소화하여 chunk_md-&gt;contig_hint를 업데이트하는 것입니다.<br>
+chunk_md-&gt;contig_md는 최대 페이지까지 해제될 수 있지만 사용 가능한 공간보다 크지 않습니다. 콘티그 힌트가 한 블록에 들어있다면 정확할 것입니다.</p>
+</li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * Check if the freed area aligns with the block-&gt;contig_hint.
+</span><span style="color:#8f5902;font-style:italic">	 * If it does, then the scan to find the beginning/end of the
+</span><span style="color:#8f5902;font-style:italic">	 * larger free area can be avoided.
+</span><span style="color:#8f5902;font-style:italic">	 *
+</span><span style="color:#8f5902;font-style:italic">	 * start and end refer to beginning and end of the free area
+</span><span style="color:#8f5902;font-style:italic">	 * within each their respective blocks.  This is not necessarily
+</span><span style="color:#8f5902;font-style:italic">	 * the entire free area as it may span blocks past the beginning
+</span><span style="color:#8f5902;font-style:italic">	 * or end of the block.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">s_off</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">s_off</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">s_block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">s_block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">s_block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">		 * Scan backwards to find the extent of the free area.
+</span><span style="color:#8f5902;font-style:italic">		 * find_last_bit returns the starting bit, so if the start bit
+</span><span style="color:#8f5902;font-style:italic">		 * is returned, that means there was no last bit and the
+</span><span style="color:#8f5902;font-style:italic">		 * remainder of the chunk is free.
+</span><span style="color:#8f5902;font-style:italic">		 */</span>
+		<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">l_bit</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">find_last_bit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_index_alloc_map</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">s_index</span><span style="color:#000;font-weight:bold">),</span>
+					  <span style="color:#000">start</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">l_bit</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">?</span> <span style="color:#0000cf;font-weight:bold">0</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000">l_bit</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><ul>
+<li>해제된 영역이 block-&gt;contig_hint와 일치하는지 확인한다.<br>
+그러면 더 큰 여유 영역의 시작/끝을 찾기 위한 스캔을 피할 수 있습니다.</li>
+<li>시작과 끝은 각각의 블록 내에 있는 자유 영역의 시작과 끝을 가리킨다. 이것은 블록의 시작이나 끝을 지나 블록에 걸쳐 있을 수 있기 때문에 반드시 전체 자유 영역은 아닙니다</li>
+<li>뒤로 스캔하여 사용 가능한 영역의 범위를 찾습니다.<br>
+find_last_bit는 시작 비트를 반환하므로 시작 비트가 반환되면 마지막 비트가 없고 청크의 나머지가 사용 가능하다는 의미입니다.</li>
+</ul>
+<p>s_off가 contig hint의 끝나는 부분이면 start를 contig hint start부분으로 한다. s_off가 contig hint의 끝에 위치한다는것은 결국 contig hint가 커질수있다는것을 의미하므로 start를 contig hint부터 하는것이다.
+그게 아니면 alloc_map을 backward로 뒤져 alloc bit를 찾는다. 요청 size대로 return 되면 set bit가 없다는것이므로 처음부터, 그게 아니면 그 bit부터 검색을 한다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">e_off</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">e_off</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">e_block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">e_block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">e_block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">else</span>
+		<span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">find_next_bit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_index_alloc_map</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">e_index</span><span style="color:#000;font-weight:bold">),</span>
+				    <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>contig hint start와 end가 일치하면 contig hint 끝부분까지, 그게 아니면 end 의 다음 set bit를 찾아서 end로 설정한다.
+위 start를 하는것과 엮어서 봤을때 기존 contig hint의 전후로 free가 된것이므로 contig hint를 확장하기 위해 범위를 늘리기 위함임을 알 수 있다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/* update s_block */</span>
+	<span style="color:#000">e_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">s_index</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">e_index</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">?</span> <span style="color:#f57900">end</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">e_off</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">nr_empty_pages</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">pcpu_block_update</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s_block</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">e_off</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>end가 start block 바깥이면 당연히 start block의 끝까지 update고 그게 아니면 내부이면 내부범위 내에서 update를 수행한다. 또한 start block 전체가 free이면 empty page가 한개 생기는것이므로 관련 처리를 수항핸다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/* freeing in the same block */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">s_index</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#000">e_index</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#8f5902;font-style:italic">/* update e_block */</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#000">nr_empty_pages</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000">pcpu_block_update</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">e_block</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">);</span>
+
+		<span style="color:#8f5902;font-style:italic">/* reset md_blocks in the middle */</span>
+		<span style="color:#000">nr_empty_pages</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">e_index</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">s_index</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">block</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">s_block</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">block</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">e_block</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">first_free</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">scan_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint_start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">left_free</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">right_free</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>end block도 바로 위의 start block처럼 처리를 하고 그 사이에있는것들은 전부 free일 것이므로 내부것들은 전부 free로 바꿔주는것이다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">nr_empty_pages</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">pcpu_update_empty_pages</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">nr_empty_pages</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>empty page가 있으면 metablock에 갱신해준다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * Refresh chunk metadata when the free makes a block free or spans
+</span><span style="color:#8f5902;font-style:italic">	 * across blocks.  The contig_hint may be off by up to a page, but if
+</span><span style="color:#8f5902;font-style:italic">	 * the contig_hint is contained in a block, it will be accurate with
+</span><span style="color:#8f5902;font-style:italic">	 * the else condition below.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(((</span><span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">&gt;=</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">||</span> <span style="color:#000">s_index</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#000">e_index</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">pcpu_chunk_refresh_hint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87">true</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">else</span>
+		<span style="color:#000">pcpu_block_update</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">chunk_md</span><span style="color:#000;font-weight:bold">,</span>
+				  <span style="color:#000">pcpu_block_off_to_off</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s_index</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">),</span>
+				  <span style="color:#000">end</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>start ~ end까지가 한 block size 보다 많거나 size가 작아도 중간에 걸치면 chunk를 full scan하고(그냥 s_index != e_index 만 있으면 될거같은데 왜 이런진 모르겠다) 그게 아니면 해당 block에 대한것만 chunk metablock에 update해준다.
+정리를 하면 요청한 영역이 free가 됬다는것을 metadata에 update하는데 기존 contig hint와 연속되는 상황이면 해당 범위를 추가해서 metadata를 update한다.</p>
+<h2 id="pcpu_is_populated">pcpu_is_populated</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_is_populated - determines if the region is populated
+</span><span style="color:#8f5902;font-style:italic"> * @chunk: chunk of interest
+</span><span style="color:#8f5902;font-style:italic"> * @bit_off: chunk offset
+</span><span style="color:#8f5902;font-style:italic"> * @bits: size of area
+</span><span style="color:#8f5902;font-style:italic"> * @next_off: return value for the next offset to start searching
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * For atomic allocations, check if the backing pages are populated.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * RETURNS:
+</span><span style="color:#8f5902;font-style:italic"> * Bool if the backing pages are populated.
+</span><span style="color:#8f5902;font-style:italic"> * next_index is to skip over unpopulated blocks in pcpu_find_block_fit.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">pcpu_is_populated</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">,</span>
+			      <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">next_off</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">page_start</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">page_end</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">page_start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">PFN_DOWN</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">PCPU_MIN_ALLOC_SIZE</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">page_end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">PFN_UP</span><span style="color:#000;font-weight:bold">((</span><span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">PCPU_MIN_ALLOC_SIZE</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">rs</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">page_start</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">bitmap_next_clear_region</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">populated</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">re</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">page_end</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">rs</span> <span style="color:#ce5c00;font-weight:bold">&gt;=</span> <span style="color:#000">page_end</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87">true</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">next_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">re</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">PAGE_SIZE</span> <span style="color:#ce5c00;font-weight:bold">/</span> <span style="color:#000">PCPU_MIN_ALLOC_SIZE</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87">false</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>bit_off ~ bit_off + bits off까지의 영역이 populate 되있는지 확인한다. page align으로 맞춰서 검색하는게 보인다.</p>
+<h2 id="pcpu_find_block_fit">pcpu_find_block_fit</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
+<span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_find_block_fit - finds the block index to start searching
+</span><span style="color:#8f5902;font-style:italic"> * @chunk: chunk of interest
+</span><span style="color:#8f5902;font-style:italic"> * @alloc_bits: size of request in allocation units
+</span><span style="color:#8f5902;font-style:italic"> * @align: alignment of area (max PAGE_SIZE bytes)
+</span><span style="color:#8f5902;font-style:italic"> * @pop_only: use populated regions only
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * Given a chunk and an allocation spec, find the offset to begin searching
+</span><span style="color:#8f5902;font-style:italic"> * for a free region.  This iterates over the bitmap metadata blocks to
+</span><span style="color:#8f5902;font-style:italic"> * find an offset that will be guaranteed to fit the requirements.  It is
+</span><span style="color:#8f5902;font-style:italic"> * not quite first fit as if the allocation does not fit in the contig hint
+</span><span style="color:#8f5902;font-style:italic"> * of a block or chunk, it is skipped.  This errs on the side of caution
+</span><span style="color:#8f5902;font-style:italic"> * to prevent excess iteration.  Poor alignment can cause the allocator to
+</span><span style="color:#8f5902;font-style:italic"> * skip over blocks and chunks that have valid free areas.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * RETURNS:
+</span><span style="color:#8f5902;font-style:italic"> * The offset in the bitmap to begin searching.
+</span><span style="color:#8f5902;font-style:italic"> * -1 if no offset is found.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">pcpu_find_block_fit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">,</span>
+			       <span style="color:#000">size_t</span> <span style="color:#000">align</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">pop_only</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_block_md</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk_md</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">chunk_md</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next_off</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * This is an optimization to prevent scanning by assuming if the
+</span><span style="color:#8f5902;font-style:italic">	 * allocation cannot fit in the global hint, there is memory pressure
+</span><span style="color:#8f5902;font-style:italic">	 * and creating a new chunk would happen soon.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">pcpu_check_block_hint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk_md</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">align</span><span style="color:#000;font-weight:bold">))</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_next_hint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk_md</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">pcpu_for_each_fit_region</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">align</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">pop_only</span> <span style="color:#ce5c00;font-weight:bold">||</span> <span style="color:#000">pcpu_is_populated</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">,</span>
+						   <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">next_off</span><span style="color:#000;font-weight:bold">))</span>
+			<span style="color:#204a87;font-weight:bold">break</span><span style="color:#000;font-weight:bold">;</span>
+
+		<span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">next_off</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">pcpu_chunk_map_bits</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">))</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><ul>
+<li>
+<p>청크와 할당 규격이 지정된 경우 사용 가능한 영역 검색을 시작할 오프셋을 찾습니다. 이것은 요구 사항에 맞는 오프셋을 찾기 위해 비트맵 메타데이터 블록 위에 반복한다. 할당이 블록이나 청크의 콘티그 힌트에 맞지 않는 경우 건너뜁니다. 이는 과도한 반복을 방지하기 위해 주의를 기울이는 측면이 있습니다. 제대로 정렬되지 않으면 할당자가 유효한 여유 영역이 있는 블록 및 청크를 건너뛸 수 있습니다.</p>
+</li>
+<li>
+<p>이는 할당이 글로벌 힌트에 맞지 않을 경우 메모리 압력이 있고 곧 새 청크가 생성될 것으로 가정하여 검색을 방지하기 위한 최적화입니다.</p>
+</li>
+</ul>
+<p>align으로 alignment 되고 alloc_bits 만큼 free 영역이 있는 bit offset을 구한다.</p>
+<ol>
+<li>pcpu_check_block_hint에서 지금 contig hint보다 요청 할당영역(alloc_bits)가 큰지 확인한다.  contig hint가 현재 chunk에서 가장 큰 영역이므로 이보다 큰게 요청되면 여기서 컷되고 새로운 chunk가 할당될것이다.</li>
+<li>pcpu_next_hint에서 bit_off이 구해진다. 저 함수에서 scan_hint_start + scan_hint 다음영역이거나 first_free를 return한다. scan_hint보다 작은것은 first_free부터 검색을하고 scan_hint보다 큰것들은 그 다음 영역부터 검색을 한다는 개념이다. scan_hint를 기준으로 검색범위를 좁히는것을 알 수 있다.</li>
+<li>그럼 이제 for문을 통해서 free 영역을 구해오는데, populate까지 검사하는게 보인다. populate를 고려 안한다면 최악조건은 contig hint에서 할당이 될것이다. 만약 contig hint가 popluate안되있고 이후에도 못찾으면 검색 실패가 되고 새로운 chunk가 할당될것이다.</li>
+</ol>
+<h2 id="pcpu_find_zero_area">pcpu_find_zero_area</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_find_zero_area - modified from bitmap_find_next_zero_area_off()
+</span><span style="color:#8f5902;font-style:italic"> * @map: the address to base the search on
+</span><span style="color:#8f5902;font-style:italic"> * @size: the bitmap size in bits
+</span><span style="color:#8f5902;font-style:italic"> * @start: the bitnumber to start searching at
+</span><span style="color:#8f5902;font-style:italic"> * @nr: the number of zeroed bits we&#39;re looking for
+</span><span style="color:#8f5902;font-style:italic"> * @align_mask: alignment mask for zero area
+</span><span style="color:#8f5902;font-style:italic"> * @largest_off: offset of the largest area skipped
+</span><span style="color:#8f5902;font-style:italic"> * @largest_bits: size of the largest area skipped
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * The @align_mask should be one less than a power of 2.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * This is a modified version of bitmap_find_next_zero_area_off() to remember
+</span><span style="color:#8f5902;font-style:italic"> * the largest area that was skipped.  This is imperfect, but in general is
+</span><span style="color:#8f5902;font-style:italic"> * good enough.  The largest remembered region is the largest failed region
+</span><span style="color:#8f5902;font-style:italic"> * seen.  This does not include anything we possibly skipped due to alignment.
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_block_update_scan() does scan backwards to try and recover what was
+</span><span style="color:#8f5902;font-style:italic"> * lost to alignment.  While this can cause scanning to miss earlier possible
+</span><span style="color:#8f5902;font-style:italic"> * free areas, smaller allocations will eventually fill those holes.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">pcpu_find_zero_area</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">map</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">nr</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">align_mask</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_off</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_bits</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+</code></pre></div><ul>
+<li>이것은 건너뛴 가장 큰 영역을 기억하기 위해 수정된 비트맵_find_next_zero_area_off() 버전입니다. 이것은 불완전하지만 일반적으로 충분합니다. 기억되는 가장 큰 지역은 가장 큰 실패 지역입니다. 여기에는 정렬로 인해 건너뛸 수 있는 내용이 포함되어 있지 않습니다.<br>
+pcpu_block_update_scan은 뒤로 검색하여 정렬에 손실된 항목을 복구합니다. 이로 인해 스캔이 이전의 가능한 사용 가능한 영역을 놓칠 수 있지만 더 작은 할당으로 인해 결국 이러한 구멍을 채울 수 있습니다.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">index</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">i</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">area_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">area_bits</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#f57900">again</span><span style="color:#000;font-weight:bold">:</span>
+	<span style="color:#000">index</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">find_next_zero_bit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">map</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>start ~ size 범위내에서 최초의 clear bit를 찾는다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/* Align allocation */</span>
+	<span style="color:#000">index</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">__ALIGN_MASK</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">index</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">align_mask</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">area_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">index</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">index</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">nr</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">;</span>
+</code></pre></div><p>요구사항대로 align시킨다. 만약 map의 범위를 넘어서면 그냥 end를 return하는것이 보인다. size보다 크면 error라고 보면될듯싶다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">find_next_bit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">map</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">index</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">area_bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">area_off</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#8f5902;font-style:italic">/* remember largest unused area with best alignment */</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">area_bits</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_bits</span> <span style="color:#ce5c00;font-weight:bold">||</span>
+		    <span style="color:#000;font-weight:bold">(</span><span style="color:#000">area_bits</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_bits</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_off</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
+		     <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">area_off</span> <span style="color:#ce5c00;font-weight:bold">||</span> <span style="color:#000">__ffs</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">area_off</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">__ffs</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_off</span><span style="color:#000;font-weight:bold">))))</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">area_off</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">area_bits</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+
+		<span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">again</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">index</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><pre><code>ex) nr이 9개라고 했고 bitmap이 아래 그림과 같을때
+11111111110000000011111111000000000011111..
+
+1회차               v end
+11111111110000000011111111000000000011111..
+^start    ^index  ^i
+
+i &lt; end 이므로 agin된다. largest_off와 largest_bits에는 pass된 free영역이 저장될것이다.
+이후에 가장 큰 free 영역으로만 갱신한다.
+만약 기존 largest 영역과 현재 pass하는 영역의 크기가 같으면 더 정렬이 잘된것을 기준으로 갱신한다.
+
+2회차
+ largest_off
+          v                       v end
+11111111110000000011111111000000000011111..
+          &lt;------&gt; ^start ^index    ^i
+          largest_bits
+i &gt; end이므로 조건에 맞게되 index를 return한다.
+</code></pre><p>즉 start부터 nr개만큼의 free size가 있는 index를 return하면서 중간에 pass하는 free area중에 가장 큰 area의 start와 size까지 return하는 기능을 수행한다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_find_zero_area - modified from bitmap_find_next_zero_area_off()
+</span><span style="color:#8f5902;font-style:italic"> * @map: the address to base the search on
+</span><span style="color:#8f5902;font-style:italic"> * @size: the bitmap size in bits
+</span><span style="color:#8f5902;font-style:italic"> * @start: the bitnumber to start searching at
+</span><span style="color:#8f5902;font-style:italic"> * @nr: the number of zeroed bits we&#39;re looking for
+</span><span style="color:#8f5902;font-style:italic"> * @align_mask: alignment mask for zero area
+</span><span style="color:#8f5902;font-style:italic"> * @largest_off: offset of the largest area skipped
+</span><span style="color:#8f5902;font-style:italic"> * @largest_bits: size of the largest area skipped
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * The @align_mask should be one less than a power of 2.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * This is a modified version of bitmap_find_next_zero_area_off() to remember
+</span><span style="color:#8f5902;font-style:italic"> * the largest area that was skipped.  This is imperfect, but in general is
+</span><span style="color:#8f5902;font-style:italic"> * good enough.  The largest remembered region is the largest failed region
+</span><span style="color:#8f5902;font-style:italic"> * seen.  This does not include anything we possibly skipped due to alignment.
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_block_update_scan() does scan backwards to try and recover what was
+</span><span style="color:#8f5902;font-style:italic"> * lost to alignment.  While this can cause scanning to miss earlier possible
+</span><span style="color:#8f5902;font-style:italic"> * free areas, smaller allocations will eventually fill those holes.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">pcpu_find_zero_area</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">map</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">nr</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">align_mask</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_off</span><span style="color:#000;font-weight:bold">,</span>
+					 <span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_bits</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">index</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">i</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">area_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">area_bits</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#f57900">again</span><span style="color:#000;font-weight:bold">:</span>
+	<span style="color:#000">index</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">find_next_zero_bit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">map</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#8f5902;font-style:italic">/* Align allocation */</span>
+	<span style="color:#000">index</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">__ALIGN_MASK</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">index</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">align_mask</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">area_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">index</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">index</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">nr</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">find_next_bit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">map</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">index</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">area_bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">area_off</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#8f5902;font-style:italic">/* remember largest unused area with best alignment */</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">area_bits</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_bits</span> <span style="color:#ce5c00;font-weight:bold">||</span>
+		    <span style="color:#000;font-weight:bold">(</span><span style="color:#000">area_bits</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_bits</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_off</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
+		     <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">area_off</span> <span style="color:#ce5c00;font-weight:bold">||</span> <span style="color:#000">__ffs</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">area_off</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">__ffs</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_off</span><span style="color:#000;font-weight:bold">))))</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">area_off</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">largest_bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">area_bits</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+
+		<span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">again</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">index</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><h2 id="pcpu_alloc_area">pcpu_alloc_area</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_alloc_area - allocates an area from a pcpu_chunk
+</span><span style="color:#8f5902;font-style:italic"> * @chunk: chunk of interest
+</span><span style="color:#8f5902;font-style:italic"> * @alloc_bits: size of request in allocation units
+</span><span style="color:#8f5902;font-style:italic"> * @align: alignment of area (max PAGE_SIZE)
+</span><span style="color:#8f5902;font-style:italic"> * @start: bit_off to start searching
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * This function takes in a @start offset to begin searching to fit an
+</span><span style="color:#8f5902;font-style:italic"> * allocation of @alloc_bits with alignment @align.  It needs to scan
+</span><span style="color:#8f5902;font-style:italic"> * the allocation map because if it fits within the block&#39;s contig hint,
+</span><span style="color:#8f5902;font-style:italic"> * @start will be block-&gt;first_free. This is an attempt to fill the
+</span><span style="color:#8f5902;font-style:italic"> * allocation prior to breaking the contig hint.  The allocation and
+</span><span style="color:#8f5902;font-style:italic"> * boundary maps are updated accordingly if it confirms a valid
+</span><span style="color:#8f5902;font-style:italic"> * free area.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * RETURNS:
+</span><span style="color:#8f5902;font-style:italic"> * Allocated addr offset in @chunk on success.
+</span><span style="color:#8f5902;font-style:italic"> * -1 if no matching area is found.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">pcpu_alloc_area</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">,</span>
+			   <span style="color:#000">size_t</span> <span style="color:#000">align</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_block_md</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk_md</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">chunk_md</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">size_t</span> <span style="color:#000">align_mask</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">align</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">?</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">align</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">area_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">area_bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">oslot</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">lockdep_assert_held</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><ul>
+<li>이 함수는 @start 오프셋을 사용하여 @alloc_bits 할당을 @align에 맞추기 위한 검색을 시작합니다. 블록의 콘티그 힌트 내에 @start가 block-&gt;first_free가 되기 때문에 할당 맵을 스캔해야 한다. 콘티그 힌트를 깨기 전에 할당을 채우려는 시도입니다. 할당 및 경계 지도는 유효한 사용 가능 영역을 확인하는 경우 그에 따라 업데이트됩니다.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">oslot</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_chunk_slot</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * Search to find a fit.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">min_t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">start</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">alloc_bits</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span><span style="color:#000;font-weight:bold">,</span>
+		    <span style="color:#000">pcpu_chunk_map_bits</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">));</span>
+	<span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_find_zero_area</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">alloc_map</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">start</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">,</span>
+				      <span style="color:#000">align_mask</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">area_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">area_bits</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">&gt;=</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span>
+</code></pre></div><p>end를 alloc_bits보다 한 lobkc더 여유있게 잡는것이 보인다. 해당 범위에서 free area를 찾지 못하면 실패처리된다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">area_bits</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">pcpu_block_update_scan</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">area_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">area_bits</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>pcpu_find_zero_area을 보면서 pass했던 영역을 어떻게 하나 봤더만 chunk에 metadata를 update하는데 사용하는것이 보인다. skip area가 contig hint보다 클일은 없을거 같다.
+pcpu_block_update에서 scan hint가 없어지는 상황이나 alloc 영역이 겹쳐서 scan hint가 없어지는 상황등, 즉 scan hint가 없는상황이 있는데 이런 경우 여기서 scan hint가 새로 생길것이다. 아니면 또 이함수를 보건데 scan hint가 무조건 contig hint의 다음 free size를 가지고 있을거 같지도 않다. 즉 alloc을 하면서 skip한 area중에 제일 큰 area가 scan hint로 갱신될 기회를 가진다고 보면될거같다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/* update alloc map */</span>
+	<span style="color:#000">bitmap_set</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">alloc_map</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>실제 할당이 됬다는 표식을 수행한다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/* update boundary map */</span>
+	<span style="color:#000">set_bit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">bound_map</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">bitmap_clear</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">bound_map</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">alloc_bits</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">set_bit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">bound_map</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>biit_off ~ bit_off + alloc_bits까지는 할당이 되었다. 경계점을 bound_map에 표시한다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">free_bytes</span> <span style="color:#ce5c00;font-weight:bold">-=</span> <span style="color:#000">alloc_bits</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">PCPU_MIN_ALLOC_SIZE</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#8f5902;font-style:italic">/* update first free bit */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">first_free</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">first_free</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">find_next_zero_bit</span><span style="color:#000;font-weight:bold">(</span>
+					<span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">alloc_map</span><span style="color:#000;font-weight:bold">,</span>
+					<span style="color:#000">pcpu_chunk_map_bits</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">),</span>
+					<span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>bit_off가 first_free랑 같다는것은 first_free영역부터 할당을 했다는것이므로 할당이후 최초의 free 지점으로 first_free를 갱신해야된다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">pcpu_block_update_hint_alloc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">alloc_bits</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">pcpu_chunk_relocate</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">oslot</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">PCPU_MIN_ALLOC_SIZE</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>alloc후 metadata를 update해주고 slot에 넣어버린다.</p>
+<ol>
+<li>(align을 수행한)start부터 alloc_bits size를 할당한다.</li>
+<li>alloc도중 free size가 모잘라 넘어간 영역중에 제일 큰 영역은 metadata에 갱신을 시도한다. 여기서 scan hint나 contig hint가 갱신될수 있을것이다.</li>
+<li>실제 alloc_map에 할당표시를 하고 bound_map에도 경계를 표시한다.</li>
+<li>first_free를 필요에 따라 갱신한다.</li>
+<li>chunk 전체 영역에 대해서 metada update를 수행하고 갱신된 contig hint를 기준으로 해당 slot으로 들어갈것이다.</li>
+</ol>
+
+
+<div class="alert alert-primary" role="alert">
+<h4 class="alert-heading">pcpu_block_refresh_hint, pcpu_block_update_scan, pcpu_block_update_hint_alloc에 대한 비교 중간정리</h4>
+
+    <ul>
+<li>pcpu_block_update_scan : 요구한 영역은 free area이며 그걸 기준으로 chunk metadata를 갱신한다.</li>
+<li>pcpu_block_update_hint_alloc : 요구한 영역은 alloc area며 현재 chunk metadata와 영역이 겹치는 확인해서 겹친다면 metadata refresh를 수행한다. 또한 block medadata또한 갱신된다.</li>
+<li>pcpu_chunk_refresh_hint : metadata refresh를 수행한다. 가지고있는 metada를 기준으로 시작을 한다.</li>
+</ul>
+
+</div>
+
+<h2 id="pcpu_free_area">pcpu_free_area</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_free_area - frees the corresponding offset
+</span><span style="color:#8f5902;font-style:italic"> * @chunk: chunk of interest
+</span><span style="color:#8f5902;font-style:italic"> * @off: addr offset into chunk
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * This function determines the size of an allocation to free using
+</span><span style="color:#8f5902;font-style:italic"> * the boundary bitmap and clears the allocation map.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * RETURNS:
+</span><span style="color:#8f5902;font-style:italic"> * Number of freed bytes.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">pcpu_free_area</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_block_md</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk_md</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">chunk_md</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">oslot</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">freed</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">lockdep_assert_held</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">pcpu_stats_area_dealloc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">oslot</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_chunk_slot</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">/</span> <span style="color:#000">PCPU_MIN_ALLOC_SIZE</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#8f5902;font-style:italic">/* find end index */</span>
+	<span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">find_next_bit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">bound_map</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">pcpu_chunk_map_bits</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">),</span>
+			    <span style="color:#000">bit_off</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">bitmap_clear</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">alloc_map</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">freed</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">PCPU_MIN_ALLOC_SIZE</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#8f5902;font-style:italic">/* update metadata */</span>
+	<span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">free_bytes</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#000">freed</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#8f5902;font-style:italic">/* update first free bit */</span>
+	<span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">first_free</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">min</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk_md</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">first_free</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">pcpu_block_update_hint_free</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">pcpu_chunk_relocate</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">oslot</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">freed</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>해당 offset을 시작점으로 free를 한다. bound_map의 set bit를 통해서 해당 map이 어디까지 alloc이 됬는지 확인을 하고 alloc_map을 clear시켜버리는게 보인다. alloc_map을 clear후에는 first_free를 갱신하고 metada를 update한다.</p>
+<h2 id="pcpu_alloc">pcpu_alloc</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_alloc - the percpu allocator
+</span><span style="color:#8f5902;font-style:italic"> * @size: size of area to allocate in bytes
+</span><span style="color:#8f5902;font-style:italic"> * @align: alignment of area (max PAGE_SIZE)
+</span><span style="color:#8f5902;font-style:italic"> * @reserved: allocate from the reserved chunk if available
+</span><span style="color:#8f5902;font-style:italic"> * @gfp: allocation flags
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * Allocate percpu area of @size bytes aligned at @align.  If @gfp doesn&#39;t
+</span><span style="color:#8f5902;font-style:italic"> * contain %GFP_KERNEL, the allocation is atomic. If @gfp has __GFP_NOWARN
+</span><span style="color:#8f5902;font-style:italic"> * then no warning will be triggered on invalid or failed allocation
+</span><span style="color:#8f5902;font-style:italic"> * requests.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * RETURNS:
+</span><span style="color:#8f5902;font-style:italic"> * Percpu pointer to the allocated area on success, NULL on failure.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">__percpu</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">pcpu_alloc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">size_t</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size_t</span> <span style="color:#000">align</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">reserved</span><span style="color:#000;font-weight:bold">,</span>
+				 <span style="color:#000">gfp_t</span> <span style="color:#000">gfp</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">gfp_t</span> <span style="color:#000">pcpu_gfp</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">do_warn</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">obj_cgroup</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">objcg</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">NULL</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">warn_limit</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">10</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">next</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">const</span> <span style="color:#204a87;font-weight:bold">char</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">slot</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">cpu</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ret</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">__percpu</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">size_t</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_align</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">gfp</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">current_gfp_context</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gfp</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#8f5902;font-style:italic">/* whitelisted flags that can be passed to the backing allocators */</span>
+	<span style="color:#000">pcpu_gfp</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">gfp</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">GFP_KERNEL</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#000">__GFP_NORETRY</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#000">__GFP_NOWARN</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">is_atomic</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">gfp</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span> <span style="color:#000">GFP_KERNEL</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#000">GFP_KERNEL</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">do_warn</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gfp</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span> <span style="color:#000">__GFP_NOWARN</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * There is now a minimum allocation size of PCPU_MIN_ALLOC_SIZE,
+</span><span style="color:#8f5902;font-style:italic">	 * therefore alignment must be a minimum of that many bytes.
+</span><span style="color:#8f5902;font-style:italic">	 * An allocation may have internal fragmentation from rounding up
+</span><span style="color:#8f5902;font-style:italic">	 * of up to PCPU_MIN_ALLOC_SIZE - 1 bytes.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">unlikely</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">align</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">PCPU_MIN_ALLOC_SIZE</span><span style="color:#000;font-weight:bold">))</span>
+		<span style="color:#000">align</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">PCPU_MIN_ALLOC_SIZE</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">size</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">ALIGN</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">PCPU_MIN_ALLOC_SIZE</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">bits</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">size</span> <span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">PCPU_MIN_ALLOC_SHIFT</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000">bit_align</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">align</span> <span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">PCPU_MIN_ALLOC_SHIFT</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">unlikely</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">size</span> <span style="color:#ce5c00;font-weight:bold">||</span> <span style="color:#000">size</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">PCPU_MIN_UNIT_SIZE</span> <span style="color:#ce5c00;font-weight:bold">||</span> <span style="color:#000">align</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">PAGE_SIZE</span> <span style="color:#ce5c00;font-weight:bold">||</span>
+		     <span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">is_power_of_2</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">align</span><span style="color:#000;font-weight:bold">)))</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">WARN</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">do_warn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;illegal size (%zu) or align (%zu) for percpu allocation</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span>
+		     <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">align</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87">NULL</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">unlikely</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">pcpu_memcg_pre_alloc_hook</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gfp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">objcg</span><span style="color:#000;font-weight:bold">)))</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87">NULL</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">		 * pcpu_balance_workfn() allocates memory under this mutex,
+</span><span style="color:#8f5902;font-style:italic">		 * and it may wait for memory reclaim. Allow current task
+</span><span style="color:#8f5902;font-style:italic">		 * to become OOM victim, in case of memory pressure.
+</span><span style="color:#8f5902;font-style:italic">		 */</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">gfp</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span> <span style="color:#000">__GFP_NOFAIL</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">mutex_lock</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_alloc_mutex</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">mutex_lock_killable</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_alloc_mutex</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">pcpu_memcg_post_alloc_hook</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">objcg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87">NULL</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87">NULL</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>pcpu단위로 맞추는게 보인다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">spin_lock_irqsave</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#8f5902;font-style:italic">/* serve reserved allocations from the reserved chunk if available */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">reserved</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">pcpu_reserved_chunk</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">chunk</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_reserved_chunk</span><span style="color:#000;font-weight:bold">;</span>
+
+		<span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_find_block_fit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_align</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;alloc from reserved chunk failed&#34;</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">fail_unlock</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+
+		<span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_alloc_area</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_align</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">&gt;=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">area_found</span><span style="color:#000;font-weight:bold">;</span>
+
+		<span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;alloc from reserved chunk failed&#34;</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">fail_unlock</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>populate 된거랑 atomic이랑 무슨상관이 있는지 모르겠는데 is_atomic == populate block만 가져오라는것인가 보다.
+요청한 범위의 블록이 있는지확인(pcpu_find_block_fit) -&gt; 실제 요청한곳으로 alloc수행(pcpu_alloc_area) 임이 보인다.
+reseved가 아니거나 reseved chunk가 없으면 if문을 안타고 다음으로 넘어간다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#f57900">restart</span><span style="color:#000;font-weight:bold">:</span>
+	<span style="color:#8f5902;font-style:italic">/* search through normal chunks */</span>
+	<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">slot</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_size_to_slot</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">size</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000">slot</span> <span style="color:#ce5c00;font-weight:bold">&lt;=</span> <span style="color:#000">pcpu_free_slot</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">slot</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">list_for_each_entry_safe</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_chunk_lists</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">slot</span><span style="color:#000;font-weight:bold">],</span>
+					 <span style="color:#000">list</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_find_block_fit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_align</span><span style="color:#000;font-weight:bold">,</span>
+						  <span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">slot</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">PCPU_SLOT_FAIL_THRESHOLD</span><span style="color:#000;font-weight:bold">)</span>
+					<span style="color:#000">pcpu_chunk_move</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">);</span>
+				<span style="color:#204a87;font-weight:bold">continue</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000;font-weight:bold">}</span>
+
+			<span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_alloc_area</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bits</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bit_align</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">&gt;=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#000">pcpu_reintegrate_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">);</span>
+				<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">area_found</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000;font-weight:bold">}</span>
+		<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">}</span>
+
+	<span style="color:#000">spin_unlock_irqrestore</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>요청한 size에 해당하는 slot에서 빼고, 없으면 더 큰 size의 slot에서 할당할수있는 chunk를 찾는것이 보인다. 일반 chunk에서는 성공하면 isolate를 풀어주는게 보인다. 왜이런지는 모른다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * No space left.  Create a new chunk.  We don&#39;t want multiple
+</span><span style="color:#8f5902;font-style:italic">	 * tasks to create chunks simultaneously.  Serialize and create iff
+</span><span style="color:#8f5902;font-style:italic">	 * there&#39;s still no empty chunk after grabbing the mutex.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;atomic alloc failed, no space left&#34;</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">fail</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><ul>
+<li>빈자리가 없다. 새 청크를 만듭니다. 우리는 여러 작업이 동시에 청크를 생성하는 것을 원하지 않습니다. 뮤텍스를 잡은 후에도 여전히 빈 청크가 없으면 직렬화하고 만듭니다.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">list_empty</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_chunk_lists</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">pcpu_free_slot</span><span style="color:#000;font-weight:bold">]))</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">chunk</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_create_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_gfp</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;failed to allocate new chunk&#34;</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">fail</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+
+		<span style="color:#000">spin_lock_irqsave</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000">pcpu_chunk_relocate</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">spin_lock_irqsave</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000;font-weight:bold">}</span>
+
+	<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">restart</span><span style="color:#000;font-weight:bold">;</span>
+</code></pre></div><p>free slot에서 free chunk가 있는지 확인하고 없으면 새로만든다. 저 slot이 free chunk를 넣어둘수있나보다. 어쨋든 chunk를 얻어오면 restart부터 다시 시작해 결국 할당에 성공하면 area_found로 올것이다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#f57900">area_found</span><span style="color:#000;font-weight:bold">:</span>
+	<span style="color:#000">pcpu_stats_area_alloc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">spin_unlock_irqrestore</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#8f5902;font-style:italic">/* populate if not all pages are already there */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">page_start</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">page_end</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">;</span>
+
+		<span style="color:#000">page_start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">PFN_DOWN</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">off</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000">page_end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">PFN_UP</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">);</span>
+
+		<span style="color:#000">bitmap_for_each_clear_region</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">populated</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">,</span>
+					     <span style="color:#000">page_start</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">page_end</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">WARN_ON</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">immutable</span><span style="color:#000;font-weight:bold">);</span>
+
+			<span style="color:#000">ret</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_populate_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">pcpu_gfp</span><span style="color:#000;font-weight:bold">);</span>
+
+			<span style="color:#000">spin_lock_irqsave</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">ret</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#000">pcpu_free_area</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">);</span>
+				<span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;failed to populate&#34;</span><span style="color:#000;font-weight:bold">;</span>
+				<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">fail_unlock</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000;font-weight:bold">}</span>
+			<span style="color:#000">pcpu_chunk_populated</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">spin_unlock_irqrestore</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000;font-weight:bold">}</span>
+
+		<span style="color:#000">mutex_unlock</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_alloc_mutex</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>위에서 is_atomic == populate로 취급했던걸 봤다. pcpu_populate_chunk에서 몬가가 일어나고 있는데 잘모르겠다. 어쨋든 mutex걸었던 이유가 조금 보이는거 같은데 pcpu_popluate_chunk에서처럼 struct page를 뭘 어떻게하면 저렇게 mutex를 걸어야되고(non atomic) 이걸 populate하지 않는다고 하나보다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_nr_empty_pop_pages</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">PCPU_EMPTY_POP_PAGES_LOW</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">pcpu_schedule_balance_work</span><span style="color:#000;font-weight:bold">();</span>
+</code></pre></div><p>page가 부족하면 balance work란걸 한다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/* clear the areas and return address relative to base address */</span>
+	<span style="color:#000">for_each_possible_cpu</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cpu</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">memset</span><span style="color:#000;font-weight:bold">((</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">pcpu_chunk_addr</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">cpu</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">ptr</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">__addr_to_pcpu_ptr</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">base_addr</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">kmemleak_alloc_percpu</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gfp</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">trace_percpu_alloc_percpu</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">reserved</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">align</span><span style="color:#000;font-weight:bold">,</span>
+			<span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">base_addr</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">pcpu_memcg_post_alloc_hook</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">objcg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">;</span>
+
+<span style="color:#f57900">fail_unlock</span><span style="color:#000;font-weight:bold">:</span>
+	<span style="color:#000">spin_unlock_irqrestore</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#f57900">fail</span><span style="color:#000;font-weight:bold">:</span>
+	<span style="color:#000">trace_percpu_alloc_percpu_fail</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">reserved</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">align</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">is_atomic</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">do_warn</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">warn_limit</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">pr_warn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;allocation failed, size=%zu align=%zu atomic=%d, %s</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span>
+			<span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">align</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000">dump_stack</span><span style="color:#000;font-weight:bold">();</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!--</span><span style="color:#000">warn_limit</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#000">pr_info</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;limit reached, disable warning</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#8f5902;font-style:italic">/* see the flag handling in pcpu_balance_workfn() */</span>
+		<span style="color:#000">pcpu_atomic_alloc_failed</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">true</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000">pcpu_schedule_balance_work</span><span style="color:#000;font-weight:bold">();</span>
+	<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">mutex_unlock</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_alloc_mutex</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000;font-weight:bold">}</span>
+
+	<span style="color:#000">pcpu_memcg_post_alloc_hook</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">objcg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87">NULL</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87">NULL</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>기타 error 처리랑 마무리.</p>
+<p>for_each_possible_cpu 동작이 어떻게 되는지 모르겠다.</p>
 
 	
 		<style>
@@ -943,7 +1682,7 @@ slot 번호란것은 결국 size에 따라 관리할 목록 개념이다.</p>
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  최종 수정 January 18, 2022: <a href="https://github.com/google/docsy-example/commit/c53ca8712491f7b57e8067a49bb707942fe44356">rebuilding site 2022. 01. 18. (화) 19:33:37 KST (c53ca87)</a>
+  최종 수정 January 18, 2022: <a href="https://github.com/google/docsy-example/commit/6a09e318f415c7245ad980c0f9d2438cb4f5012c">rebuilding site 2022. 01. 18. (화) 19:35:33 KST (6a09e31)</a>
 </div>
 
 </div>
