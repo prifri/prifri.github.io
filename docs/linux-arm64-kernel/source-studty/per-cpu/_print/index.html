@@ -1338,7 +1338,18 @@ reseved가 아니거나 reseved chunk가 없으면 if문을 안타고 다음으�
 
 		<span style="color:#000">mutex_unlock</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_alloc_mutex</span><span style="color:#000;font-weight:bold">);</span>
 	<span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><p>위에서 is_atomic == populate로 취급했던걸 봤다. pcpu_populate_chunk에서 몬가가 일어나고 있는데 잘모르겠다. 어쨋든 mutex걸었던 이유가 조금 보이는거 같은데 pcpu_popluate_chunk에서처럼 struct page를 뭘 어떻게하면 저렇게 mutex를 걸어야되고(non atomic) 이걸 populate하지 않는다고 하나보다.</p>
+</code></pre></div><p>위에서 is_atomic == populate로 취급했던걸 봤다. pcpu_populate_chunk에서 몬가가 일어나고 있는데 잘모르겠다.</p>
+
+
+<div class="alert alert-primary" role="alert">
+<h4 class="alert-heading">populate?</h4>
+
+    <a href="http://jake.dothome.co.kr/per-cpu/#:~:text=Demand%20Paging%20(%ED%8E%98%EC%9D%B4%EC%A7%80%EB%B3%84%20Population)">문c블로그 per cpu</a>
+vm에 할당되는 영역을 populate라고 하나보다.
+
+</div>
+
+<p>어쨋든 mutex걸었던 이유가 조금 보이는거 같은데 pcpu_popluate_chunk에서처럼 struct page를 뭘 어떻게하면 저렇게 mutex를 걸어야되고(non atomic) 이걸 populate하지 않는다고 하나보다.</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
 	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_nr_empty_pop_pages</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">PCPU_EMPTY_POP_PAGES_LOW</span><span style="color:#000;font-weight:bold">)</span>
 		<span style="color:#000">pcpu_schedule_balance_work</span><span style="color:#000;font-weight:bold">();</span>
@@ -1346,8 +1357,8 @@ reseved가 아니거나 reseved chunk가 없으면 if문을 안타고 다음으�
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/* clear the areas and return address relative to base address */</span>
 	<span style="color:#000">for_each_possible_cpu</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cpu</span><span style="color:#000;font-weight:bold">)</span>
 		<span style="color:#000">memset</span><span style="color:#000;font-weight:bold">((</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">pcpu_chunk_addr</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">cpu</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">);</span>
-
-	<span style="color:#000">ptr</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">__addr_to_pcpu_ptr</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">base_addr</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>해당 chunk의 base_offset 의 cpu별 off에 size만큼 할당이 완료 되었다. 모든 cpu에 대해서 해당 memory를 0로 초기화해준다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">ptr</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">__addr_to_pcpu_ptr</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">base_addr</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">);</span>
 	<span style="color:#000">kmemleak_alloc_percpu</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gfp</span><span style="color:#000;font-weight:bold">);</span>
 
 	<span style="color:#000">trace_percpu_alloc_percpu</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">reserved</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">is_atomic</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">align</span><span style="color:#000;font-weight:bold">,</span>
@@ -1382,9 +1393,377 @@ reseved가 아니거나 reseved chunk가 없으면 if문을 안타고 다음으�
 	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87">NULL</span><span style="color:#000;font-weight:bold">;</span>
 <span style="color:#000;font-weight:bold">}</span>
 </code></pre></div><p>기타 error 처리랑 마무리.</p>
-<p>for_each_possible_cpu 동작이 어떻게 되는지 모르겠다.</p>
 <p>pcpu_schedule_balance_work 가 수행되면 결국 pcpu_balance_workfn 가 한번 수행되는거 같다.</p>
+<h1 id="balance-관련">balance 관련</h1>
+<h2 id="pcpu_schedule_balance_work">pcpu_schedule_balance_work</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic"> * Balance work is used to populate or destroy chunks asynchronously.  We
+</span><span style="color:#8f5902;font-style:italic"> * try to keep the number of populated free pages between
+</span><span style="color:#8f5902;font-style:italic"> * PCPU_EMPTY_POP_PAGES_LOW and HIGH for atomic allocations and at most one
+</span><span style="color:#8f5902;font-style:italic"> * empty chunk.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_balance_workfn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">work_struct</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">work</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#000">DECLARE_WORK</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_balance_work</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">pcpu_balance_workfn</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">pcpu_async_enabled</span> <span style="color:#000">__read_mostly</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">pcpu_atomic_alloc_failed</span><span style="color:#000;font-weight:bold">;</span>
 
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_schedule_balance_work</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">void</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_async_enabled</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">schedule_work</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_balance_work</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><ul>
+<li>균형 작업은 청크를 비동기적으로 채우거나 파괴하는 데 사용됩니다. 원자량 할당을 위해 PCPU_EMPUTY_POP_PAGES_LOW와 HIGH 사이에 채워진 사용 가능한 페이지 수를 유지하고 최대 하나의 빈 청크를 유지하려고 합니다.</li>
+</ul>
+<p>pcpu_async_enabled를 먼저 본다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic"> * Percpu allocator is initialized early during boot when neither slab or
+</span><span style="color:#8f5902;font-style:italic"> * workqueue is available.  Plug async management until everything is up
+</span><span style="color:#8f5902;font-style:italic"> * and running.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">__init</span> <span style="color:#000">percpu_enable_async</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">void</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">pcpu_async_enabled</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">true</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000">subsys_initcall</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">percpu_enable_async</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>subsys_initcall 참고 : <a href="http://jake.dothome.co.kr/do_initcalls/">http://jake.dothome.co.kr/do_initcalls/</a>
+subsys_initcall은 do_initcalls에서 순서대로 호출한다. 아마 거기서 저함수가 호출되서 true로 되나보다.</p>
+<p>어쨋든 do_initcalls를 하고난후에 저 함수가 동작을 할거라는것을 알았다. schedule_wrok는 대충 pcpu_balance_work에 등록된 함수(pcpu_balance_workfn)를 실행시킨다 정도로만 파악하고 pcpu_balance_workfn를 보도록한다.</p>
+<h2 id="pcpu_balance_workfn">pcpu_balance_workfn</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_balance_workfn - manage the amount of free chunks and populated pages
+</span><span style="color:#8f5902;font-style:italic"> * @work: unused
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * For each chunk type, manage the number of fully free chunks and the number of
+</span><span style="color:#8f5902;font-style:italic"> * populated pages.  An important thing to consider is when pages are freed and
+</span><span style="color:#8f5902;font-style:italic"> * how they contribute to the global counts.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_balance_workfn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">work_struct</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">work</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * pcpu_balance_free() is called twice because the first time we may
+</span><span style="color:#8f5902;font-style:italic">	 * trim pages in the active pcpu_nr_empty_pop_pages which may cause us
+</span><span style="color:#8f5902;font-style:italic">	 * to grow other chunks.  This then gives pcpu_reclaim_populated() time
+</span><span style="color:#8f5902;font-style:italic">	 * to move fully free chunks to the active list to be freed if
+</span><span style="color:#8f5902;font-style:italic">	 * appropriate.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#000">mutex_lock</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_alloc_mutex</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">spin_lock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">pcpu_balance_free</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">false</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">pcpu_reclaim_populated</span><span style="color:#000;font-weight:bold">();</span>
+	<span style="color:#000">pcpu_balance_populated</span><span style="color:#000;font-weight:bold">();</span>
+	<span style="color:#000">pcpu_balance_free</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">true</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">spin_unlock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">mutex_unlock</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_alloc_mutex</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><ul>
+<li>각 청크 유형에 대해 사용 가능한 완전 청크 수와 채워진 페이지 수를 관리합니다. 고려해야 할 중요한 사항은 페이지가 해제되는 시점과 해당 페이지가 글로벌 카운트에 어떻게 기여하느냐입니다.</li>
+<li>pcpu_balance_freefiles는 두 번 호출되는데, 이는 처음 활성 pcpu_balance_empty_pop_page에서 페이지를 자르면 다른 덩어리가 커질 수 있기 때문이다. 그러면 pcpu_reclaim_populated()가 완전히 사용 가능한 청크를 사용 가능한 활성 목록으로 이동하여 적절한 경우 해제할 수 있는 시간을 줍니다.</li>
+</ul>
+<p>주석내용대로만 파악하고 넘어간다.</p>
+<h2 id="pcpu_balance_free">pcpu_balance_free</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_balance_free - manage the amount of free chunks
+</span><span style="color:#8f5902;font-style:italic"> * @empty_only: free chunks only if there are no populated pages
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * If empty_only is %false, reclaim all fully free chunks regardless of the
+</span><span style="color:#8f5902;font-style:italic"> * number of populated pages.  Otherwise, only reclaim chunks that have no
+</span><span style="color:#8f5902;font-style:italic"> * populated pages.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * CONTEXT:
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_lock (can be dropped temporarily)
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_balance_free</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">empty_only</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">LIST_HEAD</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">to_free</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">list_head</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">free_head</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_chunk_lists</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">pcpu_free_slot</span><span style="color:#000;font-weight:bold">];</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">next</span><span style="color:#000;font-weight:bold">;</span>
+</code></pre></div><ul>
+<li>여유 청크의 양을 관리합니다</li>
+<li>empty_only가 %false이면 채워진 페이지 수에 관계없이 사용 가능한 모든 청크를 회수하십시오. 그렇지 않으면 페이지가 채워지지 않은 청크만 회수하십시오.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">lockdep_assert_held</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * There&#39;s no reason to keep around multiple unused chunks and VM
+</span><span style="color:#8f5902;font-style:italic">	 * areas can be scarce.  Destroy all free chunks except for one.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#000">list_for_each_entry_safe</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">free_head</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">list</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">WARN_ON</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">immutable</span><span style="color:#000;font-weight:bold">);</span>
+
+		<span style="color:#8f5902;font-style:italic">/* spare the first one */</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">list_first_entry</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">free_head</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">list</span><span style="color:#000;font-weight:bold">))</span>
+			<span style="color:#204a87;font-weight:bold">continue</span><span style="color:#000;font-weight:bold">;</span>
+
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">empty_only</span> <span style="color:#ce5c00;font-weight:bold">||</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_empty_pop_pages</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#000">list_move</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">list</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">to_free</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">list_empty</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">to_free</span><span style="color:#000;font-weight:bold">))</span>
+		<span style="color:#204a87;font-weight:bold">return</span><span style="color:#000;font-weight:bold">;</span>	
+		
+	<span style="color:#000">spin_unlock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>free slot을 iterate한다. 최초한개는 남겨둔다. 빈free chunk가 한개이하면 끝낸다. empty_only이면 populate가 전부 되있는 경우에만 수행하고 아니면 무조건 수행한다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">list_for_each_entry_safe</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">to_free</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">list</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">;</span>
+
+		<span style="color:#000">bitmap_for_each_set_region</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">populated</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span>
+					   <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_pages</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">pcpu_depopulate_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">spin_lock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">pcpu_chunk_depopulated</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">spin_unlock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000;font-weight:bold">}</span>
+		<span style="color:#000">pcpu_destroy_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000">cond_resched</span><span style="color:#000;font-weight:bold">();</span>
+	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000">spin_lock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>chunk마다 populate인 bit범위를 찾고 해당 범위를 depopulate시킨다. 그리고 chunk를 해제해버린다. depopulate방법은 자세히 안본다 percpu-vm 에 대한 이해가 아직 전혀 없기 때문이다.</p>
+<h2 id="pcpu_reclaim_populated">pcpu_reclaim_populated</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_reclaim_populated - scan over to_depopulate chunks and free empty pages
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * Scan over chunks in the depopulate list and try to release unused populated
+</span><span style="color:#8f5902;font-style:italic"> * pages back to the system.  Depopulated chunks are sidelined to prevent
+</span><span style="color:#8f5902;font-style:italic"> * repopulating these pages unless required.  Fully free chunks are reintegrated
+</span><span style="color:#8f5902;font-style:italic"> * and freed accordingly (1 is kept around).  If we drop below the empty
+</span><span style="color:#8f5902;font-style:italic"> * populated pages threshold, reintegrate the chunk if it has empty free pages.
+</span><span style="color:#8f5902;font-style:italic"> * Each chunk is scanned in the reverse order to keep populated pages close to
+</span><span style="color:#8f5902;font-style:italic"> * the beginning of the chunk.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * CONTEXT:
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_lock (can be dropped temporarily)
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_reclaim_populated</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">void</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_block_md</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">block</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">freed_page_start</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">freed_page_end</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">i</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">reintegrate</span><span style="color:#000;font-weight:bold">;</span>
+</code></pre></div><ul>
+<li>청크를 추출하기 위해 스캔하고 빈 페이지를 비웁니다.</li>
+<li>채워지지 않은 목록의 청크를 검색하고 채워지지 않은 페이지를 시스템에 다시 릴리스해 보십시오. 필요하지 않은 경우 이러한 페이지를 다시 채우는 것을 방지하기 위해 채워지지 않은 청크는 따로 분리된다. 완전히 자유로운 청크는 그에 따라 다시 통합되고 해제된다(1은 주변에 유지된다). 비어 있는 페이지 임계값 아래로 떨어지면 사용 가능한 페이지가 비어 있으면 청크를 다시 통합합니다.</li>
+<li>각 청크는 역순으로 스캔되어 채워진 페이지를 청크의 시작 부분에 가깝게 유지합니다.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">lockdep_assert_held</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * Once a chunk is isolated to the to_depopulate list, the chunk is no
+</span><span style="color:#8f5902;font-style:italic">	 * longer discoverable to allocations whom may populate pages.  The only
+</span><span style="color:#8f5902;font-style:italic">	 * other accessor is the free path which only returns area back to the
+</span><span style="color:#8f5902;font-style:italic">	 * allocator not touching the populated bitmap.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#204a87;font-weight:bold">while</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">list_empty</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_chunk_lists</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">pcpu_to_depopulate_slot</span><span style="color:#000;font-weight:bold">]))</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">chunk</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">list_first_entry</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_chunk_lists</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">pcpu_to_depopulate_slot</span><span style="color:#000;font-weight:bold">],</span>
+					 <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">list</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000">WARN_ON</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">immutable</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><ul>
+<li>청크가 to_depopulate 목록으로 분리되면 페이지를 채울 수 있는 할당에서는 더 이상 청크를 검색할 수 없습니다. 유일한 다른 접근자는 채워진 비트맵을 건드리지 않는 할당자에게만 영역을 반환하는 자유 경로이다.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">		<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">		 * Scan chunk&#39;s pages in the reverse order to keep populated
+</span><span style="color:#8f5902;font-style:italic">		 * pages close to the beginning of the chunk.
+</span><span style="color:#8f5902;font-style:italic">		 */</span>
+		<span style="color:#000">freed_page_start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_pages</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000">freed_page_end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000">reintegrate</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">false</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_pages</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">&gt;=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span><span style="color:#ce5c00;font-weight:bold">--</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#8f5902;font-style:italic">/* no more work to do */</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_empty_pop_pages</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>
+				<span style="color:#204a87;font-weight:bold">break</span><span style="color:#000;font-weight:bold">;</span>
+
+			<span style="color:#8f5902;font-style:italic">/* reintegrate chunk to prevent atomic alloc failures */</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_nr_empty_pop_pages</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">PCPU_EMPTY_POP_PAGES_HIGH</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#000">reintegrate</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">true</span><span style="color:#000;font-weight:bold">;</span>
+				<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">end_chunk</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000;font-weight:bold">}</span>
+
+			<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">			 * If the page is empty and populated, start or
+</span><span style="color:#8f5902;font-style:italic">			 * extend the (i, end) range.  If i == 0, decrease
+</span><span style="color:#8f5902;font-style:italic">			 * i and perform the depopulation to cover the last
+</span><span style="color:#8f5902;font-style:italic">			 * (first) page in the chunk.
+</span><span style="color:#8f5902;font-style:italic">			 */</span>
+			<span style="color:#000">block</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">md_blocks</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">i</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">block</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">contig_hint</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">PCPU_BITMAP_BLOCK_BITS</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
+			    <span style="color:#000">test_bit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">i</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">populated</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+					<span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">i</span><span style="color:#000;font-weight:bold">;</span>
+				<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>
+					<span style="color:#204a87;font-weight:bold">continue</span><span style="color:#000;font-weight:bold">;</span>
+				<span style="color:#000">i</span><span style="color:#ce5c00;font-weight:bold">--</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><ul>
+<li>페이지가 비어 있고 채워진 경우, (i, 끝) 범위를 시작하거나 확장하십시오. i == 0이면 i를 줄이고 디포퍼레이션을 수행하여 청크의 마지막 (첫 번째) 페이지를 덮습니다.</li>
+</ul>
+<p>시스템 전체의 populate가 부족하면 그냥 reintegrate 하러간다. alloc 할당 요청시 실패를 방지하기 위함이다. 그게 아니면 backward로 범위를 특정하는데 contig hint가 전 영역이고 chunk가 populate되있다면 한번에 하기위해 end 를 설정하고 back page로 가는게 보인다.</p>
+<pre><code>                                                            nr_pages -1
+block별 contig hint size : | ... |    1 | 1024 | 1024 | 1 | ... |             |
+                                     ^i            ^end    
+                                      &lt;------------------------- backward 방향으로 진행
+
+</code></pre><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
+			<span style="color:#8f5902;font-style:italic">/* depopulate if there is an active range */</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
+				<span style="color:#204a87;font-weight:bold">continue</span><span style="color:#000;font-weight:bold">;</span>
+
+			<span style="color:#000">spin_unlock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">pcpu_depopulate_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">cond_resched</span><span style="color:#000;font-weight:bold">();</span>
+			<span style="color:#000">spin_lock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+
+			<span style="color:#000">pcpu_chunk_depopulated</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">freed_page_start</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">min</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">freed_page_start</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">freed_page_end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">max</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">freed_page_end</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">);</span>
+
+			<span style="color:#8f5902;font-style:italic">/* reset the range and continue */</span>
+			<span style="color:#000">end</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#f57900">end_chunk</span><span style="color:#000;font-weight:bold">:</span>
+		<span style="color:#8f5902;font-style:italic">/* batch tlb flush per chunk to amortize cost */</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">freed_page_start</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">freed_page_end</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">spin_unlock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">pcpu_post_unmap_tlb_flush</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span>
+						  <span style="color:#000">freed_page_start</span><span style="color:#000;font-weight:bold">,</span>
+						  <span style="color:#000">freed_page_end</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">cond_resched</span><span style="color:#000;font-weight:bold">();</span>
+			<span style="color:#000">spin_lock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000;font-weight:bold">}</span>
+
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">reintegrate</span> <span style="color:#ce5c00;font-weight:bold">||</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">free_bytes</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">pcpu_unit_size</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#000">pcpu_reintegrate_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#204a87;font-weight:bold">else</span>
+			<span style="color:#000">list_move_tail</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">list</span><span style="color:#000;font-weight:bold">,</span>
+				       <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_chunk_lists</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">pcpu_sidelined_slot</span><span style="color:#000;font-weight:bold">]);</span>
+	<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><ol>
+<li>depopulate_slot은 depopulate해야되는 chunk들이 pcpu_to_depopulate_slot에 들어가있고 이 루틴에선 chunk들을 depopulate하는것으로 대강 파악된다.</li>
+<li>first chunk외에 populate 됬다는의미는 vm 할당이 됬다는것을 의미한다.</li>
+<li>depopulate는 결국 vm 할당된 영역을 할당해제 한다는것이다.</li>
+</ol>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_balance_populated - manage the amount of populated pages
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * Maintain a certain amount of populated pages to satisfy atomic allocations.
+</span><span style="color:#8f5902;font-style:italic"> * It is possible that this is called when physical memory is scarce causing
+</span><span style="color:#8f5902;font-style:italic"> * OOM killer to be triggered.  We should avoid doing so until an actual
+</span><span style="color:#8f5902;font-style:italic"> * allocation causes the failure as it is possible that requests can be
+</span><span style="color:#8f5902;font-style:italic"> * serviced from already backed regions.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * CONTEXT:
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_lock (can be dropped temporarily)
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_balance_populated</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">void</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">/* gfp flags passed to underlying allocators */</span>
+	<span style="color:#204a87;font-weight:bold">const</span> <span style="color:#000">gfp_t</span> <span style="color:#000">gfp</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">GFP_KERNEL</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#000">__GFP_NORETRY</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#000">__GFP_NOWARN</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">slot</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">nr_to_pop</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ret</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">lockdep_assert_held</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><ul>
+<li>원자량 할당을 충족하기 위해 채워진 일정 양의 페이지를 유지합니다.<br>
+물리적 메모리가 부족할 때 호출되어 OOM 킬러가 트리거될 수 있습니다. 이미 지원된 지역에서 요청을 처리할 수 있기 때문에 실제 할당으로 인해 장애가 발생할 때까지 그렇게 하는 것은 피해야 합니다.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * Ensure there are certain number of free populated pages for
+</span><span style="color:#8f5902;font-style:italic">	 * atomic allocs.  Fill up from the most packed so that atomic
+</span><span style="color:#8f5902;font-style:italic">	 * allocs don&#39;t increase fragmentation.  If atomic allocation
+</span><span style="color:#8f5902;font-style:italic">	 * failed previously, always populate the maximum amount.  This
+</span><span style="color:#8f5902;font-style:italic">	 * should prevent atomic allocs larger than PAGE_SIZE from keeping
+</span><span style="color:#8f5902;font-style:italic">	 * failing indefinitely; however, large atomic allocs are not
+</span><span style="color:#8f5902;font-style:italic">	 * something we support properly and can be highly unreliable and
+</span><span style="color:#8f5902;font-style:italic">	 * inefficient.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+<span style="color:#f57900">retry_pop</span><span style="color:#000;font-weight:bold">:</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_atomic_alloc_failed</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">nr_to_pop</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">PCPU_EMPTY_POP_PAGES_HIGH</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#8f5902;font-style:italic">/* best effort anyway, don&#39;t worry about synchronization */</span>
+		<span style="color:#000">pcpu_atomic_alloc_failed</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">false</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">nr_to_pop</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">clamp</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">PCPU_EMPTY_POP_PAGES_HIGH</span> <span style="color:#ce5c00;font-weight:bold">-</span>
+				  <span style="color:#000">pcpu_nr_empty_pop_pages</span><span style="color:#000;font-weight:bold">,</span>
+				  <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">PCPU_EMPTY_POP_PAGES_HIGH</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><ul>
+<li>원자성 할당에 사용할 수 있는 특정 페이지 수가 있는지 확인하십시오. 원자량 할당이 조각화를 증가시키지 않도록 가장 많이 채워야 합니다. 이전에 원자성 할당에 실패한 경우 항상 최대 양을 채웁니다. 이것은 PAGE_SIZE보다 큰 원자 할당이 계속 실패하는 것을 방지해야 한다. 그러나 큰 원자 할당은 우리가 적절하게 지원하지 않으며 매우 신뢰할 수 없고 비효율적일 수 있다.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">slot</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_size_to_slot</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">PAGE_SIZE</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000">slot</span> <span style="color:#ce5c00;font-weight:bold">&lt;=</span> <span style="color:#000">pcpu_free_slot</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">slot</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">nr_unpop</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">;</span>
+
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">nr_to_pop</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#204a87;font-weight:bold">break</span><span style="color:#000;font-weight:bold">;</span>
+
+		<span style="color:#000">list_for_each_entry</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_chunk_lists</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">slot</span><span style="color:#000;font-weight:bold">],</span> <span style="color:#000">list</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">nr_unpop</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_pages</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_populated</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">nr_unpop</span><span style="color:#000;font-weight:bold">)</span>
+				<span style="color:#204a87;font-weight:bold">break</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">nr_unpop</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#204a87;font-weight:bold">continue</span><span style="color:#000;font-weight:bold">;</span>
+</code></pre></div><p>populate 안된 페이지가 존재하는지 확인한다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">		<span style="color:#8f5902;font-style:italic">/* @chunk can&#39;t go away while pcpu_alloc_mutex is held */</span>
+		<span style="color:#000">bitmap_for_each_clear_region</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">populated</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span>
+					     <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_pages</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">nr</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">min_t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">nr_to_pop</span><span style="color:#000;font-weight:bold">);</span>
+
+			<span style="color:#000">spin_unlock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">ret</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_populate_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">nr</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">gfp</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000">cond_resched</span><span style="color:#000;font-weight:bold">();</span>
+			<span style="color:#000">spin_lock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">ret</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#000">nr_to_pop</span> <span style="color:#ce5c00;font-weight:bold">-=</span> <span style="color:#000">nr</span><span style="color:#000;font-weight:bold">;</span>
+				<span style="color:#000">pcpu_chunk_populated</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">rs</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">nr</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#000">nr_to_pop</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000;font-weight:bold">}</span>
+
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">nr_to_pop</span><span style="color:#000;font-weight:bold">)</span>
+				<span style="color:#204a87;font-weight:bold">break</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>populate 안된 페이지들은 populate 시킨다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">nr_to_pop</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#8f5902;font-style:italic">/* ran out of chunks to populate, create a new one and retry */</span>
+		<span style="color:#000">spin_unlock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000">chunk</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_create_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gfp</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000">cond_resched</span><span style="color:#000;font-weight:bold">();</span>
+		<span style="color:#000">spin_lock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">pcpu_chunk_relocate</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">);</span>
+			<span style="color:#204a87;font-weight:bold">goto</span> <span style="color:#000">retry_pop</span><span style="color:#000;font-weight:bold">;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+</code></pre></div><p>populate page가 여유분이 있으면 chunk를 하나 생성한다.</p>
+<h2 id="pcpu_balance_workfn-2">pcpu_balance_workfn 2</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">pcpu_balance_workfn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">work_struct</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">work</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+</code></pre></div><p>이제 다시 봐보자.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">mutex_lock</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_alloc_mutex</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">spin_lock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">pcpu_balance_free</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">false</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>free slot에 있는 모든 chunk에 대해서 depopulate를 하고 해제해버린다. 즉 free slot을 일단 한번 비운다.(1개빼고)</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">pcpu_reclaim_populated</span><span style="color:#000;font-weight:bold">();</span>
+</code></pre></div><p>depoulate slot에 있는 chunk들을 이제 depopulate 시킨다. 해제는 안하고 만약 chunk 전체가 free byte면 일반 slot으로 넘기고 좀 남아잇으면 sidelined slot에 넣어놓는다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">pcpu_balance_populated</span><span style="color:#000;font-weight:bold">();</span>
+</code></pre></div><p>최대 PCPU_EMPTY_POP_PAGES_HIGH(4)개 page만큼을 PAGE_SIZE slot ~ free slot까지 돌면서 popluate 안된것들이 있으면 popluate를 좀 시켜준다. 만약 popluate가 다 되있다면 chunk를 하나 더 만들고 새로생긴 chunk는 일반 slot에 갈것이다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">pcpu_balance_free</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">true</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>free slot에 있는것들 중에 popluate가 하나도 안된것들은 해제시켜버린다. pcpu_balance_populated</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">spin_unlock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">mutex_unlock</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_alloc_mutex</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div>
 </div>
 
 
