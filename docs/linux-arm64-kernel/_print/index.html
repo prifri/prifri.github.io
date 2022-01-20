@@ -1646,7 +1646,7 @@ subsys_initcall은 do_initcalls에서 순서대로 호출한다. 아마 거기�
 <span style="color:#000;font-weight:bold">}</span>
 </code></pre></div><ul>
 <li>각 청크 유형에 대해 사용 가능한 완전 청크 수와 채워진 페이지 수를 관리합니다. 고려해야 할 중요한 사항은 페이지가 해제되는 시점과 해당 페이지가 글로벌 카운트에 어떻게 기여하느냐입니다.</li>
-<li>pcpu_balance_freefiles는 두 번 호출되는데, 이는 처음 활성 pcpu_balance_empty_pop_page에서 페이지를 자르면 다른 덩어리가 커질 수 있기 때문이다. 그러면 pcpu_reclaim_populated()가 완전히 사용 가능한 청크를 사용 가능한 활성 목록으로 이동하여 적절한 경우 해제할 수 있는 시간을 줍니다.</li>
+<li>pcpu_balance_freefiles는 두 번 호출되는데, 이는 첫호출에서 active pcpu_balance_empty_pop_page에서 페이지를 자르면 다른 덩어리가 커질 수 있기 때문이다. 그러면 pcpu_reclaim_populated()가 완전히 사용 가능한 chunk를 사용 가능한 active list로 이동하여 적절한 경우 해제할 수 있는 시간을 줍니다.</li>
 </ul>
 <p>주석내용대로만 파악하고 넘어간다.</p>
 <h2 id="pcpu_balance_free">pcpu_balance_free</h2>
@@ -1938,7 +1938,8 @@ block별 contig hint size : | ... |    1 | 1024 | 1024 | 1 | ... |             |
 	<span style="color:#000">spin_lock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
 
 	<span style="color:#000">pcpu_balance_free</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87">false</span><span style="color:#000;font-weight:bold">);</span>
-</code></pre></div><p>free slot에 있는 모든 chunk에 대해서 depopulate를 하고 해제해버린다. 즉 free slot을 일단 한번 비운다.(1개빼고)</p>
+</code></pre></div><p>free slot에 있는 모든 chunk에 대해서 depopulate를 하고 해제해버린다. 즉 free slot을 일단 한번 비운다.(1개빼고)
+주석에서 pcpu_balance_free를 두번 호출한 이유에 대해서 나오는데 즉 첫번째 pcpu_balance_free 호출에서 depoulate를 많이 시켜놓으면 pcpu_nr_empty_pop_pages가 줄어들고, 만약 충분한 pcpu_nr_empty_pop_pages가 없으면 pcpu_reclaim_populated에서 depopulate가 요청된 chunk들을 다시 일반 slot으로 보내고 나중에 적절할때 해제한다나 뭐라나.</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">pcpu_reclaim_populated</span><span style="color:#000;font-weight:bold">();</span>
 </code></pre></div><p>depoulate slot에 있는 chunk들을 이제 depopulate 시킨다. 해제는 안하고 만약 chunk 전체가 free byte면 일반 slot으로 넘기고 좀 남아잇으면 sidelined slot에 넣어놓는다.</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">pcpu_balance_populated</span><span style="color:#000;font-weight:bold">();</span>
