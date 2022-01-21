@@ -1949,7 +1949,138 @@ block별 contig hint size : | ... |    1 | 1024 | 1024 | 1 | ... |             |
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">spin_unlock_irq</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">);</span>
 	<span style="color:#000">mutex_unlock</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_alloc_mutex</span><span style="color:#000;font-weight:bold">);</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div>
+</code></pre></div><h2 id="__pcpu_ptr_to_addr">__pcpu_ptr_to_addr</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">#ifndef __addr_to_pcpu_ptr
+</span><span style="color:#8f5902;font-style:italic">#define __addr_to_pcpu_ptr(addr)					\
+</span><span style="color:#8f5902;font-style:italic">	(void __percpu *)((unsigned long)(addr) -			\
+</span><span style="color:#8f5902;font-style:italic">			  (unsigned long)pcpu_base_addr	+		\
+</span><span style="color:#8f5902;font-style:italic">			  (unsigned long)__per_cpu_start)
+</span><span style="color:#8f5902;font-style:italic">#endif
+</span><span style="color:#8f5902;font-style:italic">#ifndef __pcpu_ptr_to_addr
+</span><span style="color:#8f5902;font-style:italic">#define __pcpu_ptr_to_addr(ptr)						\
+</span><span style="color:#8f5902;font-style:italic">	(void __force *)((unsigned long)(ptr) +				\
+</span><span style="color:#8f5902;font-style:italic">			 (unsigned long)pcpu_base_addr -		\
+</span><span style="color:#8f5902;font-style:italic">			 (unsigned long)__per_cpu_start)
+</span><span style="color:#8f5902;font-style:italic">#endif
+</span></code></pre></div><p>vm에 대한 이해가 있어야 변환과정을 이해할듯 싶은데 아직 모르므로 일단 skip한다.</p>
+<h2 id="pcpu_chunk_addr_search">pcpu_chunk_addr_search</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
+<span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_chunk_addr_search - determine chunk containing specified address
+</span><span style="color:#8f5902;font-style:italic"> * @addr: address for which the chunk needs to be determined.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * This is an internal function that handles all but static allocations.
+</span><span style="color:#8f5902;font-style:italic"> * Static percpu address values should never be passed into the allocator.
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * RETURNS:
+</span><span style="color:#8f5902;font-style:italic"> * The address of the found chunk.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">pcpu_chunk_addr_search</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">addr</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">/* is it in the dynamic region (first chunk)? */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_addr_in_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_first_chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">addr</span><span style="color:#000;font-weight:bold">))</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">pcpu_first_chunk</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#8f5902;font-style:italic">/* is it in the reserved region? */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_addr_in_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_reserved_chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">addr</span><span style="color:#000;font-weight:bold">))</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">pcpu_reserved_chunk</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * The address is relative to unit0 which might be unused and
+</span><span style="color:#8f5902;font-style:italic">	 * thus unmapped.  Offset the address to the unit space of the
+</span><span style="color:#8f5902;font-style:italic">	 * current processor before looking it up in the vmalloc
+</span><span style="color:#8f5902;font-style:italic">	 * space.  Note that any possible cpu id can be used here, so
+</span><span style="color:#8f5902;font-style:italic">	 * there&#39;s no need to worry about preemption or cpu hotplug.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#000">addr</span> <span style="color:#ce5c00;font-weight:bold">+=</span> <span style="color:#000">pcpu_unit_offsets</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">raw_smp_processor_id</span><span style="color:#000;font-weight:bold">()];</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">pcpu_get_page_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_addr_to_page</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">addr</span><span style="color:#000;font-weight:bold">));</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>addr에 해당하는 chunk를 가져온다. first-&gt;reserved-&gt;dynamic 순이라는것만 생각하고 넘어간다.</p>
+<h2 id="free_percpu">free_percpu</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">free_percpu</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">__percpu</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">addr</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">unsigned</span> <span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">need_balance</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">false</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#204a87;font-weight:bold">return</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">kmemleak_free_percpu</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">addr</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">__pcpu_ptr_to_addr</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">spin_lock_irqsave</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">chunk</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_chunk_addr_search</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">addr</span><span style="color:#000;font-weight:bold">);</span>
+	<span style="color:#000">off</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">addr</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">base_addr</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#000">size</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">pcpu_free_area</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>해당 addr의 chunk를 구한후 bitmap을 free하고 chunk를 relocate한다. 이때 contig size가 늘어났다면 slot번호가 바뀔수도있을것이다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">	<span style="color:#000">pcpu_memcg_free_hook</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * If there are more than one fully free chunks, wake up grim reaper.
+</span><span style="color:#8f5902;font-style:italic">	 * If the chunk is isolated, it may be in the process of being
+</span><span style="color:#8f5902;font-style:italic">	 * reclaimed.  Let reclaim manage cleaning up of that chunk.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">isolated</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">free_bytes</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">pcpu_unit_size</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">pos</span><span style="color:#000;font-weight:bold">;</span>
+
+		<span style="color:#000">list_for_each_entry</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pos</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_chunk_lists</span><span style="color:#000;font-weight:bold">[</span><span style="color:#000">pcpu_free_slot</span><span style="color:#000;font-weight:bold">],</span> <span style="color:#000">list</span><span style="color:#000;font-weight:bold">)</span>
+			<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">pos</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#000">need_balance</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">true</span><span style="color:#000;font-weight:bold">;</span>
+				<span style="color:#204a87;font-weight:bold">break</span><span style="color:#000;font-weight:bold">;</span>
+			<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_should_reclaim_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#000">pcpu_isolate_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">);</span>
+		<span style="color:#000">need_balance</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">true</span><span style="color:#000;font-weight:bold">;</span>
+	<span style="color:#000;font-weight:bold">}</span>
+
+	<span style="color:#000">trace_percpu_free_percpu</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">base_addr</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">off</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ptr</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#000">spin_unlock_irqrestore</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">pcpu_lock</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">need_balance</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#000">pcpu_schedule_balance_work</span><span style="color:#000;font-weight:bold">();</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>cgroup은 넘어가고 chunk가 isolate이거나 완전한 free chunk가 아니라면 reclaim을 해야되는지 검사한다.
+pcpu_should_reclaim_chunk는 분석이 되니 한번 본다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * pcpu_should_reclaim_chunk - determine if a chunk should go into reclaim
+</span><span style="color:#8f5902;font-style:italic"> * @chunk: chunk of interest
+</span><span style="color:#8f5902;font-style:italic"> *
+</span><span style="color:#8f5902;font-style:italic"> * This is the entry point for percpu reclaim.  If a chunk qualifies, it is then
+</span><span style="color:#8f5902;font-style:italic"> * isolated and managed in separate lists at the back of pcpu_slot: sidelined
+</span><span style="color:#8f5902;font-style:italic"> * and to_depopulate respectively.  The to_depopulate list holds chunks slated
+</span><span style="color:#8f5902;font-style:italic"> * for depopulation.  They no longer contribute to pcpu_nr_empty_pop_pages once
+</span><span style="color:#8f5902;font-style:italic"> * they are on this list.  Once depopulated, they are moved onto the sidelined
+</span><span style="color:#8f5902;font-style:italic"> * list which enables them to be pulled back in for allocation if no other chunk
+</span><span style="color:#8f5902;font-style:italic"> * can suffice the allocation.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">pcpu_should_reclaim_chunk</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">pcpu_chunk</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">chunk</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#8f5902;font-style:italic">/* do not reclaim either the first chunk or reserved chunk */</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">chunk</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">pcpu_first_chunk</span> <span style="color:#ce5c00;font-weight:bold">||</span> <span style="color:#000">chunk</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">pcpu_reserved_chunk</span><span style="color:#000;font-weight:bold">)</span>
+		<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87">false</span><span style="color:#000;font-weight:bold">;</span>
+
+	<span style="color:#8f5902;font-style:italic">/*
+</span><span style="color:#8f5902;font-style:italic">	 * If it is isolated, it may be on the sidelined list so move it back to
+</span><span style="color:#8f5902;font-style:italic">	 * the to_depopulate list.  If we hit at least 1/4 pages empty pages AND
+</span><span style="color:#8f5902;font-style:italic">	 * there is no system-wide shortage of empty pages aside from this
+</span><span style="color:#8f5902;font-style:italic">	 * chunk, move it to the to_depopulate list.
+</span><span style="color:#8f5902;font-style:italic">	 */</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">((</span><span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">isolated</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_empty_pop_pages</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">||</span>
+		<span style="color:#000;font-weight:bold">(</span><span style="color:#000">pcpu_nr_empty_pop_pages</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span>
+		 <span style="color:#000;font-weight:bold">(</span><span style="color:#000">PCPU_EMPTY_POP_PAGES_HIGH</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_empty_pop_pages</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
+		 <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_empty_pop_pages</span> <span style="color:#ce5c00;font-weight:bold">&gt;=</span> <span style="color:#000">chunk</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">nr_pages</span> <span style="color:#ce5c00;font-weight:bold">/</span> <span style="color:#0000cf;font-weight:bold">4</span><span style="color:#000;font-weight:bold">));</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>chunk가 first, reserved일때는 당연히 할필요없다. chunk가 isolated면서 비어있는 populate가 존재하면 isolate되있으니 populate를 풀어버리는거 같고, 기타 system에서 비어있는 populate page가 너무 많으면 역시 reclaim을 수행한다고 되있다.</p>
+<p>다시 돌아와서 isolate가 아니면서 전체가 free size chunk라면 free slot에 chunk가 2개이상 있거나 한개가 있어도 해당 chunk가 지금것이 아니라면 need_balance를 set한다. (list.cnt &gt;= 2 || ㅣlist.head != chunk랑 일치하는거같다)
+isolate가 되있는 chunk면서 empty populate가 많은 상황이거나 아무튼 free할 chunk가 있다면 balance를 하는거같다.</p>
+
 </div>
 
 
