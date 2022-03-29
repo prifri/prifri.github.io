@@ -1854,6 +1854,11 @@ bar := &amp;quot;foo&amp;quot;;
 엘드리치호러(3.32), 테포마(3.25)
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;경쟁&#34;&gt;경쟁&lt;/h3&gt;
+&lt;style scoped&gt;
+table {
+  font-size: 9px;
+}
+&lt;/style&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
