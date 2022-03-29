@@ -1835,7 +1835,8 @@ bar := &amp;quot;foo&amp;quot;;
         
         
         &lt;p&gt;&lt;a href=&#34;https://boardgamearena.com/gamelist&#34;&gt;board game arena link&lt;/a&gt;
-&lt;a href=&#34;https://boardgamegeek.com/&#34;&gt;board game geek link&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&#34;https://boardgamegeek.com/&#34;&gt;board game geek link&lt;/a&gt;
+&lt;a href=&#34;https://www.tablesgenerator.com/markdown_tables&#34;&gt;mk tables generator&lt;/a&gt;&lt;/p&gt;
 
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;

@@ -4,7 +4,6 @@
     <link>/docs/boardgame/</link>
     <description>Recent content in Board Game on Goldydocs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 29 Mar 2022 00:00:00 +0000</lastBuildDate>
     
 	  <atom:link href="/docs/boardgame/index.xml" rel="self" type="application/rss+xml" />
     
@@ -24,7 +23,8 @@
         
         
         &lt;p&gt;&lt;a href=&#34;https://boardgamearena.com/gamelist&#34;&gt;board game arena link&lt;/a&gt;
-&lt;a href=&#34;https://boardgamegeek.com/&#34;&gt;board game geek link&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&#34;https://boardgamegeek.com/&#34;&gt;board game geek link&lt;/a&gt;
+&lt;a href=&#34;https://www.tablesgenerator.com/markdown_tables&#34;&gt;mk tables generator&lt;/a&gt;&lt;/p&gt;
 
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
