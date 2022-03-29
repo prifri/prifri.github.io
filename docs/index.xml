@@ -1826,6 +1826,215 @@ bar := &amp;quot;foo&amp;quot;;
     </item>
     
     <item>
+      <title>Docs: BGA</title>
+      <link>/docs/boardgame/bga/</link>
+      <pubDate>Tue, 29 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/boardgame/bga/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;a href=&#34;https://boardgamearena.com/gamelist&#34;&gt;board game arena link&lt;/a&gt;
+&lt;a href=&#34;https://boardgamegeek.com/&#34;&gt;board game geek link&lt;/a&gt;&lt;/p&gt;
+
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;BGA에서의 board game 정보(난이도, 플탐)는 매우 부정확하므로 Geek을 참고하였다.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;난이도는 온라인, 오프라인에서의 차이가 고려되야 된다. 예를들어 아그리콜라와 엘드리치를 비교해본다. 아그리콜라 3.49, 엘드리치 호러가 3.32.로 매겨져있다.
+아그리콜라가 룰상으로는 엘드리치보다 쉽고 판깔기도 편하며 잔룰도 적지만 막상 판을 깔고 정리한다는 점에서 엘드리치 호러가 더 피곤함이 느껴지고 게임을 가르켜줄때도 여러 잔룰과 확장팩 룰 추가때문에 좀 더 힘든 감이 있다. 캐릭터 마다 전략도 다르게 가야되기도 하다. 하지만 게임 진행시의 자체의 복잡도는 경쟁 + 덱 + 여러 상황판단에 따른 다양한 조합이 요구되는 아그리콜라가 집중도면에서는 확실히 피로감이 더 있긴다.
+즉 Geek의 난이도가 높다고 오프라인 상에서의 판 세팅, 최초진입, 오더, 게임중의 피로가 전부 절대적으로 높진 않다고 생각한다.
+게임 Geek 난이도는 진행에 대한 난이도 정도로만 일단 생각해본다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;참고난이도
+엘드리치호러(3.32), 테포마(3.25)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;경쟁&#34;&gt;경쟁&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;W&lt;/th&gt;
+&lt;th&gt;인원(B)&lt;/th&gt;
+&lt;th&gt;실플탐&lt;/th&gt;
+&lt;th&gt;평점&lt;/th&gt;
+&lt;th&gt;룰적응&lt;/th&gt;
+&lt;th&gt;E&lt;/th&gt;
+&lt;th&gt;장르&lt;/th&gt;
+&lt;th&gt;LastPlay&lt;/th&gt;
+&lt;th&gt;Note&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;컬러레또&lt;/td&gt;
+&lt;td&gt;1.28&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;인당5분&lt;/td&gt;
+&lt;td&gt;7.0&lt;/td&gt;
+&lt;td&gt;1판&lt;/td&gt;
+&lt;td&gt;X&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;2022-03-28&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;스플렌더&lt;/td&gt;
+&lt;td&gt;1.79&lt;/td&gt;
+&lt;td&gt;2-4(3)&lt;/td&gt;
+&lt;td&gt;인당15분&lt;/td&gt;
+&lt;td&gt;7.4&lt;/td&gt;
+&lt;td&gt;1판&lt;/td&gt;
+&lt;td&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;2022-03-28&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;카르카손&lt;/td&gt;
+&lt;td&gt;1.90&lt;/td&gt;
+&lt;td&gt;2-5(2)&lt;/td&gt;
+&lt;td&gt;30+&lt;/td&gt;
+&lt;td&gt;7.4&lt;/td&gt;
+&lt;td&gt;오더+1판&lt;/td&gt;
+&lt;td&gt;O&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;2022-03-28&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;아그리콜라&lt;/td&gt;
+&lt;td&gt;3.49&lt;/td&gt;
+&lt;td&gt;1-5(3-4)&lt;/td&gt;
+&lt;td&gt;인당30분+&lt;/td&gt;
+&lt;td&gt;7.9&lt;/td&gt;
+&lt;td&gt;룰북+오더++&lt;/td&gt;
+&lt;td&gt;O&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;협력&#34;&gt;협력&lt;/h3&gt;
+&lt;h3 id=&#34;할예정&#34;&gt;할예정&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;W&lt;/th&gt;
+&lt;th&gt;장르(경/협)&lt;/th&gt;
+&lt;th&gt;인원(B)&lt;/th&gt;
+&lt;th&gt;플탐&lt;/th&gt;
+&lt;th&gt;평점&lt;/th&gt;
+&lt;th&gt;Note&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;7원더스&lt;/td&gt;
+&lt;td&gt;2.32&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;3-7(4-5)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.7&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;젝스님트&lt;/td&gt;
+&lt;td&gt;1.20&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;3-10(5-6)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;6.9&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;아줄&lt;/td&gt;
+&lt;td&gt;1.77&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;2-4(2)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.8&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;푸에르토 리코&lt;/td&gt;
+&lt;td&gt;3.27&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;90-150&lt;/td&gt;
+&lt;td&gt;8.4&lt;/td&gt;
+&lt;td&gt;아그리콜라급으로 예상됨&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;펜데믹&lt;/td&gt;
+&lt;td&gt;2.41&lt;/td&gt;
+&lt;td&gt;전략(협)&lt;/td&gt;
+&lt;td&gt;1-4(4)&lt;/td&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;석기시대&lt;/td&gt;
+&lt;td&gt;2.47&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;90&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;상트페테르부르크&lt;/td&gt;
+&lt;td&gt;2.67&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.5&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;테오티우아칸&lt;/td&gt;
+&lt;td&gt;3.77&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;1-4(4)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;7.9&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;쓰루 디 에이지스&lt;/td&gt;
+&lt;td&gt;4.42&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;2-4(3)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;8.4&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;테라 미스티카&lt;/td&gt;
+&lt;td&gt;3.97&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;60-150&lt;/td&gt;
+&lt;td&gt;8.1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;미분류&#34;&gt;미분류&lt;/h3&gt;
+&lt;p&gt;킹도미노 로스트시티 세븐원더스듀얼 포세일 패치워크 러브레터 노땡스
+반디도 코덱스 랠리맨&lt;/p&gt;
+&lt;h3 id=&#34;보드게임-추천-사이트&#34;&gt;보드게임 추천 사이트&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://pgr21.com/free2/72290?category=1&amp;amp;sn1=on&amp;amp;divpage=13&amp;amp;sn=on&amp;amp;keyword=%ED%99%A9%EA%B8%88%EA%B2%BD%20%EC%97%98%EB%93%9C%EB%A6%AC%EC%B9%98&amp;amp;desc=desc&#34;&gt;참고사이트 1&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: mm_percpu_c</title>
       <link>/docs/linux-arm64-kernel/source-studty/per-cpu/mm_percpu_c/</link>
       <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
