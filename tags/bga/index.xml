@@ -43,6 +43,9 @@
 엘드리치호러(3.32), 테포마(3.25)
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;경쟁&#34;&gt;경쟁&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;APT : Actual Play Time&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -51,10 +54,10 @@
 &lt;th&gt;player(B)    &lt;/th&gt;
 &lt;th&gt;APT    &lt;/th&gt;
 &lt;th&gt;Rating&lt;/th&gt;
-&lt;th&gt;Intro difficulty&lt;/th&gt;
+&lt;th&gt;Intro difficulty       &lt;/th&gt;
 &lt;th&gt;E&lt;/th&gt;
 &lt;th&gt;Thema&lt;/th&gt;
-&lt;th&gt;LastPlay Time&lt;/th&gt;
+&lt;th&gt;LastPlay Time     &lt;/th&gt;
 &lt;th&gt;Note&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
