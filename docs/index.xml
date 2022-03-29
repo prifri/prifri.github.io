@@ -1834,9 +1834,9 @@ bar := &amp;quot;foo&amp;quot;;
       <description>
         
         
-        &lt;p&gt;&lt;a href=&#34;https://boardgamearena.com/gamelist&#34;&gt;board game arena link&lt;/a&gt;
-&lt;a href=&#34;https://boardgamegeek.com/&#34;&gt;board game geek link&lt;/a&gt;
-&lt;a href=&#34;https://www.tablesgenerator.com/markdown_tables&#34;&gt;mk tables generator&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;a href=&#34;https://boardgamearena.com/gamelist&#34;&gt;board game arena link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://boardgamegeek.com/&#34;&gt;board game geek link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.tablesgenerator.com/markdown_tables&#34;&gt;mk tables generator&lt;/a&gt;&lt;/p&gt;
 
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
@@ -1852,7 +1852,8 @@ bar := &amp;quot;foo&amp;quot;;
 &lt;/blockquote&gt;
 &lt;pre&gt;&lt;code&gt;참고난이도
 엘드리치호러(3.32), 테포마(3.25)
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;경쟁&#34;&gt;경쟁&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;경쟁&#34;&gt;경쟁&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1919,7 +1920,9 @@ bar := &amp;quot;foo&amp;quot;;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;hr&gt;
 &lt;h3 id=&#34;협력&#34;&gt;협력&lt;/h3&gt;
+&lt;hr&gt;
 &lt;h3 id=&#34;할예정&#34;&gt;할예정&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -2026,11 +2029,14 @@ bar := &amp;quot;foo&amp;quot;;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;hr&gt;
 &lt;h3 id=&#34;미분류&#34;&gt;미분류&lt;/h3&gt;
 &lt;p&gt;킹도미노 로스트시티 세븐원더스듀얼 포세일 패치워크 러브레터 노땡스
 반디도 코덱스 랠리맨&lt;/p&gt;
+&lt;hr&gt;
 &lt;h3 id=&#34;보드게임-추천-사이트&#34;&gt;보드게임 추천 사이트&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;https://pgr21.com/free2/72290?category=1&amp;amp;sn1=on&amp;amp;divpage=13&amp;amp;sn=on&amp;amp;keyword=%ED%99%A9%EA%B8%88%EA%B2%BD%20%EC%97%98%EB%93%9C%EB%A6%AC%EC%B9%98&amp;amp;desc=desc&#34;&gt;참고사이트 1&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
 
       </description>
     </item>
