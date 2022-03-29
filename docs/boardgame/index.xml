@@ -43,7 +43,8 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;경쟁&#34;&gt;경쟁&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;p&gt;APT : Actual Play Time&lt;/p&gt;
+&lt;p&gt;APT : Actual Play Time. 실플탐
+m/p : 1인당 플탐&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -65,7 +66,7 @@
 &lt;td&gt;컬러레또&lt;/td&gt;
 &lt;td&gt;1.28&lt;/td&gt;
 &lt;td&gt;2-5(4)&lt;/td&gt;
-&lt;td&gt;인당5분&lt;/td&gt;
+&lt;td&gt;5m/p&lt;/td&gt;
 &lt;td&gt;7.0&lt;/td&gt;
 &lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;X&lt;/td&gt;
@@ -77,7 +78,7 @@
 &lt;td&gt;스플렌더&lt;/td&gt;
 &lt;td&gt;1.79&lt;/td&gt;
 &lt;td&gt;2-4(3)&lt;/td&gt;
-&lt;td&gt;인당15분&lt;/td&gt;
+&lt;td&gt;15m/p&lt;/td&gt;
 &lt;td&gt;7.4&lt;/td&gt;
 &lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;?&lt;/td&gt;
@@ -101,7 +102,7 @@
 &lt;td&gt;아그리콜라&lt;/td&gt;
 &lt;td&gt;3.49&lt;/td&gt;
 &lt;td&gt;1-5(3-4)&lt;/td&gt;
-&lt;td&gt;인당30분+&lt;/td&gt;
+&lt;td&gt;30m/p+&lt;/td&gt;
 &lt;td&gt;7.9&lt;/td&gt;
 &lt;td&gt;룰북+오더++&lt;/td&gt;
 &lt;td&gt;O&lt;/td&gt;
