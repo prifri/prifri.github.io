@@ -119,13 +119,13 @@
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Name          &lt;/th&gt;
 &lt;th&gt;W&lt;/th&gt;
 &lt;th&gt;Thema(Comp/Coop)&lt;/th&gt;
-&lt;th&gt;player(B)&lt;/th&gt;
-&lt;th&gt;Play Time&lt;/th&gt;
+&lt;th&gt;player(B)    &lt;/th&gt;
+&lt;th&gt;Play Time    &lt;/th&gt;
 &lt;th&gt;Rating&lt;/th&gt;
-&lt;th&gt;N o t e&lt;/th&gt;
+&lt;th&gt;Note                     &lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
