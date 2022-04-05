@@ -16,23 +16,24 @@
     <item>
       <title>Docs: BGA</title>
       <link>/docs/boardgame/bga/</link>
-      <pubDate>Tue, 29 Mar 2022 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate>
       
       <guid>/docs/boardgame/bga/</guid>
       <description>
         
         
-        &lt;p&gt;&lt;a href=&#34;https://boardgamearena.com/gamelist&#34;&gt;board game arena link&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://boardgamegeek.com/&#34;&gt;board game geek link&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.tablesgenerator.com/markdown_tables&#34;&gt;mk tables generator&lt;/a&gt;&lt;/p&gt;
+        &lt;h3 id=&#34;참고사이트&#34;&gt;참고사이트&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://boardgamearena.com/gamelist&#34;&gt;board game arena link&lt;/a&gt;
+&lt;a href=&#34;https://boardgamegeek.com/&#34;&gt;board game geek link&lt;/a&gt;
+&lt;a href=&#34;https://www.tablesgenerator.com/markdown_tables&#34;&gt;mk tables generator&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;객관적-stats&#34;&gt;객관적 stats&lt;/h3&gt;
 
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;BGA에서의 board game 정보(난이도, 플탐)는 매우 부정확하므로 Geek을 참고하였다.&lt;/p&gt;
+&lt;p&gt;BGA에서의 board game 정보(난이도, 플탐)는 매우 부정확하다고 생각하여 Geek을 참고하였다.&lt;/p&gt;
 
 &lt;/div&gt;
 
-&lt;h3 id=&#34;객관적-stats&#34;&gt;객관적 stats&lt;/h3&gt;
 &lt;h3 id=&#34;난이도에-대해서&#34;&gt;난이도에 대해서&lt;/h3&gt;
 &lt;p&gt;난이도는 온라인, 오프라인에서의 차이가 고려되야 된다. 예를들어 아그리콜라와 엘드리치를 비교해본다.
 아그리콜라 3.49, 엘드리치 호러가 3.32.로 매겨져있다.&lt;/p&gt;
