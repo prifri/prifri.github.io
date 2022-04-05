@@ -59,25 +59,31 @@
 &lt;p&gt;실제 플레이를 해본 경험을 기준으로 정리했으며 일절의 객관성이 없이 주관적으로 작성했다.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; APT  : Actual Play Time. 실플탐(분단위)  
         (Xm/p : 1인당 X분 플탐)  
- w    : F - 친구랑 하기 좋음(대화하면서 할 꺼리가 있음)  
-        N - 모르는 사람이랑 하기 좋음(친구끼리 할때 오고가는 말이 적음, 경쟁 퍼즐류)  
-		 X - 무관  
+ w    : with. 게임도중 게임진행에 대한 의사소통
+		X - 무관
+		0 - 블러핑게임. 대화로만 이루어지는 게임(대화하면서 할 꺼리가 있음)  
+        1 - 전략, 퍼즐등의 측면이 있지만 결국 대화가 메인인 게임.
+        2 - 매라운드, 매턴 랜덤적등의 요인으로 인해 상대에 영향을 줄수밖에 없는 게임.
+        3 - 매라운드, 매턴 공유자원등 선택에 따라 상대에 영향을 줄수 있는 게임.
+        4 - 선택에따라 영향을 줄순 있지만 전체 게임시스템에서 미미한게임.
+        5 - 몇가지 목표점을 공유하는것을 제외하곤 필드나 덱에 대한 컨트롤이 타인이 침범할 경우가 없는게임.
+		6 - 대화전무. 
  C    : Kepp Check. 고의로 견제를 함으로써 상대와 자신의 패가 말리는 정도.  
         X - 협력게임  
         0 - 견제 없음. 자신의 판만 발전시키면됨.  
-   	 1 - 랜덤적인 요소로만 견제가 이루어짐. 랜덤자체는 고의로 고를수도있음.  
-            랜덤적이든 살기위해서든 진행상 견제모양이 될수밖에 없는 게임.  
-   	 2 - 고의로 견제가 가능하되 큰 밸런스에서 영향이 적음.  
-   	 3 - 자의든 타이든 견제가 이루어지고 그 속에서 이득을 찾아야 됨.  
-   	 4 - 모든 사람이 견제플을 안하면 견제를 안받고 안하는 사람만 이득이 되는 시스템.  
-   	 5 - 견제만을 위한 게임.  
+		1 - 랜덤적인 요소로만 견제가 이루어짐. 랜덤자체는 고의로 고를수도있음.  
+		랜덤적이든 살기위해서든 진행상 견제모양이 될수밖에 없는 게임.  
+		2 - 고의로 견제가 가능하되 전략적으로 꾸준히 대응 가능.
+		3 - 고의로 견제가 가능하며 계속 견제를 받을 경우 전략적으로도 대응 불가.
+		4 - 모든 사람이 견제플을 안하면 견제를 안받고 안하는 사람만 이득이 되는 시스템.  
+		5 - 견제만을 위한 게임.  
  R    : Random 적인 요소.  
         0 - Random 요소가 아에 없음.  
         1 - 선전략. Random 요소가 있지만 자신이 세운 전략범위내에서 제어 가능. 승패에 아주 약간 영향.  
         2 - 후전략. 먼저 Random 요소를 본후 전략을 세워야되고 이 전략이 끝날때까지 유효.  
         3 - 중전략. 게임 진행 내내 Random 요소를 보며 전략을 계속 수정해야됨.  
         4 - Random으로만 진행하고 그 순간의 판단만으로 게임을 진행.  
-        5 - 완전히 Random적인 요소로만 진행.
+        5 - 완전히 Random적인 요소로 + 결단력으로만 진행.
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;경쟁&#34;&gt;경쟁&lt;/h3&gt;
 &lt;table&gt;
@@ -98,6 +104,32 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
+&lt;td&gt;No Thanks!&lt;/td&gt;
+&lt;td&gt;1.14&lt;/td&gt;
+&lt;td&gt;3-7(4-5)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Card&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;캔트스탑&lt;/td&gt;
+&lt;td&gt;1.14&lt;/td&gt;
+&lt;td&gt;3-7(4-5)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.1&lt;/td&gt;
+&lt;td&gt;1판&lt;/td&gt;
+&lt;td&gt;주사위&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;Coloretto&lt;/td&gt;
 &lt;td&gt;1.28&lt;/td&gt;
 &lt;td&gt;2-5(4)&lt;/td&gt;
@@ -106,7 +138,7 @@
 &lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;Card&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;N&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;/tr&gt;
@@ -119,7 +151,7 @@
 &lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;Card&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;F&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;/tr&gt;
@@ -132,7 +164,7 @@
 &lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;Puzzle&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;N&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;/tr&gt;
@@ -145,9 +177,22 @@
 &lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;X&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Codex Naturalis&lt;/td&gt;
+&lt;td&gt;1.84&lt;/td&gt;
+&lt;td&gt;1-4(2-3)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.2&lt;/td&gt;
+&lt;td&gt;1판&lt;/td&gt;
+&lt;td&gt;퍼즐&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;카르카손&lt;/td&gt;
@@ -158,8 +203,21 @@
 &lt;td&gt;1판+&lt;/td&gt;
 &lt;td&gt;ㅁㅁㅁ&lt;/td&gt;
 &lt;td&gt;22.03.28&lt;/td&gt;
-&lt;td&gt;X&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Nidavellir&lt;/td&gt;
+&lt;td&gt;2.14&lt;/td&gt;
+&lt;td&gt;2-5(3)&lt;/td&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;7.7&lt;/td&gt;
+&lt;td&gt;1판+&lt;/td&gt;
+&lt;td&gt;Card, Bidding&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -171,9 +229,22 @@
 &lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;X&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;석기시대&lt;/td&gt;
+&lt;td&gt;2.47&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;90&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;버건디의 성&lt;/td&gt;
@@ -183,8 +254,8 @@
 &lt;td&gt;8.1&lt;/td&gt;
 &lt;td&gt;2판&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
-&lt;td&gt;22.04.01&lt;/td&gt;
-&lt;td&gt;X&lt;/td&gt;
+&lt;td&gt;22.04.04&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;/tr&gt;
@@ -197,7 +268,7 @@
 &lt;td&gt;2판&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;X&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;/tr&gt;
@@ -210,7 +281,7 @@
 &lt;td&gt;2판++&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;22.04.02&lt;/td&gt;
-&lt;td&gt;X&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;/tr&gt;
@@ -389,32 +460,6 @@
 &lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;No Thanks!&lt;/td&gt;
-&lt;td&gt;1.14&lt;/td&gt;
-&lt;td&gt;3-7(4-5)&lt;/td&gt;
-&lt;td&gt;30&lt;/td&gt;
-&lt;td&gt;7.1&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;전략&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;캔트스탑&lt;/td&gt;
-&lt;td&gt;1.14&lt;/td&gt;
-&lt;td&gt;3-7(4-5)&lt;/td&gt;
-&lt;td&gt;30&lt;/td&gt;
-&lt;td&gt;7.1&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;전략&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;for sale&lt;/td&gt;
 &lt;td&gt;1.26&lt;/td&gt;
 &lt;td&gt;3-6(5)&lt;/td&gt;
@@ -474,19 +519,6 @@
 &lt;td&gt;7.7&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;석기시대&lt;/td&gt;
-&lt;td&gt;2.47&lt;/td&gt;
-&lt;td&gt;2-4(4)&lt;/td&gt;
-&lt;td&gt;90&lt;/td&gt;
-&lt;td&gt;7.6&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
@@ -576,19 +608,6 @@
 &lt;td&gt;2(2)&lt;/td&gt;
 &lt;td&gt;30&lt;/td&gt;
 &lt;td&gt;8.1&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;전략&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Codex Naturalis&lt;/td&gt;
-&lt;td&gt;1.84&lt;/td&gt;
-&lt;td&gt;1-4(2-3)&lt;/td&gt;
-&lt;td&gt;30&lt;/td&gt;
-&lt;td&gt;7.2&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
@@ -786,19 +805,6 @@
 &lt;td&gt;7.6&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;도시빌딩&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Nidavellir&lt;/td&gt;
-&lt;td&gt;2.14&lt;/td&gt;
-&lt;td&gt;2-5(3)&lt;/td&gt;
-&lt;td&gt;45&lt;/td&gt;
-&lt;td&gt;7.7&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;

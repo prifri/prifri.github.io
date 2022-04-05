@@ -242,25 +242,31 @@ if (!doNotTrack) {
 <p>실제 플레이를 해본 경험을 기준으로 정리했으며 일절의 객관성이 없이 주관적으로 작성했다.</p>
 <pre><code> APT  : Actual Play Time. 실플탐(분단위)  
         (Xm/p : 1인당 X분 플탐)  
- w    : F - 친구랑 하기 좋음(대화하면서 할 꺼리가 있음)  
-        N - 모르는 사람이랑 하기 좋음(친구끼리 할때 오고가는 말이 적음, 경쟁 퍼즐류)  
-		 X - 무관  
+ w    : with. 게임도중 게임진행에 대한 의사소통
+		X - 무관
+		0 - 블러핑게임. 대화로만 이루어지는 게임(대화하면서 할 꺼리가 있음)  
+        1 - 전략, 퍼즐등의 측면이 있지만 결국 대화가 메인인 게임.
+        2 - 매라운드, 매턴 랜덤적등의 요인으로 인해 상대에 영향을 줄수밖에 없는 게임.
+        3 - 매라운드, 매턴 공유자원등 선택에 따라 상대에 영향을 줄수 있는 게임.
+        4 - 선택에따라 영향을 줄순 있지만 전체 게임시스템에서 미미한게임.
+        5 - 몇가지 목표점을 공유하는것을 제외하곤 필드나 덱에 대한 컨트롤이 타인이 침범할 경우가 없는게임.
+		6 - 대화전무. 
  C    : Kepp Check. 고의로 견제를 함으로써 상대와 자신의 패가 말리는 정도.  
         X - 협력게임  
         0 - 견제 없음. 자신의 판만 발전시키면됨.  
-   	 1 - 랜덤적인 요소로만 견제가 이루어짐. 랜덤자체는 고의로 고를수도있음.  
-            랜덤적이든 살기위해서든 진행상 견제모양이 될수밖에 없는 게임.  
-   	 2 - 고의로 견제가 가능하되 큰 밸런스에서 영향이 적음.  
-   	 3 - 자의든 타이든 견제가 이루어지고 그 속에서 이득을 찾아야 됨.  
-   	 4 - 모든 사람이 견제플을 안하면 견제를 안받고 안하는 사람만 이득이 되는 시스템.  
-   	 5 - 견제만을 위한 게임.  
+		1 - 랜덤적인 요소로만 견제가 이루어짐. 랜덤자체는 고의로 고를수도있음.  
+		랜덤적이든 살기위해서든 진행상 견제모양이 될수밖에 없는 게임.  
+		2 - 고의로 견제가 가능하되 전략적으로 꾸준히 대응 가능.
+		3 - 고의로 견제가 가능하며 계속 견제를 받을 경우 전략적으로도 대응 불가.
+		4 - 모든 사람이 견제플을 안하면 견제를 안받고 안하는 사람만 이득이 되는 시스템.  
+		5 - 견제만을 위한 게임.  
  R    : Random 적인 요소.  
         0 - Random 요소가 아에 없음.  
         1 - 선전략. Random 요소가 있지만 자신이 세운 전략범위내에서 제어 가능. 승패에 아주 약간 영향.  
         2 - 후전략. 먼저 Random 요소를 본후 전략을 세워야되고 이 전략이 끝날때까지 유효.  
         3 - 중전략. 게임 진행 내내 Random 요소를 보며 전략을 계속 수정해야됨.  
         4 - Random으로만 진행하고 그 순간의 판단만으로 게임을 진행.  
-        5 - 완전히 Random적인 요소로만 진행.
+        5 - 완전히 Random적인 요소로 + 결단력으로만 진행.
 </code></pre><hr>
 <h3 id="경쟁">경쟁</h3>
 <table>
@@ -281,6 +287,32 @@ if (!doNotTrack) {
 </thead>
 <tbody>
 <tr>
+<td>No Thanks!</td>
+<td>1.14</td>
+<td>3-7(4-5)</td>
+<td>30</td>
+<td>7.1</td>
+<td></td>
+<td>Card</td>
+<td></td>
+<td>2</td>
+<td>1</td>
+<td>5</td>
+</tr>
+<tr>
+<td>캔트스탑</td>
+<td>1.14</td>
+<td>3-7(4-5)</td>
+<td>30</td>
+<td>7.1</td>
+<td>1판</td>
+<td>주사위</td>
+<td></td>
+<td>2</td>
+<td>0</td>
+<td>5</td>
+</tr>
+<tr>
 <td>Coloretto</td>
 <td>1.28</td>
 <td>2-5(4)</td>
@@ -289,7 +321,7 @@ if (!doNotTrack) {
 <td>1판</td>
 <td>Card</td>
 <td>22.04.03</td>
-<td>N</td>
+<td>3</td>
 <td>5</td>
 <td>4</td>
 </tr>
@@ -302,7 +334,7 @@ if (!doNotTrack) {
 <td>1판</td>
 <td>Card</td>
 <td>22.04.03</td>
-<td>F</td>
+<td>2</td>
 <td>1</td>
 <td>4</td>
 </tr>
@@ -315,7 +347,7 @@ if (!doNotTrack) {
 <td>1판</td>
 <td>Puzzle</td>
 <td>22.04.03</td>
-<td>N</td>
+<td>3</td>
 <td>3</td>
 <td>3</td>
 </tr>
@@ -328,9 +360,22 @@ if (!doNotTrack) {
 <td>1판</td>
 <td></td>
 <td>22.04.03</td>
-<td>X</td>
+<td>3</td>
 <td>4</td>
 <td>3</td>
+</tr>
+<tr>
+<td>Codex Naturalis</td>
+<td>1.84</td>
+<td>1-4(2-3)</td>
+<td>30</td>
+<td>7.2</td>
+<td>1판</td>
+<td>퍼즐</td>
+<td></td>
+<td>5</td>
+<td>0</td>
+<td>1</td>
 </tr>
 <tr>
 <td>카르카손</td>
@@ -341,8 +386,21 @@ if (!doNotTrack) {
 <td>1판+</td>
 <td>ㅁㅁㅁ</td>
 <td>22.03.28</td>
-<td>X</td>
 <td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Nidavellir</td>
+<td>2.14</td>
+<td>2-5(3)</td>
+<td>45</td>
+<td>7.7</td>
+<td>1판+</td>
+<td>Card, Bidding</td>
+<td></td>
+<td>2</td>
+<td>2</td>
 <td>3</td>
 </tr>
 <tr>
@@ -354,9 +412,22 @@ if (!doNotTrack) {
 <td>1판</td>
 <td>전략</td>
 <td>22.04.03</td>
-<td>X</td>
+<td>2</td>
 <td>3</td>
 <td>3</td>
+</tr>
+<tr>
+<td>석기시대</td>
+<td>2.47</td>
+<td>2-4(4)</td>
+<td>90</td>
+<td>7.6</td>
+<td></td>
+<td>전략</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td>버건디의 성</td>
@@ -366,8 +437,8 @@ if (!doNotTrack) {
 <td>8.1</td>
 <td>2판</td>
 <td>전략</td>
-<td>22.04.01</td>
-<td>X</td>
+<td>22.04.04</td>
+<td>3</td>
 <td>3</td>
 <td>1</td>
 </tr>
@@ -380,7 +451,7 @@ if (!doNotTrack) {
 <td>2판</td>
 <td>전략</td>
 <td>22.04.03</td>
-<td>X</td>
+<td>4</td>
 <td>3</td>
 <td>1</td>
 </tr>
@@ -393,7 +464,7 @@ if (!doNotTrack) {
 <td>2판++</td>
 <td>전략</td>
 <td>22.04.02</td>
-<td>X</td>
+<td>3</td>
 <td>4</td>
 <td>2</td>
 </tr>
@@ -572,32 +643,6 @@ if (!doNotTrack) {
 <td align="center"></td>
 </tr>
 <tr>
-<td>No Thanks!</td>
-<td>1.14</td>
-<td>3-7(4-5)</td>
-<td>30</td>
-<td>7.1</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>캔트스탑</td>
-<td>1.14</td>
-<td>3-7(4-5)</td>
-<td>30</td>
-<td>7.1</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
 <td>for sale</td>
 <td>1.26</td>
 <td>3-6(5)</td>
@@ -657,19 +702,6 @@ if (!doNotTrack) {
 <td>7.7</td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>석기시대</td>
-<td>2.47</td>
-<td>2-4(4)</td>
-<td>90</td>
-<td>7.6</td>
-<td></td>
-<td>전략</td>
 <td></td>
 <td></td>
 <td></td>
@@ -759,19 +791,6 @@ if (!doNotTrack) {
 <td>2(2)</td>
 <td>30</td>
 <td>8.1</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>Codex Naturalis</td>
-<td>1.84</td>
-<td>1-4(2-3)</td>
-<td>30</td>
-<td>7.2</td>
 <td></td>
 <td>전략</td>
 <td></td>
@@ -969,19 +988,6 @@ if (!doNotTrack) {
 <td>7.6</td>
 <td></td>
 <td>도시빌딩</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>Nidavellir</td>
-<td>2.14</td>
-<td>2-5(3)</td>
-<td>45</td>
-<td>7.7</td>
-<td></td>
-<td>전략</td>
 <td></td>
 <td></td>
 <td></td>
