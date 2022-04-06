@@ -242,8 +242,8 @@ if (!doNotTrack) {
 <p>실제 플레이를 해본 경험을 기준으로 정리했으며 일절의 객관성이 없이 주관적으로 작성했다.</p>
 <pre><code> APT  : Actual Play Time. 실플탐(분단위)  
         (Xm/p : 1인당 X분 플탐)  
- W,R    : Weigh. ,뒤는 필요 판수 
- I    : Interaction . 게임도중 게임진행에 대한 의사소통 / 상호작용
+ W,R    : Weigh. ,뒤는 익히는데 필요한 예상 필요 판수  
+ I    : Interaction . 게임도중 게임진행에 대한 의사소통 / 상호작용  
 		0 - 상호작용이 없음  
 		1 - 몇가지 목표/점수/조합등만을 공유하고 게임 전체는 거의 솔플과 유사.  
 		2 - 상호작용할 요소가 1-2개 정도 밖에 없음.  
@@ -264,773 +264,146 @@ if (!doNotTrack) {
 		6 - 견제만을 위한 게임.  
  R    : Random 적인 요소.  
         0 - Random 요소가 아에 없음.  
-        1 - 선전략. Random 요소가 있지만 자신이 세운 전략범위내에서 제어 가능.
+        1 - 선전략. Random 요소가 있지만 자신이 세운 전략범위내에서 제어 가능.  
         2 - 후전략. 먼저 Random 요소를 본후 전략을 세워야되고 이 전략이 끝날때까지 유효.  
         3 - 중전략. 게임 진행 내내 Random 요소를 보며 전략을 계속 수정해야됨.  
         4 - Random으로만 진행하고 그 순간의 판단만으로 게임을 진행.  
         5 - 완전히 Random적인 요소로 + 결단력으로만 진행.
-</code></pre><hr>
-<h3 id="경쟁">경쟁</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>W,R</th>
-<th>player(B)</th>
-<th>APT</th>
-<th>Rating</th>
-<th>Category</th>
-<th>Time</th>
-<th>I</th>
-<th>C</th>
-<th>R</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>No Thanks!</td>
-<td>1.14,1</td>
-<td>3-7(4-5)</td>
-<td>30</td>
-<td>7.1</td>
-<td>Card</td>
-<td>22.04.05</td>
-<td>6</td>
-<td>2</td>
-<td>5</td>
-</tr>
-<tr>
-<td>캔트스탑</td>
-<td>1.14,1</td>
-<td>3-7(4-5)</td>
-<td>30</td>
-<td>7.1</td>
-<td>주사위</td>
-<td>22.04.05</td>
-<td>6</td>
-<td>2</td>
-<td>5</td>
-</tr>
-<tr>
-<td>킹도미노</td>
-<td>1.22,1</td>
-<td>2-4(2,4)</td>
-<td>5m/p+</td>
-<td>7.3</td>
-<td>퍼즐</td>
-<td>22.04.05</td>
-<td>6</td>
-<td>2</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Coloretto</td>
-<td>1.28,1</td>
-<td>2-5(4)</td>
-<td>5m/p</td>
-<td>7.0</td>
-<td>Card</td>
-<td>22.04.03</td>
-<td>6</td>
-<td>2</td>
-<td>4</td>
-</tr>
-<tr>
-<td>젝스님트</td>
-<td>1.37,1</td>
-<td>2-10(4-6)</td>
-<td>5m/p+</td>
-<td>7.4</td>
-<td>Card</td>
-<td>22.04.03</td>
-<td>6</td>
-<td>2</td>
-<td>4</td>
-</tr>
-<tr>
-<td>아줄</td>
-<td>1.77,1</td>
-<td>2-4(2)</td>
-<td>10m/p+</td>
-<td>7.4</td>
-<td>Puzzle</td>
-<td>22.04.03</td>
-<td>6</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>스플렌더</td>
-<td>1.79,1</td>
-<td>2-4(3)</td>
-<td>15m/p</td>
-<td>7.4</td>
-<td>전략</td>
-<td>22.04.03</td>
-<td>5</td>
-<td>5</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Codex Naturalis</td>
-<td>1.84,1</td>
-<td>1-4(2-3)</td>
-<td>30</td>
-<td>7.2</td>
-<td>퍼즐</td>
-<td>22.04.05</td>
-<td>1</td>
-<td>0</td>
-<td>3</td>
-</tr>
-<tr>
-<td>카르카손</td>
-<td>1.90,1+</td>
-<td>2-5(2)</td>
-<td>30+</td>
-<td>7.4</td>
-<td>맵빌딩</td>
-<td>22.03.28</td>
-<td>5</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Nidavellir</td>
-<td>2.14,1+</td>
-<td>2-5(3)</td>
-<td>45</td>
-<td>7.7</td>
-<td>Card, Bidding</td>
-<td>22.04.05</td>
-<td>5</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>7원더스:건축가</td>
-<td>2.35,1</td>
-<td>2-8(4-5)</td>
-<td>5m/p+</td>
-<td>7.8</td>
-<td>전략</td>
-<td>22.04.03</td>
-<td>5</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>석기시대</td>
-<td>2.47,1</td>
-<td>2-4(4)</td>
-<td>90</td>
-<td>7.6</td>
-<td>전략</td>
-<td>22.04.05</td>
-<td>5</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>버건디의 성</td>
-<td>3.00,2</td>
-<td>2-4(2)</td>
-<td>20m/p+</td>
-<td>8.1</td>
-<td>전략</td>
-<td>22.04.04</td>
-<td>3</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr>
-<td>푸에르토 리코</td>
-<td>3.27,2</td>
-<td>2-5(4)</td>
-<td>20m/p+</td>
-<td>8.4</td>
-<td>전략</td>
-<td>22.04.03</td>
-<td>3</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr>
-<td>아그리콜라</td>
-<td>3.49,2++</td>
-<td>1-5(3-4)</td>
-<td>30m/p+</td>
-<td>7.9</td>
-<td>전략</td>
-<td>22.04.02</td>
-<td>5</td>
-<td>5</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="협력">협력</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>W</th>
-<th>player(B)</th>
-<th>APT</th>
-<th>Rating</th>
-<th>W(R)</th>
-<th>Thema</th>
-<th>Time</th>
-<th>w</th>
-<th>C</th>
-<th>R</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>하나비</td>
-<td>1.69</td>
-<td>2-5(4)</td>
-<td>30m</td>
-<td>7.1</td>
-<td>1판</td>
-<td>카드</td>
-<td>22.04.04</td>
-<td>F</td>
-<td>X</td>
-<td>4</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="2인전용">2인전용</h3>
-<hr>
-<h3 id="할예정">할예정</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>W</th>
-<th>player(B)</th>
-<th>PT</th>
-<th>Rating</th>
-<th>-</th>
-<th>Thema</th>
-<th>-</th>
-<th>-</th>
-<th>-</th>
-<th align="center">-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>반디도</td>
-<td>1.14</td>
-<td>1-4(X)</td>
-<td>15</td>
-<td>6.5</td>
-<td></td>
-<td>협력</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>아르낙의 잊혀진 유적</td>
-<td>2.87</td>
-<td>1-4(3)</td>
-<td>120</td>
-<td>8.1</td>
-<td></td>
-<td>전략(협)</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>스페이스 크루</td>
-<td>1.98</td>
-<td>2-5(4)</td>
-<td>20</td>
-<td>7.9</td>
-<td></td>
-<td>전략(협)</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>크루 : 심해..</td>
-<td>2.00</td>
-<td>2-5(4)</td>
-<td>20</td>
-<td>8.4</td>
-<td></td>
-<td>전략(협)</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>슈퍼 판타지 브롤</td>
-<td>2.30</td>
-<td>2(2)</td>
-<td>40</td>
-<td>7.8</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>패치워크</td>
-<td>1.62</td>
-<td>2(2)</td>
-<td>30</td>
-<td>7.6</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>야찌</td>
-<td>1.19</td>
-<td>2-10(3-4)</td>
-<td>30</td>
-<td>5.4</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>사보타지</td>
-<td>1.32</td>
-<td>3-10(7-8)</td>
-<td>30</td>
-<td>6.6</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>카네기</td>
-<td>3.83</td>
-<td>1-4(2)</td>
-<td>180</td>
-<td>7.7</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>for sale</td>
-<td>1.26</td>
-<td>3-6(5)</td>
-<td>30</td>
-<td>7.2</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>티츄</td>
-<td>2.34</td>
-<td>4(4)</td>
-<td>60</td>
-<td>7.6</td>
-<td></td>
-<td>trick-taking</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>쿠</td>
-<td>2.34</td>
-<td>4(4)</td>
-<td>60</td>
-<td>7.6</td>
-<td></td>
-<td>협상</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>love letter</td>
-<td>1.19</td>
-<td>3-4(4)</td>
-<td>30</td>
-<td>7.2</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>7원더스</td>
-<td>2.32</td>
-<td>3-7(4-5)</td>
-<td>30</td>
-<td>7.7</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>상트페테르부르크</td>
-<td>2.67</td>
-<td>2-5(4)</td>
-<td>60</td>
-<td>7.5</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>테오티우아칸</td>
-<td>3.77</td>
-<td>1-4(4)</td>
-<td>120</td>
-<td>7.9</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>쓰루 디 에이지스</td>
-<td>4.42</td>
-<td>2-4(3)</td>
-<td>120</td>
-<td>8.4</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>테라 미스티카</td>
-<td>3.97</td>
-<td>2-5(4)</td>
-<td>60-150</td>
-<td>8.1</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>로스트시티</td>
-<td>1.49</td>
-<td>2(2)</td>
-<td>30</td>
-<td>7.2</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>7원더스:듀얼</td>
-<td>2.23</td>
-<td>2(2)</td>
-<td>30</td>
-<td>8.1</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>Rallyman: GT</td>
-<td>2.22</td>
-<td>1-6(4)</td>
-<td>60</td>
-<td>7.3</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>포션 폭발</td>
-<td>1.76</td>
-<td>2-4(X)</td>
-<td>45</td>
-<td>7.1</td>
-<td></td>
-<td>퍼즐</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>다이스 포지</td>
-<td>1.96</td>
-<td>2-4(4)</td>
-<td>45</td>
-<td>7.3</td>
-<td></td>
-<td>덱빌딩</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>자이푸르</td>
-<td>1.48</td>
-<td>2(2)</td>
-<td>30</td>
-<td>7.5</td>
-<td></td>
-<td>카드</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>Luncky Numbers</td>
-<td>1.12</td>
-<td>2-4(3)</td>
-<td>20</td>
-<td>6.3</td>
-<td></td>
-<td>퍼즐</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>race for the galaxy</td>
-<td>2.99</td>
-<td>2-4(2)</td>
-<td>60</td>
-<td>7.8</td>
-<td></td>
-<td>카드</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>Dungeon Petz</td>
-<td>3.62</td>
-<td>2-4(4)</td>
-<td>90</td>
-<td>7.4</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>The Palaces of Carrara</td>
-<td>2.61</td>
-<td>2-4(4)</td>
-<td>60</td>
-<td>7.2</td>
-<td></td>
-<td>덱빌딩</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>Tzolk&rsquo;in: The Mayan Calendar</td>
-<td>3.66</td>
-<td>2-4(4)</td>
-<td>90</td>
-<td>7.9</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>카르카손: 수렵채집</td>
-<td>1.92</td>
-<td>2-5(2-3)</td>
-<td>35</td>
-<td>7.1</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>Signorie</td>
-<td>3.55</td>
-<td>2-4(4)</td>
-<td>120</td>
-<td>7.4</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>Nippon</td>
-<td>3.78</td>
-<td>2-4(4)</td>
-<td>120</td>
-<td>7.7</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>Clans of Caledonia</td>
-<td>3.46</td>
-<td>1-4(4)</td>
-<td>120</td>
-<td>8.0</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>The King&rsquo;s Guild</td>
-<td>2.42</td>
-<td>1-6(3-4)</td>
-<td>120</td>
-<td>7.1</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>Welcome To</td>
-<td>1.83</td>
-<td>1-12(4)</td>
-<td>25</td>
-<td>7.6</td>
-<td></td>
-<td>도시빌딩</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>하와이</td>
-<td>2.90</td>
-<td>2-5(3-4)</td>
-<td>90</td>
-<td>7.1</td>
-<td></td>
-<td>전략</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>PARKS</td>
-<td>2.16</td>
-<td>1-4(3)</td>
-<td>60</td>
-<td>7.8</td>
-<td></td>
-<td>모험</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="미분류">미분류</h3>
-<blockquote>
-<p>Space Base, Century, Santorini, 스시 고!, Meadow, 타케노코, King of Tokyo,
-Imhotep,</p>
-</blockquote>
-<p>롤포갤, 어비스, 클오칼, 마폴 2, 레포갤
+
+---
+
+### 경쟁
+
+| Name            	| W,R      	| player(B) 	| APT    	| Rating 	| Category      	| Played    | I 	| C 	| R 	|
+|-----------------	|----------	|-----------	|--------	|--------	|---------------	|----------	|---	|---	|---	|
+| No Thanks!      	| 1.14,1   	| 3-7(4-5)  	| 30     	| 7.1    	| Card          	| 22.04.05 	| 6 	| 2 	| 5 	|
+| 캔트스탑        	| 1.14,1   	| 3-7(4-5)  	| 30     	| 7.1    	| 주사위        	| 22.04.05 	| 6 	| 2 	| 5 	|
+| 킹도미노        	| 1.22,1   	| 2-4(2,4)  	| 5m/p+  	| 7.3    	| 퍼즐          	| 22.04.05 	| 6 	| 2 	| 4 	|
+| Coloretto       	| 1.28,1   	| 2-5(4)    	| 5m/p   	| 7.0    	| Card          	| 22.04.03 	| 6 	| 2 	| 4 	|
+| 젝스님트        	| 1.37,1   	| 2-10(4-6) 	| 5m/p+  	| 7.4    	| Card          	| 22.04.03 	| 6 	| 2 	| 4 	|
+| 아줄            	| 1.77,1   	| 2-4(2)    	| 10m/p+ 	| 7.4    	| Puzzle        	| 22.04.03 	| 6 	| 3 	| 3 	|
+| 스플렌더        	| 1.79,1   	| 2-4(3)    	| 15m/p  	| 7.4    	| 전략          	| 22.04.03 	| 5 	| 5 	| 3 	|
+| Codex Naturalis 	| 1.84,1   	| 1-4(2-3)  	| 30     	| 7.2    	| 퍼즐          	| 22.04.05 	| 1 	| 0 	| 3 	|
+| 카르카손        	| 1.90,1+  	| 2-5(2)    	| 30+    	| 7.4    	| 맵빌딩        	| 22.03.28 	| 5 	| 3 	| 3 	|
+| Nidavellir      	| 2.14,1+  	| 2-5(3)    	| 45     	| 7.7    	| Card, Bidding 	| 22.04.05 	| 5 	| 3 	| 3 	|
+| 7원더스:건축가  	| 2.35,1   	| 2-8(4-5)  	| 5m/p+  	| 7.8    	| 전략          	| 22.04.03 	| 5 	| 3 	| 3 	|
+| 석기시대        	| 2.47,1   	| 2-4(4)    	| 90     	| 7.6    	| 전략          	| 22.04.05 	| 5 	| 3 	| 3 	|
+| 버건디의 성     	| 3.00,2   	| 2-4(2)    	| 20m/p+ 	| 8.1    	| 전략          	| 22.04.04 	| 3 	| 3 	| 1 	|
+| 푸에르토 리코   	| 3.27,2   	| 2-5(4)    	| 20m/p+ 	| 8.4    	| 전략          	| 22.04.03 	| 3 	| 3 	| 1 	|
+| 아그리콜라      	| 3.49,2++ 	| 1-5(3-4)  	| 30m/p+ 	| 7.9    	| 전략          	| 22.04.02 	| 5 	| 5 	| 2 	|
+
+---
+
+### 협력
+
+| Name           	| W    	| player(B) 	| APT    	| Rating 	| W(R)  	| Thema  	| Time     	| w 	| C 	| R 	|
+|----------------	|------	|-----------	|--------	|--------	|-------	|--------	|----------	|---	|---	|---	|
+| 하나비     	| 1.69 	| 2-5(4)  	| 30m 	| 7.1    	| 1판 	| 카드   	| 22.04.04 	| F 	| X 	| 4 	|
+
+---
+
+### 2인전용
+
+---
+
+### 할예정
+
+| Name                         	| W    	| player(B) 	| PT     	| Rating 	| Category     	| - 	| - 	| - 	| - 	|
+|------------------------------	|------	|-----------	|--------	|--------	|--------------	|---	|---	|---	|:-:	|
+| 반디도                       	| 1.14 	| 1-4(X)    	| 15     	| 6.5    	| 협력         	|   	|   	|   	|   	|
+| 아르낙의 잊혀진 유적         	| 2.87 	| 1-4(3)    	| 120    	| 8.1    	| 전략(협)     	|   	|   	|   	|   	|
+| 스페이스 크루                	| 1.98 	| 2-5(4)    	| 20     	| 7.9    	| 전략(협)     	|   	|   	|   	|   	|
+| 크루 : 심해..                	| 2.00 	| 2-5(4)    	| 20     	| 8.4    	| 전략(협)     	|   	|   	|   	|   	|
+| 슈퍼 판타지 브롤             	| 2.30 	| 2(2)      	| 40     	| 7.8    	| 전략         	|   	|   	|   	|   	|
+| 패치워크                     	| 1.62 	| 2(2)      	| 30     	| 7.6    	| 전략         	|   	|   	|   	|   	|
+| 야찌                         	| 1.19 	| 2-10(3-4) 	| 30     	| 5.4    	|              	|   	|   	|   	|   	|
+| 사보타지                     	| 1.32 	| 3-10(7-8) 	| 30     	| 6.6    	|              	|   	|   	|   	|   	|
+| 카네기                       	| 3.83 	| 1-4(2)    	| 180    	| 7.7    	| 전략         	|   	|   	|   	|   	|
+| for sale                     	| 1.26 	| 3-6(5)    	| 30     	| 7.2    	| 전략         	|   	|   	|   	|   	|
+| 티츄                         	| 2.34 	| 4(4)      	| 60     	| 7.6    	| trick-taking 	|   	|   	|   	|   	|
+| 쿠                           	| 2.34 	| 4(4)      	| 60     	| 7.6    	| 협상         	|   	|   	|   	|   	|
+| love letter                  	| 1.19 	| 3-4(4)    	| 30     	| 7.2    	| 전략         	|   	|   	|   	|   	|
+| 7원더스                      	| 2.32 	| 3-7(4-5)  	| 30     	| 7.7    	|              	|   	|   	|   	|   	|
+| 상트페테르부르크             	| 2.67 	| 2-5(4)    	| 60     	| 7.5    	| 전략         	|   	|   	|   	|   	|
+| 테오티우아칸                 	| 3.77 	| 1-4(4)    	| 120    	| 7.9    	| 전략         	|   	|   	|   	|   	|
+| 쓰루 디 에이지스             	| 4.42 	| 2-4(3)    	| 120    	| 8.4    	| 전략         	|   	|   	|   	|   	|
+| 테라 미스티카                	| 3.97 	| 2-5(4)    	| 60-150 	| 8.1    	| 전략         	|   	|   	|   	|   	|
+| 로스트시티                   	| 1.49 	| 2(2)      	| 30     	| 7.2    	| 전략         	|   	|   	|   	|   	|
+| 7원더스:듀얼                 	| 2.23 	| 2(2)      	| 30     	| 8.1    	| 전략         	|   	|   	|   	|   	|
+| Rallyman: GT                 	| 2.22 	| 1-6(4)    	| 60     	| 7.3    	| 전략         	|   	|   	|   	|   	|
+| 포션 폭발                    	| 1.76 	| 2-4(X)    	| 45     	| 7.1    	| 퍼즐         	|   	|   	|   	|   	|
+| 다이스 포지                  	| 1.96 	| 2-4(4)    	| 45     	| 7.3    	| 덱빌딩       	|   	|   	|   	|   	|
+| 자이푸르                     	| 1.48 	| 2(2)      	| 30     	| 7.5    	| 카드         	|   	|   	|   	|   	|
+| Luncky Numbers               	| 1.12 	| 2-4(3)    	| 20     	| 6.3    	| 퍼즐         	|   	|   	|   	|   	|
+| race for the galaxy          	| 2.99 	| 2-4(2)    	| 60     	| 7.8    	| 카드         	|   	|   	|   	|   	|
+| Dungeon Petz                 	| 3.62 	| 2-4(4)    	| 90     	| 7.4    	| 전략         	|   	|   	|   	|   	|
+| The Palaces of Carrara       	| 2.61 	| 2-4(4)    	| 60     	| 7.2    	| 덱빌딩       	|   	|   	|   	|   	|
+| Tzolk'in: The Mayan Calendar 	| 3.66 	| 2-4(4)    	| 90     	| 7.9    	| 전략         	|   	|   	|   	|   	|
+| 카르카손: 수렵채집           	| 1.92 	| 2-5(2-3)  	| 35     	| 7.1    	| 전략         	|   	|   	|   	|   	|
+| Signorie                     	| 3.55 	| 2-4(4)    	| 120    	| 7.4    	| 전략         	|   	|   	|   	|   	|
+| Nippon                       	| 3.78 	| 2-4(4)    	| 120    	| 7.7    	| 전략         	|   	|   	|   	|   	|
+| Clans of Caledonia           	| 3.46 	| 1-4(4)    	| 120    	| 8.0    	| 전략         	|   	|   	|   	|   	|
+| The King's Guild             	| 2.42 	| 1-6(3-4)  	| 120    	| 7.1    	| 전략         	|   	|   	|   	|   	|
+| Welcome To                   	| 1.83 	| 1-12(4)   	| 25     	| 7.6    	| 도시빌딩     	|   	|   	|   	|   	|
+| 하와이                       	| 2.90 	| 2-5(3-4)  	| 90     	| 7.1    	| 전략         	|   	|   	|   	|   	|
+| PARKS                        	| 2.16 	| 1-4(3)    	| 60     	| 7.8    	| 모험         	|   	|   	|   	|   	|
+
+---
+
+### 미분류
+
+&gt; Space Base, Century, Santorini, 스시 고!, Meadow, 타케노코, King of Tokyo,
+Imhotep, 
+
+롤포갤, 어비스, 클오칼, 마폴 2, 레포갤
 레즈 아르카나, 롤 포 더 갤럭시 드래프토사우르스, 어비스, 다운포스,
 마르코 폴로2, 비아 매지카, 포비든 아일랜드, 잉카의 황금, 드래곤우드,
 쿠, 늑대인간들, 빌더스: 미들 에이지, 미스터 잭, 란드운터, 빌더스: 고대, 콘 소나!,
-크로스마스터: 아레나, 던전 트위스터, 가이아 프로젝트, 오딘을 위하여</p>
-<hr>
-<h3 id="review">Review</h3>
-<h4 id="컬러레또">컬러레또</h4>
-<h4 id="젝스님트">젝스님트</h4>
-<h4 id="아줄">아줄</h4>
-<h4 id="스플렌더">스플렌더</h4>
-<h4 id="카르카손">카르카손</h4>
-<h4 id="7원더스건축가">7원더스:건축가</h4>
-<h4 id="버건디의-성">버건디의 성</h4>
-<h4 id="포에르토-리코">포에르토 리코</h4>
-<h4 id="아그리콜라">아그리콜라</h4>
-<hr>
+크로스마스터: 아레나, 던전 트위스터, 가이아 프로젝트, 오딘을 위하여
 
+---
+
+### Review
+
+| Name            	| Thema, Note |
+|-----------------	|----------|
+| No Thanks!      	| 폭탄돌리기
+| 캔트스탑        	| 클라이밍 테마.
+| 킹도미노        	| 타일배치. 처음에 도미노게임인줄..
+| Coloretto       	| 카드수집.
+| 젝스님트        	| 카드제거.
+| 아줄            	| 궁전 장식을 만든다는 컨셉.
+| 스플렌더        	| 르네상스시대를 배경으로한 물건수집.
+| Codex Naturalis 	| 동물, 새, 곤충을 수집. 게임 자체는 맵빌딩 + 화폐 시스템.
+| 카르카손        	| 중세시대의 지도 만들기.
+| Nidavellir      	| 경매 + 카드수집. 드래곤을 잡기위한 드워프를 모은다는 내용.
+| 7원더스:건축가  	| 문화발전, 전쟁, 불가사의 건설
+| 석기시대        	| 석기시대를 배경으로 마을을 키워나간다는 배경.
+| 버건디의 성     	| 중세 시대를 배경으로 성과 영지를 개발한다.
+| 푸에르토 리코   	| 밭을 만들고 공장을 만들어 생산품으로 판매 및 수출
+| 아그리콜라      	| 농장경영
+
+
+#### 컬러레또
+
+#### 젝스님트
+
+#### 아줄
+
+#### 스플렌더
+
+#### 카르카손
+
+#### 7원더스:건축가
+
+#### 버건디의 성
+
+#### 포에르토 리코
+
+#### 아그리콜라
+
+---
+</code></pre>
 </div>
 
 
