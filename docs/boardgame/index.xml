@@ -59,27 +59,29 @@
 &lt;p&gt;실제 플레이를 해본 경험을 기준으로 정리했으며 일절의 객관성이 없이 주관적으로 작성했다.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; APT  : Actual Play Time. 실플탐(분단위)  
         (Xm/p : 1인당 X분 플탐)  
- w    : with. 게임도중 게임진행에 대한 의사소통
-		X - 무관
-		0 - 블러핑게임. 대화로만 이루어지는 게임(대화하면서 할 꺼리가 있음)  
-        1 - 전략, 퍼즐등의 측면이 있지만 결국 대화가 메인인 게임.
-        2 - 매라운드, 매턴 랜덤적등의 요인으로 인해 상대에 영향을 줄수밖에 없는 게임.
-        3 - 매라운드, 매턴 공유자원등 선택에 따라 상대에 영향을 줄수 있는 게임.
-        4 - 선택에따라 영향을 줄순 있지만 전체 게임시스템에서 미미한게임.
-        5 - 몇가지 목표점을 공유하는것을 제외하곤 필드나 덱에 대한 컨트롤이 타인이 침범할 경우가 없는게임.
-		6 - 대화전무. 
+ W,R    : Weigh. ,뒤는 필요 판수 
+ I    : Interaction . 게임도중 게임진행에 대한 의사소통 / 상호작용
+		0 - 상호작용이 없음  
+		1 - 몇가지 목표/점수/조합등만을 공유하고 게임 전체는 거의 솔플과 유사.  
+		2 - 상호작용할 요소가 1-2개 정도 밖에 없음.  
+		3 - 상호작용할게 있긴 하지만 결국 전략/설계가 중요.  
+		4 - 상호작용요소가 골고루 분포.  
+		5 - 상호작용기준으로 전략/설계를 변경  
+		6 - 상호작용으로 전략/설계를 진행  
+		7 - 의사소통만으로 진행하는 게임.  
  C    : Kepp Check. 고의로 견제를 함으로써 상대와 자신의 패가 말리는 정도.  
         X - 협력게임  
-        0 - 견제 없음. 자신의 판만 발전시키면됨.  
+        0 - 견제 없거나 초숙련자가 아니면 힘든시스템. 자신의 판만 발전시키면됨.  
 		1 - 랜덤적인 요소로만 견제가 이루어짐. 랜덤자체는 고의로 고를수도있음.  
-		랜덤적이든 살기위해서든 진행상 견제모양이 될수밖에 없는 게임.  
-		2 - 고의로 견제가 가능하되 전략적으로 꾸준히 대응 가능.
-		3 - 고의로 견제가 가능하며 계속 견제를 받을 경우 전략적으로도 대응 불가.
-		4 - 모든 사람이 견제플을 안하면 견제를 안받고 안하는 사람만 이득이 되는 시스템.  
-		5 - 견제만을 위한 게임.  
+		    랜덤적이든 살기위해서든 진행상 견제모양이 될수밖에 없는 게임.  
+		2 - 언제나 견제가 되는건 아니고 특정 조건이나 상황에서만 견제가 가능.  
+		3 - 고의로 견제가 가능하되 전략적으로 꾸준히 대응 가능.  
+		4 - 고의로 견제가 가능하며 계속 견제를 받을 경우 전략적으로도 대응 불가. 맞견제를 해야됨.  
+		5 - 모든 사람이 견제플을 안하면 견제를 안받고 안하는 사람만 이득이 되는 시스템.  
+		6 - 견제만을 위한 게임.  
  R    : Random 적인 요소.  
         0 - Random 요소가 아에 없음.  
-        1 - 선전략. Random 요소가 있지만 자신이 세운 전략범위내에서 제어 가능. 승패에 아주 약간 영향.  
+        1 - 선전략. Random 요소가 있지만 자신이 세운 전략범위내에서 제어 가능.
         2 - 후전략. 먼저 Random 요소를 본후 전략을 세워야되고 이 전략이 끝날때까지 유효.  
         3 - 중전략. 게임 진행 내내 Random 요소를 보며 전략을 계속 수정해야됨.  
         4 - Random으로만 진행하고 그 순간의 판단만으로 게임을 진행.  
@@ -90,14 +92,13 @@
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Name&lt;/th&gt;
-&lt;th&gt;W&lt;/th&gt;
+&lt;th&gt;W,R&lt;/th&gt;
 &lt;th&gt;player(B)&lt;/th&gt;
 &lt;th&gt;APT&lt;/th&gt;
 &lt;th&gt;Rating&lt;/th&gt;
-&lt;th&gt;W(R)&lt;/th&gt;
-&lt;th&gt;Thema&lt;/th&gt;
+&lt;th&gt;Category&lt;/th&gt;
 &lt;th&gt;Time&lt;/th&gt;
-&lt;th&gt;w&lt;/th&gt;
+&lt;th&gt;I&lt;/th&gt;
 &lt;th&gt;C&lt;/th&gt;
 &lt;th&gt;R&lt;/th&gt;
 &lt;/tr&gt;
@@ -105,154 +106,154 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;No Thanks!&lt;/td&gt;
-&lt;td&gt;1.14&lt;/td&gt;
+&lt;td&gt;1.14,1&lt;/td&gt;
 &lt;td&gt;3-7(4-5)&lt;/td&gt;
 &lt;td&gt;30&lt;/td&gt;
 &lt;td&gt;7.1&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;Card&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;5&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;캔트스탑&lt;/td&gt;
-&lt;td&gt;1.14&lt;/td&gt;
+&lt;td&gt;1.14,1&lt;/td&gt;
 &lt;td&gt;3-7(4-5)&lt;/td&gt;
 &lt;td&gt;30&lt;/td&gt;
 &lt;td&gt;7.1&lt;/td&gt;
-&lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;주사위&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
 &lt;td&gt;5&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;킹도미노&lt;/td&gt;
+&lt;td&gt;1.22,1&lt;/td&gt;
+&lt;td&gt;2-4(2,4)&lt;/td&gt;
+&lt;td&gt;5m/p+&lt;/td&gt;
+&lt;td&gt;7.3&lt;/td&gt;
+&lt;td&gt;퍼즐&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;Coloretto&lt;/td&gt;
-&lt;td&gt;1.28&lt;/td&gt;
+&lt;td&gt;1.28,1&lt;/td&gt;
 &lt;td&gt;2-5(4)&lt;/td&gt;
 &lt;td&gt;5m/p&lt;/td&gt;
 &lt;td&gt;7.0&lt;/td&gt;
-&lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;Card&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;젝스님트&lt;/td&gt;
-&lt;td&gt;1.37&lt;/td&gt;
+&lt;td&gt;1.37,1&lt;/td&gt;
 &lt;td&gt;2-10(4-6)&lt;/td&gt;
 &lt;td&gt;5m/p+&lt;/td&gt;
 &lt;td&gt;7.4&lt;/td&gt;
-&lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;Card&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;아줄&lt;/td&gt;
-&lt;td&gt;1.77&lt;/td&gt;
+&lt;td&gt;1.77,1&lt;/td&gt;
 &lt;td&gt;2-4(2)&lt;/td&gt;
 &lt;td&gt;10m/p+&lt;/td&gt;
 &lt;td&gt;7.4&lt;/td&gt;
-&lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;Puzzle&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;스플렌더&lt;/td&gt;
-&lt;td&gt;1.79&lt;/td&gt;
+&lt;td&gt;1.79,1&lt;/td&gt;
 &lt;td&gt;2-4(3)&lt;/td&gt;
 &lt;td&gt;15m/p&lt;/td&gt;
 &lt;td&gt;7.4&lt;/td&gt;
-&lt;td&gt;1판&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Codex Naturalis&lt;/td&gt;
-&lt;td&gt;1.84&lt;/td&gt;
+&lt;td&gt;1.84,1&lt;/td&gt;
 &lt;td&gt;1-4(2-3)&lt;/td&gt;
 &lt;td&gt;30&lt;/td&gt;
 &lt;td&gt;7.2&lt;/td&gt;
-&lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;퍼즐&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;5&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;카르카손&lt;/td&gt;
-&lt;td&gt;1.90&lt;/td&gt;
+&lt;td&gt;1.90,1+&lt;/td&gt;
 &lt;td&gt;2-5(2)&lt;/td&gt;
 &lt;td&gt;30+&lt;/td&gt;
 &lt;td&gt;7.4&lt;/td&gt;
-&lt;td&gt;1판+&lt;/td&gt;
-&lt;td&gt;ㅁㅁㅁ&lt;/td&gt;
+&lt;td&gt;맵빌딩&lt;/td&gt;
 &lt;td&gt;22.03.28&lt;/td&gt;
-&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Nidavellir&lt;/td&gt;
-&lt;td&gt;2.14&lt;/td&gt;
+&lt;td&gt;2.14,1+&lt;/td&gt;
 &lt;td&gt;2-5(3)&lt;/td&gt;
 &lt;td&gt;45&lt;/td&gt;
 &lt;td&gt;7.7&lt;/td&gt;
-&lt;td&gt;1판+&lt;/td&gt;
 &lt;td&gt;Card, Bidding&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;2&lt;/td&gt;
-&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;7원더스:건축가&lt;/td&gt;
-&lt;td&gt;2.35&lt;/td&gt;
+&lt;td&gt;2.35,1&lt;/td&gt;
 &lt;td&gt;2-8(4-5)&lt;/td&gt;
 &lt;td&gt;5m/p+&lt;/td&gt;
 &lt;td&gt;7.8&lt;/td&gt;
-&lt;td&gt;1판&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;석기시대&lt;/td&gt;
-&lt;td&gt;2.47&lt;/td&gt;
+&lt;td&gt;2.47,1&lt;/td&gt;
 &lt;td&gt;2-4(4)&lt;/td&gt;
 &lt;td&gt;90&lt;/td&gt;
 &lt;td&gt;7.6&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;버건디의 성&lt;/td&gt;
-&lt;td&gt;3.00&lt;/td&gt;
+&lt;td&gt;3.00,2&lt;/td&gt;
 &lt;td&gt;2-4(2)&lt;/td&gt;
 &lt;td&gt;20m/p+&lt;/td&gt;
 &lt;td&gt;8.1&lt;/td&gt;
-&lt;td&gt;2판&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;22.04.04&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
@@ -261,28 +262,26 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;푸에르토 리코&lt;/td&gt;
-&lt;td&gt;3.27&lt;/td&gt;
+&lt;td&gt;3.27,2&lt;/td&gt;
 &lt;td&gt;2-5(4)&lt;/td&gt;
 &lt;td&gt;20m/p+&lt;/td&gt;
 &lt;td&gt;8.4&lt;/td&gt;
-&lt;td&gt;2판&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;22.04.03&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;아그리콜라&lt;/td&gt;
-&lt;td&gt;3.49&lt;/td&gt;
+&lt;td&gt;3.49,2++&lt;/td&gt;
 &lt;td&gt;1-5(3-4)&lt;/td&gt;
 &lt;td&gt;30m/p+&lt;/td&gt;
 &lt;td&gt;7.9&lt;/td&gt;
-&lt;td&gt;2판++&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
 &lt;td&gt;22.04.02&lt;/td&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -571,19 +570,6 @@
 &lt;td&gt;8.1&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;전략&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;킹도미노&lt;/td&gt;
-&lt;td&gt;1.22&lt;/td&gt;
-&lt;td&gt;2-4(2,4)&lt;/td&gt;
-&lt;td&gt;15-25&lt;/td&gt;
-&lt;td&gt;7.3&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;파티&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
