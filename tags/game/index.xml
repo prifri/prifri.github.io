@@ -107,108 +107,930 @@
         3 - 중전략. 게임 진행 내내 Random 요소를 보며 전략을 계속 수정해야됨.  
         4 - Random으로만 진행하고 그 순간의 판단만으로 게임을 진행.  
         5 - 완전히 Random적인 요소로 + 결단력으로만 진행.
-
----
-
-### 경쟁
-
-| Name            	| W,R      	| player(B) 	| APT    	| Rating 	| Category      	| Played    | I 	| C 	| R 	|
-|-----------------	|----------	|-----------	|--------	|--------	|---------------	|----------	|---	|---	|---	|
-| Luncky Numbers    | 1.12		| 2-4(3)    	| 5m/p     	| 6.3    	| 퍼즐		     	| 22.04.05	| 5 	| 2 	| 4 	|
-| No Thanks!      	| 1.14,1   	| 3-7(4-5)  	| 5m/p+     | 7.1    	| Card          	| 22.04.05 	| 6 	| 2 	| 5 	|
-| 캔트스탑        	| 1.14,1   	| 3-7(4-5)  	| 5m/p++    | 7.1    	| 주사위        	| 22.04.05 	| 6 	| 2 	| 5 	|
-| 킹도미노        	| 1.22,1   	| 2-4(2,4)  	| 5m/p+  	| 7.3    	| 퍼즐          	| 22.04.05 	| 6 	| 2 	| 4 	|
-| for sale          | 1.26,1  	| 3-6(5)    	| 5m/p     	| 7.2    	| 경매          	| 22.04.06	| 6 	| 1 	| 4 	|
-| Coloretto       	| 1.28,1   	| 2-5(4)    	| 5m/p   	| 7.0    	| Card          	| 22.04.03 	| 6 	| 2 	| 4 	|
-| 젝스님트        	| 1.37,1   	| 2-10(4-6) 	| 5m/p+  	| 7.4    	| Card          	| 22.04.03 	| 6 	| 2 	| 4 	|
-| 포션 폭발         | 1.76,1 	| 2-4(X)    	| 10m/p     | 7.1    	| 퍼즐				| 22.04.06	| 5 	| 3 	| 3 	|
-| 아줄            	| 1.77,1   	| 2-4(2)    	| 10m/p+ 	| 7.4    	| Puzzle        	| 22.04.03 	| 6 	| 3 	| 3 	|
-| 스플렌더        	| 1.79,1   	| 2-4(3)    	| 15m/p  	| 7.4    	| 전략          	| 22.04.03 	| 5 	| 5 	| 3 	|
-| Codex Naturalis 	| 1.84,1   	| 1-4(2-3)  	| 30     	| 7.2    	| 퍼즐          	| 22.04.05 	| 1 	| 0 	| 3 	|
-| 카르카손        	| 1.90,1+  	| 2-5(2)    	| 30+    	| 7.4    	| 맵빌딩        	| 22.03.28 	| 5 	| 3 	| 3 	|
-| Nidavellir      	| 2.14,1+  	| 2-5(3)    	| 45     	| 7.7    	| Card, Bidding 	| 22.04.05 	| 5 	| 3 	| 3 	|
-| 7원더스:건축가  	| 2.35,1   	| 2-8(4-5)  	| 5m/p+  	| 7.8    	| 전략          	| 22.04.03 	| 5 	| 3 	| 3 	|
-| 석기시대        	| 2.47,1   	| 2-4(4)    	| 90     	| 7.6    	| 전략          	| 22.04.05 	| 5 	| 3 	| 3 	|
-| 버건디의 성     	| 3.00,2   	| 2-4(2)    	| 20m/p+ 	| 8.1    	| 전략          	| 22.04.04 	| 3 	| 3 	| 1 	|
-| 푸에르토 리코   	| 3.27,2   	| 2-5(4)    	| 20m/p+ 	| 8.4    	| 전략          	| 22.04.03 	| 3 	| 3 	| 1 	|
-| 아그리콜라      	| 3.49,2++ 	| 1-5(3-4)  	| 30m/p+ 	| 7.9    	| 전략          	| 22.04.02 	| 5 	| 5 	| 2 	|
-
----
-
-### 협력
-
-| Name           	| W    	| player(B) 	| APT    	| Rating 	| W(R)  	| Thema  	| Time     	| w 	| C 	| R 	|
-|----------------	|------	|-----------	|--------	|--------	|-------	|--------	|----------	|---	|---	|---	|
-| 하나비     	| 1.69 	| 2-5(4)  	| 30m 	| 7.1    	| 1판 	| 카드   	| 22.04.04 	| F 	| X 	| 4 	|
-
----
-
-### 2인전용
-
-| Name            	| W,R      	| player(B) 	| APT    	| Rating 	| Category      	| Played    | I 	| C 	| R 	|
-|-----------------	|----------	|-----------	|--------	|--------	|---------------	|----------	|---	|---	|---	|
-| 패치워크          | 1.62,1	| 2(2)      	| 30     	| 7.6    	| 퍼즐				| 22.04.01  | 5    	| 3 	| 3 	|
-
----
-
-### 할예정
-
-| Name                         	| W    	| player(B) 	| PT     	| Rating 	| Category     	| - 	| - 	| - 	| - 	|
-|------------------------------	|------	|-----------	|--------	|--------	|--------------	|---	|---	|---	|:-:	|
-| 반디도                       	| 1.14 	| 1-4(X)    	| 15     	| 6.5    	| 협력         	|   	|   	|   	|   	|
-| 아르낙의 잊혀진 유적         	| 2.87 	| 1-4(3)    	| 120    	| 8.1    	| 전략(협)     	|   	|   	|   	|   	|
-| 스페이스 크루                	| 1.98 	| 2-5(4)    	| 20     	| 7.9    	| 전략(협)     	|   	|   	|   	|   	|
-| 크루 : 심해..                	| 2.00 	| 2-5(4)    	| 20     	| 8.4    	| 전략(협)     	|   	|   	|   	|   	|
-| 슈퍼 판타지 브롤             	| 2.30 	| 2(2)      	| 40     	| 7.8    	| 전략         	|   	|   	|   	|   	|
-| 사보타지                     	| 1.32 	| 3-10(7-8) 	| 30     	| 6.6    	|              	|   	|   	|   	|   	|
-| 카네기                       	| 3.83 	| 1-4(2)    	| 180    	| 7.7    	| 전략         	|   	|   	|   	|   	|
-| 쿠                           	| 2.34 	| 4(4)      	| 60     	| 7.6    	| 협상         	|   	|   	|   	|   	|
-| love letter                  	| 1.19 	| 3-4(4)    	| 30     	| 7.2    	| 전략         	|   	|   	|   	|   	|
-| 7원더스                      	| 2.32 	| 3-7(4-5)  	| 30     	| 7.7    	|              	|   	|   	|   	|   	|
-| 상트페테르부르크             	| 2.67 	| 2-5(4)    	| 60     	| 7.5    	| 전략         	|   	|   	|   	|   	|
-| 테오티우아칸                 	| 3.77 	| 1-4(4)    	| 120    	| 7.9    	| 전략         	|   	|   	|   	|   	|
-| 쓰루 디 에이지스             	| 4.42 	| 2-4(3)    	| 120    	| 8.4    	| 전략         	|   	|   	|   	|   	|
-| 테라 미스티카                	| 3.97 	| 2-5(4)    	| 60-150 	| 8.1    	| 전략         	|   	|   	|   	|   	|
-| 로스트시티                   	| 1.49 	| 2(2)      	| 30     	| 7.2    	| 전략         	|   	|   	|   	|   	|
-| Rallyman: GT                 	| 2.22 	| 1-6(4)    	| 60     	| 7.3    	| 전략         	|   	|   	|   	|   	|
-| 다이스 포지                  	| 1.96 	| 2-4(4)    	| 45     	| 7.3    	| 덱빌딩       	|   	|   	|   	|   	|
-| 자이푸르                     	| 1.48 	| 2(2)      	| 30     	| 7.5    	| 카드         	|   	|   	|   	|   	|
-| race for the galaxy          	| 2.99 	| 2-4(2)    	| 60     	| 7.8    	| 카드         	|   	|   	|   	|   	|
-| Dungeon Petz                 	| 3.62 	| 2-4(4)    	| 90     	| 7.4    	| 전략         	|   	|   	|   	|   	|
-| The Palaces of Carrara       	| 2.61 	| 2-4(4)    	| 60     	| 7.2    	| 덱빌딩       	|   	|   	|   	|   	|
-| Tzolk&#39;in: The Mayan Calendar 	| 3.66 	| 2-4(4)    	| 90     	| 7.9    	| 전략         	|   	|   	|   	|   	|
-| 카르카손: 수렵채집           	| 1.92 	| 2-5(2-3)  	| 35     	| 7.1    	| 전략         	|   	|   	|   	|   	|
-| Signorie                     	| 3.55 	| 2-4(4)    	| 120    	| 7.4    	| 전략         	|   	|   	|   	|   	|
-| Nippon                       	| 3.78 	| 2-4(4)    	| 120    	| 7.7    	| 전략         	|   	|   	|   	|   	|
-| Clans of Caledonia           	| 3.46 	| 1-4(4)    	| 120    	| 8.0    	| 전략         	|   	|   	|   	|   	|
-| The King&#39;s Guild             	| 2.42 	| 1-6(3-4)  	| 120    	| 7.1    	| 전략         	|   	|   	|   	|   	|
-| Welcome To                   	| 1.83 	| 1-12(4)   	| 25     	| 7.6    	| 도시빌딩     	|   	|   	|   	|   	|
-| 하와이                       	| 2.90 	| 2-5(3-4)  	| 90     	| 7.1    	| 전략         	|   	|   	|   	|   	|
-| PARKS                        	| 2.16 	| 1-4(3)    	| 60     	| 7.8    	| 모험         	|   	|   	|   	|   	|
-| Roll for the Galaxy           | 2.78 	| 2-5(3-4)    	| 45     	| 7.6    	| 전략         	|   	|   	|   	|   	|
-| abyss							| 2.34 	| 2-4(4)    	| 60     	| 7.3    	| 전략         	|   	|   	|   	|   	|
-| 마르코 폴로2					| 3.38 	| 2-4(3)    	| 120     	| 8.1    	| 전략         	|   	|   	|   	|   	|
-| race for the galaxy			| 2.99 	| 2-4(2)    	| 60     	| 7.8    	| 전략         	|   	|   	|   	|   	|
-| space base					| 2.12 	| 2-5(3-4)    	| 60     	| 7.6    	| 가족         	|   	|   	|   	|   	|
-| century:spice road			| 1.78 	| 2-5(3-4)    	| 45     	| 7.3    	| 가족         	|   	|   	|   	|   	|
-| Santorini						| 1.73 	| 2-3(2)    	| 20     	| 7.4    	| 가족         	|   	|   	|   	|   	|
-| 스시 고!						| 1.16 	| 3-5(4)    	| 15     	| 7.0    	| 가족         	|   	|   	|   	|   	|
-| meadow						| 2.26 	| 1-4(2)    	| 90     	| 7.9    	| 가족         	|   	|   	|   	|   	|
-| takenoko						| 1.97 	| 2-4(3)    	| 45     	| 7.3    	| 가족         	|   	|   	|   	|   	|
-| King of Tokyo					| 1.49 	| 3-6(4-5)    	| 30     	| 7.2    	| 가족         	|   	|   	|   	|   	|
-| Imhotep						| 2.00 	| 2-4(4)    	| 40     	| 7.2    	| 가족         	|   	|   	|   	|   	|
-| Draftosaurus					| 1.26 	| 2-5(4)    	| 15     	| 7.2    	| 가족         	|   	|   	|   	|   	|
-| Res Arcana					| 2.61 	| 2-4(2)    	| 60     	| 7.7    	| 전략         	|   	|   	|   	|   	|
-| Downforce						| 1.73 	| 2-6(3,6)    	| 40     	| 7.3    	| 가족         	|   	|   	|   	|   	|
-| 가이아 프로젝트				| 4.37 	| 1-4(3-4)		| 150     	| 8.5    	| 전략         	|   	|   	|   	|   	|
-| 오딘을 위하여					| 3.85 	| 1-4(3)		| 120     	| 8.2    	| 전략         	|   	|   	|   	|   	|
-| 엘 그란데						| 3.05 	| 2-5(5)		| 120     	| 7.7    	| 전략         	|   	|   	|   	|   	|
-| 딕싯:스텔라					| 1.13 	| 3-6(4-6)		| 30     	| 7.3    	| 가족,파티     |   	|   	|   	|   	|
-| Glow							| 2.03 	| 2-4(3)		| 45     	| 7.2    	| ?				|   	|   	|   	|   	|
-
-### 미예정
-
-| Name  | W    	| player(B) 	| PT     	| Rating 	| Category | Note |
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;경쟁&#34;&gt;경쟁&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;W,R&lt;/th&gt;
+&lt;th&gt;player(B)&lt;/th&gt;
+&lt;th&gt;APT&lt;/th&gt;
+&lt;th&gt;Rating&lt;/th&gt;
+&lt;th&gt;Category&lt;/th&gt;
+&lt;th&gt;Played&lt;/th&gt;
+&lt;th&gt;I&lt;/th&gt;
+&lt;th&gt;C&lt;/th&gt;
+&lt;th&gt;R&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Luncky Numbers&lt;/td&gt;
+&lt;td&gt;1.12&lt;/td&gt;
+&lt;td&gt;2-4(3)&lt;/td&gt;
+&lt;td&gt;5m/p&lt;/td&gt;
+&lt;td&gt;6.3&lt;/td&gt;
+&lt;td&gt;퍼즐&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;No Thanks!&lt;/td&gt;
+&lt;td&gt;1.14,1&lt;/td&gt;
+&lt;td&gt;3-7(4-5)&lt;/td&gt;
+&lt;td&gt;5m/p+&lt;/td&gt;
+&lt;td&gt;7.1&lt;/td&gt;
+&lt;td&gt;Card&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;캔트스탑&lt;/td&gt;
+&lt;td&gt;1.14,1&lt;/td&gt;
+&lt;td&gt;3-7(4-5)&lt;/td&gt;
+&lt;td&gt;5m/p++&lt;/td&gt;
+&lt;td&gt;7.1&lt;/td&gt;
+&lt;td&gt;주사위&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;킹도미노&lt;/td&gt;
+&lt;td&gt;1.22,1&lt;/td&gt;
+&lt;td&gt;2-4(2,4)&lt;/td&gt;
+&lt;td&gt;5m/p+&lt;/td&gt;
+&lt;td&gt;7.3&lt;/td&gt;
+&lt;td&gt;퍼즐&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;for sale&lt;/td&gt;
+&lt;td&gt;1.26,1&lt;/td&gt;
+&lt;td&gt;3-6(5)&lt;/td&gt;
+&lt;td&gt;5m/p&lt;/td&gt;
+&lt;td&gt;7.2&lt;/td&gt;
+&lt;td&gt;경매&lt;/td&gt;
+&lt;td&gt;22.04.06&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Coloretto&lt;/td&gt;
+&lt;td&gt;1.28,1&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;5m/p&lt;/td&gt;
+&lt;td&gt;7.0&lt;/td&gt;
+&lt;td&gt;Card&lt;/td&gt;
+&lt;td&gt;22.04.03&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;젝스님트&lt;/td&gt;
+&lt;td&gt;1.37,1&lt;/td&gt;
+&lt;td&gt;2-10(4-6)&lt;/td&gt;
+&lt;td&gt;5m/p+&lt;/td&gt;
+&lt;td&gt;7.4&lt;/td&gt;
+&lt;td&gt;Card&lt;/td&gt;
+&lt;td&gt;22.04.03&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;포션 폭발&lt;/td&gt;
+&lt;td&gt;1.76,1&lt;/td&gt;
+&lt;td&gt;2-4(X)&lt;/td&gt;
+&lt;td&gt;10m/p&lt;/td&gt;
+&lt;td&gt;7.1&lt;/td&gt;
+&lt;td&gt;퍼즐&lt;/td&gt;
+&lt;td&gt;22.04.06&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;아줄&lt;/td&gt;
+&lt;td&gt;1.77,1&lt;/td&gt;
+&lt;td&gt;2-4(2)&lt;/td&gt;
+&lt;td&gt;10m/p+&lt;/td&gt;
+&lt;td&gt;7.4&lt;/td&gt;
+&lt;td&gt;Puzzle&lt;/td&gt;
+&lt;td&gt;22.04.03&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;스플렌더&lt;/td&gt;
+&lt;td&gt;1.79,1&lt;/td&gt;
+&lt;td&gt;2-4(3)&lt;/td&gt;
+&lt;td&gt;15m/p&lt;/td&gt;
+&lt;td&gt;7.4&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;22.04.03&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Codex Naturalis&lt;/td&gt;
+&lt;td&gt;1.84,1&lt;/td&gt;
+&lt;td&gt;1-4(2-3)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.2&lt;/td&gt;
+&lt;td&gt;퍼즐&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;카르카손&lt;/td&gt;
+&lt;td&gt;1.90,1+&lt;/td&gt;
+&lt;td&gt;2-5(2)&lt;/td&gt;
+&lt;td&gt;30+&lt;/td&gt;
+&lt;td&gt;7.4&lt;/td&gt;
+&lt;td&gt;맵빌딩&lt;/td&gt;
+&lt;td&gt;22.03.28&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Nidavellir&lt;/td&gt;
+&lt;td&gt;2.14,1+&lt;/td&gt;
+&lt;td&gt;2-5(3)&lt;/td&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;7.7&lt;/td&gt;
+&lt;td&gt;Card, Bidding&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7원더스:건축가&lt;/td&gt;
+&lt;td&gt;2.35,1&lt;/td&gt;
+&lt;td&gt;2-8(4-5)&lt;/td&gt;
+&lt;td&gt;5m/p+&lt;/td&gt;
+&lt;td&gt;7.8&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;22.04.03&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;석기시대&lt;/td&gt;
+&lt;td&gt;2.47,1&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;90&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;22.04.05&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;버건디의 성&lt;/td&gt;
+&lt;td&gt;3.00,2&lt;/td&gt;
+&lt;td&gt;2-4(2)&lt;/td&gt;
+&lt;td&gt;20m/p+&lt;/td&gt;
+&lt;td&gt;8.1&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;22.04.04&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;푸에르토 리코&lt;/td&gt;
+&lt;td&gt;3.27,2&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;20m/p+&lt;/td&gt;
+&lt;td&gt;8.4&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;22.04.03&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;아그리콜라&lt;/td&gt;
+&lt;td&gt;3.49,2++&lt;/td&gt;
+&lt;td&gt;1-5(3-4)&lt;/td&gt;
+&lt;td&gt;30m/p+&lt;/td&gt;
+&lt;td&gt;7.9&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;22.04.02&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;협력&#34;&gt;협력&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;W&lt;/th&gt;
+&lt;th&gt;player(B)&lt;/th&gt;
+&lt;th&gt;APT&lt;/th&gt;
+&lt;th&gt;Rating&lt;/th&gt;
+&lt;th&gt;W(R)&lt;/th&gt;
+&lt;th&gt;Thema&lt;/th&gt;
+&lt;th&gt;Time&lt;/th&gt;
+&lt;th&gt;w&lt;/th&gt;
+&lt;th&gt;C&lt;/th&gt;
+&lt;th&gt;R&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;하나비&lt;/td&gt;
+&lt;td&gt;1.69&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;30m&lt;/td&gt;
+&lt;td&gt;7.1&lt;/td&gt;
+&lt;td&gt;1판&lt;/td&gt;
+&lt;td&gt;카드&lt;/td&gt;
+&lt;td&gt;22.04.04&lt;/td&gt;
+&lt;td&gt;F&lt;/td&gt;
+&lt;td&gt;X&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2인전용&#34;&gt;2인전용&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;W,R&lt;/th&gt;
+&lt;th&gt;player(B)&lt;/th&gt;
+&lt;th&gt;APT&lt;/th&gt;
+&lt;th&gt;Rating&lt;/th&gt;
+&lt;th&gt;Category&lt;/th&gt;
+&lt;th&gt;Played&lt;/th&gt;
+&lt;th&gt;I&lt;/th&gt;
+&lt;th&gt;C&lt;/th&gt;
+&lt;th&gt;R&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;패치워크&lt;/td&gt;
+&lt;td&gt;1.62,1&lt;/td&gt;
+&lt;td&gt;2(2)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;퍼즐&lt;/td&gt;
+&lt;td&gt;22.04.01&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;할예정&#34;&gt;할예정&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;W&lt;/th&gt;
+&lt;th&gt;player(B)&lt;/th&gt;
+&lt;th&gt;PT&lt;/th&gt;
+&lt;th&gt;Rating&lt;/th&gt;
+&lt;th&gt;Category&lt;/th&gt;
+&lt;th&gt;-&lt;/th&gt;
+&lt;th&gt;-&lt;/th&gt;
+&lt;th&gt;-&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;-&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;반디도&lt;/td&gt;
+&lt;td&gt;1.14&lt;/td&gt;
+&lt;td&gt;1-4(X)&lt;/td&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;6.5&lt;/td&gt;
+&lt;td&gt;협력&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;아르낙의 잊혀진 유적&lt;/td&gt;
+&lt;td&gt;2.87&lt;/td&gt;
+&lt;td&gt;1-4(3)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;8.1&lt;/td&gt;
+&lt;td&gt;전략(협)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;스페이스 크루&lt;/td&gt;
+&lt;td&gt;1.98&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;td&gt;7.9&lt;/td&gt;
+&lt;td&gt;전략(협)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;크루 : 심해..&lt;/td&gt;
+&lt;td&gt;2.00&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;td&gt;8.4&lt;/td&gt;
+&lt;td&gt;전략(협)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;슈퍼 판타지 브롤&lt;/td&gt;
+&lt;td&gt;2.30&lt;/td&gt;
+&lt;td&gt;2(2)&lt;/td&gt;
+&lt;td&gt;40&lt;/td&gt;
+&lt;td&gt;7.8&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;사보타지&lt;/td&gt;
+&lt;td&gt;1.32&lt;/td&gt;
+&lt;td&gt;3-10(7-8)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;6.6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;카네기&lt;/td&gt;
+&lt;td&gt;3.83&lt;/td&gt;
+&lt;td&gt;1-4(2)&lt;/td&gt;
+&lt;td&gt;180&lt;/td&gt;
+&lt;td&gt;7.7&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;쿠&lt;/td&gt;
+&lt;td&gt;2.34&lt;/td&gt;
+&lt;td&gt;4(4)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;협상&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;love letter&lt;/td&gt;
+&lt;td&gt;1.19&lt;/td&gt;
+&lt;td&gt;3-4(4)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.2&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7원더스&lt;/td&gt;
+&lt;td&gt;2.32&lt;/td&gt;
+&lt;td&gt;3-7(4-5)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.7&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;상트페테르부르크&lt;/td&gt;
+&lt;td&gt;2.67&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.5&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;테오티우아칸&lt;/td&gt;
+&lt;td&gt;3.77&lt;/td&gt;
+&lt;td&gt;1-4(4)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;7.9&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;쓰루 디 에이지스&lt;/td&gt;
+&lt;td&gt;4.42&lt;/td&gt;
+&lt;td&gt;2-4(3)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;8.4&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;테라 미스티카&lt;/td&gt;
+&lt;td&gt;3.97&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;60-150&lt;/td&gt;
+&lt;td&gt;8.1&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;로스트시티&lt;/td&gt;
+&lt;td&gt;1.49&lt;/td&gt;
+&lt;td&gt;2(2)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.2&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Rallyman: GT&lt;/td&gt;
+&lt;td&gt;2.22&lt;/td&gt;
+&lt;td&gt;1-6(4)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.3&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;다이스 포지&lt;/td&gt;
+&lt;td&gt;1.96&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;7.3&lt;/td&gt;
+&lt;td&gt;덱빌딩&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;자이푸르&lt;/td&gt;
+&lt;td&gt;1.48&lt;/td&gt;
+&lt;td&gt;2(2)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.5&lt;/td&gt;
+&lt;td&gt;카드&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;race for the galaxy&lt;/td&gt;
+&lt;td&gt;2.99&lt;/td&gt;
+&lt;td&gt;2-4(2)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.8&lt;/td&gt;
+&lt;td&gt;카드&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dungeon Petz&lt;/td&gt;
+&lt;td&gt;3.62&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;90&lt;/td&gt;
+&lt;td&gt;7.4&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The Palaces of Carrara&lt;/td&gt;
+&lt;td&gt;2.61&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.2&lt;/td&gt;
+&lt;td&gt;덱빌딩&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Tzolk&amp;rsquo;in: The Mayan Calendar&lt;/td&gt;
+&lt;td&gt;3.66&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;90&lt;/td&gt;
+&lt;td&gt;7.9&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;카르카손: 수렵채집&lt;/td&gt;
+&lt;td&gt;1.92&lt;/td&gt;
+&lt;td&gt;2-5(2-3)&lt;/td&gt;
+&lt;td&gt;35&lt;/td&gt;
+&lt;td&gt;7.1&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Signorie&lt;/td&gt;
+&lt;td&gt;3.55&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;7.4&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Nippon&lt;/td&gt;
+&lt;td&gt;3.78&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;7.7&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Clans of Caledonia&lt;/td&gt;
+&lt;td&gt;3.46&lt;/td&gt;
+&lt;td&gt;1-4(4)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;8.0&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The King&amp;rsquo;s Guild&lt;/td&gt;
+&lt;td&gt;2.42&lt;/td&gt;
+&lt;td&gt;1-6(3-4)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;7.1&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Welcome To&lt;/td&gt;
+&lt;td&gt;1.83&lt;/td&gt;
+&lt;td&gt;1-12(4)&lt;/td&gt;
+&lt;td&gt;25&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;도시빌딩&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;하와이&lt;/td&gt;
+&lt;td&gt;2.90&lt;/td&gt;
+&lt;td&gt;2-5(3-4)&lt;/td&gt;
+&lt;td&gt;90&lt;/td&gt;
+&lt;td&gt;7.1&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PARKS&lt;/td&gt;
+&lt;td&gt;2.16&lt;/td&gt;
+&lt;td&gt;1-4(3)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.8&lt;/td&gt;
+&lt;td&gt;모험&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Roll for the Galaxy&lt;/td&gt;
+&lt;td&gt;2.78&lt;/td&gt;
+&lt;td&gt;2-5(3-4)&lt;/td&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;abyss&lt;/td&gt;
+&lt;td&gt;2.34&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.3&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;마르코 폴로2&lt;/td&gt;
+&lt;td&gt;3.38&lt;/td&gt;
+&lt;td&gt;2-4(3)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;8.1&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;race for the galaxy&lt;/td&gt;
+&lt;td&gt;2.99&lt;/td&gt;
+&lt;td&gt;2-4(2)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.8&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;space base&lt;/td&gt;
+&lt;td&gt;2.12&lt;/td&gt;
+&lt;td&gt;2-5(3-4)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;가족&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;century:spice road&lt;/td&gt;
+&lt;td&gt;1.78&lt;/td&gt;
+&lt;td&gt;2-5(3-4)&lt;/td&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;7.3&lt;/td&gt;
+&lt;td&gt;가족&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Santorini&lt;/td&gt;
+&lt;td&gt;1.73&lt;/td&gt;
+&lt;td&gt;2-3(2)&lt;/td&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;td&gt;7.4&lt;/td&gt;
+&lt;td&gt;가족&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;스시 고!&lt;/td&gt;
+&lt;td&gt;1.16&lt;/td&gt;
+&lt;td&gt;3-5(4)&lt;/td&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;7.0&lt;/td&gt;
+&lt;td&gt;가족&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meadow&lt;/td&gt;
+&lt;td&gt;2.26&lt;/td&gt;
+&lt;td&gt;1-4(2)&lt;/td&gt;
+&lt;td&gt;90&lt;/td&gt;
+&lt;td&gt;7.9&lt;/td&gt;
+&lt;td&gt;가족&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;takenoko&lt;/td&gt;
+&lt;td&gt;1.97&lt;/td&gt;
+&lt;td&gt;2-4(3)&lt;/td&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;7.3&lt;/td&gt;
+&lt;td&gt;가족&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;King of Tokyo&lt;/td&gt;
+&lt;td&gt;1.49&lt;/td&gt;
+&lt;td&gt;3-6(4-5)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.2&lt;/td&gt;
+&lt;td&gt;가족&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Imhotep&lt;/td&gt;
+&lt;td&gt;2.00&lt;/td&gt;
+&lt;td&gt;2-4(4)&lt;/td&gt;
+&lt;td&gt;40&lt;/td&gt;
+&lt;td&gt;7.2&lt;/td&gt;
+&lt;td&gt;가족&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Draftosaurus&lt;/td&gt;
+&lt;td&gt;1.26&lt;/td&gt;
+&lt;td&gt;2-5(4)&lt;/td&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;7.2&lt;/td&gt;
+&lt;td&gt;가족&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Res Arcana&lt;/td&gt;
+&lt;td&gt;2.61&lt;/td&gt;
+&lt;td&gt;2-4(2)&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;7.7&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Downforce&lt;/td&gt;
+&lt;td&gt;1.73&lt;/td&gt;
+&lt;td&gt;2-6(3,6)&lt;/td&gt;
+&lt;td&gt;40&lt;/td&gt;
+&lt;td&gt;7.3&lt;/td&gt;
+&lt;td&gt;가족&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;가이아 프로젝트&lt;/td&gt;
+&lt;td&gt;4.37&lt;/td&gt;
+&lt;td&gt;1-4(3-4)&lt;/td&gt;
+&lt;td&gt;150&lt;/td&gt;
+&lt;td&gt;8.5&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;오딘을 위하여&lt;/td&gt;
+&lt;td&gt;3.85&lt;/td&gt;
+&lt;td&gt;1-4(3)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;8.2&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;엘 그란데&lt;/td&gt;
+&lt;td&gt;3.05&lt;/td&gt;
+&lt;td&gt;2-5(5)&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;td&gt;7.7&lt;/td&gt;
+&lt;td&gt;전략&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;딕싯:스텔라&lt;/td&gt;
+&lt;td&gt;1.13&lt;/td&gt;
+&lt;td&gt;3-6(4-6)&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;7.3&lt;/td&gt;
+&lt;td&gt;가족,파티&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Glow&lt;/td&gt;
+&lt;td&gt;2.03&lt;/td&gt;
+&lt;td&gt;2-4(3)&lt;/td&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;7.2&lt;/td&gt;
+&lt;td&gt;?&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;미예정&#34;&gt;미예정&lt;/h3&gt;
+&lt;p&gt;| Name  | W    	| player(B) 	| PT     	| Rating 	| Category | Note |
 | 야찌  | 1.19 	| 2-10(3-4) 	| 30     	| 5.4    	| 주사위   | 족보     |
 | 티츄  | 2.34 	| 4(4)      	| 60     	| 7.6    	| 2:2팀전, 족보 | 족보, 시스템을 알아야됨. 초보자끼리 할경우 2시간도걸림.  |
 | 콘 소나! | 2.00 	| 2-4(3)		| 30     	| 3.5    	| ?         	| 평점처참 |
@@ -216,64 +1038,106 @@
 | Forbidden Island				| 1.74 	| 1-4(4)    	| 30     	| 6.8    	| 가족         	|   	                    	|
 | Incan gold					| 1.11 	| 3-8(6-8)    	| 30     	| 6.8    	| 가족         	|   	                    	|
 | dragonwood					| 1.38 	| 2-4(3)    	| 20     	| 6.6    	| 가족         	|   	                    	|
-| Miller&#39;s Hollow의 늑대인간들	| 1.31 	| 8-18(11-15)   | 30     	| 6.7    	| 파티         	|   	                    	|
+| Miller&amp;rsquo;s Hollow의 늑대인간들	| 1.31 	| 8-18(11-15)   | 30     	| 6.7    	| 파티         	|   	                    	|
 | 빌더스: 미들에이지			| 1.79 	| 2-4(2)		| 30     	| 6.5    	| 가족         	|   	                    	|
 | 빌더스: 고대					| 1.92 	| 2-4(3)		| 30     	| 6.7    	| 가족         	|   	                    	|
 | 크로스마스터:아레나			| 2.67 	| 2-4(2)		| 60     	| 6.7    	| ?         	|   	                    	|
-| 던전트위스터					| 2.89 	| 2(2)			| 60     	| 6.8    	| 전략         	|   	                    	|
+| 던전트위스터					| 2.89 	| 2(2)			| 60     	| 6.8    	| 전략         	|   	                    	|&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;미분류&#34;&gt;미분류&lt;/h3&gt;
+&lt;p&gt;늑대인간들, 빌더스: 미들 에이지, 미스터 잭, 란드운터, 빌더스: 고대, 콘 소나!,
+크로스마스터: 아레나, 던전 트위스터, 가이아 프로젝트, 오딘을 위하여&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;review&#34;&gt;Review&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Thema, Note&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;No Thanks!&lt;/td&gt;
+&lt;td&gt;폭탄돌리기&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;캔트스탑&lt;/td&gt;
+&lt;td&gt;클라이밍 테마.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;킹도미노&lt;/td&gt;
+&lt;td&gt;타일배치. 처음에 도미노게임인줄..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;for sale&lt;/td&gt;
+&lt;td&gt;건물 경매 후 얼마나 비싸게 파는지&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Coloretto&lt;/td&gt;
+&lt;td&gt;카드수집.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;젝스님트&lt;/td&gt;
+&lt;td&gt;카드제거.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;포션폭발&lt;/td&gt;
+&lt;td&gt;포션을 제조해서 사용한다는 컨셉.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;아줄&lt;/td&gt;
+&lt;td&gt;궁전 장식을 만든다는 컨셉.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;스플렌더&lt;/td&gt;
+&lt;td&gt;르네상스시대를 배경으로한 물건수집.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Codex Naturalis&lt;/td&gt;
+&lt;td&gt;동물, 새, 곤충을 수집. 게임 자체는 맵빌딩 + 화폐 시스템.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;카르카손&lt;/td&gt;
+&lt;td&gt;중세시대의 지도 만들기.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Nidavellir&lt;/td&gt;
+&lt;td&gt;경매 + 카드수집. 드래곤을 잡기위한 드워프를 모은다는 내용.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7원더스:건축가&lt;/td&gt;
+&lt;td&gt;문화발전, 전쟁, 불가사의 건설&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;석기시대&lt;/td&gt;
+&lt;td&gt;석기시대를 배경으로 마을을 키워나간다는 배경.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;버건디의 성&lt;/td&gt;
+&lt;td&gt;중세 시대를 배경으로 성과 영지를 개발한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;푸에르토 리코&lt;/td&gt;
+&lt;td&gt;밭을 만들고 공장을 만들어 생산품으로 판매 및 수출&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;아그리콜라&lt;/td&gt;
+&lt;td&gt;농장경영&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;컬러레또&#34;&gt;컬러레또&lt;/h4&gt;
+&lt;h4 id=&#34;젝스님트&#34;&gt;젝스님트&lt;/h4&gt;
+&lt;h4 id=&#34;아줄&#34;&gt;아줄&lt;/h4&gt;
+&lt;h4 id=&#34;스플렌더&#34;&gt;스플렌더&lt;/h4&gt;
+&lt;h4 id=&#34;카르카손&#34;&gt;카르카손&lt;/h4&gt;
+&lt;h4 id=&#34;7원더스건축가&#34;&gt;7원더스:건축가&lt;/h4&gt;
+&lt;h4 id=&#34;버건디의-성&#34;&gt;버건디의 성&lt;/h4&gt;
+&lt;h4 id=&#34;포에르토-리코&#34;&gt;포에르토 리코&lt;/h4&gt;
+&lt;h4 id=&#34;아그리콜라&#34;&gt;아그리콜라&lt;/h4&gt;
+&lt;hr&gt;
 
----
-
-### 미분류
-
-늑대인간들, 빌더스: 미들 에이지, 미스터 잭, 란드운터, 빌더스: 고대, 콘 소나!,
-크로스마스터: 아레나, 던전 트위스터, 가이아 프로젝트, 오딘을 위하여
-
----
-
-### Review
-
-| Name            	| Thema, Note |
-|-----------------	|----------|
-| No Thanks!      	| 폭탄돌리기
-| 캔트스탑        	| 클라이밍 테마.
-| 킹도미노        	| 타일배치. 처음에 도미노게임인줄..
-| for sale			| 건물 경매 후 얼마나 비싸게 파는지
-| Coloretto       	| 카드수집.
-| 젝스님트        	| 카드제거.
-| 포션폭발        	| 포션을 제조해서 사용한다는 컨셉.
-| 아줄            	| 궁전 장식을 만든다는 컨셉.
-| 스플렌더        	| 르네상스시대를 배경으로한 물건수집.
-| Codex Naturalis 	| 동물, 새, 곤충을 수집. 게임 자체는 맵빌딩 + 화폐 시스템.
-| 카르카손        	| 중세시대의 지도 만들기.
-| Nidavellir      	| 경매 + 카드수집. 드래곤을 잡기위한 드워프를 모은다는 내용.
-| 7원더스:건축가  	| 문화발전, 전쟁, 불가사의 건설
-| 석기시대        	| 석기시대를 배경으로 마을을 키워나간다는 배경.
-| 버건디의 성     	| 중세 시대를 배경으로 성과 영지를 개발한다.
-| 푸에르토 리코   	| 밭을 만들고 공장을 만들어 생산품으로 판매 및 수출
-| 아그리콜라      	| 농장경영
-
-
-#### 컬러레또
-
-#### 젝스님트
-
-#### 아줄
-
-#### 스플렌더
-
-#### 카르카손
-
-#### 7원더스:건축가
-
-#### 버건디의 성
-
-#### 포에르토 리코
-
-#### 아그리콜라
-
----
-&lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
     
